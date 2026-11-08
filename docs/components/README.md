@@ -146,6 +146,7 @@ dioxus-shadcn = { version = "0.6", default-features = false, features = ["button
 | [Card](card.md) | `dxui add card` | `card` | Styled parts |
 | [Checkbox](checkbox.md) | `dxui add checkbox` | `checkbox` | Controlled styled part |
 | [Chart](chart.md) | `dxui add chart` | `chart` | SVG line/bar/area composition parts |
+| [Code Tabs](code-tabs.md) | `dxui add code-tabs` | `code-tabs` | Underlined code comparison tabs |
 | [Collapsible](collapsible.md) | `dxui add collapsible` | `collapsible` | Controlled disclosure parts |
 | [Command](command.md) | `dxui add command` | `command` | Active descendant command parts |
 | [Combobox](combobox.md) | `dxui add combobox` | `combobox` | Popover-backed searchable choice parts |

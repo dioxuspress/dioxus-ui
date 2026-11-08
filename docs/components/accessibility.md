@@ -143,6 +143,7 @@ Statuses:
 | Component | Contract | Status |
 | --- | --- | --- |
 | Pagination | Uses navigation region and current-page state; controls without an `href` are buttons that report `onclick`, and a disabled control cannot take focus or be activated; browser-verified on Web. | Implemented |
+| Code Tabs | `tablist`, `tab`, and `tabpanel` roles with `aria-selected`, `aria-controls`, and `aria-labelledby`; one Tab stop with Left, Right, Home, and End movement and automatic or manual activation; browser-verified on Web. | Implemented |
 | Progress | Uses progressbar value attributes and takes a name and `aria-valuetext` through passed attributes; browser-verified on Web. | Implemented |
 | Table | Uses semantic table elements. | Implemented |
 | Data Table | Exposes sorted header state, selected row state, hidden cells, loading status, and empty state composition. | Implemented |

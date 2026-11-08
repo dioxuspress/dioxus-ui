@@ -8,6 +8,17 @@ for commit messages.
 
 ## [Unreleased]
 
+## [0.6.7] - 2026-11-08
+
+Version 0.6.7 adds the Code Tabs component (`code-tabs`) for underlined
+horizontal code and command switcher tabs with a muted rounded code panel.
+
+### Added
+- `CodeTabs`, `CodeTabsList`, `CodeTabsTrigger`, `CodeTabsContent`,
+  `CodeTabsActivation`, and the `code_tabs_class`, `code_tabs_list_class`,
+  `code_tabs_trigger_class`, and `code_tabs_content_class` helpers under the
+  `code-tabs` feature and `dxui add code-tabs`.
+
 ## [0.6.6] - 2026-10-09
 
 Version 0.6.6 closes two gaps the 0.6.5 blocks found: Context Menu opens

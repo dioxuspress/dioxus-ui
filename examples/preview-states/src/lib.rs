@@ -15,22 +15,23 @@ use dioxus_shadcn::{
   CalendarCaption, CalendarDate, CalendarDay, CalendarGrid, CalendarHeader, CalendarMonth,
   CalendarNav, CalendarNavButton, CalendarNavDirection, CalendarRow, CalendarWeekday,
   ChartAreaSeries, ChartBarSeries, ChartDescription, ChartFallbackTable, ChartLegend,
-  ChartLineSeries, ChartRoot, ChartSvg, ChartTitle, Checkbox, Combobox, ComboboxContent,
-  ComboboxInput, ComboboxItem, ComboboxList, ComboboxStatus, Command, CommandEmpty, CommandGroup,
-  CommandInput, CommandItem, CommandLabel, CommandList, CommandStatus, ContextMenu,
-  ContextMenuCheckboxItem, ContextMenuContent, ContextMenuItem, ContextMenuSub,
-  ContextMenuSubContent, ContextMenuSubTrigger, ContextMenuTrigger, DatePicker, DatePickerContent,
-  DatePickerTrigger, DatePickerValue, Dropdown, DropdownContent, DropdownItem, DropdownSeparator,
-  HoverCard, HoverCardContent, HoverCardDescription, HoverCardHeader, HoverCardTitle,
-  HoverCardTrigger, Label, Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSub,
-  MenubarSubContent, MenubarSubTrigger, MenubarTrigger, NavigationMenu, NavigationMenuContent,
-  NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger,
-  NavigationOrientation, RadioGroup, RadioGroupItem, Select, SelectContent, SelectItem,
-  SelectTrigger, SonnerClose, SonnerContent, SonnerTitle, SonnerToast, SonnerVariant,
-  SonnerViewport, Switch, Tabs, TabsActivation, TabsContent, TabsList, TabsOrientation,
-  TabsTrigger, ToastAction, ToastClose, ToastRoot, ToastTitle, ToastViewport, ToggleGroup,
-  ToggleGroupItem, Tree, TreeItem, calendar_month_grid, calendar_move_date, command_matches,
-  sonner_dismiss_reason_attribute, toast_dismiss_reason_attribute,
+  ChartLineSeries, ChartRoot, ChartSvg, ChartTitle, Checkbox, CodeTabs, CodeTabsContent,
+  CodeTabsList, CodeTabsTrigger, Combobox, ComboboxContent, ComboboxInput, ComboboxItem,
+  ComboboxList, ComboboxStatus, Command, CommandEmpty, CommandGroup, CommandInput, CommandItem,
+  CommandLabel, CommandList, CommandStatus, ContextMenu, ContextMenuCheckboxItem,
+  ContextMenuContent, ContextMenuItem, ContextMenuSub, ContextMenuSubContent,
+  ContextMenuSubTrigger, ContextMenuTrigger, DatePicker, DatePickerContent, DatePickerTrigger,
+  DatePickerValue, Dropdown, DropdownContent, DropdownItem, DropdownSeparator, HoverCard,
+  HoverCardContent, HoverCardDescription, HoverCardHeader, HoverCardTitle, HoverCardTrigger, Label,
+  Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSub, MenubarSubContent,
+  MenubarSubTrigger, MenubarTrigger, NavigationMenu, NavigationMenuContent, NavigationMenuItem,
+  NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, NavigationOrientation, RadioGroup,
+  RadioGroupItem, Select, SelectContent, SelectItem, SelectTrigger, SonnerClose, SonnerContent,
+  SonnerTitle, SonnerToast, SonnerVariant, SonnerViewport, Switch, Tabs, TabsActivation,
+  TabsContent, TabsList, TabsOrientation, TabsTrigger, ToastAction, ToastClose, ToastRoot,
+  ToastTitle, ToastViewport, ToggleGroup, ToggleGroupItem, Tree, TreeItem, calendar_month_grid,
+  calendar_move_date, command_matches, sonner_dismiss_reason_attribute,
+  toast_dismiss_reason_attribute,
 };
 use dioxus_shadcn::{
   AlertDialog, AlertDialogAction, AlertDialogActionVariant, AlertDialogCancel, AlertDialogContent,
@@ -251,6 +252,14 @@ pub const COMPONENT_PREVIEW_TARGETS: &[ComponentPreviewTarget] = &[
     test_id: "component-preview-checkbox",
     coverage_level: "controlled",
     notes: "Controlled rendered state target; mutations remain app-owned.",
+  },
+  ComponentPreviewTarget {
+    component: "code-tabs",
+    label: "Code Tabs",
+    panel: "navigation",
+    test_id: "component-preview-code-tabs",
+    coverage_level: "controlled",
+    notes: "Controlled state target; keyboard and click requests are browser-verified in the interaction panel.",
   },
   ComponentPreviewTarget {
     component: "collapsible",
@@ -946,6 +955,7 @@ pub fn PreviewSurface(target: PreviewTarget, title: String) -> Element {
   let mut typed_date = use_signal(|| None::<CalendarDate>);
   let mut mega_sub = use_signal(|| "web".to_string());
   let mut tabs_value = use_signal(|| "account".to_string());
+  let mut code_tabs_value = use_signal(|| "markdown".to_string());
   let mut settings_tab = use_signal(|| "general".to_string());
   let mut radio_value = use_signal(|| None::<String>);
   let mut toggle_value = use_signal(String::new);
@@ -1886,6 +1896,31 @@ pub fn PreviewSurface(target: PreviewTarget, title: String) -> Element {
               TabsContent { value: "password", "Password settings" }
               TabsContent { value: "billing", "Billing settings" }
               TabsContent { value: "team", "Team settings" }
+            }
+          }
+          article {
+            class: "rounded-md border border-border p-4",
+            "data-interaction-target": "code-tabs",
+            "data-value": "{code_tabs_value}",
+            h2 { class: "text-sm font-medium", "Code tabs interaction" }
+            CodeTabs {
+              class: "mt-3",
+              default_value: "markdown",
+              on_value_change: move |value: String| code_tabs_value.set(value),
+              CodeTabsList { "aria-label": "Syntax comparison",
+                CodeTabsTrigger { value: "markdown", "Markdown" }
+                CodeTabsTrigger { value: "latex", "LaTeX" }
+                CodeTabsTrigger { value: "typst", "Typst" }
+              }
+              CodeTabsContent { value: "markdown",
+                pre { code { "# Heading\n\nWrite **bold** and *italic* text." } }
+              }
+              CodeTabsContent { value: "latex",
+                pre { code { "\\section{{Heading}}\n\nWrite \\textbf{{bold}} and \\textit{{italic}} text." } }
+              }
+              CodeTabsContent { value: "typst",
+                pre { code { "= Heading\n\nWrite *bold* and _italic_ text." } }
+              }
             }
           }
           article {

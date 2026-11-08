@@ -1095,6 +1095,24 @@ async function runBrowserAssertions() {
     await expect(tabs).toHaveAttribute("data-value", "billing");
     await expect(tab("Billing")).toHaveAttribute("tabindex", "0");
 
+    const codeTabs = page.locator('[data-interaction-target="code-tabs"]');
+    await expect(codeTabs.getByRole("tablist", { name: "Syntax comparison", exact: true })).toHaveCount(1);
+    const codeTab = (name) => codeTabs.getByRole("tab", { name, exact: true });
+    const codeTabPanel = (name) => codeTabs.getByRole("tabpanel", { name, exact: true });
+    await codeTab("Markdown").evaluate((element) => element.scrollIntoView({ block: "center" }));
+    await expect(codeTab("Markdown")).toHaveAttribute("tabindex", "0");
+    await expect(codeTab("LaTeX")).toHaveAttribute("tabindex", "-1");
+    await expect(codeTab("Typst")).toHaveAttribute("tabindex", "-1");
+    await expect(codeTabPanel("Markdown")).toBeVisible();
+    await codeTab("Markdown").focus();
+    await page.keyboard.press("ArrowRight");
+    await expect(codeTab("LaTeX")).toBeFocused();
+    await expect(codeTabs).toHaveAttribute("data-value", "latex");
+    await expect(codeTabPanel("LaTeX")).toBeVisible();
+    await codeTab("Typst").click();
+    await expect(codeTabs).toHaveAttribute("data-value", "typst");
+    await expect(codeTabPanel("Typst")).toBeVisible();
+
     const verticalTabs = page.locator('[data-interaction-target="tabs-vertical"]');
     const verticalList = verticalTabs.getByRole("tablist");
     const verticalTab = (name) => verticalTabs.getByRole("tab", { name, exact: true });

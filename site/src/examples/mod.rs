@@ -79,6 +79,7 @@ examples! {
   navigation_menu_mega => NavigationMenuMegaDemo, "navigation-menu", "Mega menu";
   pagination_basic => PaginationBasicDemo, "pagination", "Pages";
   sidebar_collapsible => SidebarCollapsibleDemo, "sidebar", "Collapsible";
+  code_tabs_compare => CodeTabsCompareDemo, "code-tabs", "Three-way syntax comparison";
   tabs_account => TabsAccountDemo, "tabs", "Account settings";
   tree_files => TreeFilesDemo, "tree", "Project files";
   accordion_faq => AccordionFaqDemo, "accordion", "FAQ";

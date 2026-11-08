@@ -7,7 +7,7 @@
 - a CLI that copies component source into user projects
 - a packaged crate for users who prefer dependency-based usage
 
-It ships 83 components, the `dxui` CLI, and a
+It ships 84 components, the `dxui` CLI, and a
 [component site](https://yuxuetr.github.io/dioxus-ui/). Version 0.4.2 is
 on crates.io as [`dioxus-shadcn`](https://crates.io/crates/dioxus-shadcn) and
 [`dioxus-shadcn-cli`](https://crates.io/crates/dioxus-shadcn-cli).

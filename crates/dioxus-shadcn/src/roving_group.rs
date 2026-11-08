@@ -119,7 +119,7 @@ export async function run(dioxus) {
 "#
 );
 
-#[cfg(any(feature = "accordion", feature = "tabs"))]
+#[cfg(any(feature = "accordion", feature = "code-tabs", feature = "tabs"))]
 /// Builds a trigger or panel id for a group part. Characters that are not
 /// ASCII letters, digits, `-`, or `_` become `-` so the id is a valid IDREF.
 pub(crate) fn group_part_id(base_id: &str, part: &str, value: &str) -> String {

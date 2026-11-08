@@ -55,6 +55,9 @@ pub mod checkbox;
 #[cfg(feature = "chart")]
 pub mod chart;
 
+#[cfg(feature = "code-tabs")]
+pub mod code_tabs;
+
 #[cfg(feature = "collapsible")]
 pub mod collapsible;
 
@@ -80,6 +83,7 @@ pub mod dialog;
   feature = "accordion",
   feature = "alert-dialog",
   feature = "checkbox",
+  feature = "code-tabs",
   feature = "collapsible",
   feature = "combobox",
   feature = "command",
@@ -116,6 +120,7 @@ mod element_id;
   feature = "accordion",
   feature = "alert-dialog",
   feature = "carousel",
+  feature = "code-tabs",
   feature = "collapsible",
   feature = "combobox",
   feature = "command",
@@ -262,6 +267,7 @@ mod hover_open;
 mod layer;
 #[cfg(any(
   feature = "accordion",
+  feature = "code-tabs",
   feature = "radio-group",
   feature = "tabs",
   feature = "toggle-group"
@@ -281,6 +287,7 @@ mod safe_url;
   feature = "accordion",
   feature = "alert-dialog",
   feature = "checkbox",
+  feature = "code-tabs",
   feature = "combobox",
   feature = "command",
   feature = "context-menu",
@@ -799,6 +806,11 @@ pub mod timeline;
 #[cfg(feature = "stat")]
 pub mod stat;
 
+#[cfg(feature = "code-tabs")]
+pub use code_tabs::{
+  CodeTabs, CodeTabsActivation, CodeTabsContent, CodeTabsList, CodeTabsTrigger, code_tabs_class,
+  code_tabs_content_class, code_tabs_list_class, code_tabs_trigger_class,
+};
 #[cfg(feature = "switch")]
 pub use switch::{Switch, switch_class, switch_thumb_class};
 #[cfg(feature = "table")]

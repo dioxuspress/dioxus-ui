@@ -272,6 +272,12 @@ pub const CATEGORIES: &[Category] = &[
         feature: "breadcrumb",
       },
       Component {
+        slug: "code-tabs",
+        title: "Code Tabs",
+        description: "Underlined code comparison tabs with roving keyboard navigation and code panels.",
+        feature: "code-tabs",
+      },
+      Component {
         slug: "dock",
         title: "Dock",
         description: "Styled bottom navigation bar of links or buttons.",

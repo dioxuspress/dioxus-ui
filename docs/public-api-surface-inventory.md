@@ -18,10 +18,10 @@ Use it with:
 
 | Surface | Count | User-facing Mode | Notes |
 | --- | ---: | --- | --- |
-| Styled component crate modules | 83 | Crate mode | Feature-gated modules under `crates/dioxus-shadcn/src`. |
-| Styled component features | 83 | Crate mode | Public Cargo feature names in `crates/dioxus-shadcn/Cargo.toml`. |
-| Source-copy templates | 96 | Source-copy mode | 83 component templates plus 13 helper templates (RFC 0074). |
-| Registry entries | 96 | CLI/source-copy mode | 83 component entries in `registry/` plus 13 helper entries in `helpers/`. |
+| Styled component crate modules | 84 | Crate mode | Feature-gated modules under `crates/dioxus-shadcn/src`. |
+| Styled component features | 84 | Crate mode | Public Cargo feature names in `crates/dioxus-shadcn/Cargo.toml`. |
+| Source-copy templates | 97 | Source-copy mode | 84 component templates plus 13 helper templates (RFC 0074). |
+| Registry entries | 97 | CLI/source-copy mode | 84 component entries in `registry/` plus 13 helper entries in `helpers/`. |
 | Registry schema | 1 | Tooling metadata | `crates/dioxus-shadcn-cli/registry/schema.json` validates registry shape and is not a component. |
 | Primitive modules | 18 | Crate mode | Public helpers, config types, and runtime adapter traits in `dioxus-shadcn-primitives`, under its own semver promise (RFC 0079). |
 | Core crate exports | 4 groups | Crate/tooling mode | `classes`, `merge_classes`, `UiDensity`, and registry data structs. |
@@ -47,6 +47,7 @@ card
 carousel
 chart
 checkbox
+code-tabs
 collapsible
 combobox
 command
@@ -137,6 +138,7 @@ card
 carousel
 chart
 checkbox
+code_tabs
 collapsible
 combobox
 command

@@ -37,7 +37,7 @@ about the rest.
 you pass `--overwrite`, and says which files it kept. `dxui diff [<name>...]`
 shows how your copies, all of them unless you name some, differ from the
 templates of the installed CLI.
-`dxui list` prints the 83 components. Copied
+`dxui list` prints the 84 components. Copied
 components depend only on `dioxus`.
 
 `dxui add` also takes a block, a whole screen such as `login`: it copies the
@@ -80,7 +80,7 @@ writes an `@source` line for the crate's source, after the import, from
 
 ```css
 @import "tailwindcss";
-@source "/home/me/.cargo/registry/src/index.crates.io-…/dioxus-shadcn-0.6.6/src";
+@source "/home/me/.cargo/registry/src/index.crates.io-…/dioxus-shadcn-0.6.7/src";
 ```
 
 The path names one version, so run `dxui init` again after upgrading the
@@ -118,7 +118,7 @@ stylesheet; set `data-theme="nord"` on any element to theme its subtree.
 
 Accordion, Alert, Alert Dialog, Aspect Ratio, Attachment, Avatar, Badge,
 Breadcrumb, Bubble, Button, Button Group, Calendar, Card, Carousel, Chart,
-Checkbox, Collapsible, Combobox, Command, Context Menu, Countdown, Data Table,
+Checkbox, Code Tabs, Collapsible, Combobox, Command, Context Menu, Countdown, Data Table,
 Date Picker, Dialog, Diff, Direction, Dock, Drawer, Dropdown, Empty, Fab,
 Field, File Input, Hover Card, Indicator, Input, Input Group, Input OTP, Item,
 Kbd, Label, Marker, Menubar, Message, Message Scroller, Native Select,

@@ -13,14 +13,14 @@ parity.
 
 ## Summary
 
-- Public components: 83
-- Registry entries: 108
+- Public components: 84
+- Registry entries: 109
 - Source-copy helpers: anchored-overlay, calendar-grid, choice, class-merge, class-merge-table, default-attribute, density, dialog-labels, dismiss-timer, element-id, hover-open, layer, listbox, media-query, menu-marks, menu-radio, menu-sub, modal-focus, overlay, overlay-root, root-state, roving-group, safe-url, script, utils
-- Templates: 108
-- Crate modules: 83
-- Crate features: 83
-- Component docs pages: 83
-- Complete local wiring: 83
+- Templates: 109
+- Crate modules: 84
+- Crate features: 84
+- Component docs pages: 84
+- Complete local wiring: 84
 - Incomplete local wiring: 0
 
 ## Category Counts
@@ -30,7 +30,7 @@ parity.
 | Actions | 9 |
 | Forms | 18 |
 | Overlays | 11 |
-| Navigation | 9 |
+| Navigation | 10 |
 | Layout | 12 |
 | Data Display | 13 |
 | Feedback | 6 |
@@ -104,6 +104,7 @@ parity.
 | Message | Messaging | yes | yes | yes | yes | yes | yes | yes |
 | Message Scroller | Messaging | yes | yes | yes | yes | yes | yes | yes |
 | Breadcrumb | Navigation | yes | yes | yes | yes | yes | yes | yes |
+| Code Tabs | Navigation | yes | yes | yes | yes | yes | yes | yes |
 | Dock | Navigation | yes | yes | yes | yes | yes | yes | yes |
 | Menu | Navigation | yes | yes | yes | yes | yes | yes | yes |
 | Navigation Menu | Navigation | yes | yes | yes | yes | yes | yes | yes |
@@ -192,6 +193,7 @@ parity.
 | Message | Messaging | [docs](message.md) | `dxui add message` | `message` | `crates/dioxus-shadcn-cli/templates/message.rs` | `src/components/ui/message.rs` |
 | Message Scroller | Messaging | [docs](message-scroller.md) | `dxui add message-scroller` | `message-scroller` | `crates/dioxus-shadcn-cli/templates/message_scroller.rs` | `src/components/ui/message_scroller.rs` |
 | Breadcrumb | Navigation | [docs](breadcrumb.md) | `dxui add breadcrumb` | `breadcrumb` | `crates/dioxus-shadcn-cli/templates/breadcrumb.rs` | `src/components/ui/breadcrumb.rs` |
+| Code Tabs | Navigation | [docs](code-tabs.md) | `dxui add code-tabs` | `code-tabs` | `crates/dioxus-shadcn-cli/templates/code_tabs.rs` | `src/components/ui/code_tabs.rs` |
 | Dock | Navigation | [docs](dock.md) | `dxui add dock` | `dock` | `crates/dioxus-shadcn-cli/templates/dock.rs` | `src/components/ui/dock.rs` |
 | Menu | Navigation | [docs](menu.md) | `dxui add menu` | `menu` | `crates/dioxus-shadcn-cli/templates/menu.rs` | `src/components/ui/menu.rs` |
 | Navigation Menu | Navigation | [docs](navigation-menu.md) | `dxui add navigation-menu` | `navigation-menu` | `crates/dioxus-shadcn-cli/templates/navigation_menu.rs` | `src/components/ui/navigation_menu.rs` |

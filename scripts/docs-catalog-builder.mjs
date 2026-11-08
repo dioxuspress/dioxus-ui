@@ -32,6 +32,7 @@ const componentCategories = {
   carousel: "layout",
   chart: "data-display",
   checkbox: "forms",
+  "code-tabs": "navigation",
   collapsible: "layout",
   combobox: "overlays",
   command: "actions",

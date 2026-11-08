@@ -10,7 +10,7 @@ The catalog is derived from registry entries, templates, component docs,
 crate features, and crate modules. It intentionally does not include visual
 preview routes, screenshot artifacts, or generated JSON metadata.
 
-Public components: 83
+Public components: 84
 
 ## Groups
 
@@ -64,6 +64,7 @@ Public components: 83
 ### Navigation
 
 - [Breadcrumb](breadcrumb.md): Semantic breadcrumb navigation composition parts.
+- [Code Tabs](code-tabs.md): Underlined code comparison tabs with roving keyboard navigation and code panels.
 - [Dock](dock.md): Styled bottom navigation bar of links or buttons.
 - [Menu](menu.md): Vertical navigation list with titles, active items, and collapsible groups.
 - [Navigation Menu](navigation-menu.md): Controlled navigation menu parts with navigation semantics.
@@ -141,6 +142,7 @@ Public components: 83
 | [Carousel](carousel.md) | Carousel whose root owns the selected slide. | `dxui add carousel` | `carousel` | `crates/dioxus-shadcn-cli/templates/carousel.rs` | `src/components/ui/carousel.rs` |
 | [Chart](chart.md) | Source-copy friendly SVG chart composition parts. | `dxui add chart` | `chart` | `crates/dioxus-shadcn-cli/templates/chart.rs` | `src/components/ui/chart.rs` |
 | [Checkbox](checkbox.md) | Checkbox component with checked and disabled states. | `dxui add checkbox` | `checkbox` | `crates/dioxus-shadcn-cli/templates/checkbox.rs` | `src/components/ui/checkbox.rs` |
+| [Code Tabs](code-tabs.md) | Underlined code comparison tabs with roving keyboard navigation and code panels. | `dxui add code-tabs` | `code-tabs` | `crates/dioxus-shadcn-cli/templates/code_tabs.rs` | `src/components/ui/code_tabs.rs` |
 | [Collapsible](collapsible.md) | Collapsible section whose root owns whether it is open. | `dxui add collapsible` | `collapsible` | `crates/dioxus-shadcn-cli/templates/collapsible.rs` | `src/components/ui/collapsible.rs` |
 | [Combobox](combobox.md) | Controlled searchable selection parts backed by popover primitive configuration. | `dxui add combobox` | `combobox` | `crates/dioxus-shadcn-cli/templates/combobox.rs` | `src/components/ui/combobox.rs` |
 | [Command](command.md) | Command list whose root links the input to the list and highlights options. | `dxui add command` | `command` | `crates/dioxus-shadcn-cli/templates/command.rs` | `src/components/ui/command.rs` |

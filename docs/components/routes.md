@@ -11,7 +11,7 @@ It does not create rendered routes, router code, screenshots, or generated JSON.
 For source preview route metadata, see the
 [Source Preview Manifest](source-preview.md).
 
-Component routes: 83
+Component routes: 84
 Category routes: 8
 
 ## Top-level Routes
@@ -56,6 +56,7 @@ Category routes: 8
 | [Carousel](carousel.md) | /components/carousel | docs/components/carousel.md | /components#category-layout | /components/carousel/source |
 | [Chart](chart.md) | /components/chart | docs/components/chart.md | /components#category-data-display | /components/chart/source |
 | [Checkbox](checkbox.md) | /components/checkbox | docs/components/checkbox.md | /components#category-forms | /components/checkbox/source |
+| [Code Tabs](code-tabs.md) | /components/code-tabs | docs/components/code-tabs.md | /components#category-navigation | /components/code-tabs/source |
 | [Collapsible](collapsible.md) | /components/collapsible | docs/components/collapsible.md | /components#category-layout | /components/collapsible/source |
 | [Combobox](combobox.md) | /components/combobox | docs/components/combobox.md | /components#category-overlays | /components/combobox/source |
 | [Command](command.md) | /components/command | docs/components/command.md | /components#category-actions | /components/command/source |
