@@ -25,7 +25,7 @@ function fail(message) {
 // Newest 0.8 version on crates.io, pre-releases included.
 async function newestDioxus08() {
   const response = await fetch("https://crates.io/api/v1/crates/dioxus/versions", {
-    headers: { "User-Agent": "dioxus-ui verify:dioxus-next (github.com/yuxuetr/dioxus-ui)" },
+    headers: { "User-Agent": "dioxus-ui verify:dioxus-next (github.com/dioxuspress/dioxus-ui)" },
   });
   if (!response.ok) fail(`crates.io answered ${response.status} for the dioxus versions`);
   const { versions } = await response.json();

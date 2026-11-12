@@ -168,8 +168,8 @@ Each `rc-feedback` issue is closed with one of these notes:
 open:
 
 ```bash
-gh issue list -R yuxuetr/dioxus-ui --label rc-feedback --state all --json author -q '[.[]|select(.author.login!="yuxuetr")]|length'
-gh issue list -R yuxuetr/dioxus-ui --label rc-feedback --state open --json number -q length
+gh issue list -R dioxuspress/dioxus-ui --label rc-feedback --state all --json author -q '[.[]|select(.author.login!="yuxuetr")]|length'
+gh issue list -R dioxuspress/dioxus-ui --label rc-feedback --state open --json number -q length
 ```
 
 ## Release Gates
