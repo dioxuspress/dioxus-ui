@@ -39,9 +39,9 @@ axe-core in each.
 ## Deployment
 
 Every push to `main` deploys the site to
-<https://dioxuspress.github.io/dioxus-ui/> through `.github/workflows/pages.yml`.
+<https://ui.dioxuspress.dev/> through `.github/workflows/pages.yml`.
 The workflow runs
-`dx build --release --package dioxus-ui-site --platform web --base-path dioxus-ui`,
+`dx build --release --package dioxus-ui-site --platform web`,
 then `npm run site:pages <public dir>`, which copies `index.html` into a
 directory for each route so deep links load with status 200, and to
 `404.html` so unknown paths reach the router's not found page.

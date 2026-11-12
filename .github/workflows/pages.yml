@@ -48,10 +48,10 @@ jobs:
       - name: Install Node dependencies
         run: npm ci
 
-      # The site is served from https://dioxuspress.github.io/dioxus-ui/.
+      # The site is served from https://ui.dioxuspress.dev/.
       - name: Build the site
         run: |
-          dx build --release --package dioxus-ui-site --platform web --base-path dioxus-ui
+          dx build --release --package dioxus-ui-site --platform web
           echo "SITE_DIR=$(find target/dx/dioxus-ui-site/release/web -maxdepth 1 -name public -type d)" >> "$GITHUB_ENV"
 
       - name: Add route pages
