@@ -140,7 +140,7 @@ with a migration note in the changelog. The Web renderer is tested in a
 browser, including an axe-core accessibility audit. Desktop, iOS, and Android
 run a self-test of the main overlays.
 
-- [Component site](https://dioxuspress.github.io/dioxus-ui/)
+- [Component site](https://ui.dioxuspress.dev/)
 - [Component docs](https://github.com/dioxuspress/dioxus-ui/tree/main/docs/components)
 - [Changelog](https://github.com/dioxuspress/dioxus-ui/blob/main/CHANGELOG.md)
 - [Repository](https://github.com/dioxuspress/dioxus-ui)
