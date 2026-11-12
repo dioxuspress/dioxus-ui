@@ -8,7 +8,7 @@
 - a packaged crate for users who prefer dependency-based usage
 
 It ships 84 components, the `dxui` CLI, and a
-[component site](https://yuxuetr.github.io/dioxus-ui/). Version 0.4.2 is
+[component site](https://dioxuspress.github.io/dioxus-ui/). Version 0.4.2 is
 on crates.io as [`dioxus-shadcn`](https://crates.io/crates/dioxus-shadcn) and
 [`dioxus-shadcn-cli`](https://crates.io/crates/dioxus-shadcn-cli).
 
@@ -312,7 +312,7 @@ when either generated file is stale, and `npm run verify:site` checks every
 route in a browser.
 
 Every push to `main` deploys the site to
-<https://yuxuetr.github.io/dioxus-ui/> through `.github/workflows/pages.yml`:
+<https://dioxuspress.github.io/dioxus-ui/> through `.github/workflows/pages.yml`:
 it builds with `--base-path dioxus-ui`, and `npm run site:pages` copies
 `index.html` to each route and to `404.html`, since GitHub Pages serves files
 only.

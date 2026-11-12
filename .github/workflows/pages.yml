@@ -48,7 +48,7 @@ jobs:
       - name: Install Node dependencies
         run: npm ci
 
-      # The site is served from https://yuxuetr.github.io/dioxus-ui/.
+      # The site is served from https://dioxuspress.github.io/dioxus-ui/.
       - name: Build the site
         run: |
           dx build --release --package dioxus-ui-site --platform web --base-path dioxus-ui

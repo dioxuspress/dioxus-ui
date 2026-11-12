@@ -184,7 +184,7 @@ preparation documents before public publish.
 Internal trial can proceed with every locally resolvable publish readiness item
 in place:
 
-- repository identity: `https://github.com/yuxuetr/dioxus-ui`
+- repository identity: `https://github.com/dioxuspress/dioxus-ui`
 - license: MIT with committed root `LICENSE`
 - API stability: current `0.1.x` API surface accepted for first publish;
   breaking changes before `1.0` require a minor bump and a `CHANGELOG.md`

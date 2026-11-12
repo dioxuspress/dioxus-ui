@@ -61,7 +61,7 @@ recorded registry availability in
 First publish release notes are recorded in `CHANGELOG.md`. APIs remain
 pre-1.0, and the current `0.6.x` API surface is accepted
 under the pre-`1.0` breaking-change policy. The repository URL is approved as
-`https://github.com/yuxuetr/dioxus-ui`, and root MIT license text is committed
+`https://github.com/dioxuspress/dioxus-ui`, and root MIT license text is committed
 in `LICENSE`. CLI template delivery now uses embedded registry/template assets
 and is tracked by
 [CLI Template Packaging Readiness Metadata](archive/first-publish/cli-template-packaging-readiness-metadata.md).

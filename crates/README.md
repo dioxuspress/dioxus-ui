@@ -18,7 +18,7 @@ Each library crate follows semver on its whole public API, and every public
 item has a doc comment. `dioxus-shadcn-primitives` makes the same promise as
 `dioxus-shadcn`, so an app may depend on it directly, for example to
 implement the runtime adapter traits; `dioxus-shadcn` re-exports the
-primitive types its components take ([RFC 0079](https://github.com/yuxuetr/dioxus-ui/blob/main/docs/rfcs/0079-public-surface.md)).
+primitive types its components take ([RFC 0079](https://github.com/dioxuspress/dioxus-ui/blob/main/docs/rfcs/0079-public-surface.md)).
 
 ## Copy the source
 
@@ -140,9 +140,9 @@ with a migration note in the changelog. The Web renderer is tested in a
 browser, including an axe-core accessibility audit. Desktop, iOS, and Android
 run a self-test of the main overlays.
 
-- [Component site](https://yuxuetr.github.io/dioxus-ui/)
-- [Component docs](https://github.com/yuxuetr/dioxus-ui/tree/main/docs/components)
-- [Changelog](https://github.com/yuxuetr/dioxus-ui/blob/main/CHANGELOG.md)
-- [Repository](https://github.com/yuxuetr/dioxus-ui)
+- [Component site](https://dioxuspress.github.io/dioxus-ui/)
+- [Component docs](https://github.com/dioxuspress/dioxus-ui/tree/main/docs/components)
+- [Changelog](https://github.com/dioxuspress/dioxus-ui/blob/main/CHANGELOG.md)
+- [Repository](https://github.com/dioxuspress/dioxus-ui)
 
-Licensed under the [MIT License](https://github.com/yuxuetr/dioxus-ui/blob/main/LICENSE).
+Licensed under the [MIT License](https://github.com/dioxuspress/dioxus-ui/blob/main/LICENSE).
