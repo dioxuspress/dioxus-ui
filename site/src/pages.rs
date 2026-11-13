@@ -184,7 +184,7 @@ pub fn Home() -> Element {
                   Link {
                     class: "text-muted-foreground hover:text-foreground hover:underline",
                     to: Route::ComponentPage { slug: component.slug.to_string() },
-                    "{component.title}"
+                    "{i18n::component_title(lang, component.slug, component.title)}"
                   }
                 }
               }
@@ -475,7 +475,7 @@ pub fn ComponentPage(slug: String) -> Element {
       p { class: "text-sm text-muted-foreground",
         "{i18n::category_label(lang, category.id, category.label)}"
       }
-      h1 { class: "{H1} mt-1", "{component.title}" }
+      h1 { class: "{H1} mt-1", "{i18n::component_title(lang, component.slug, component.title)}" }
       p { class: LEAD, "{i18n::component_description(lang, component.slug, component.description)}" }
       h2 { class: H2, if zh { "安装方式" } else { "Installation" } }
       p { class: P, if zh { "拷贝源码到你的应用：" } else { "Copy the source into your app:" } }

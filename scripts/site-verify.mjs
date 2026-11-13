@@ -529,6 +529,18 @@ async function run() {
       await expect(zhPage.locator("html")).toHaveAttribute("lang", "zh-CN");
       await expect(zhPage.getByRole("link", { name: "快速开始", exact: true })).toBeVisible();
       await expect(zhPage.getByRole("heading", { name: "84 个组件", exact: true })).toBeVisible();
+      const zhSidebar = zhPage.getByRole("navigation", { name: "站点导航" });
+      await expect(zhSidebar.getByRole("link", { name: "Dashboard 数据看板", exact: true })).toBeVisible();
+      await expect(zhSidebar.getByRole("link", { name: "Button 按钮", exact: true })).toBeVisible();
+      await expect(zhSidebar.getByRole("link", { name: "Command 命令面板", exact: true })).toBeVisible();
+      const wrappedSidebarLinks = await zhSidebar.locator("a").evaluateAll((links) =>
+        links
+          .filter((link) => link.getBoundingClientRect().height > 36)
+          .map((link) => `${link.textContent?.trim()} (${Math.round(link.getBoundingClientRect().height)}px)`),
+      );
+      if (wrappedSidebarLinks.length > 0) {
+        throw new Error(`zh-CN sidebar links wrapped onto multiple lines: ${wrappedSidebarLinks.join(", ")}`);
+      }
       await expect(zhPage.locator("[data-site-back-link]")).toHaveAttribute(
         "href",
         "https://dioxuspress.dev/?lang=zh",
@@ -546,6 +558,7 @@ async function run() {
       ]) {
         const zhArticle = await visit(zhPage, zhPath);
         if (zhPath === "/components/button") {
+          await expect(zhArticle.getByRole("heading", { level: 1, name: "Button 按钮", exact: true })).toHaveCount(1);
           const zhRef = zhArticle.locator("[data-site-reference]");
           for (const heading of ["API 概览", "事件处理", "触控密度", "无障碍说明"]) {
             await expect(zhRef.getByRole("heading", { name: heading, exact: true })).toHaveCount(1);
@@ -587,12 +600,14 @@ async function run() {
         .toBe("en");
 
       await visit(zhPage, "/components/button");
+      await expect(zhPage.getByRole("heading", { level: 1, name: "Button", exact: true })).toBeVisible();
       await expect(zhPage.getByRole("heading", { name: "Examples", exact: true })).toBeVisible();
       await expect(zhPage.getByRole("heading", { name: "API Surface", exact: true })).toBeVisible();
 
       // Header toggle switches live to Chinese, updates DioxusPress back-link, and fits at 375px.
       await zhPage.locator("[data-site-lang-toggle]").click();
       await expect(zhPage.locator("html")).toHaveAttribute("lang", "zh-CN");
+      await expect(zhPage.getByRole("heading", { level: 1, name: "Button 按钮", exact: true })).toBeVisible();
       await expect(zhPage.getByRole("heading", { name: "交互示例", exact: true })).toBeVisible();
       await expect(zhPage.getByRole("heading", { name: "API 概览", exact: true })).toBeVisible();
       await expect(zhPage.locator("[data-site-back-link]")).toHaveAttribute(
@@ -609,7 +624,7 @@ async function run() {
       await zhPage.getByRole("button", { name: "打开组件导航菜单" }).click();
       const zhMenu = zhPage.getByRole("dialog");
       await expect(zhMenu).toBeVisible();
-      await zhMenu.getByRole("link", { name: "Dialog", exact: true }).click();
+      await zhMenu.getByRole("link", { name: "Dialog 对话框", exact: true }).click();
       await expect(zhMenu).toBeHidden();
 
       if (zhErrors.length > 0) {

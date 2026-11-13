@@ -244,107 +244,148 @@ fn zh_category_label(id: &str) -> Option<&'static str> {
   })
 }
 
-pub fn component_description(lang: SiteLang, slug: &str, fallback: &'static str) -> &'static str {
+pub fn component_title(lang: SiteLang, slug: &str, fallback: &'static str) -> &'static str {
   match lang {
     SiteLang::En => fallback,
-    SiteLang::Zh => zh_component_description(slug).unwrap_or(fallback),
+    SiteLang::Zh => zh_component_meta(slug).map_or(fallback, |(title, _)| title),
   }
 }
 
-fn zh_component_description(slug: &str) -> Option<&'static str> {
+pub fn component_description(lang: SiteLang, slug: &str, fallback: &'static str) -> &'static str {
+  match lang {
+    SiteLang::En => fallback,
+    SiteLang::Zh => zh_component_meta(slug).map_or(fallback, |(_, desc)| desc),
+  }
+}
+
+fn zh_component_meta(slug: &str) -> Option<(&'static str, &'static str)> {
   Some(match slug {
     // actions
-    "button" => "支持多种视觉变体、尺寸规格与触控密度自适应的按钮组件。",
-    "button-group" => "用于将一组关联命令按钮组合排列的按钮组容器。",
-    "command" => "将搜索输入框与可高亮选项列表自动关联的命令面板组件。",
-    "fab" => "带可选快捷展开菜单（Speed Dial）的悬浮操作按钮。",
-    "kbd" => "用于展示键盘快捷键组合提示的语义化按键组件。",
-    "swap" => "在两个元素之间平滑切换显示状态的开关按钮组件。",
-    "theme-controller" => "在文档根节点应用、跟随系统并持久化记忆配色主题的控制器。",
-    "toggle" => "支持受控按下（Pressed）状态的双态切换按钮组件。",
-    "toggle-group" => "由根节点统一管理单选或多选按下状态的切换按钮组。",
+    "button" => ("Button 按钮", "支持多种视觉变体、尺寸规格与触控密度自适应的按钮组件。"),
+    "button-group" => ("Button Group 按钮组", "用于将一组关联命令按钮组合排列的按钮组容器。"),
+    "command" => ("Command 命令面板", "将搜索输入框与可高亮选项列表自动关联的命令面板组件。"),
+    "fab" => ("Fab 悬浮按钮", "带可选快捷展开菜单（Speed Dial）的悬浮操作按钮。"),
+    "kbd" => ("Kbd 快捷键", "用于展示键盘快捷键组合提示的语义化按键组件。"),
+    "swap" => ("Swap 元素切换", "在两个元素之间平滑切换显示状态的开关按钮组件。"),
+    "theme-controller" => {
+      ("Theme Controller 主题切换", "在文档根节点应用、跟随系统并持久化记忆配色主题的控制器。")
+    }
+    "toggle" => ("Toggle 切换按钮", "支持受控按下（Pressed）状态的双态切换按钮组件。"),
+    "toggle-group" => {
+      ("Toggle Group 切换按钮组", "由根节点统一管理单选或多选按下状态的切换按钮组。")
+    }
     // forms
-    "calendar" => "基于纯日期网格无障碍原语构建的日历选择组件。",
-    "checkbox" => "支持选中、未选中与禁用状态的复选框组件。",
-    "date-picker" => "组合触发器、选中值展示与日历浮层面板的日期选择器部件。",
-    "field" => "用于统一组织标签、控件、辅助说明与校验错误的表单字段布局部件。",
-    "file-input" => "样式化的原生文件上传输入框，完整透传原生变更事件。",
-    "input" => "支持禁用态与校验错误态的单行文本输入框组件。",
-    "input-group" => "支持在输入框前后组合图标、文本前缀或操作按钮的输入组组件。",
-    "input-otp" => "由根节点集中管理验证码字符状态的一次性口令（OTP）输入框。",
-    "label" => "用于将说明文字与表单控件进行无障碍关联的标签组件。",
-    "native-select" => "样式化的原生下拉选择框（select / optgroup / option）组件。",
-    "number-input" => "带增减步进按钮与键盘微调（spinbutton）语义的数值输入框。",
-    "radio-group" => "由根节点受控管理当前选中项的单选按钮组组件。",
-    "rating" => "基于原生单选组语义构建的可无障碍操作星级评分组件。",
-    "select" => "基于无障碍选择原语构建的可定制下拉选择器组件。",
-    "slider" => "支持受控数值调节与键盘步进的水平滑动条组件。",
-    "switch" => "支持开启、关闭与禁用状态的拨动开关组件。",
-    "tags-input" => "支持回车添加与逐项移除胶囊标签的多标签输入框组件。",
-    "textarea" => "支持禁用态与校验错误态的多行文本域组件。",
+    "calendar" => ("Calendar 日历", "基于纯日期网格无障碍原语构建的日历选择组件。"),
+    "checkbox" => ("Checkbox 复选框", "支持选中、未选中与禁用状态的复选框组件。"),
+    "date-picker" => {
+      ("Date Picker 日期选择器", "组合触发器、选中值展示与日历浮层面板的日期选择器部件。")
+    }
+    "field" => ("Field 表单字段", "用于统一组织标签、控件、辅助说明与校验错误的表单字段布局部件。"),
+    "file-input" => ("File Input 文件上传", "样式化的原生文件上传输入框，完整透传原生变更事件。"),
+    "input" => ("Input 输入框", "支持禁用态与校验错误态的单行文本输入框组件。"),
+    "input-group" => {
+      ("Input Group 输入框组", "支持在输入框前后组合图标、文本前缀或操作按钮的输入组组件。")
+    }
+    "input-otp" => {
+      ("Input OTP 验证码输入", "由根节点集中管理验证码字符状态的一次性口令（OTP）输入框。")
+    }
+    "label" => ("Label 标签", "用于将说明文字与表单控件进行无障碍关联的标签组件。"),
+    "native-select" => {
+      ("Native Select 原生选择", "样式化的原生下拉选择框（select / optgroup / option）组件。")
+    }
+    "number-input" => {
+      ("Number Input 数字输入", "带增减步进按钮与键盘微调（spinbutton）语义的数值输入框。")
+    }
+    "radio-group" => ("Radio Group 单选框组", "由根节点受控管理当前选中项的单选按钮组组件。"),
+    "rating" => ("Rating 星级评分", "基于原生单选组语义构建的可无障碍操作星级评分组件。"),
+    "select" => ("Select 选择器", "基于无障碍选择原语构建的可定制下拉选择器组件。"),
+    "slider" => ("Slider 滑动条", "支持受控数值调节与键盘步进的水平滑动条组件。"),
+    "switch" => ("Switch 开关", "支持开启、关闭与禁用状态的拨动开关组件。"),
+    "tags-input" => ("Tags Input 标签输入", "支持回车添加与逐项移除胶囊标签的多标签输入框组件。"),
+    "textarea" => ("Textarea 文本域", "支持禁用态与校验错误态的多行文本域组件。"),
     // overlays
-    "alert-dialog" => "基于对话框原语构建的模态确认与高危操作二次拦截弹窗。",
-    "combobox" => "结合气泡浮层与关键词过滤能力的可搜索下拉组合框部件。",
-    "context-menu" => "支持鼠标右键或键盘快捷键唤起的上下文菜单部件。",
-    "dialog" => "具备焦点捕获、遮罩层与键盘关闭能力的模态对话框组件。",
-    "drawer" => "面向移动端交互体验优化的底部滑出抽屉浮层组件。",
-    "dropdown" => "支持键盘方向键漫游与菜单项分组的下拉菜单组件。",
-    "hover-card" => "悬停或聚焦触发器时展示富媒体预览信息的悬浮卡片组件。",
-    "menubar" => "适合桌面端与编辑器顶部的多级水平菜单栏组件。",
-    "popover" => "锚定在触发元素旁展示交互表单或富内容的弹出气泡组件。",
-    "sheet" => "从屏幕四侧边缘滑出的侧边面板（Sheet）浮层组件。",
-    "tooltip" => "悬停或键盘聚焦时展示简短补充说明的文字提示组件。",
+    "alert-dialog" => {
+      ("Alert Dialog 警告弹窗", "基于对话框原语构建的模态确认与高危操作二次拦截弹窗。")
+    }
+    "combobox" => ("Combobox 组合框", "结合气泡浮层与关键词过滤能力的可搜索下拉组合框部件。"),
+    "context-menu" => ("Context Menu 右键菜单", "支持鼠标右键或键盘快捷键唤起的上下文菜单部件。"),
+    "dialog" => ("Dialog 对话框", "具备焦点捕获、遮罩层与键盘关闭能力的模态对话框组件。"),
+    "drawer" => ("Drawer 底部抽屉", "面向移动端交互体验优化的底部滑出抽屉浮层组件。"),
+    "dropdown" => ("Dropdown 下拉菜单", "支持键盘方向键漫游与菜单项分组的下拉菜单组件。"),
+    "hover-card" => ("Hover Card 悬浮卡片", "悬停或聚焦触发器时展示富媒体预览信息的悬浮卡片组件。"),
+    "menubar" => ("Menubar 菜单栏", "适合桌面端与编辑器顶部的多级水平菜单栏组件。"),
+    "popover" => ("Popover 弹出气泡", "锚定在触发元素旁展示交互表单或富内容的弹出气泡组件。"),
+    "sheet" => ("Sheet 侧边面板", "从屏幕四侧边缘滑出的侧边面板（Sheet）浮层组件。"),
+    "tooltip" => ("Tooltip 文字提示", "悬停或键盘聚焦时展示简短补充说明的文字提示组件。"),
     // navigation
-    "breadcrumb" => "表达页面层级位置并支持折叠省略的语义化面包屑导航部件。",
-    "code-tabs" => "带下划线激活指示、键盘左右漫游与代码面板的多语言对比标签页。",
-    "dock" => "适用于移动端或应用壳层的底部快捷导航栏组件。",
-    "menu" => "支持分组标题、激活态高亮与可折叠子项的纵向导航菜单。",
-    "navigation-menu" => "具备完整导航语义的受控顶部多栏导航菜单部件。",
-    "pagination" => "包含页码链接、上下页按钮与省略号占位的分页导航组件。",
-    "sidebar" => "由 Provider 统一管理桌面折叠与移动抽屉状态的应用侧边栏框架。",
-    "steps" => "展示已完成、进行中与待处理进度的编号步骤条组件。",
-    "tabs" => "支持受控或默认激活态切换的选项卡面板组件。",
-    "tree" => "支持节点展开折叠与 WAI-ARIA 树形键盘导航的层级树组件。",
+    "breadcrumb" => ("Breadcrumb 面包屑", "表达页面层级位置并支持折叠省略的语义化面包屑导航部件。"),
+    "code-tabs" => {
+      ("Code Tabs 代码标签页", "带下划线激活指示、键盘左右漫游与代码面板的多语言对比标签页。")
+    }
+    "dock" => ("Dock 底部导航栏", "适用于移动端或应用壳层的底部快捷导航栏组件。"),
+    "menu" => ("Menu 菜单列表", "支持分组标题、激活态高亮与可折叠子项的纵向导航菜单。"),
+    "navigation-menu" => {
+      ("Navigation Menu 导航菜单", "具备完整导航语义的受控顶部多栏导航菜单部件。")
+    }
+    "pagination" => ("Pagination 分页", "包含页码链接、上下页按钮与省略号占位的分页导航组件。"),
+    "sidebar" => ("Sidebar 侧边栏", "由 Provider 统一管理桌面折叠与移动抽屉状态的应用侧边栏框架。"),
+    "steps" => ("Steps 步骤条", "展示已完成、进行中与待处理进度的编号步骤条组件。"),
+    "tabs" => ("Tabs 选项卡", "支持受控或默认激活态切换的选项卡面板组件。"),
+    "tree" => ("Tree 树形控件", "支持节点展开折叠与 WAI-ARIA 树形键盘导航的层级树组件。"),
     // layout
-    "accordion" => "由根节点管理单个或多个面板展开状态的垂直手风琴折叠组件。",
-    "aspect-ratio" => "按固定宽高比约束图片、视频或嵌入内容的比例容器。",
-    "card" => "包含头部、主体内容与底部操作区的通用卡片容器组件。",
-    "carousel" => "由根节点管理当前激活幻灯片索引的轮播展示组件。",
-    "collapsible" => "控制单块内容区域展开或收起的可折叠面板组件。",
-    "direction" => "为子树局部指定原生从左到右（LTR）或从右到左（RTL）书写方向的容器。",
-    "indicator" => "在目标元素边角叠加角标计数或在线状态点的定位容器。",
-    "item" => "用于构建列表行、设置项与联系人条目的通用列表项组合部件。",
-    "mockup" => "提供浏览器、窗口、代码终端与手机外框的内容展示样机容器。",
-    "resizable" => "支持鼠标与键盘拖拽调整分栏比例的可调尺寸面板组部件。",
-    "scroll-area" => "统一封装滚动视口与定制滚动条样式的原生滚动区域组件。",
-    "separator" => "用于水平或垂直分隔内容区块的视觉与语义分割线组件。",
+    "accordion" => ("Accordion 手风琴", "由根节点管理单个或多个面板展开状态的垂直手风琴折叠组件。"),
+    "aspect-ratio" => ("Aspect Ratio 宽高比", "按固定宽高比约束图片、视频或嵌入内容的比例容器。"),
+    "card" => ("Card 卡片", "包含头部、主体内容与底部操作区的通用卡片容器组件。"),
+    "carousel" => ("Carousel 轮播图", "由根节点管理当前激活幻灯片索引的轮播展示组件。"),
+    "collapsible" => ("Collapsible 折叠面板", "控制单块内容区域展开或收起的可折叠面板组件。"),
+    "direction" => {
+      ("Direction 书写方向", "为子树局部指定原生从左到右（LTR）或从右到左（RTL）书写方向的容器。")
+    }
+    "indicator" => ("Indicator 角标指示", "在目标元素边角叠加角标计数或在线状态点的定位容器。"),
+    "item" => ("Item 列表项", "用于构建列表行、设置项与联系人条目的通用列表项组合部件。"),
+    "mockup" => ("Mockup 样机外框", "提供浏览器、窗口、代码终端与手机外框的内容展示样机容器。"),
+    "resizable" => ("Resizable 可调分栏", "支持鼠标与键盘拖拽调整分栏比例的可调尺寸面板组部件。"),
+    "scroll-area" => {
+      ("Scroll Area 滚动区域", "统一封装滚动视口与定制滚动条样式的原生滚动区域组件。")
+    }
+    "separator" => ("Separator 分割线", "用于水平或垂直分隔内容区块的视觉与语义分割线组件。"),
     // data-display
-    "avatar" => "支持头像图片加载与首字母回退占位的用户头像组件。",
-    "badge" => "提供多种静态语义状态变体的轻量徽标与标签胶囊组件。",
-    "chart" => "对源码拷贝友好、零重型运行时依赖的 SVG 图表组合部件。",
-    "countdown" => "展示应用层剩余秒数并支持无障碍播报的倒计时组件。",
-    "data-table" => "提供受控筛选、列排序与行多选状态辅助函数的数据表格部件。",
-    "diff" => "支持键盘左右调节分割线的前后视图对比（Diff）组件。",
-    "empty" => "用于展示无数据、空搜索结果及引导操作的空状态布局部件。",
-    "progress" => "具备完整无障碍进度数值语义的线性进度条组件。",
-    "radial-progress" => "中心可展示百分比或自定义标签的环形进度指示组件。",
-    "stat" => "组合指标标题、核心数值、趋势说明与图标的统计数值卡片组件。",
-    "table" => "提供统一边框、表头与行悬停样式的语义化数据表格组件。",
-    "timeline" => "包含时间戳、节点标记与事件内容的有序时间线展示组件。",
-    "typography" => "面向长文与技术文档排版的语义化标题、段落与引用样式部件。",
+    "avatar" => ("Avatar 头像", "支持头像图片加载与首字母回退占位的用户头像组件。"),
+    "badge" => ("Badge 徽标", "提供多种静态语义状态变体的轻量徽标与标签胶囊组件。"),
+    "chart" => ("Chart 图表", "对源码拷贝友好、零重型运行时依赖的 SVG 图表组合部件。"),
+    "countdown" => ("Countdown 倒计时", "展示应用层剩余秒数并支持无障碍播报的倒计时组件。"),
+    "data-table" => {
+      ("Data Table 数据表格", "提供受控筛选、列排序与行多选状态辅助函数的数据表格部件。")
+    }
+    "diff" => ("Diff 视图对比", "支持键盘左右调节分割线的前后视图对比（Diff）组件。"),
+    "empty" => ("Empty 空状态", "用于展示无数据、空搜索结果及引导操作的空状态布局部件。"),
+    "progress" => ("Progress 进度条", "具备完整无障碍进度数值语义的线性进度条组件。"),
+    "radial-progress" => {
+      ("Radial Progress 环形进度", "中心可展示百分比或自定义标签的环形进度指示组件。")
+    }
+    "stat" => ("Stat 统计数值", "组合指标标题、核心数值、趋势说明与图标的统计数值卡片组件。"),
+    "table" => ("Table 表格", "提供统一边框、表头与行悬停样式的语义化数据表格组件。"),
+    "timeline" => ("Timeline 时间线", "包含时间戳、节点标记与事件内容的有序时间线展示组件。"),
+    "typography" => ("Typography 排版", "面向长文与技术文档排版的语义化标题、段落与引用样式部件。"),
     // feedback
-    "alert" => "包含标题与详细说明的页面内静态提示与告警横幅组件。",
-    "skeleton" => "在异步内容加载完成前保持版面稳定的脉冲骨架屏占位组件。",
-    "sonner" => "开箱即用的堆叠式轻提示（Sonner Toast）部件与通知队列辅助函数。",
-    "spinner" => "用于按钮内联或区块等待反馈的轻量加载旋转指示器。",
-    "status" => "带可选无障碍状态标签的语义色呼吸/常亮状态圆点组件。",
-    "toast" => "支持受控生命周期、操作按钮与队列管理的通知提示部件。",
+    "alert" => ("Alert 警告提示", "包含标题与详细说明的页面内静态提示与告警横幅组件。"),
+    "skeleton" => ("Skeleton 骨架屏", "在异步内容加载完成前保持版面稳定的脉冲骨架屏占位组件。"),
+    "sonner" => {
+      ("Sonner 堆叠通知", "开箱即用的堆叠式轻提示（Sonner Toast）部件与通知队列辅助函数。")
+    }
+    "spinner" => ("Spinner 加载指示", "用于按钮内联或区块等待反馈的轻量加载旋转指示器。"),
+    "status" => ("Status 状态点", "带可选无障碍状态标签的语义色呼吸/常亮状态圆点组件。"),
+    "toast" => ("Toast 轻提示", "支持受控生命周期、操作按钮与队列管理的通知提示部件。"),
     // messaging
-    "attachment" => "与具体服务商解耦的文件附件预览行、上传进度与操作组件。",
-    "bubble" => "面向即时通讯与 AI 对话场景的消息气泡与表情回应容器。",
-    "marker" => "用于会话流内嵌状态提示、高亮边框行与日期分割线的标记组件。",
-    "message" => "与数据源无关的聊天消息行布局（头像、署名、正文与操作栏）组件。",
-    "message-scroller" => "内置纯滚动意图判定辅助函数的受控消息流自动跟随滚动容器。",
+    "attachment" => ("Attachment 附件", "与具体服务商解耦的文件附件预览行、上传进度与操作组件。"),
+    "bubble" => ("Bubble 消息气泡", "面向即时通讯与 AI 对话场景的消息气泡与表情回应容器。"),
+    "marker" => ("Marker 会话标记", "用于会话流内嵌状态提示、高亮边框行与日期分割线的标记组件。"),
+    "message" => {
+      ("Message 消息行", "与数据源无关的聊天消息行布局（头像、署名、正文与操作栏）组件。")
+    }
+    "message-scroller" => {
+      ("Message Scroller 消息滚动", "内置纯滚动意图判定辅助函数的受控消息流自动跟随滚动容器。")
+    }
     _ => return None,
   })
 }
@@ -540,19 +581,29 @@ mod tests {
         category.id
       );
       for component in category.components {
+        let (title, desc) = zh_component_meta(component.slug)
+          .unwrap_or_else(|| panic!("missing Chinese component metadata for `{}`", component.slug));
+        let expected_prefix = format!("{} ", component.title);
         assert!(
-          zh_component_description(component.slug).is_some(),
-          "missing Chinese component description for `{}`",
-          component.slug
+          title.starts_with(&expected_prefix) && title.len() > expected_prefix.len(),
+          "Chinese component title `{title}` for `{}` must follow `{} <中文>`",
+          component.slug,
+          component.title
         );
+        assert!(!desc.is_empty(), "empty Chinese component description for `{}`", component.slug);
       }
     }
     for block in BLOCKS {
+      let (title, desc) = zh_block_meta(block.slug)
+        .unwrap_or_else(|| panic!("missing Chinese block metadata for `{}`", block.slug));
+      let expected_prefix = format!("{} ", block.title);
       assert!(
-        zh_block_meta(block.slug).is_some(),
-        "missing Chinese block metadata for `{}`",
-        block.slug
+        title.starts_with(&expected_prefix) && title.len() > expected_prefix.len(),
+        "Chinese block title `{title}` for `{}` must follow `{} <中文>`",
+        block.slug,
+        block.title
       );
+      assert!(!desc.is_empty(), "empty Chinese block description for `{}`", block.slug);
     }
     for example in EXAMPLES {
       assert!(
