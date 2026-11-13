@@ -17,25 +17,35 @@ use pages::{BlockPage, Blocks, ComponentPage, GettingStarted, Home, NotFound, Th
 
 const SITE_CSS: Asset = asset!("/assets/site.generated.css");
 
-#[derive(Routable, Clone, PartialEq)]
-#[rustfmt::skip]
-pub enum Route {
-  #[layout(Shell)]
-    #[route("/")]
-    Home {},
-    #[route("/docs/getting-started")]
-    GettingStarted {},
-    #[route("/docs/theming")]
-    Theming {},
-    #[route("/components/:slug")]
-    ComponentPage { slug: String },
-    #[route("/blocks")]
-    Blocks {},
-    #[route("/blocks/:slug")]
-    BlockPage { slug: String },
-    #[route("/:..segments")]
-    NotFound { segments: Vec<String> },
+// `dioxus-router-macro` emits a sibling `const _: () = { ... }` with a trailing
+// error return after the infallible `/:..segments` catch-all arm, which Rust
+// 1.100+ flags as `unreachable_code`. Scoping the derive in a module keeps the
+// lint active everywhere else in `main.rs`.
+#[allow(unreachable_code)]
+mod route {
+  use super::*;
+
+  #[derive(Routable, Clone, PartialEq)]
+  #[rustfmt::skip]
+  pub enum Route {
+    #[layout(Shell)]
+      #[route("/")]
+      Home {},
+      #[route("/docs/getting-started")]
+      GettingStarted {},
+      #[route("/docs/theming")]
+      Theming {},
+      #[route("/components/:slug")]
+      ComponentPage { slug: String },
+      #[route("/blocks")]
+      Blocks {},
+      #[route("/blocks/:slug")]
+      BlockPage { slug: String },
+      #[route("/:..segments")]
+      NotFound { segments: Vec<String> },
+  }
 }
+pub use route::Route;
 
 fn main() {
   dioxus::launch(App);
