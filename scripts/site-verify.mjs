@@ -535,11 +535,44 @@ async function run() {
       );
       await expect(zhPage.locator("[data-site-lang-toggle]")).toHaveText("EN");
 
-      for (const zhPath of ["/", "/docs/getting-started", "/docs/theming", "/components/button", "/blocks", "/missing"]) {
-        await visit(zhPage, zhPath);
-        await expectReadable(zhPage, `${zhPath} (zh-CN)`, { audit: true });
+      for (const zhPath of [
+        "/",
+        "/docs/getting-started",
+        "/docs/theming",
+        "/components/button",
+        "/blocks",
+        "/blocks/dashboard",
+        "/missing",
+      ]) {
+        const zhArticle = await visit(zhPage, zhPath);
+        if (zhPath === "/components/button") {
+          const zhRef = zhArticle.locator("[data-site-reference]");
+          for (const heading of ["API 概览", "事件处理", "触控密度", "无障碍说明"]) {
+            await expect(zhRef.getByRole("heading", { name: heading, exact: true })).toHaveCount(1);
+          }
+          await expect(zhRef.getByRole("heading", { name: "API Surface", exact: true })).toHaveCount(0);
+        }
+        if (zhPath === "/blocks/dashboard") {
+          const zhBlockRef = zhArticle.locator("[data-site-reference]");
+          for (const heading of ["行为与交互", "无障碍说明"]) {
+            await expect(zhBlockRef.getByRole("heading", { name: heading, exact: true })).toHaveCount(1);
+          }
+          await expect(zhBlockRef.getByRole("heading", { name: "Behavior", exact: true })).toHaveCount(0);
+        }
+        await expectReadable(zhPage, `${zhPath} (zh-CN)`, {
+          audit: true,
+          disabledRules: zhPath.startsWith("/blocks/dashboard") ? blockLandmarkRules : [],
+        });
         await expectNoSidewaysScroll(zhPage, `${zhPath} (zh-CN)`);
       }
+
+      // Cross-component links inside Chinese reference docs navigate within the site.
+      await visit(zhPage, "/components/date-picker");
+      await zhPage.locator("[data-site-reference]").getByRole("link", { name: /Calendar/ }).first().click();
+      await expect(zhPage.locator("main [data-site-page]")).toHaveAttribute("data-component", "calendar");
+      await expect(
+        zhPage.locator("[data-site-reference]").getByRole("heading", { name: "API 概览", exact: true }),
+      ).toHaveCount(1);
 
       // ?lang=en overrides browser zh-CN locale and persists across client navigation.
       await visit(zhPage, "/?lang=en");
@@ -555,11 +588,13 @@ async function run() {
 
       await visit(zhPage, "/components/button");
       await expect(zhPage.getByRole("heading", { name: "Examples", exact: true })).toBeVisible();
+      await expect(zhPage.getByRole("heading", { name: "API Surface", exact: true })).toBeVisible();
 
       // Header toggle switches live to Chinese, updates DioxusPress back-link, and fits at 375px.
       await zhPage.locator("[data-site-lang-toggle]").click();
       await expect(zhPage.locator("html")).toHaveAttribute("lang", "zh-CN");
       await expect(zhPage.getByRole("heading", { name: "交互示例", exact: true })).toBeVisible();
+      await expect(zhPage.getByRole("heading", { name: "API 概览", exact: true })).toBeVisible();
       await expect(zhPage.locator("[data-site-back-link]")).toHaveAttribute(
         "href",
         "https://dioxuspress.dev/?lang=zh",

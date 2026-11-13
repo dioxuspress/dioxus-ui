@@ -1,6 +1,6 @@
-//! Renders each component's docs page, from its API Surface section on, to
-//! HTML for the component site (M199.2), so the site shows the reference
-//! instead of linking to GitHub.
+//! Renders each component's and block's docs page (English and Chinese) to
+//! HTML for the component site (M199.2), so the site shows the localized
+//! reference instead of linking to GitHub.
 
 use std::collections::BTreeSet;
 use std::fmt::Write as _;
@@ -16,9 +16,14 @@ fn main() {
   let manifest = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
   let root = manifest.parent().expect("the site sits in the workspace root");
   let docs = root.join("docs/components");
+  let zh_docs = manifest.join("i18n/zh/components");
+  let blocks_docs = root.join("docs/blocks");
+  let zh_blocks_docs = manifest.join("i18n/zh/blocks");
   let registry = root.join("crates/dioxus-shadcn-cli/registry");
-  println!("cargo:rerun-if-changed={}", docs.display());
-  println!("cargo:rerun-if-changed={}", registry.display());
+
+  for watched in [&docs, &zh_docs, &blocks_docs, &zh_blocks_docs, &registry] {
+    println!("cargo:rerun-if-changed={}", watched.display());
+  }
 
   let slugs = fs::read_dir(&registry)
     .expect("read the CLI registry")
@@ -27,9 +32,10 @@ fn main() {
     .collect::<BTreeSet<_>>();
   let repository = env!("CARGO_PKG_REPOSITORY");
 
-  let mut out = String::from("pub const REFERENCES: &[(&str, &str)] = &[\n");
+  let mut out = String::from("pub const REFERENCES_EN: &[(&str, &str)] = &[\n");
   for slug in &slugs {
     let path = docs.join(format!("{slug}.md"));
+    println!("cargo:rerun-if-changed={}", path.display());
     let markdown = fs::read_to_string(&path).expect("read a component docs page");
     let start = markdown.find("## API Surface").unwrap_or(markdown.len());
     let rendered = render(&markdown[start..], &slugs, repository, "docs/components");
@@ -37,21 +43,51 @@ fn main() {
   }
   out.push_str("];\n");
 
+  out.push_str("pub const REFERENCES_ZH: &[(&str, &str)] = &[\n");
+  for slug in &slugs {
+    let path = zh_docs.join(format!("{slug}.md"));
+    println!("cargo:rerun-if-changed={}", path.display());
+    let markdown = fs::read_to_string(&path).unwrap_or_else(|err| {
+      panic!("missing Chinese component reference {}: {err}", path.display())
+    });
+    let start = markdown.find("## API 概览").unwrap_or_else(|| {
+      panic!("Chinese component reference {} must start with `## API 概览`", path.display())
+    });
+    let rendered = render(&markdown[start..], &slugs, repository, "site/i18n/zh/components");
+    writeln!(out, "  ({slug:?}, {rendered:?}),").expect("write to a string");
+  }
+  out.push_str("];\n");
+
   // Blocks (RFC 0073): each docs page from its Behavior section on.
-  out.push_str("pub const BLOCK_REFERENCES: &[(&str, &str)] = &[\n");
-  let blocks_docs = root.join("docs/blocks");
-  println!("cargo:rerun-if-changed={}", blocks_docs.display());
   let mut block_pages = fs::read_dir(&blocks_docs)
     .expect("read the blocks docs")
     .filter_map(|entry| entry.ok().map(|entry| entry.path()))
     .filter(|path| path.file_name().is_some_and(|name| name != "README.md"))
     .collect::<Vec<_>>();
   block_pages.sort();
-  for path in block_pages {
+
+  out.push_str("pub const BLOCK_REFERENCES_EN: &[(&str, &str)] = &[\n");
+  for path in &block_pages {
+    println!("cargo:rerun-if-changed={}", path.display());
     let slug = path.file_stem().and_then(|stem| stem.to_str()).expect("block docs file name");
-    let markdown = fs::read_to_string(&path).expect("read a block docs page");
+    let markdown = fs::read_to_string(path).expect("read a block docs page");
     let start = markdown.find("## Behavior").unwrap_or(markdown.len());
     let rendered = render(&markdown[start..], &slugs, repository, "docs/blocks");
+    writeln!(out, "  ({slug:?}, {rendered:?}),").expect("write to a string");
+  }
+  out.push_str("];\n");
+
+  out.push_str("pub const BLOCK_REFERENCES_ZH: &[(&str, &str)] = &[\n");
+  for path in &block_pages {
+    let slug = path.file_stem().and_then(|stem| stem.to_str()).expect("block docs file name");
+    let zh_path = zh_blocks_docs.join(format!("{slug}.md"));
+    println!("cargo:rerun-if-changed={}", zh_path.display());
+    let markdown = fs::read_to_string(&zh_path)
+      .unwrap_or_else(|err| panic!("missing Chinese block reference {}: {err}", zh_path.display()));
+    let start = markdown.find("## 行为与交互").unwrap_or_else(|| {
+      panic!("Chinese block reference {} must start with `## 行为与交互`", zh_path.display())
+    });
+    let rendered = render(&markdown[start..], &slugs, repository, "site/i18n/zh/blocks");
     writeln!(out, "  ({slug:?}, {rendered:?}),").expect("write to a string");
   }
   out.push_str("];\n");
@@ -91,7 +127,8 @@ fn rewrite_link(
   let (path, fragment) =
     dest.split_once('#').map_or((dest, ""), |(path, fragment)| (path, fragment));
   let fragment = if fragment.is_empty() { String::new() } else { format!("#{fragment}") };
-  let in_components = dir == "docs/components" && !path.contains('/');
+  let in_components =
+    (dir == "docs/components" || dir == "site/i18n/zh/components") && !path.contains('/');
   if let Some(stem) = path.strip_suffix(".md").filter(|stem| in_components && slugs.contains(*stem))
   {
     return CowStr::from(format!("{SITE_BASE}/components/{stem}{fragment}"));
@@ -105,6 +142,15 @@ fn rewrite_link(
       Component::Normal(name) => resolved.push(name),
       _ => {}
     }
+  }
+  if resolved.parent() == Some(Path::new("site/i18n/zh/components"))
+    && let Some(stem) = resolved
+      .file_name()
+      .and_then(|name| name.to_str())
+      .and_then(|name| name.strip_suffix(".md"))
+      .filter(|stem| slugs.contains(*stem))
+  {
+    return CowStr::from(format!("{SITE_BASE}/components/{stem}{fragment}"));
   }
   CowStr::from(format!("{repository}/blob/main/{}{fragment}", resolved.display()))
 }
