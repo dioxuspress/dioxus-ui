@@ -52,17 +52,22 @@ use dioxus_shadcn::{
 - `CalendarBody { class, children }`
 - `CalendarRow { class, children }`
 - `CalendarDay { date, selected, today, outside_month, disabled, range_state, focused, on_key_move, on_select, class, children }`
+- `CalendarSelect { value, disabled, onchange, class, children }` (compact native `<select>` for Year/Month dropdown jumps inside `CalendarHeader`)
+- `CalendarWheelColumn { label, items, selected_index, on_select, class }` (vertical wheel column with mouse wheel, pointer swipe, click, and keyboard navigation)
+- `CalendarWheel { value, min_year, max_year, year_label, month_label, day_label, on_value_change, class }` (three-column Year / Month / Day wheel picker)
 
 Types the props and helpers use:
 
 - `CalendarNavDirection` (`CalendarNavButton`'s `direction`)
 - `CalendarKeyMove` (the `on_key_move` payload)
 - `CalendarMonth`, `CalendarWeekday`, `CalendarMonthGrid`, `CalendarPrimitiveDay`
+- `CalendarTime`, `CalendarDateTime`
 
 Primitive helpers:
 
 - `calendar_month_grid(...)`
 - `calendar_move_date(...)`
+- `calendar_clamp_date(year, month, day)`
 - `calendar_key_move(key, shift)`
 - `calendar_range_state(...)`
 - `days_in_month(year, month)`

@@ -13,14 +13,14 @@ parity.
 
 ## Summary
 
-- Public components: 84
-- Registry entries: 109
+- Public components: 85
+- Registry entries: 110
 - Source-copy helpers: anchored-overlay, calendar-grid, choice, class-merge, class-merge-table, default-attribute, density, dialog-labels, dismiss-timer, element-id, hover-open, layer, listbox, media-query, menu-marks, menu-radio, menu-sub, modal-focus, overlay, overlay-root, root-state, roving-group, safe-url, script, utils
-- Templates: 109
-- Crate modules: 84
-- Crate features: 84
-- Component docs pages: 84
-- Complete local wiring: 84
+- Templates: 110
+- Crate modules: 85
+- Crate features: 85
+- Component docs pages: 85
+- Complete local wiring: 85
 - Incomplete local wiring: 0
 
 ## Category Counts
@@ -28,7 +28,7 @@ parity.
 | Category | Components |
 | --- | ---: |
 | Actions | 9 |
-| Forms | 18 |
+| Forms | 19 |
 | Overlays | 11 |
 | Navigation | 10 |
 | Layout | 12 |
@@ -71,6 +71,7 @@ parity.
 | Calendar | Forms | yes | yes | yes | yes | yes | yes | yes |
 | Checkbox | Forms | yes | yes | yes | yes | yes | yes | yes |
 | Date Picker | Forms | yes | yes | yes | yes | yes | yes | yes |
+| Date Time Picker | Forms | yes | yes | yes | yes | yes | yes | yes |
 | Field | Forms | yes | yes | yes | yes | yes | yes | yes |
 | File Input | Forms | yes | yes | yes | yes | yes | yes | yes |
 | Input | Forms | yes | yes | yes | yes | yes | yes | yes |
@@ -160,6 +161,7 @@ parity.
 | Calendar | Forms | [docs](calendar.md) | `dxui add calendar` | `calendar` | `crates/dioxus-shadcn-cli/templates/calendar.rs` | `src/components/ui/calendar.rs` |
 | Checkbox | Forms | [docs](checkbox.md) | `dxui add checkbox` | `checkbox` | `crates/dioxus-shadcn-cli/templates/checkbox.rs` | `src/components/ui/checkbox.rs` |
 | Date Picker | Forms | [docs](date-picker.md) | `dxui add date-picker` | `date-picker` | `crates/dioxus-shadcn-cli/templates/date_picker.rs` | `src/components/ui/date_picker.rs` |
+| Date Time Picker | Forms | [docs](date-time-picker.md) | `dxui add date-time-picker` | `date-time-picker` | `crates/dioxus-shadcn-cli/templates/date_time_picker.rs` | `src/components/ui/date_time_picker.rs` |
 | Field | Forms | [docs](field.md) | `dxui add field` | `field` | `crates/dioxus-shadcn-cli/templates/field.rs` | `src/components/ui/field.rs` |
 | File Input | Forms | [docs](file-input.md) | `dxui add file-input` | `file-input` | `crates/dioxus-shadcn-cli/templates/file_input.rs` | `src/components/ui/file_input.rs` |
 | Input | Forms | [docs](input.md) | `dxui add input` | `input` | `crates/dioxus-shadcn-cli/templates/input.rs` | `src/components/ui/input.rs` |

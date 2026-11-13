@@ -98,6 +98,12 @@ pub const CATEGORIES: &[Category] = &[
         feature: "date-picker",
       },
       Component {
+        slug: "date-time-picker",
+        title: "Date Time Picker",
+        description: "Date Time Picker with calendar+time columns, standalone TimePicker, and full-wheel DateTimeWheel.",
+        feature: "date-time-picker",
+      },
+      Component {
         slug: "field",
         title: "Field",
         description: "Form field layout composition parts.",

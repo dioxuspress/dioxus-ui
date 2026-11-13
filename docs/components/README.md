@@ -154,6 +154,7 @@ dioxus-shadcn = { version = "0.6", default-features = false, features = ["button
 | [Countdown](countdown.md) | `dxui add countdown` | `countdown` | App-clocked countdown timer |
 | [Data Table](data-table.md) | `dxui add data-table` | `data-table` | Controlled data table parts |
 | [Date Picker](date-picker.md) | `dxui add date-picker` | `date-picker` | Calendar popover composition parts |
+| [Date Time Picker](date-time-picker.md) | `dxui add date-time-picker` | `date-time-picker` | Calendar+time columns, standalone `TimePicker`, and full-wheel `DateTimeWheel` |
 | [Dialog](dialog.md) | `dxui add dialog` | `dialog` | Primitive config + styled parts |
 | [Diff](diff.md) | `dxui add diff` | `diff` | Before-and-after comparison parts |
 | [Direction](direction.md) | `dxui add direction` | `direction` | Scoped native text direction |

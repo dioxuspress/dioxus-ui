@@ -318,6 +318,14 @@ pub const COMPONENT_PREVIEW_TARGETS: &[ComponentPreviewTarget] = &[
     notes: "Rendered target exists; renderer behavior needs separate runtime verification.",
   },
   ComponentPreviewTarget {
+    component: "date-time-picker",
+    label: "Date Time Picker",
+    panel: "forms",
+    test_id: "component-preview-date-time-picker",
+    coverage_level: "runtime-planned",
+    notes: "Rendered target exists; renderer behavior needs separate runtime verification.",
+  },
+  ComponentPreviewTarget {
     component: "dialog",
     label: "Dialog",
     panel: "overlays",

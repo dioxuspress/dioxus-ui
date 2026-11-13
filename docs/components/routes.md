@@ -11,7 +11,7 @@ It does not create rendered routes, router code, screenshots, or generated JSON.
 For source preview route metadata, see the
 [Source Preview Manifest](source-preview.md).
 
-Component routes: 84
+Component routes: 85
 Category routes: 8
 
 ## Top-level Routes
@@ -64,6 +64,7 @@ Category routes: 8
 | [Countdown](countdown.md) | /components/countdown | docs/components/countdown.md | /components#category-data-display | /components/countdown/source |
 | [Data Table](data-table.md) | /components/data-table | docs/components/data-table.md | /components#category-data-display | /components/data-table/source |
 | [Date Picker](date-picker.md) | /components/date-picker | docs/components/date-picker.md | /components#category-forms | /components/date-picker/source |
+| [Date Time Picker](date-time-picker.md) | /components/date-time-picker | docs/components/date-time-picker.md | /components#category-forms | /components/date-time-picker/source |
 | [Dialog](dialog.md) | /components/dialog | docs/components/dialog.md | /components#category-overlays | /components/dialog/source |
 | [Diff](diff.md) | /components/diff | docs/components/diff.md | /components#category-data-display | /components/diff/source |
 | [Direction](direction.md) | /components/direction | docs/components/direction.md | /components#category-layout | /components/direction/source |

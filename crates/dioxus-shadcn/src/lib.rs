@@ -76,6 +76,9 @@ pub mod data_table;
 #[cfg(feature = "date-picker")]
 pub mod date_picker;
 
+#[cfg(feature = "date-time-picker")]
+pub mod date_time_picker;
+
 #[cfg(feature = "dialog")]
 pub mod dialog;
 
@@ -89,6 +92,7 @@ pub mod dialog;
   feature = "command",
   feature = "context-menu",
   feature = "date-picker",
+  feature = "date-time-picker",
   feature = "dialog",
   feature = "drawer",
   feature = "dropdown",
@@ -126,6 +130,7 @@ mod element_id;
   feature = "command",
   feature = "context-menu",
   feature = "date-picker",
+  feature = "date-time-picker",
   feature = "dialog",
   feature = "drawer",
   feature = "dropdown",
@@ -166,6 +171,7 @@ mod overlay_root;
 #[cfg(any(
   feature = "alert-dialog",
   feature = "date-picker",
+  feature = "date-time-picker",
   feature = "dialog",
   feature = "drawer",
   feature = "sheet",
@@ -186,6 +192,7 @@ mod dialog_labels;
   feature = "combobox",
   feature = "context-menu",
   feature = "date-picker",
+  feature = "date-time-picker",
   feature = "dropdown",
   feature = "hover-card",
   feature = "menubar",
@@ -254,6 +261,7 @@ mod hover_open;
   feature = "combobox",
   feature = "context-menu",
   feature = "date-picker",
+  feature = "date-time-picker",
   feature = "dialog",
   feature = "drawer",
   feature = "dropdown",
@@ -292,6 +300,7 @@ mod safe_url;
   feature = "command",
   feature = "context-menu",
   feature = "date-picker",
+  feature = "date-time-picker",
   feature = "dialog",
   feature = "drawer",
   feature = "dropdown",
@@ -474,11 +483,14 @@ pub use button_group::{
 };
 #[cfg(feature = "calendar")]
 pub use calendar::{
-  Calendar, CalendarBody, CalendarCaption, CalendarDate, CalendarDay, CalendarGrid, CalendarHead,
-  CalendarHeadCell, CalendarHeader, CalendarKeyMove, CalendarMonth, CalendarMonthGrid, CalendarNav,
-  CalendarNavButton, CalendarNavDirection, CalendarPrimitiveDay, CalendarRangeState, CalendarRow,
-  CalendarWeekday, calendar_key_move, calendar_month_grid, calendar_move_date,
-  calendar_range_state, days_in_month, is_leap_year,
+  Calendar, CalendarBody, CalendarCaption, CalendarDate, CalendarDateTime, CalendarDay,
+  CalendarGrid, CalendarHead, CalendarHeadCell, CalendarHeader, CalendarKeyMove, CalendarMonth,
+  CalendarMonthGrid, CalendarNav, CalendarNavButton, CalendarNavDirection, CalendarPrimitiveDay,
+  CalendarRangeState, CalendarRow, CalendarSelect, CalendarTime, CalendarWeekday, CalendarWheel,
+  CalendarWheelColumn, calendar_clamp_date, calendar_key_move, calendar_month_grid,
+  calendar_move_date, calendar_range_state, calendar_select_class, calendar_wheel_class,
+  calendar_wheel_column_class, days_in_month, format_date_time, format_time, is_leap_year,
+  parse_date_time, parse_time,
 };
 #[cfg(feature = "card")]
 pub use card::{Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, card_class};
@@ -544,6 +556,15 @@ pub use date_picker::{
   OverlaySide as DatePickerSide, PopoverPrimitiveConfig as DatePickerPrimitiveConfig,
   date_picker_content_class, date_picker_input_class, date_picker_trigger_class,
   date_picker_value_class, format_date, parse_date,
+};
+#[cfg(feature = "date-time-picker")]
+pub use date_time_picker::{
+  DateTimePicker, DateTimePickerContent, DateTimePickerInput, DateTimePickerTrigger,
+  DateTimePickerValue, DateTimeWheel, DismissBehavior as DateTimePickerDismissBehavior,
+  OverlayAlign as DateTimePickerAlign, OverlaySide as DateTimePickerSide,
+  PopoverPrimitiveConfig as DateTimePickerPrimitiveConfig, TimePicker,
+  date_time_picker_content_class, date_time_picker_input_class, date_time_picker_trigger_class,
+  date_time_picker_value_class, date_time_wheel_class, time_picker_class,
 };
 #[cfg(feature = "dialog")]
 pub use dialog::{
