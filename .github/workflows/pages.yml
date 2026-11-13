@@ -37,7 +37,10 @@ jobs:
       - name: Install the Dioxus CLI
         uses: taiki-e/install-action@v2
         with:
-          tool: dioxus-cli@0.7.9
+          tool: dioxus-cli@0.7.10
+
+      - name: Install binaryen (wasm-opt)
+        run: sudo apt-get update && sudo apt-get install -y binaryen
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -52,7 +55,11 @@ jobs:
       - name: Build the site
         run: |
           dx build --release --package dioxus-ui-site --platform web
-          echo "SITE_DIR=$(find target/dx/dioxus-ui-site/release/web -maxdepth 1 -name public -type d)" >> "$GITHUB_ENV"
+          SITE_DIR="$(find target/dx/dioxus-ui-site/release/web -maxdepth 1 -name public -type d)"
+          echo "SITE_DIR=$SITE_DIR" >> "$GITHUB_ENV"
+          for wasm in "$SITE_DIR"/assets/*.wasm; do
+            wasm-opt -Oz --enable-bulk-memory --enable-nontrapping-float-to-int --enable-sign-ext --enable-mutable-globals -o "$wasm" "$wasm"
+          done
 
       - name: Add route pages
         run: npm run site:pages -- "$SITE_DIR"

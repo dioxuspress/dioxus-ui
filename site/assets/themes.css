@@ -6,7 +6,7 @@
    Copyright (c) 2020 Pouya Saadeghi. Mapped to the dioxus-shadcn tokens by
    RFC 0057.
    Adjusted for WCAG AA: destructive, destructive-foreground. */
-[data-theme="abyss"] {
+:root[data-theme="abyss"], [data-theme="abyss"] {
   color-scheme: dark;
   --radius: 0.5rem;
   --background: oklch(0.2 0.08 209);
@@ -54,7 +54,7 @@
    Copyright (c) 2020 Pouya Saadeghi. Mapped to the dioxus-shadcn tokens by
    RFC 0057.
    Adjusted for WCAG AA: destructive, destructive-foreground. */
-[data-theme="acid"] {
+:root[data-theme="acid"], [data-theme="acid"] {
   color-scheme: light;
   --radius: 1rem;
   --background: oklch(0.98 0 0);
@@ -102,7 +102,7 @@
    Copyright (c) 2020 Pouya Saadeghi. Mapped to the dioxus-shadcn tokens by
    RFC 0057.
    Adjusted for WCAG AA: secondary-foreground, destructive, info-foreground. */
-[data-theme="aqua"] {
+:root[data-theme="aqua"], [data-theme="aqua"] {
   color-scheme: dark;
   --radius: 1rem;
   --background: oklch(0.37 0.146 265.522);
@@ -150,7 +150,7 @@
    Copyright (c) 2020 Pouya Saadeghi. Mapped to the dioxus-shadcn tokens by
    RFC 0057.
    Adjusted for WCAG AA: destructive. */
-[data-theme="autumn"] {
+:root[data-theme="autumn"], [data-theme="autumn"] {
   color-scheme: light;
   --radius: 1rem;
   --background: oklch(0.958 0 0);
@@ -198,7 +198,7 @@
    Copyright (c) 2020 Pouya Saadeghi. Mapped to the dioxus-shadcn tokens by
    RFC 0057.
    Adjusted for WCAG AA: success-foreground. */
-[data-theme="black"] {
+:root[data-theme="black"], [data-theme="black"] {
   color-scheme: dark;
   --radius: 0rem;
   --background: oklch(0 0 0);
@@ -246,7 +246,7 @@
    Copyright (c) 2020 Pouya Saadeghi. Mapped to the dioxus-shadcn tokens by
    RFC 0057.
    Adjusted for WCAG AA: secondary-foreground, destructive, destructive-foreground, info-foreground. */
-[data-theme="bumblebee"] {
+:root[data-theme="bumblebee"], [data-theme="bumblebee"] {
   color-scheme: light;
   --radius: 1rem;
   --background: oklch(1 0 0);
@@ -294,7 +294,7 @@
    Copyright (c) 2020 Pouya Saadeghi. Mapped to the dioxus-shadcn tokens by
    RFC 0057.
    Adjusted for WCAG AA: destructive, destructive-foreground. */
-[data-theme="business"] {
+:root[data-theme="business"], [data-theme="business"] {
   color-scheme: dark;
   --radius: 0.25rem;
   --background: oklch(0.244 0 0);
@@ -342,7 +342,7 @@
    Copyright (c) 2020 Pouya Saadeghi. Mapped to the dioxus-shadcn tokens by
    RFC 0057.
    Adjusted for WCAG AA: destructive, destructive-foreground. */
-[data-theme="caramellatte"] {
+:root[data-theme="caramellatte"], [data-theme="caramellatte"] {
   color-scheme: light;
   --radius: 1rem;
   --background: oklch(0.98 0.016 73.684);
@@ -390,7 +390,7 @@
    Copyright (c) 2020 Pouya Saadeghi. Mapped to the dioxus-shadcn tokens by
    RFC 0057.
    Adjusted for WCAG AA: destructive, destructive-foreground. */
-[data-theme="cmyk"] {
+:root[data-theme="cmyk"], [data-theme="cmyk"] {
   color-scheme: light;
   --radius: 1rem;
   --background: oklch(1 0 0);
@@ -437,7 +437,7 @@
 /* Ported from the daisyUI coffee theme (https://daisyui.com), MIT License,
    Copyright (c) 2020 Pouya Saadeghi. Mapped to the dioxus-shadcn tokens by
    RFC 0057. */
-[data-theme="coffee"] {
+:root[data-theme="coffee"], [data-theme="coffee"] {
   color-scheme: dark;
   --radius: 1rem;
   --background: oklch(0.24 0.023 329.708);
@@ -485,7 +485,7 @@
    Copyright (c) 2020 Pouya Saadeghi. Mapped to the dioxus-shadcn tokens by
    RFC 0057.
    Adjusted for WCAG AA: primary-foreground, destructive, destructive-foreground, success-foreground, info-foreground. */
-[data-theme="corporate"] {
+:root[data-theme="corporate"], [data-theme="corporate"] {
   color-scheme: light;
   --radius: 0.25rem;
   --background: oklch(1 0 0);
@@ -533,7 +533,7 @@
    Copyright (c) 2020 Pouya Saadeghi. Mapped to the dioxus-shadcn tokens by
    RFC 0057.
    Adjusted for WCAG AA: destructive, destructive-foreground. */
-[data-theme="cupcake"] {
+:root[data-theme="cupcake"], [data-theme="cupcake"] {
   color-scheme: light;
   --radius: 1rem;
   --background: oklch(0.978 0.004 56.375);
@@ -581,7 +581,7 @@
    Copyright (c) 2020 Pouya Saadeghi. Mapped to the dioxus-shadcn tokens by
    RFC 0057.
    Adjusted for WCAG AA: destructive, destructive-foreground. */
-[data-theme="cyberpunk"] {
+:root[data-theme="cyberpunk"], [data-theme="cyberpunk"] {
   color-scheme: light;
   --radius: 0rem;
   --background: oklch(0.945 0.179 104.32);
@@ -628,7 +628,7 @@
 /* Ported from the daisyUI dim theme (https://daisyui.com), MIT License,
    Copyright (c) 2020 Pouya Saadeghi. Mapped to the dioxus-shadcn tokens by
    RFC 0057. */
-[data-theme="dim"] {
+:root[data-theme="dim"], [data-theme="dim"] {
   color-scheme: dark;
   --radius: 1rem;
   --background: oklch(0.309 0.023 264.149);
@@ -676,7 +676,7 @@
    Copyright (c) 2020 Pouya Saadeghi. Mapped to the dioxus-shadcn tokens by
    RFC 0057.
    Adjusted for WCAG AA: destructive. */
-[data-theme="dracula"] {
+:root[data-theme="dracula"], [data-theme="dracula"] {
   color-scheme: dark;
   --radius: 1rem;
   --background: oklch(0.288 0.022 277.508);
@@ -724,7 +724,7 @@
    Copyright (c) 2020 Pouya Saadeghi. Mapped to the dioxus-shadcn tokens by
    RFC 0057.
    Adjusted for WCAG AA: secondary-foreground, destructive, destructive-foreground. */
-[data-theme="emerald"] {
+:root[data-theme="emerald"], [data-theme="emerald"] {
   color-scheme: light;
   --radius: 1rem;
   --background: oklch(1 0 0);
@@ -772,7 +772,7 @@
    Copyright (c) 2020 Pouya Saadeghi. Mapped to the dioxus-shadcn tokens by
    RFC 0057.
    Adjusted for WCAG AA: secondary-foreground, destructive, destructive-foreground. */
-[data-theme="fantasy"] {
+:root[data-theme="fantasy"], [data-theme="fantasy"] {
   color-scheme: light;
   --radius: 1rem;
   --background: oklch(1 0 0);
@@ -819,7 +819,7 @@
 /* Ported from the daisyUI forest theme (https://daisyui.com), MIT License,
    Copyright (c) 2020 Pouya Saadeghi. Mapped to the dioxus-shadcn tokens by
    RFC 0057. */
-[data-theme="forest"] {
+:root[data-theme="forest"], [data-theme="forest"] {
   color-scheme: dark;
   --radius: 1rem;
   --background: oklch(0.208 0.008 17.911);
@@ -867,7 +867,7 @@
    Copyright (c) 2020 Pouya Saadeghi. Mapped to the dioxus-shadcn tokens by
    RFC 0057.
    Adjusted for WCAG AA: primary-foreground, destructive, destructive-foreground. */
-[data-theme="garden"] {
+:root[data-theme="garden"], [data-theme="garden"] {
   color-scheme: light;
   --radius: 1rem;
   --background: oklch(0.93 0.002 17.197);
@@ -915,7 +915,7 @@
    Copyright (c) 2020 Pouya Saadeghi. Mapped to the dioxus-shadcn tokens by
    RFC 0057.
    Adjusted for WCAG AA: info-foreground. */
-[data-theme="halloween"] {
+:root[data-theme="halloween"], [data-theme="halloween"] {
   color-scheme: dark;
   --radius: 1rem;
   --background: oklch(0.21 0.006 56.043);
@@ -963,7 +963,7 @@
    Copyright (c) 2020 Pouya Saadeghi. Mapped to the dioxus-shadcn tokens by
    RFC 0057.
    Adjusted for WCAG AA: destructive, destructive-foreground. */
-[data-theme="lemonade"] {
+:root[data-theme="lemonade"], [data-theme="lemonade"] {
   color-scheme: light;
   --radius: 1rem;
   --background: oklch(0.987 0.02 123.72);
@@ -1011,7 +1011,7 @@
    Copyright (c) 2020 Pouya Saadeghi. Mapped to the dioxus-shadcn tokens by
    RFC 0057.
    Adjusted for WCAG AA: destructive, destructive-foreground. */
-[data-theme="lofi"] {
+:root[data-theme="lofi"], [data-theme="lofi"] {
   color-scheme: light;
   --radius: 0.5rem;
   --background: oklch(1 0 0);
@@ -1058,7 +1058,7 @@
 /* Ported from the daisyUI luxury theme (https://daisyui.com), MIT License,
    Copyright (c) 2020 Pouya Saadeghi. Mapped to the dioxus-shadcn tokens by
    RFC 0057. */
-[data-theme="luxury"] {
+:root[data-theme="luxury"], [data-theme="luxury"] {
   color-scheme: dark;
   --radius: 1rem;
   --background: oklch(0.141 0.004 285.822);
@@ -1105,7 +1105,7 @@
 /* Ported from the daisyUI night theme (https://daisyui.com), MIT License,
    Copyright (c) 2020 Pouya Saadeghi. Mapped to the dioxus-shadcn tokens by
    RFC 0057. */
-[data-theme="night"] {
+:root[data-theme="night"], [data-theme="night"] {
   color-scheme: dark;
   --radius: 1rem;
   --background: oklch(0.208 0.039 265.754);
@@ -1153,7 +1153,7 @@
    Copyright (c) 2020 Pouya Saadeghi. Mapped to the dioxus-shadcn tokens by
    RFC 0057.
    Adjusted for WCAG AA: destructive, destructive-foreground. */
-[data-theme="nord"] {
+:root[data-theme="nord"], [data-theme="nord"] {
   color-scheme: light;
   --radius: 0.5rem;
   --background: oklch(0.951 0.007 260.731);
@@ -1201,7 +1201,7 @@
    Copyright (c) 2020 Pouya Saadeghi. Mapped to the dioxus-shadcn tokens by
    RFC 0057.
    Adjusted for WCAG AA: secondary-foreground, destructive, destructive-foreground, success-foreground, warning-foreground, info-foreground. */
-[data-theme="pastel"] {
+:root[data-theme="pastel"], [data-theme="pastel"] {
   color-scheme: light;
   --radius: 1rem;
   --background: oklch(1 0 0);
@@ -1249,7 +1249,7 @@
    Copyright (c) 2020 Pouya Saadeghi. Mapped to the dioxus-shadcn tokens by
    RFC 0057.
    Adjusted for WCAG AA: destructive, destructive-foreground, warning-foreground, info-foreground. */
-[data-theme="retro"] {
+:root[data-theme="retro"], [data-theme="retro"] {
   color-scheme: light;
   --radius: 0.5rem;
   --background: oklch(0.916 0.034 90.515);
@@ -1297,7 +1297,7 @@
    Copyright (c) 2020 Pouya Saadeghi. Mapped to the dioxus-shadcn tokens by
    RFC 0057.
    Adjusted for WCAG AA: destructive, destructive-foreground. */
-[data-theme="silk"] {
+:root[data-theme="silk"], [data-theme="silk"] {
   color-scheme: light;
   --radius: 1rem;
   --background: oklch(0.97 0.004 67.78);
@@ -1344,7 +1344,7 @@
 /* Ported from the daisyUI sunset theme (https://daisyui.com), MIT License,
    Copyright (c) 2020 Pouya Saadeghi. Mapped to the dioxus-shadcn tokens by
    RFC 0057. */
-[data-theme="sunset"] {
+:root[data-theme="sunset"], [data-theme="sunset"] {
   color-scheme: dark;
   --radius: 1rem;
   --background: oklch(0.22 0.019 237.69);
@@ -1391,7 +1391,7 @@
 /* Ported from the daisyUI synthwave theme (https://daisyui.com), MIT License,
    Copyright (c) 2020 Pouya Saadeghi. Mapped to the dioxus-shadcn tokens by
    RFC 0057. */
-[data-theme="synthwave"] {
+:root[data-theme="synthwave"], [data-theme="synthwave"] {
   color-scheme: dark;
   --radius: 1rem;
   --background: oklch(0.15 0.09 281.288);
@@ -1439,7 +1439,7 @@
    Copyright (c) 2020 Pouya Saadeghi. Mapped to the dioxus-shadcn tokens by
    RFC 0057.
    Adjusted for WCAG AA: primary-foreground, secondary-foreground, destructive. */
-[data-theme="valentine"] {
+:root[data-theme="valentine"], [data-theme="valentine"] {
   color-scheme: light;
   --radius: 1rem;
   --background: oklch(0.97 0.014 343.198);
@@ -1487,7 +1487,7 @@
    Copyright (c) 2020 Pouya Saadeghi. Mapped to the dioxus-shadcn tokens by
    RFC 0057.
    Adjusted for WCAG AA: primary-foreground, destructive, destructive-foreground. */
-[data-theme="winter"] {
+:root[data-theme="winter"], [data-theme="winter"] {
   color-scheme: light;
   --radius: 1rem;
   --background: oklch(1 0 0);
@@ -1534,7 +1534,7 @@
 /* Ported from the daisyUI wireframe theme (https://daisyui.com), MIT License,
    Copyright (c) 2020 Pouya Saadeghi. Mapped to the dioxus-shadcn tokens by
    RFC 0057. */
-[data-theme="wireframe"] {
+:root[data-theme="wireframe"], [data-theme="wireframe"] {
   color-scheme: light;
   --radius: 0.25rem;
   --background: oklch(1 0 0);

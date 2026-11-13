@@ -38,3 +38,8 @@ wasm-bindgen = "0.2"
 
 [profile.dev.package."*"]
 debug = false
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1

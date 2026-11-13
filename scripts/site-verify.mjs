@@ -451,8 +451,14 @@ async function run() {
       await expect(root).toHaveCSS("color-scheme", colorScheme === "dark" ? "dark" : "normal");
     }
 
-    // Each preset sets data-theme on the root, brings its own color scheme,
-    // and stays readable and passes axe-core.
+    // Each preset sets data-theme on the root, overrides the default :root
+    // semantic tokens, brings its own color scheme, stays readable, and passes
+    // axe-core.
+    const defaultLightPrimary = await page.evaluate(() => {
+      document.documentElement.removeAttribute("data-theme");
+      document.documentElement.classList.remove("dark");
+      return getComputedStyle(document.documentElement).getPropertyValue("--primary").trim();
+    });
     for (const path of presetPages) {
       await visit(page, path);
       for (const preset of presets) {
@@ -460,6 +466,16 @@ async function run() {
         await expect(root).toHaveAttribute("data-theme", preset);
         await expect(root).not.toHaveClass(/\bdark\b/);
         await settle(page);
+        if (preset === "corporate") {
+          const activePrimary = await page.evaluate(() =>
+            getComputedStyle(document.documentElement).getPropertyValue("--primary").trim(),
+          );
+          if (!activePrimary || activePrimary === defaultLightPrimary) {
+            throw new Error(
+              `${path} (${preset} preset): --primary remained ${activePrimary} (overridden by :root)`,
+            );
+          }
+        }
         const label = `${path} (${preset} preset)`;
         const failures = await page.evaluate(lowContrastText);
         if (failures.length > 0) {
