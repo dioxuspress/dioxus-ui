@@ -305,7 +305,7 @@ fn SiteNav() -> Element {
               class: link,
               active_class: active,
               to: Route::ComponentPage { slug: component.slug.to_string() },
-              "{component.title}"
+              "{i18n::component_title(lang, component.slug, component.title)}"
             }
           }
         }
