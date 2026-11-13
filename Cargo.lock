@@ -1749,6 +1749,7 @@ dependencies = [
  "dioxus",
  "dioxus-shadcn",
  "pulldown-cmark",
+ "wasm-bindgen",
 ]
 
 [[package]]

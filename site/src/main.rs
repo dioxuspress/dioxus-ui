@@ -5,6 +5,7 @@ mod blocks;
 mod catalog;
 mod components;
 mod examples;
+mod i18n;
 mod pages;
 mod themes;
 
@@ -13,6 +14,7 @@ use dioxus_shadcn::{
   Button, ButtonSize, ButtonVariant, NativeSelect, NativeSelectGroup, NativeSelectOption, Sheet,
   SheetContent, SheetOverlay, SheetSide, SheetTitle, Theme, ThemeController,
 };
+use i18n::{SiteLang, use_site_lang};
 use pages::{BlockPage, Blocks, ComponentPage, GettingStarted, Home, NotFound, Theming};
 
 const SITE_CSS: Asset = asset!("/assets/site.generated.css");
@@ -53,6 +55,9 @@ fn main() {
 
 #[component]
 fn App() -> Element {
+  // Resolve `?lang=` before `Router::<Route>` mounts: Dioxus Router normalizes
+  // unknown query strings via `history.replaceState` during `Router` setup.
+  use_context_provider(|| Signal::new(i18n::detect_initial_lang()));
   rsx! {
     document::Stylesheet { href: SITE_CSS }
     Router::<Route> {}
@@ -62,32 +67,37 @@ fn App() -> Element {
 /// The header, the catalog sidebar, and the routed page. The theme menu picks
 /// the system scheme, light, dark, or a preset (RFC 0057), which the
 /// `ThemeController` applies to the document root and remembers (RFC 0071);
-/// pages read and set the same theme through context.
+/// pages read and set the same theme and language (`en` / `zh`) through context.
 #[component]
 fn Shell() -> Element {
   let mut theme = use_context_provider(|| Signal::new(Theme::System));
+  let mut lang = use_site_lang();
   let mut menu_open = use_signal(|| false);
+  let current_lang = lang();
+  let zh = current_lang == SiteLang::Zh;
 
   rsx! {
     ThemeController { theme: theme(), on_theme_change: move |stored| theme.set(stored) }
     div {
       class: "min-h-screen bg-background text-foreground",
       "data-site-root": "",
+      "data-site-lang": current_lang.code(),
       header { class: "sticky top-0 z-40 border-b border-border bg-background",
-        div { class: "mx-auto flex h-14 max-w-6xl items-center gap-3 px-4",
+        div { class: "mx-auto flex h-14 max-w-6xl items-center gap-1.5 px-4 sm:gap-3",
           Button {
             class: "md:hidden",
             variant: ButtonVariant::Ghost,
             size: ButtonSize::Sm,
-            "aria-label": "Open the component menu",
+            "aria-label": if zh { "打开组件导航菜单" } else { "Open the component menu" },
             onclick: move |_| menu_open.set(true),
-            "Menu"
+            if zh { "菜单" } else { "Menu" }
           }
           a {
-            class: "inline-flex h-7 items-center gap-1 rounded-md border border-border bg-muted px-2 text-xs font-medium text-foreground transition-colors hover:bg-accent hover:text-accent-foreground",
-            href: "https://dioxuspress.dev/",
-            "aria-label": "Back to DioxusPress",
-            title: "Back to DioxusPress main site",
+            class: "inline-flex h-7 shrink-0 items-center gap-1 rounded-md border border-border bg-muted px-2 text-xs font-medium text-foreground transition-colors hover:bg-accent hover:text-accent-foreground",
+            href: current_lang.main_site_href(),
+            "aria-label": if zh { "返回 DioxusPress 主站" } else { "Back to DioxusPress" },
+            title: if zh { "返回 DioxusPress 主站" } else { "Back to DioxusPress main site" },
+            "data-site-back-link": "",
             svg {
               class: "h-3.5 w-3.5 shrink-0",
               fill: "none",
@@ -103,18 +113,34 @@ fn Shell() -> Element {
             }
             span { class: "hidden sm:inline", "DioxusPress" }
           }
-          Link { class: "font-semibold tracking-tight", to: Route::Home {}, "dioxus-shadcn" }
+          Link {
+            class: "whitespace-nowrap text-sm font-semibold tracking-tight sm:text-base",
+            to: Route::Home {},
+            "dioxus-shadcn"
+          }
           nav { class: "hidden items-center gap-4 text-sm text-muted-foreground md:flex",
-            Link { class: "hover:text-foreground", to: Route::GettingStarted {}, "Docs" }
+            Link {
+              class: "hover:text-foreground",
+              to: Route::GettingStarted {},
+              if zh { "文档" } else { "Docs" }
+            }
             Link {
               class: "hover:text-foreground",
               to: Route::ComponentPage { slug: "button".to_string() },
-              "Components"
+              if zh { "组件" } else { "Components" }
             }
-            Link { class: "hover:text-foreground", to: Route::Blocks {}, "Blocks" }
-            Link { class: "hover:text-foreground", to: Route::Theming {}, "Theming" }
+            Link {
+              class: "hover:text-foreground",
+              to: Route::Blocks {},
+              if zh { "区块" } else { "Blocks" }
+            }
+            Link {
+              class: "hover:text-foreground",
+              to: Route::Theming {},
+              if zh { "主题" } else { "Theming" }
+            }
           }
-          div { class: "ml-auto flex items-center gap-2",
+          div { class: "ml-auto flex items-center gap-1.5 sm:gap-2",
             label {
               class: "hidden items-center gap-1.5 text-xs font-medium text-muted-foreground lg:inline-flex",
               r#for: "site-theme",
@@ -131,29 +157,32 @@ fn Shell() -> Element {
                   d: "M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01",
                 }
               }
-              "Theme"
+              if zh { "主题" } else { "Theme" }
             }
             NativeSelect {
               id: "site-theme",
-              class: "h-8 w-28 sm:w-36",
-              "aria-label": "Theme",
+              class: "h-8 w-24 sm:w-36",
+              "aria-label": if zh { "主题" } else { "Theme" },
               on_value_change: move |value: String| theme.set(Theme::parse(&value)),
-              NativeSelectGroup { label: "Default",
+              NativeSelectGroup { label: if zh { "默认模式" } else { "Default" },
                 for option in [Theme::System, Theme::Light, Theme::Dark] {
                   NativeSelectOption {
                     key: "{option.as_str()}",
                     value: option.as_str().to_string(),
                     selected: theme() == option,
                     match option {
-                      Theme::Light => "Light",
-                      Theme::Dark => "Dark",
-                      _ => "System",
+                      Theme::Light => if zh { "浅色" } else { "Light" },
+                      Theme::Dark => if zh { "深色" } else { "Dark" },
+                      _ => if zh { "跟随系统" } else { "System" },
                     }
                   }
                 }
               }
-              for (label, dark) in [("Light presets", false), ("Dark presets", true)] {
-                NativeSelectGroup { key: "{label}", label,
+              for (group_key, label, dark) in [
+                ("light", if zh { "浅色预设" } else { "Light presets" }, false),
+                ("dark", if zh { "深色预设" } else { "Dark presets" }, true),
+              ] {
+                NativeSelectGroup { key: "{group_key}", label,
                   for preset in themes::THEMES.iter().filter(|preset| preset.dark == dark) {
                     NativeSelectOption {
                       key: "{preset.name}",
@@ -165,11 +194,24 @@ fn Shell() -> Element {
                 }
               }
             }
+            button {
+              r#type: "button",
+              class: "inline-flex h-8 shrink-0 items-center justify-center rounded-md border border-border bg-muted px-2 text-xs font-medium text-foreground transition-colors hover:bg-accent hover:text-accent-foreground",
+              "aria-label": current_lang.toggle_aria_label(),
+              title: current_lang.toggle_aria_label(),
+              "data-site-lang-toggle": "",
+              onclick: move |_| {
+                let next = lang().toggle();
+                i18n::persist_lang(next);
+                lang.set(next);
+              },
+              "{current_lang.toggle_button_text()}"
+            }
             a {
               class: "hidden h-8 w-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground sm:inline-flex",
               href: "https://github.com/dioxuspress/dioxus-ui",
-              "aria-label": "GitHub repository",
-              title: "GitHub repository",
+              "aria-label": if zh { "GitHub 源码仓库" } else { "GitHub repository" },
+              title: if zh { "GitHub 源码仓库" } else { "GitHub repository" },
               svg {
                 class: "h-4 w-4",
                 fill: "currentColor",
@@ -194,7 +236,7 @@ fn Shell() -> Element {
       Sheet { open: menu_open(), on_open_change: move |open| menu_open.set(open),
         SheetOverlay {}
         SheetContent { class: "overflow-y-auto", side: SheetSide::Left,
-          SheetTitle { class: "mb-4", "Components" }
+          SheetTitle { class: "mb-4", if zh { "组件目录" } else { "Components" } }
           // A followed link bubbles here, so the menu closes on navigation.
           div { onclick: move |_| menu_open.set(false), SiteNav {} }
         }
@@ -206,33 +248,57 @@ fn Shell() -> Element {
 /// The guides and the catalog grouped by category, from `catalog.rs`.
 #[component]
 fn SiteNav() -> Element {
+  let lang = use_site_lang()();
+  let zh = lang == SiteLang::Zh;
   let link = "block rounded-md px-2 py-1 text-sm text-muted-foreground hover:bg-accent hover:text-foreground";
   let active = "bg-accent text-foreground";
 
   rsx! {
-    nav { class: "grid gap-6", "aria-label": "Site",
+    nav { class: "grid gap-6", "aria-label": if zh { "站点导航" } else { "Site" },
       section { class: "grid gap-1",
-        h2 { class: "px-2 text-sm font-semibold", "Getting Started" }
-        Link { class: link, active_class: active, to: Route::Home {}, "Introduction" }
-        Link { class: link, active_class: active, to: Route::GettingStarted {}, "Installation" }
-        Link { class: link, active_class: active, to: Route::Theming {}, "Theming" }
-        a { class: link, href: "https://dioxuspress.dev/", "← DioxusPress Home" }
+        h2 { class: "px-2 text-sm font-semibold", if zh { "快速开始" } else { "Getting Started" } }
+        Link {
+          class: link,
+          active_class: active,
+          to: Route::Home {},
+          if zh { "简介" } else { "Introduction" }
+        }
+        Link {
+          class: link,
+          active_class: active,
+          to: Route::GettingStarted {},
+          if zh { "安装指南" } else { "Installation" }
+        }
+        Link {
+          class: link,
+          active_class: active,
+          to: Route::Theming {},
+          if zh { "主题定制" } else { "Theming" }
+        }
+        a {
+          class: link,
+          href: lang.main_site_href(),
+          if zh { "← 返回 DioxusPress 主站" } else { "← DioxusPress Home" }
+        }
       }
       section { class: "grid gap-1",
-        h2 { class: "px-2 text-sm font-semibold", "Blocks" }
+        h2 { class: "px-2 text-sm font-semibold", if zh { "页面区块" } else { "Blocks" } }
         for block in blocks::BLOCKS {
           Link {
             key: "{block.slug}",
             class: link,
             active_class: active,
             to: Route::BlockPage { slug: block.slug.to_string() },
-            "{block.title}"
+            "{i18n::block_title(lang, block.slug, block.title)}"
           }
         }
       }
       for category in catalog::CATEGORIES {
         section { key: "{category.id}", id: "category-{category.id}", class: "grid gap-1",
-          h2 { class: "px-2 text-sm font-semibold", "{category.label}" }
+          h2 {
+            class: "px-2 text-sm font-semibold",
+            "{i18n::category_label(lang, category.id, category.label)}"
+          }
           for component in category.components {
             Link {
               key: "{component.slug}",
@@ -250,7 +316,9 @@ fn SiteNav() -> Element {
 
 #[cfg(test)]
 mod tests {
+  use super::Route;
   use dioxus_shadcn::{THEME_STORAGE_KEY, theme_init_script};
+  use std::str::FromStr;
 
   #[test]
   fn page_template_applies_the_stored_theme_before_the_app_loads() {
@@ -260,5 +328,14 @@ mod tests {
       template.contains(&format!("<script>{}</script>", theme_init_script(THEME_STORAGE_KEY)))
     );
     assert!(template.contains(r#"<html lang="en">"#));
+  }
+
+  #[test]
+  fn routes_parse_with_lang_query_param() {
+    assert!(Route::from_str("/?lang=en").ok() == Some(Route::Home {}));
+    assert!(
+      Route::from_str("/components/button?lang=zh").ok()
+        == Some(Route::ComponentPage { slug: "button".to_string() })
+    );
   }
 }
