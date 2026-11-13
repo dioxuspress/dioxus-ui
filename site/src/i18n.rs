@@ -563,4 +563,62 @@ mod tests {
       );
     }
   }
+
+  #[test]
+  fn every_component_and_block_has_bilingual_reference_html() {
+    use crate::pages::{block_reference_html, reference_html};
+
+    for category in CATEGORIES {
+      for component in category.components {
+        let en = reference_html(SiteLang::En, component.slug)
+          .unwrap_or_else(|| panic!("missing English reference HTML for `{}`", component.slug));
+        assert!(
+          en.contains("<h2>API Surface</h2>") && en.contains("<h2>Accessibility Notes</h2>"),
+          "English reference HTML for `{}` missing required headings",
+          component.slug
+        );
+
+        let zh = reference_html(SiteLang::Zh, component.slug)
+          .unwrap_or_else(|| panic!("missing Chinese reference HTML for `{}`", component.slug));
+        assert!(
+          zh.contains("<h2>API 概览</h2>") && zh.contains("<h2>无障碍说明</h2>"),
+          "Chinese reference HTML for `{}` must include `API 概览` and `无障碍说明` headings",
+          component.slug
+        );
+        for english_heading in [
+          "<h2>API Surface</h2>",
+          "<h2>Behavior</h2>",
+          "<h2>Keyboard Behavior</h2>",
+          "<h2>Events</h2>",
+          "<h2>Density</h2>",
+          "<h2>Ownership Boundaries</h2>",
+          "<h2>Accessibility Notes</h2>",
+        ] {
+          assert!(
+            !zh.contains(english_heading),
+            "Chinese reference HTML for `{}` still contains untranslated `{english_heading}`",
+            component.slug
+          );
+        }
+      }
+    }
+
+    for block in BLOCKS {
+      let en = block_reference_html(SiteLang::En, block.slug)
+        .unwrap_or_else(|| panic!("missing English block reference HTML for `{}`", block.slug));
+      assert!(
+        en.contains("<h2>Behavior</h2>") && en.contains("<h2>Accessibility Notes</h2>"),
+        "English block reference HTML for `{}` missing required headings",
+        block.slug
+      );
+
+      let zh = block_reference_html(SiteLang::Zh, block.slug)
+        .unwrap_or_else(|| panic!("missing Chinese block reference HTML for `{}`", block.slug));
+      assert!(
+        zh.contains("<h2>行为与交互</h2>") && zh.contains("<h2>无障碍说明</h2>"),
+        "Chinese block reference HTML for `{}` must include `行为与交互` and `无障碍说明` headings",
+        block.slug
+      );
+    }
+  }
 }

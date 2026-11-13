@@ -28,21 +28,40 @@ fn find_component(slug: &str) -> Option<(&'static Category, &'static Component)>
   })
 }
 
-// `REFERENCES`: each component docs page from its API Surface section on,
-// rendered by `build.rs`.
+// `REFERENCES_EN` / `REFERENCES_ZH` and `BLOCK_REFERENCES_EN` /
+// `BLOCK_REFERENCES_ZH`, rendered from Markdown by `build.rs`.
 include!(concat!(env!("OUT_DIR"), "/references.rs"));
 
 /// Styles the rendered docs, which arrive as plain HTML elements.
 const PROSE: &str = "[&_h2]:mt-10 [&_h2]:border-b [&_h2]:border-border [&_h2]:pb-2 [&_h2]:text-xl [&_h2]:font-semibold [&_h3]:mt-8 [&_h3]:text-lg [&_h3]:font-semibold [&_p]:mt-4 [&_p]:leading-7 [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:ps-6 [&_ol]:mt-4 [&_ol]:list-decimal [&_ol]:ps-6 [&_li]:mt-1.5 [&_li]:leading-7 [&_a]:font-medium [&_a]:underline [&_a]:underline-offset-4 [&_pre]:mt-4 [&_pre]:overflow-x-auto [&_pre]:rounded-md [&_pre]:border [&_pre]:border-border [&_pre]:bg-muted [&_pre]:p-4 [&_pre]:text-sm [&_code]:font-mono [&_code]:text-sm [&_:not(pre)>code]:rounded [&_:not(pre)>code]:bg-muted [&_:not(pre)>code]:px-1.5 [&_:not(pre)>code]:py-0.5 [&_:not(pre)>code]:[overflow-wrap:anywhere] [&_table]:mt-4 [&_table]:w-full [&_table]:text-sm [&_th]:border-b [&_th]:border-border [&_th]:py-2 [&_th]:text-start [&_td]:border-b [&_td]:border-border [&_td]:py-2";
 
-/// A component's rendered reference, with links to other component pages
-/// under the site's base path.
-fn reference_html(slug: &str) -> Option<String> {
-  let (_, html) = REFERENCES.iter().find(|(reference, _)| *reference == slug)?;
+fn with_site_base(html: &str) -> String {
   let base = dioxus::cli_config::base_path().unwrap_or_default();
   let base = base.trim_matches('/');
   let prefix = if base.is_empty() { String::new() } else { format!("/{base}") };
-  Some(html.replace("__SITE_BASE__", &prefix))
+  html.replace("__SITE_BASE__", &prefix)
+}
+
+/// A component's rendered reference in `lang`, with links to other component
+/// pages rewritten under the site's base path.
+pub(crate) fn reference_html(lang: SiteLang, slug: &str) -> Option<String> {
+  let table = match lang {
+    SiteLang::En => REFERENCES_EN,
+    SiteLang::Zh => REFERENCES_ZH,
+  };
+  let (_, html) = table.iter().find(|(reference, _)| *reference == slug)?;
+  Some(with_site_base(html))
+}
+
+/// A block's rendered reference in `lang`, with component links rewritten under
+/// the site's base path.
+pub(crate) fn block_reference_html(lang: SiteLang, slug: &str) -> Option<String> {
+  let table = match lang {
+    SiteLang::En => BLOCK_REFERENCES_EN,
+    SiteLang::Zh => BLOCK_REFERENCES_ZH,
+  };
+  let (_, html) = table.iter().find(|(reference, _)| *reference == slug)?;
+  Some(with_site_base(html))
 }
 
 /// The crate version these pages document, such as `0.3.0`.
@@ -475,7 +494,7 @@ pub fn ComponentPage(slug: String) -> Element {
           ExampleCard { key: "{component.slug}-{example.title}", index }
         }
       }
-      if let Some(reference) = reference_html(component.slug) {
+      if let Some(reference) = reference_html(lang, component.slug) {
         div { class: PROSE, "data-site-reference": "", dangerous_inner_html: reference }
       }
       p { class: "mt-10 text-sm text-muted-foreground",
@@ -534,8 +553,7 @@ pub fn BlockPage(slug: String) -> Element {
   let Some(block) = BLOCKS.iter().find(|block| block.slug == slug) else {
     return rsx! { NotFoundContent { path: format!("/blocks/{slug}") } };
   };
-  let reference =
-    BLOCK_REFERENCES.iter().find(|(reference, _)| *reference == block.slug).map(|(_, html)| *html);
+  let reference = block_reference_html(lang, block.slug);
   let display_title = i18n::block_title(lang, block.slug, block.title);
 
   rsx! {
@@ -545,7 +563,12 @@ pub fn BlockPage(slug: String) -> Element {
       p { class: LEAD, "{i18n::block_description(lang, block.slug, block.description)}" }
       CodeBlock { code: format!("dxui add {}", block.slug) }
       Tabs { class: "mt-8", default_value: "preview",
-        TabsList { "aria-label": "{block.title} block",
+        TabsList {
+          "aria-label": if zh {
+            format!("{display_title} 区块切换")
+          } else {
+            format!("{} block", block.title)
+          },
           TabsTrigger { value: "preview", if zh { "实时预览" } else { "Preview" } }
           TabsTrigger { value: "code", if zh { "源码" } else { "Code" } }
         }
@@ -555,7 +578,11 @@ pub fn BlockPage(slug: String) -> Element {
           div {
             class: "h-[44rem] overflow-auto rounded-lg border border-border [transform:translateZ(0)]",
             tabindex: "0",
-            "aria-label": "{block.title} preview",
+            "aria-label": if zh {
+              format!("{display_title} 预览")
+            } else {
+              format!("{} preview", block.title)
+            },
             "data-site-block-preview": "",
             BlockRender { slug: block.slug }
           }
@@ -604,7 +631,12 @@ fn ExampleCard(index: usize) -> Element {
     section { class: "mt-6", "data-site-example": example.title,
       h3 { class: "font-semibold", "{shown_title}" }
       Tabs { class: "mt-3", default_value: "preview",
-        TabsList { "aria-label": "{example.title} example",
+        TabsList {
+          "aria-label": if zh {
+            format!("{shown_title} 示例")
+          } else {
+            format!("{} example", example.title)
+          },
           TabsTrigger { value: "preview", if zh { "预览" } else { "Preview" } }
           TabsTrigger { value: "code", if zh { "代码" } else { "Code" } }
         }
