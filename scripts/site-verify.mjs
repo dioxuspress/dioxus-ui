@@ -167,7 +167,11 @@ async function run() {
   const browser = await launchBrowser("scripts/site-verify.mjs");
   try {
     const page = await (
-      await browser.newContext({ viewport, permissions: ["clipboard-read", "clipboard-write"] })
+      await browser.newContext({
+        viewport,
+        locale: "en-US",
+        permissions: ["clipboard-read", "clipboard-write"],
+      })
     ).newPage();
     const errors = [];
     page.on("console", (message) => {
@@ -502,6 +506,82 @@ async function run() {
     await expect(page.locator("main [data-site-page]")).toHaveAttribute("data-component", "dialog");
     if (errors.length > 0) {
       throw new Error(`console errors: ${errors.join("; ")}`);
+    }
+
+    // Bilingual (Chinese / English) auto-detection, ?lang= query sync, live toggle,
+    // WCAG contrast, axe-core, and 375px zero-overflow checks.
+    const zhContext = await browser.newContext({
+      viewport,
+      locale: "zh-CN",
+      permissions: ["clipboard-read", "clipboard-write"],
+    });
+    try {
+      const zhPage = await zhContext.newPage();
+      const zhErrors = [];
+      zhPage.on("console", (message) => {
+        if (message.type() === "error") {
+          zhErrors.push(message.text());
+        }
+      });
+      zhPage.on("pageerror", (error) => zhErrors.push(String(error)));
+
+      await visit(zhPage, "/");
+      await expect(zhPage.locator("html")).toHaveAttribute("lang", "zh-CN");
+      await expect(zhPage.getByRole("link", { name: "快速开始", exact: true })).toBeVisible();
+      await expect(zhPage.getByRole("heading", { name: "84 个组件", exact: true })).toBeVisible();
+      await expect(zhPage.locator("[data-site-back-link]")).toHaveAttribute(
+        "href",
+        "https://dioxuspress.dev/?lang=zh",
+      );
+      await expect(zhPage.locator("[data-site-lang-toggle]")).toHaveText("EN");
+
+      for (const zhPath of ["/", "/docs/getting-started", "/docs/theming", "/components/button", "/blocks", "/missing"]) {
+        await visit(zhPage, zhPath);
+        await expectReadable(zhPage, `${zhPath} (zh-CN)`, { audit: true });
+        await expectNoSidewaysScroll(zhPage, `${zhPath} (zh-CN)`);
+      }
+
+      // ?lang=en overrides browser zh-CN locale and persists across client navigation.
+      await visit(zhPage, "/?lang=en");
+      await expect(zhPage.locator("html")).toHaveAttribute("lang", "en");
+      await expect(zhPage.getByRole("link", { name: "Get started", exact: true })).toBeVisible();
+      await expect(zhPage.locator("[data-site-back-link]")).toHaveAttribute(
+        "href",
+        "https://dioxuspress.dev/?lang=en",
+      );
+      await expect
+        .poll(() => zhPage.evaluate(() => window.localStorage.getItem("dxui-lang")))
+        .toBe("en");
+
+      await visit(zhPage, "/components/button");
+      await expect(zhPage.getByRole("heading", { name: "Examples", exact: true })).toBeVisible();
+
+      // Header toggle switches live to Chinese, updates DioxusPress back-link, and fits at 375px.
+      await zhPage.locator("[data-site-lang-toggle]").click();
+      await expect(zhPage.locator("html")).toHaveAttribute("lang", "zh-CN");
+      await expect(zhPage.getByRole("heading", { name: "交互示例", exact: true })).toBeVisible();
+      await expect(zhPage.locator("[data-site-back-link]")).toHaveAttribute(
+        "href",
+        "https://dioxuspress.dev/?lang=zh",
+      );
+      await expect
+        .poll(() => zhPage.evaluate(() => window.localStorage.getItem("dxui-lang")))
+        .toBe("zh");
+      await expectReadable(zhPage, "/components/button (toggled zh-CN)", { audit: true });
+
+      await expectNoSidewaysScroll(zhPage, "/components/button (375px zh-CN)");
+      await zhPage.setViewportSize({ width: 375, height: 800 });
+      await zhPage.getByRole("button", { name: "打开组件导航菜单" }).click();
+      const zhMenu = zhPage.getByRole("dialog");
+      await expect(zhMenu).toBeVisible();
+      await zhMenu.getByRole("link", { name: "Dialog", exact: true }).click();
+      await expect(zhMenu).toBeHidden();
+
+      if (zhErrors.length > 0) {
+        throw new Error(`zh-CN console errors: ${zhErrors.join("; ")}`);
+      }
+    } finally {
+      await zhContext.close();
     }
   } finally {
     await browser.close();
