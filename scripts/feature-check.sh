@@ -93,6 +93,9 @@ features=(
   mask
   stack
   hover-gallery
+  hover-3d
+  text-rotate
+  aura
 )
 
 for feature in "${features[@]}"; do
@@ -101,7 +104,7 @@ for feature in "${features[@]}"; do
 done
 
 echo "checking static component feature set"
-cargo check -q -p dioxus-shadcn --no-default-features --features "alert,alert-dialog,aspect-ratio,attachment,avatar,badge,breadcrumb,bubble,button-group,card,carousel,chart,collapsible,direction,empty,field,input-group,input-otp,item,kbd,marker,message,message-scroller,native-select,pagination,progress,separator,sidebar,skeleton,sonner,spinner,table,toast,typography,stat,timeline,steps,indicator,status,radial-progress,countdown,diff,swap,dock,theme-controller,menu,mockup,mask,stack,hover-gallery"
+cargo check -q -p dioxus-shadcn --no-default-features --features "alert,alert-dialog,aspect-ratio,attachment,avatar,badge,breadcrumb,bubble,button-group,card,carousel,chart,collapsible,direction,empty,field,input-group,input-otp,item,kbd,marker,message,message-scroller,native-select,pagination,progress,separator,sidebar,skeleton,sonner,spinner,table,toast,typography,stat,timeline,steps,indicator,status,radial-progress,countdown,diff,swap,dock,theme-controller,menu,mockup,mask,stack,hover-gallery,hover-3d,aura"
 
 echo "checking primitive-backed feature set"
 cargo check -q -p dioxus-shadcn --no-default-features --features "code-tabs,combobox,context-menu,date-picker,date-time-picker,dialog,drawer,dropdown,hover-card,menubar,navigation-menu,popover,radio-group,select,sheet,slider,toggle-group,tooltip,tree"

@@ -107,6 +107,9 @@ examples! {
   mask_shapes => MaskShapesDemo, "mask", "Geometric shapes";
   stack_cards => StackCardsDemo, "stack", "Stacked cards";
   hover_gallery_product => HoverGalleryProductDemo, "hover-gallery", "Product angles";
+  hover_3d_card => Hover3dCardDemo, "hover-3d", "3D tilt card";
+  text_rotate_headline => TextRotateHeadlineDemo, "text-rotate", "Rotating headline";
+  aura_spotlight => AuraSpotlightDemo, "aura", "Ambient spotlight";
   status_presence => StatusPresenceDemo, "status", "Service health";
   radial_progress_usage => RadialProgressUsageDemo, "radial-progress", "Sizes and labels";
   countdown_sale => CountdownSaleDemo, "countdown", "Sale timer";

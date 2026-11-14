@@ -13,14 +13,14 @@ parity.
 
 ## Summary
 
-- Public components: 88
-- Registry entries: 113
+- Public components: 91
+- Registry entries: 116
 - Source-copy helpers: anchored-overlay, calendar-grid, choice, class-merge, class-merge-table, default-attribute, density, dialog-labels, dismiss-timer, element-id, hover-open, layer, listbox, media-query, menu-marks, menu-radio, menu-sub, modal-focus, overlay, overlay-root, root-state, roving-group, safe-url, script, utils
-- Templates: 113
-- Crate modules: 88
-- Crate features: 88
-- Component docs pages: 88
-- Complete local wiring: 88
+- Templates: 116
+- Crate modules: 91
+- Crate features: 91
+- Component docs pages: 91
+- Complete local wiring: 91
 - Incomplete local wiring: 0
 
 ## Category Counts
@@ -31,8 +31,8 @@ parity.
 | Forms | 19 |
 | Overlays | 11 |
 | Navigation | 10 |
-| Layout | 14 |
-| Data Display | 14 |
+| Layout | 15 |
+| Data Display | 16 |
 | Feedback | 6 |
 | Messaging | 5 |
 
@@ -56,11 +56,13 @@ parity.
 | Data Table | Data Display | yes | yes | yes | yes | yes | yes | yes |
 | Diff | Data Display | yes | yes | yes | yes | yes | yes | yes |
 | Empty | Data Display | yes | yes | yes | yes | yes | yes | yes |
+| Hover 3d | Data Display | yes | yes | yes | yes | yes | yes | yes |
 | Hover Gallery | Data Display | yes | yes | yes | yes | yes | yes | yes |
 | Progress | Data Display | yes | yes | yes | yes | yes | yes | yes |
 | Radial Progress | Data Display | yes | yes | yes | yes | yes | yes | yes |
 | Stat | Data Display | yes | yes | yes | yes | yes | yes | yes |
 | Table | Data Display | yes | yes | yes | yes | yes | yes | yes |
+| Text Rotate | Data Display | yes | yes | yes | yes | yes | yes | yes |
 | Timeline | Data Display | yes | yes | yes | yes | yes | yes | yes |
 | Typography | Data Display | yes | yes | yes | yes | yes | yes | yes |
 | Alert | Feedback | yes | yes | yes | yes | yes | yes | yes |
@@ -90,6 +92,7 @@ parity.
 | Textarea | Forms | yes | yes | yes | yes | yes | yes | yes |
 | Accordion | Layout | yes | yes | yes | yes | yes | yes | yes |
 | Aspect Ratio | Layout | yes | yes | yes | yes | yes | yes | yes |
+| Aura | Layout | yes | yes | yes | yes | yes | yes | yes |
 | Card | Layout | yes | yes | yes | yes | yes | yes | yes |
 | Carousel | Layout | yes | yes | yes | yes | yes | yes | yes |
 | Collapsible | Layout | yes | yes | yes | yes | yes | yes | yes |
@@ -149,11 +152,13 @@ parity.
 | Data Table | Data Display | [docs](data-table.md) | `dxui add data-table` | `data-table` | `crates/dioxus-shadcn-cli/templates/data_table.rs` | `src/components/ui/data_table.rs` |
 | Diff | Data Display | [docs](diff.md) | `dxui add diff` | `diff` | `crates/dioxus-shadcn-cli/templates/diff.rs` | `src/components/ui/diff.rs` |
 | Empty | Data Display | [docs](empty.md) | `dxui add empty` | `empty` | `crates/dioxus-shadcn-cli/templates/empty.rs` | `src/components/ui/empty.rs` |
+| Hover 3d | Data Display | [docs](hover-3d.md) | `dxui add hover-3d` | `hover-3d` | `crates/dioxus-shadcn-cli/templates/hover_3d.rs` | `src/components/ui/hover_3d.rs` |
 | Hover Gallery | Data Display | [docs](hover-gallery.md) | `dxui add hover-gallery` | `hover-gallery` | `crates/dioxus-shadcn-cli/templates/hover_gallery.rs` | `src/components/ui/hover_gallery.rs` |
 | Progress | Data Display | [docs](progress.md) | `dxui add progress` | `progress` | `crates/dioxus-shadcn-cli/templates/progress.rs` | `src/components/ui/progress.rs` |
 | Radial Progress | Data Display | [docs](radial-progress.md) | `dxui add radial-progress` | `radial-progress` | `crates/dioxus-shadcn-cli/templates/radial_progress.rs` | `src/components/ui/radial_progress.rs` |
 | Stat | Data Display | [docs](stat.md) | `dxui add stat` | `stat` | `crates/dioxus-shadcn-cli/templates/stat.rs` | `src/components/ui/stat.rs` |
 | Table | Data Display | [docs](table.md) | `dxui add table` | `table` | `crates/dioxus-shadcn-cli/templates/table.rs` | `src/components/ui/table.rs` |
+| Text Rotate | Data Display | [docs](text-rotate.md) | `dxui add text-rotate` | `text-rotate` | `crates/dioxus-shadcn-cli/templates/text_rotate.rs` | `src/components/ui/text_rotate.rs` |
 | Timeline | Data Display | [docs](timeline.md) | `dxui add timeline` | `timeline` | `crates/dioxus-shadcn-cli/templates/timeline.rs` | `src/components/ui/timeline.rs` |
 | Typography | Data Display | [docs](typography.md) | `dxui add typography` | `typography` | `crates/dioxus-shadcn-cli/templates/typography.rs` | `src/components/ui/typography.rs` |
 | Alert | Feedback | [docs](alert.md) | `dxui add alert` | `alert` | `crates/dioxus-shadcn-cli/templates/alert.rs` | `src/components/ui/alert.rs` |
@@ -183,6 +188,7 @@ parity.
 | Textarea | Forms | [docs](textarea.md) | `dxui add textarea` | `textarea` | `crates/dioxus-shadcn-cli/templates/textarea.rs` | `src/components/ui/textarea.rs` |
 | Accordion | Layout | [docs](accordion.md) | `dxui add accordion` | `accordion` | `crates/dioxus-shadcn-cli/templates/accordion.rs` | `src/components/ui/accordion.rs` |
 | Aspect Ratio | Layout | [docs](aspect-ratio.md) | `dxui add aspect-ratio` | `aspect-ratio` | `crates/dioxus-shadcn-cli/templates/aspect_ratio.rs` | `src/components/ui/aspect_ratio.rs` |
+| Aura | Layout | [docs](aura.md) | `dxui add aura` | `aura` | `crates/dioxus-shadcn-cli/templates/aura.rs` | `src/components/ui/aura.rs` |
 | Card | Layout | [docs](card.md) | `dxui add card` | `card` | `crates/dioxus-shadcn-cli/templates/card.rs` | `src/components/ui/card.rs` |
 | Carousel | Layout | [docs](carousel.md) | `dxui add carousel` | `carousel` | `crates/dioxus-shadcn-cli/templates/carousel.rs` | `src/components/ui/carousel.rs` |
 | Collapsible | Layout | [docs](collapsible.md) | `dxui add collapsible` | `collapsible` | `crates/dioxus-shadcn-cli/templates/collapsible.rs` | `src/components/ui/collapsible.rs` |

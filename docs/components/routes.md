@@ -11,7 +11,7 @@ It does not create rendered routes, router code, screenshots, or generated JSON.
 For source preview route metadata, see the
 [Source Preview Manifest](source-preview.md).
 
-Component routes: 88
+Component routes: 91
 Category routes: 8
 
 ## Top-level Routes
@@ -45,6 +45,7 @@ Category routes: 8
 | [Alert Dialog](alert-dialog.md) | /components/alert-dialog | docs/components/alert-dialog.md | /components#category-overlays | /components/alert-dialog/source |
 | [Aspect Ratio](aspect-ratio.md) | /components/aspect-ratio | docs/components/aspect-ratio.md | /components#category-layout | /components/aspect-ratio/source |
 | [Attachment](attachment.md) | /components/attachment | docs/components/attachment.md | /components#category-messaging | /components/attachment/source |
+| [Aura](aura.md) | /components/aura | docs/components/aura.md | /components#category-layout | /components/aura/source |
 | [Avatar](avatar.md) | /components/avatar | docs/components/avatar.md | /components#category-data-display | /components/avatar/source |
 | [Badge](badge.md) | /components/badge | docs/components/badge.md | /components#category-data-display | /components/badge/source |
 | [Breadcrumb](breadcrumb.md) | /components/breadcrumb | docs/components/breadcrumb.md | /components#category-navigation | /components/breadcrumb/source |
@@ -75,6 +76,7 @@ Category routes: 8
 | [Fab](fab.md) | /components/fab | docs/components/fab.md | /components#category-actions | /components/fab/source |
 | [Field](field.md) | /components/field | docs/components/field.md | /components#category-forms | /components/field/source |
 | [File Input](file-input.md) | /components/file-input | docs/components/file-input.md | /components#category-forms | /components/file-input/source |
+| [Hover 3d](hover-3d.md) | /components/hover-3d | docs/components/hover-3d.md | /components#category-data-display | /components/hover-3d/source |
 | [Hover Card](hover-card.md) | /components/hover-card | docs/components/hover-card.md | /components#category-overlays | /components/hover-card/source |
 | [Hover Gallery](hover-gallery.md) | /components/hover-gallery | docs/components/hover-gallery.md | /components#category-data-display | /components/hover-gallery/source |
 | [Indicator](indicator.md) | /components/indicator | docs/components/indicator.md | /components#category-layout | /components/indicator/source |
@@ -119,6 +121,7 @@ Category routes: 8
 | [Table](table.md) | /components/table | docs/components/table.md | /components#category-data-display | /components/table/source |
 | [Tabs](tabs.md) | /components/tabs | docs/components/tabs.md | /components#category-navigation | /components/tabs/source |
 | [Tags Input](tags-input.md) | /components/tags-input | docs/components/tags-input.md | /components#category-forms | /components/tags-input/source |
+| [Text Rotate](text-rotate.md) | /components/text-rotate | docs/components/text-rotate.md | /components#category-data-display | /components/text-rotate/source |
 | [Textarea](textarea.md) | /components/textarea | docs/components/textarea.md | /components#category-forms | /components/textarea/source |
 | [Theme Controller](theme-controller.md) | /components/theme-controller | docs/components/theme-controller.md | /components#category-actions | /components/theme-controller/source |
 | [Timeline](timeline.md) | /components/timeline | docs/components/timeline.md | /components#category-data-display | /components/timeline/source |

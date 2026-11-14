@@ -321,7 +321,8 @@ mod safe_url;
   feature = "toast",
   feature = "toggle-group",
   feature = "tooltip",
-  feature = "tree"
+  feature = "tree",
+  feature = "text-rotate"
 ))]
 mod script;
 
@@ -840,6 +841,15 @@ pub mod stack;
 #[cfg(feature = "hover-gallery")]
 pub mod hover_gallery;
 
+#[cfg(feature = "hover-3d")]
+pub mod hover_3d;
+
+#[cfg(feature = "text-rotate")]
+pub mod text_rotate;
+
+#[cfg(feature = "aura")]
+pub mod aura;
+
 #[cfg(feature = "code-tabs")]
 pub use code_tabs::{
   CodeTabs, CodeTabsActivation, CodeTabsContent, CodeTabsList, CodeTabsTrigger, code_tabs_class,
@@ -935,6 +945,17 @@ pub use stack::{Stack, StackAlign, stack_class};
 
 #[cfg(feature = "hover-gallery")]
 pub use hover_gallery::{HoverGallery, HoverGalleryImage, hover_gallery_class};
+
+#[cfg(feature = "hover-3d")]
+pub use hover_3d::{
+  Hover3D, Hover3dIntensity, hover_3d_class, hover_3d_surface_class, hover_3d_transform,
+};
+
+#[cfg(feature = "text-rotate")]
+pub use text_rotate::{TextRotate, text_rotate_class};
+
+#[cfg(feature = "aura")]
+pub use aura::{Aura, AuraSize, AuraTone, aura_class};
 
 #[cfg(feature = "tags-input")]
 pub use tags_input::{TagsInput, tags_input_class};

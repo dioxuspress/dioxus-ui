@@ -350,6 +350,12 @@ pub const CATEGORIES: &[Category] = &[
         feature: "aspect-ratio",
       },
       Component {
+        slug: "aura",
+        title: "Aura",
+        description: "Soft semantic glow backdrop for spotlighting hero cards and feature panels.",
+        feature: "aura",
+      },
+      Component {
         slug: "card",
         title: "Card",
         description: "Card component with header, content, and footer parts.",
@@ -470,6 +476,12 @@ pub const CATEGORIES: &[Category] = &[
         feature: "empty",
       },
       Component {
+        slug: "hover-3d",
+        title: "Hover 3d",
+        description: "Interactive 3D perspective tilt card that responds to pointer zones without JS eval.",
+        feature: "hover-3d",
+      },
+      Component {
         slug: "hover-gallery",
         title: "Hover Gallery",
         description: "Interactive multi-image gallery that switches frames as the pointer moves across horizontal zones.",
@@ -498,6 +510,12 @@ pub const CATEGORIES: &[Category] = &[
         title: "Table",
         description: "Table component with styled table parts.",
         feature: "table",
+      },
+      Component {
+        slug: "text-rotate",
+        title: "Text Rotate",
+        description: "Vertical rotating phrase switcher with smooth slide-and-fade transitions.",
+        feature: "text-rotate",
       },
       Component {
         slug: "timeline",

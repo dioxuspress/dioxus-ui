@@ -1,0 +1,14 @@
+{
+  "name": "aura",
+  "description": "Soft semantic glow backdrop for spotlighting hero cards and feature panels.",
+  "files": [
+    {
+      "source": "templates/aura.rs",
+      "target": "src/components/ui/aura.rs"
+    }
+  ],
+  "dependencies": [
+    "utils"
+  ],
+  "assets": []
+}

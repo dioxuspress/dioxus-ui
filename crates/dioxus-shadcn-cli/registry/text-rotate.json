@@ -1,0 +1,15 @@
+{
+  "name": "text-rotate",
+  "description": "Vertical rotating phrase switcher with smooth slide-and-fade transitions.",
+  "files": [
+    {
+      "source": "templates/text_rotate.rs",
+      "target": "src/components/ui/text_rotate.rs"
+    }
+  ],
+  "dependencies": [
+    "utils",
+    "script"
+  ],
+  "assets": []
+}
