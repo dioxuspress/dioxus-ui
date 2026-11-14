@@ -285,6 +285,7 @@ mod roving_group;
   feature = "breadcrumb",
   feature = "dock",
   feature = "hover-card",
+  feature = "link",
   feature = "menu",
   feature = "navigation-menu",
   feature = "pagination",
@@ -850,6 +851,18 @@ pub mod text_rotate;
 #[cfg(feature = "aura")]
 pub mod aura;
 
+#[cfg(feature = "filter")]
+pub mod filter;
+
+#[cfg(feature = "link")]
+pub mod link;
+
+#[cfg(feature = "loading")]
+pub mod loading;
+
+#[cfg(feature = "join")]
+pub mod join;
+
 #[cfg(feature = "code-tabs")]
 pub use code_tabs::{
   CodeTabs, CodeTabsActivation, CodeTabsContent, CodeTabsList, CodeTabsTrigger, code_tabs_class,
@@ -956,6 +969,18 @@ pub use text_rotate::{TextRotate, text_rotate_class};
 
 #[cfg(feature = "aura")]
 pub use aura::{Aura, AuraSize, AuraTone, aura_class};
+
+#[cfg(feature = "filter")]
+pub use filter::{Filter, FilterOption, filter_class, filter_item_class, filter_reset_class};
+
+#[cfg(feature = "link")]
+pub use link::{Link, LinkUnderline, LinkVariant, link_class};
+
+#[cfg(feature = "loading")]
+pub use loading::{Loading, LoadingSize, LoadingVariant, loading_class};
+
+#[cfg(feature = "join")]
+pub use join::{Join, JoinOrientation, join_class, join_item_class};
 
 #[cfg(feature = "tags-input")]
 pub use tags_input::{TagsInput, tags_input_class};

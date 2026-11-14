@@ -1,0 +1,99 @@
+//! Join: a grouping container that collapses adjacent border radii for buttons, inputs, and selects.
+
+use dioxus::prelude::*;
+use dioxus_shadcn_core::{classes, merge_classes};
+
+/// Direction in which `Join` arranges its children.
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub enum JoinOrientation {
+  /// Side by side in a row (default).
+  #[default]
+  Horizontal,
+  /// Stacked in a column.
+  Vertical,
+}
+
+impl JoinOrientation {
+  /// Tailwind classes for the orientation's layout and edge radius collapsing.
+  pub const fn class(self) -> &'static str {
+    match self {
+      Self::Horizontal => {
+        "flex-row [&>*:not(:first-child)]:rounded-l-none [&>*:not(:first-child)]:-ml-px [&>*:not(:last-child)]:rounded-r-none"
+      }
+      Self::Vertical => {
+        "flex-col [&>*:not(:first-child)]:rounded-t-none [&>*:not(:first-child)]:-mt-px [&>*:not(:last-child)]:rounded-b-none"
+      }
+    }
+  }
+
+  /// Value for the `data-orientation` attribute.
+  pub const fn attribute(self) -> &'static str {
+    match self {
+      Self::Horizontal => "horizontal",
+      Self::Vertical => "vertical",
+    }
+  }
+}
+
+const JOIN_BASE_CLASS: &str = "inline-flex items-stretch [&>*]:focus-visible:z-10";
+const JOIN_ITEM_BASE_CLASS: &str = "relative focus-visible:z-10";
+
+/// Classes for the `Join` container.
+pub fn join_class(orientation: JoinOrientation, class: &str) -> String {
+  merge_classes(classes([Some(JOIN_BASE_CLASS), Some(orientation.class())]), class)
+}
+
+/// Helper classes for an explicit child item inside `Join`.
+pub fn join_item_class(class: &str) -> String {
+  merge_classes(classes([Some(JOIN_ITEM_BASE_CLASS)]), class)
+}
+
+/// Groups adjacent controls such as inputs, buttons, or badges into a seamless connected strip.
+#[component]
+pub fn Join(
+  #[props(default)] orientation: JoinOrientation,
+  #[props(default)] class: String,
+  #[props(extends = GlobalAttributes)] attributes: Vec<Attribute>,
+  children: Element,
+) -> Element {
+  let class = join_class(orientation, &class);
+
+  rsx! {
+    div {
+      class,
+      "data-orientation": orientation.attribute(),
+      ..attributes,
+      {children}
+    }
+  }
+}
+
+#[cfg(test)]
+mod tests {
+  use super::*;
+  use dioxus_ssr::render_element;
+
+  #[test]
+  fn join_class_applies_orientation() {
+    let horizontal = join_class(JoinOrientation::Horizontal, "");
+    let vertical = join_class(JoinOrientation::Vertical, "w-full");
+    assert!(horizontal.contains("flex-row"));
+    assert!(horizontal.contains("rounded-l-none"));
+    assert!(vertical.contains("flex-col"));
+    assert!(vertical.contains("rounded-t-none"));
+    assert!(vertical.ends_with("w-full"));
+  }
+
+  #[test]
+  fn join_renders_children() {
+    let html = render_element(rsx! {
+      Join {
+        input { placeholder: "Search" }
+        button { "Go" }
+      }
+    });
+    assert!(html.contains("data-orientation=\"horizontal\""));
+    assert!(html.contains("Search"));
+    assert!(html.contains("Go"));
+  }
+}

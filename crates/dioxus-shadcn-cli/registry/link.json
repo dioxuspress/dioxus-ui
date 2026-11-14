@@ -1,0 +1,15 @@
+{
+  "name": "link",
+  "description": "Styled anchor links with semantic color variants, underline modes, and safe URL filtering.",
+  "files": [
+    {
+      "source": "templates/link.rs",
+      "target": "src/components/ui/link.rs"
+    }
+  ],
+  "dependencies": [
+    "safe-url",
+    "utils"
+  ],
+  "assets": []
+}

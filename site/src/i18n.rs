@@ -382,6 +382,13 @@ fn zh_component_meta(slug: &str) -> Option<(&'static str, &'static str)> {
     "typography" => ("Typography 排版", "面向长文与技术文档排版的语义化标题、段落与引用样式部件。"),
     // feedback
     "alert" => ("Alert 警告提示", "包含标题与详细说明的页面内静态提示与告警横幅组件。"),
+    "filter" => ("Filter 筛选栏", "带自动重置按钮的单选胶囊筛选栏组件。"),
+    "join" => ("Join 组合拼接", "将相邻输入框、按钮或选择器圆角无缝拼接的布局容器。"),
+    "link" => ("Link 链接", "支持语义配色、下划线模式与安全 URL 过滤的链接组件。"),
+    "loading" => (
+      "Loading 加载动画",
+      "支持 spinner、dots、ring、ball、bars 与 infinity 六种动画的加载指示器。",
+    ),
     "skeleton" => ("Skeleton 骨架屏", "在异步内容加载完成前保持版面稳定的脉冲骨架屏占位组件。"),
     "sonner" => {
       ("Sonner 堆叠通知", "开箱即用的堆叠式轻提示（Sonner Toast）部件与通知队列辅助函数。")
@@ -560,6 +567,10 @@ fn zh_example_title(english_title: &str) -> Option<&'static str> {
     "3D tilt card" => "3D 透视倾斜卡片",
     "Rotating headline" => "动态轮播标题",
     "Ambient spotlight" => "氛围光晕聚焦",
+    "Filter pills" => "筛选胶囊组",
+    "Link variants" => "链接样式变体",
+    "Loading variants" => "加载动画变体",
+    "Joined controls" => "拼接控件组",
     _ => return None,
   })
 }
