@@ -167,6 +167,8 @@ dioxus-shadcn = { version = "0.6", default-features = false, features = ["button
 | [Field](field.md) | `dxui add field` | `field` | Form field composition parts |
 | [File Input](file-input.md) | `dxui add file-input` | `file-input` | Styled native file input |
 | [Filter](filter.md) | `dxui add filter` | `filter` | Radio-style filter pills with reset |
+| [Footer](footer.md) | `dxui add footer` | `footer` | Multi-column or centered page footer |
+| [Hero](hero.md) | `dxui add hero` | `hero` | Full-width showcase section with overlay |
 | [Hover Card](hover-card.md) | `dxui add hover-card` | `hover-card` | Popover-backed preview content |
 | [Hover 3D](hover-3d.md) | `dxui add hover-3d` | `hover-3d` | 3D perspective tilt card |
 | [Hover Gallery](hover-gallery.md) | `dxui add hover-gallery` | `hover-gallery` | Multi-image hover frame switcher |
@@ -182,11 +184,13 @@ dioxus-shadcn = { version = "0.6", default-features = false, features = ["button
 | [Loading](loading.md) | `dxui add loading` | `loading` | Multi-variant animated loading indicator |
 | [Mask](mask.md) | `dxui add mask` | `mask` | Geometric clip-path shape wrapper |
 | [Marker](marker.md) | `dxui add marker` | `marker` | Inline message marker parts |
+| [Megamenu](megamenu.md) | `dxui add megamenu` | `megamenu` | Multi-column toggleable navigation panel |
 | [Menu](menu.md) | `dxui add menu` | `menu` | Vertical navigation list with collapsible groups |
 | [Menubar](menubar.md) | `dxui add menubar` | `menubar` | Dropdown-backed menubar parts |
 | [Message](message.md) | `dxui add message` | `message` | Provider-neutral message row parts |
 | [Message Scroller](message-scroller.md) | `dxui add message-scroller` | `message-scroller` | Controlled transcript viewport parts |
 | [Mockup](mockup.md) | `dxui add mockup` | `mockup` | Browser, window, code, and phone frames |
+| [Navbar](navbar.md) | `dxui add navbar` | `navbar` | Top navigation bar with start, center, and end slots |
 | [Native Select](native-select.md) | `dxui add native-select` | `native-select` | Styled native form select |
 | [Navigation Menu](navigation-menu.md) | `dxui add navigation-menu` | `navigation-menu` | Navigation-oriented disclosure parts |
 | [Number Input](number-input.md) | `dxui add number-input` | `number-input` | Spinbutton number field |
@@ -225,6 +229,7 @@ dioxus-shadcn = { version = "0.6", default-features = false, features = ["button
 | [Tooltip](tooltip.md) | `dxui add tooltip` | `tooltip` | Primitive config + styled part |
 | [Tree](tree.md) | `dxui add tree` | `tree` | Nested items with tree keyboard navigation |
 | [Typography](typography.md) | `dxui add typography` | `typography` | Styled semantic text parts |
+| [Validator](validator.md) | `dxui add validator` | `validator` | Declarative form validation wrapper and hint |
 
 ## Preview Commands
 

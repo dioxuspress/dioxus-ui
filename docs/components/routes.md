@@ -11,7 +11,7 @@ It does not create rendered routes, router code, screenshots, or generated JSON.
 For source preview route metadata, see the
 [Source Preview Manifest](source-preview.md).
 
-Component routes: 95
+Component routes: 100
 Category routes: 8
 
 ## Top-level Routes
@@ -77,6 +77,8 @@ Category routes: 8
 | [Field](field.md) | /components/field | docs/components/field.md | /components#category-forms | /components/field/source |
 | [File Input](file-input.md) | /components/file-input | docs/components/file-input.md | /components#category-forms | /components/file-input/source |
 | [Filter](filter.md) | /components/filter | docs/components/filter.md | /components#category-forms | /components/filter/source |
+| [Footer](footer.md) | /components/footer | docs/components/footer.md | /components#category-layout | /components/footer/source |
+| [Hero](hero.md) | /components/hero | docs/components/hero.md | /components#category-layout | /components/hero/source |
 | [Hover 3d](hover-3d.md) | /components/hover-3d | docs/components/hover-3d.md | /components#category-data-display | /components/hover-3d/source |
 | [Hover Card](hover-card.md) | /components/hover-card | docs/components/hover-card.md | /components#category-overlays | /components/hover-card/source |
 | [Hover Gallery](hover-gallery.md) | /components/hover-gallery | docs/components/hover-gallery.md | /components#category-data-display | /components/hover-gallery/source |
@@ -92,12 +94,14 @@ Category routes: 8
 | [Loading](loading.md) | /components/loading | docs/components/loading.md | /components#category-feedback | /components/loading/source |
 | [Marker](marker.md) | /components/marker | docs/components/marker.md | /components#category-messaging | /components/marker/source |
 | [Mask](mask.md) | /components/mask | docs/components/mask.md | /components#category-layout | /components/mask/source |
+| [Megamenu](megamenu.md) | /components/megamenu | docs/components/megamenu.md | /components#category-navigation | /components/megamenu/source |
 | [Menu](menu.md) | /components/menu | docs/components/menu.md | /components#category-navigation | /components/menu/source |
 | [Menubar](menubar.md) | /components/menubar | docs/components/menubar.md | /components#category-overlays | /components/menubar/source |
 | [Message](message.md) | /components/message | docs/components/message.md | /components#category-messaging | /components/message/source |
 | [Message Scroller](message-scroller.md) | /components/message-scroller | docs/components/message-scroller.md | /components#category-messaging | /components/message-scroller/source |
 | [Mockup](mockup.md) | /components/mockup | docs/components/mockup.md | /components#category-layout | /components/mockup/source |
 | [Native Select](native-select.md) | /components/native-select | docs/components/native-select.md | /components#category-forms | /components/native-select/source |
+| [Navbar](navbar.md) | /components/navbar | docs/components/navbar.md | /components#category-navigation | /components/navbar/source |
 | [Navigation Menu](navigation-menu.md) | /components/navigation-menu | docs/components/navigation-menu.md | /components#category-navigation | /components/navigation-menu/source |
 | [Number Input](number-input.md) | /components/number-input | docs/components/number-input.md | /components#category-forms | /components/number-input/source |
 | [Pagination](pagination.md) | /components/pagination | docs/components/pagination.md | /components#category-navigation | /components/pagination/source |
@@ -135,3 +139,4 @@ Category routes: 8
 | [Tooltip](tooltip.md) | /components/tooltip | docs/components/tooltip.md | /components#category-overlays | /components/tooltip/source |
 | [Tree](tree.md) | /components/tree | docs/components/tree.md | /components#category-navigation | /components/tree/source |
 | [Typography](typography.md) | /components/typography | docs/components/typography.md | /components#category-data-display | /components/typography/source |
+| [Validator](validator.md) | /components/validator | docs/components/validator.md | /components#category-forms | /components/validator/source |

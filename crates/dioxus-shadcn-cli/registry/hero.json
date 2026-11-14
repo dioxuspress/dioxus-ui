@@ -1,0 +1,14 @@
+{
+  "name": "hero",
+  "description": "Full-width showcase section with centered content and optional overlay.",
+  "files": [
+    {
+      "source": "templates/hero.rs",
+      "target": "src/components/ui/hero.rs"
+    }
+  ],
+  "dependencies": [
+    "utils"
+  ],
+  "assets": []
+}

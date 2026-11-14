@@ -13,14 +13,14 @@ parity.
 
 ## Summary
 
-- Public components: 95
-- Registry entries: 120
+- Public components: 100
+- Registry entries: 125
 - Source-copy helpers: anchored-overlay, calendar-grid, choice, class-merge, class-merge-table, default-attribute, density, dialog-labels, dismiss-timer, element-id, hover-open, layer, listbox, media-query, menu-marks, menu-radio, menu-sub, modal-focus, overlay, overlay-root, root-state, roving-group, safe-url, script, utils
-- Templates: 120
-- Crate modules: 95
-- Crate features: 95
-- Component docs pages: 95
-- Complete local wiring: 95
+- Templates: 125
+- Crate modules: 100
+- Crate features: 100
+- Component docs pages: 100
+- Complete local wiring: 100
 - Incomplete local wiring: 0
 
 ## Category Counts
@@ -28,10 +28,10 @@ parity.
 | Category | Components |
 | --- | ---: |
 | Actions | 9 |
-| Forms | 20 |
+| Forms | 21 |
 | Overlays | 11 |
-| Navigation | 11 |
-| Layout | 16 |
+| Navigation | 13 |
+| Layout | 18 |
 | Data Display | 16 |
 | Feedback | 7 |
 | Messaging | 5 |
@@ -92,6 +92,7 @@ parity.
 | Switch | Forms | yes | yes | yes | yes | yes | yes | yes |
 | Tags Input | Forms | yes | yes | yes | yes | yes | yes | yes |
 | Textarea | Forms | yes | yes | yes | yes | yes | yes | yes |
+| Validator | Forms | yes | yes | yes | yes | yes | yes | yes |
 | Accordion | Layout | yes | yes | yes | yes | yes | yes | yes |
 | Aspect Ratio | Layout | yes | yes | yes | yes | yes | yes | yes |
 | Aura | Layout | yes | yes | yes | yes | yes | yes | yes |
@@ -99,6 +100,8 @@ parity.
 | Carousel | Layout | yes | yes | yes | yes | yes | yes | yes |
 | Collapsible | Layout | yes | yes | yes | yes | yes | yes | yes |
 | Direction | Layout | yes | yes | yes | yes | yes | yes | yes |
+| Footer | Layout | yes | yes | yes | yes | yes | yes | yes |
+| Hero | Layout | yes | yes | yes | yes | yes | yes | yes |
 | Indicator | Layout | yes | yes | yes | yes | yes | yes | yes |
 | Item | Layout | yes | yes | yes | yes | yes | yes | yes |
 | Join | Layout | yes | yes | yes | yes | yes | yes | yes |
@@ -117,7 +120,9 @@ parity.
 | Code Tabs | Navigation | yes | yes | yes | yes | yes | yes | yes |
 | Dock | Navigation | yes | yes | yes | yes | yes | yes | yes |
 | Link | Navigation | yes | yes | yes | yes | yes | yes | yes |
+| Megamenu | Navigation | yes | yes | yes | yes | yes | yes | yes |
 | Menu | Navigation | yes | yes | yes | yes | yes | yes | yes |
+| Navbar | Navigation | yes | yes | yes | yes | yes | yes | yes |
 | Navigation Menu | Navigation | yes | yes | yes | yes | yes | yes | yes |
 | Pagination | Navigation | yes | yes | yes | yes | yes | yes | yes |
 | Sidebar | Navigation | yes | yes | yes | yes | yes | yes | yes |
@@ -192,6 +197,7 @@ parity.
 | Switch | Forms | [docs](switch.md) | `dxui add switch` | `switch` | `crates/dioxus-shadcn-cli/templates/switch.rs` | `src/components/ui/switch.rs` |
 | Tags Input | Forms | [docs](tags-input.md) | `dxui add tags-input` | `tags-input` | `crates/dioxus-shadcn-cli/templates/tags_input.rs` | `src/components/ui/tags_input.rs` |
 | Textarea | Forms | [docs](textarea.md) | `dxui add textarea` | `textarea` | `crates/dioxus-shadcn-cli/templates/textarea.rs` | `src/components/ui/textarea.rs` |
+| Validator | Forms | [docs](validator.md) | `dxui add validator` | `validator` | `crates/dioxus-shadcn-cli/templates/validator.rs` | `src/components/ui/validator.rs` |
 | Accordion | Layout | [docs](accordion.md) | `dxui add accordion` | `accordion` | `crates/dioxus-shadcn-cli/templates/accordion.rs` | `src/components/ui/accordion.rs` |
 | Aspect Ratio | Layout | [docs](aspect-ratio.md) | `dxui add aspect-ratio` | `aspect-ratio` | `crates/dioxus-shadcn-cli/templates/aspect_ratio.rs` | `src/components/ui/aspect_ratio.rs` |
 | Aura | Layout | [docs](aura.md) | `dxui add aura` | `aura` | `crates/dioxus-shadcn-cli/templates/aura.rs` | `src/components/ui/aura.rs` |
@@ -199,6 +205,8 @@ parity.
 | Carousel | Layout | [docs](carousel.md) | `dxui add carousel` | `carousel` | `crates/dioxus-shadcn-cli/templates/carousel.rs` | `src/components/ui/carousel.rs` |
 | Collapsible | Layout | [docs](collapsible.md) | `dxui add collapsible` | `collapsible` | `crates/dioxus-shadcn-cli/templates/collapsible.rs` | `src/components/ui/collapsible.rs` |
 | Direction | Layout | [docs](direction.md) | `dxui add direction` | `direction` | `crates/dioxus-shadcn-cli/templates/direction.rs` | `src/components/ui/direction.rs` |
+| Footer | Layout | [docs](footer.md) | `dxui add footer` | `footer` | `crates/dioxus-shadcn-cli/templates/footer.rs` | `src/components/ui/footer.rs` |
+| Hero | Layout | [docs](hero.md) | `dxui add hero` | `hero` | `crates/dioxus-shadcn-cli/templates/hero.rs` | `src/components/ui/hero.rs` |
 | Indicator | Layout | [docs](indicator.md) | `dxui add indicator` | `indicator` | `crates/dioxus-shadcn-cli/templates/indicator.rs` | `src/components/ui/indicator.rs` |
 | Item | Layout | [docs](item.md) | `dxui add item` | `item` | `crates/dioxus-shadcn-cli/templates/item.rs` | `src/components/ui/item.rs` |
 | Join | Layout | [docs](join.md) | `dxui add join` | `join` | `crates/dioxus-shadcn-cli/templates/join.rs` | `src/components/ui/join.rs` |
@@ -217,7 +225,9 @@ parity.
 | Code Tabs | Navigation | [docs](code-tabs.md) | `dxui add code-tabs` | `code-tabs` | `crates/dioxus-shadcn-cli/templates/code_tabs.rs` | `src/components/ui/code_tabs.rs` |
 | Dock | Navigation | [docs](dock.md) | `dxui add dock` | `dock` | `crates/dioxus-shadcn-cli/templates/dock.rs` | `src/components/ui/dock.rs` |
 | Link | Navigation | [docs](link.md) | `dxui add link` | `link` | `crates/dioxus-shadcn-cli/templates/link.rs` | `src/components/ui/link.rs` |
+| Megamenu | Navigation | [docs](megamenu.md) | `dxui add megamenu` | `megamenu` | `crates/dioxus-shadcn-cli/templates/megamenu.rs` | `src/components/ui/megamenu.rs` |
 | Menu | Navigation | [docs](menu.md) | `dxui add menu` | `menu` | `crates/dioxus-shadcn-cli/templates/menu.rs` | `src/components/ui/menu.rs` |
+| Navbar | Navigation | [docs](navbar.md) | `dxui add navbar` | `navbar` | `crates/dioxus-shadcn-cli/templates/navbar.rs` | `src/components/ui/navbar.rs` |
 | Navigation Menu | Navigation | [docs](navigation-menu.md) | `dxui add navigation-menu` | `navigation-menu` | `crates/dioxus-shadcn-cli/templates/navigation_menu.rs` | `src/components/ui/navigation_menu.rs` |
 | Pagination | Navigation | [docs](pagination.md) | `dxui add pagination` | `pagination` | `crates/dioxus-shadcn-cli/templates/pagination.rs` | `src/components/ui/pagination.rs` |
 | Sidebar | Navigation | [docs](sidebar.md) | `dxui add sidebar` | `sidebar` | `crates/dioxus-shadcn-cli/templates/sidebar.rs` | `src/components/ui/sidebar.rs` |

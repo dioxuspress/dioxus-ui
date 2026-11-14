@@ -286,6 +286,7 @@ mod roving_group;
   feature = "dock",
   feature = "hover-card",
   feature = "link",
+  feature = "megamenu",
   feature = "menu",
   feature = "navigation-menu",
   feature = "pagination",
@@ -863,6 +864,21 @@ pub mod loading;
 #[cfg(feature = "join")]
 pub mod join;
 
+#[cfg(feature = "navbar")]
+pub mod navbar;
+
+#[cfg(feature = "hero")]
+pub mod hero;
+
+#[cfg(feature = "footer")]
+pub mod footer;
+
+#[cfg(feature = "megamenu")]
+pub mod megamenu;
+
+#[cfg(feature = "validator")]
+pub mod validator;
+
 #[cfg(feature = "code-tabs")]
 pub use code_tabs::{
   CodeTabs, CodeTabsActivation, CodeTabsContent, CodeTabsList, CodeTabsTrigger, code_tabs_class,
@@ -981,6 +997,34 @@ pub use loading::{Loading, LoadingSize, LoadingVariant, loading_class};
 
 #[cfg(feature = "join")]
 pub use join::{Join, JoinOrientation, join_class, join_item_class};
+
+#[cfg(feature = "navbar")]
+pub use navbar::{
+  Navbar, NavbarCenter, NavbarEnd, NavbarStart, navbar_center_class, navbar_class,
+  navbar_end_class, navbar_start_class,
+};
+
+#[cfg(feature = "hero")]
+pub use hero::{
+  Hero, HeroContent, HeroOverlay, hero_class, hero_content_class, hero_overlay_class,
+};
+
+#[cfg(feature = "footer")]
+pub use footer::{
+  Footer, FooterLayout, FooterNav, FooterTitle, footer_class, footer_nav_class, footer_title_class,
+};
+
+#[cfg(feature = "megamenu")]
+pub use megamenu::{
+  Megamenu, MegamenuColumn, MegamenuContent, MegamenuHeading, MegamenuLink, MegamenuTrigger,
+  megamenu_class, megamenu_column_class, megamenu_content_class, megamenu_heading_class,
+  megamenu_link_class, megamenu_trigger_class,
+};
+
+#[cfg(feature = "validator")]
+pub use validator::{
+  Validator, ValidatorHint, ValidatorState, validator_class, validator_hint_class,
+};
 
 #[cfg(feature = "tags-input")]
 pub use tags_input::{TagsInput, tags_input_class};

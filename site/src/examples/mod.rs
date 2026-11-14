@@ -143,6 +143,11 @@ examples! {
   link_variants => LinkVariantsDemo, "link", "Link variants";
   loading_variants => LoadingVariantsDemo, "loading", "Loading variants";
   join_items => JoinItemsDemo, "join", "Joined controls";
+  navbar_slots => NavbarSlotsDemo, "navbar", "Navbar slots";
+  hero_showcase => HeroShowcaseDemo, "hero", "Hero showcase";
+  footer_columns => FooterColumnsDemo, "footer", "Footer columns";
+  megamenu_columns => MegamenuColumnsDemo, "megamenu", "Megamenu columns";
+  validator_states => ValidatorStatesDemo, "validator", "Validation states";
 }
 
 #[cfg(test)]

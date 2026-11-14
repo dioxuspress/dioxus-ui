@@ -10,7 +10,7 @@ The manifest defines template metadata for future source preview routes.
 It does not embed full template source, syntax highlighting, rendered routes,
 screenshots, or generated JSON.
 
-Source preview routes: 95
+Source preview routes: 100
 
 ## Source Preview Routes
 
@@ -53,6 +53,8 @@ Source preview routes: 95
 | [Field](field.md) | /components/field/source | crates/dioxus-shadcn-cli/templates/field.rs | src/components/ui/field.rs | rust | 124 | 3255 |
 | [File Input](file-input.md) | /components/file-input/source | crates/dioxus-shadcn-cli/templates/file_input.rs | src/components/ui/file_input.rs | rust | 104 | 4281 |
 | [Filter](filter.md) | /components/filter/source | crates/dioxus-shadcn-cli/templates/filter.rs | src/components/ui/filter.rs | rust | 114 | 4349 |
+| [Footer](footer.md) | /components/footer/source | crates/dioxus-shadcn-cli/templates/footer.rs | src/components/ui/footer.rs | rust | 86 | 2442 |
+| [Hero](hero.md) | /components/hero/source | crates/dioxus-shadcn-cli/templates/hero.rs | src/components/ui/hero.rs | rust | 65 | 1983 |
 | [Hover 3d](hover-3d.md) | /components/hover-3d/source | crates/dioxus-shadcn-cli/templates/hover_3d.rs | src/components/ui/hover_3d.rs | rust | 123 | 3777 |
 | [Hover Card](hover-card.md) | /components/hover-card/source | crates/dioxus-shadcn-cli/templates/hover_card.rs | src/components/ui/hover_card.rs | rust | 195 | 5727 |
 | [Hover Gallery](hover-gallery.md) | /components/hover-gallery/source | crates/dioxus-shadcn-cli/templates/hover_gallery.rs | src/components/ui/hover_gallery.rs | rust | 97 | 3172 |
@@ -68,12 +70,14 @@ Source preview routes: 95
 | [Loading](loading.md) | /components/loading/source | crates/dioxus-shadcn-cli/templates/loading.rs | src/components/ui/loading.rs | rust | 148 | 4600 |
 | [Marker](marker.md) | /components/marker/source | crates/dioxus-shadcn-cli/templates/marker.rs | src/components/ui/marker.rs | rust | 107 | 2890 |
 | [Mask](mask.md) | /components/mask/source | crates/dioxus-shadcn-cli/templates/mask.rs | src/components/ui/mask.rs | rust | 136 | 4239 |
+| [Megamenu](megamenu.md) | /components/megamenu/source | crates/dioxus-shadcn-cli/templates/megamenu.rs | src/components/ui/megamenu.rs | rust | 165 | 5085 |
 | [Menu](menu.md) | /components/menu/source | crates/dioxus-shadcn-cli/templates/menu.rs | src/components/ui/menu.rs | rust | 187 | 6606 |
 | [Menubar](menubar.md) | /components/menubar/source | crates/dioxus-shadcn-cli/templates/menubar.rs | src/components/ui/menubar.rs | rust | 608 | 20711 |
 | [Message](message.md) | /components/message/source | crates/dioxus-shadcn-cli/templates/message.rs | src/components/ui/message.rs | rust | 168 | 4829 |
 | [Message Scroller](message-scroller.md) | /components/message-scroller/source | crates/dioxus-shadcn-cli/templates/message_scroller.rs | src/components/ui/message_scroller.rs | rust | 284 | 9866 |
 | [Mockup](mockup.md) | /components/mockup/source | crates/dioxus-shadcn-cli/templates/mockup.rs | src/components/ui/mockup.rs | rust | 165 | 5469 |
 | [Native Select](native-select.md) | /components/native-select/source | crates/dioxus-shadcn-cli/templates/native_select.rs | src/components/ui/native_select.rs | rust | 105 | 3228 |
+| [Navbar](navbar.md) | /components/navbar/source | crates/dioxus-shadcn-cli/templates/navbar.rs | src/components/ui/navbar.rs | rust | 83 | 2426 |
 | [Navigation Menu](navigation-menu.md) | /components/navigation-menu/source | crates/dioxus-shadcn-cli/templates/navigation_menu.rs | src/components/ui/navigation_menu.rs | rust | 503 | 20036 |
 | [Number Input](number-input.md) | /components/number-input/source | crates/dioxus-shadcn-cli/templates/number_input.rs | src/components/ui/number_input.rs | rust | 164 | 6246 |
 | [Pagination](pagination.md) | /components/pagination/source | crates/dioxus-shadcn-cli/templates/pagination.rs | src/components/ui/pagination.rs | rust | 244 | 7648 |
@@ -111,3 +115,4 @@ Source preview routes: 95
 | [Tooltip](tooltip.md) | /components/tooltip/source | crates/dioxus-shadcn-cli/templates/tooltip.rs | src/components/ui/tooltip.rs | rust | 131 | 3978 |
 | [Tree](tree.md) | /components/tree/source | crates/dioxus-shadcn-cli/templates/tree.rs | src/components/ui/tree.rs | rust | 313 | 12134 |
 | [Typography](typography.md) | /components/typography/source | crates/dioxus-shadcn-cli/templates/typography.rs | src/components/ui/typography.rs | rust | 110 | 3877 |
+| [Validator](validator.md) | /components/validator/source | crates/dioxus-shadcn-cli/templates/validator.rs | src/components/ui/validator.rs | rust | 105 | 2919 |
