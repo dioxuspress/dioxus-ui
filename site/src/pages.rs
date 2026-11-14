@@ -7,6 +7,7 @@ use crate::Route;
 use crate::blocks::BLOCKS;
 use crate::catalog::{CATEGORIES, Category, Component};
 use crate::examples::EXAMPLES;
+use crate::highlight::highlight_html;
 use crate::i18n::{self, SiteLang, use_site_lang};
 
 const H1: &str = "text-3xl font-bold tracking-normal";
@@ -127,12 +128,15 @@ fn CopyButton(text: String, label: String) -> Element {
 }
 
 #[component]
-fn CodeBlock(code: String) -> Element {
+fn CodeBlock(code: String, #[props(default = "bash".to_string())] lang: String) -> Element {
   let zh = use_site_lang()() == SiteLang::Zh;
+  let highlighted = highlight_html(&code, &lang);
 
   rsx! {
     div { class: "relative mt-4",
-      pre { class: CODE_BLOCK, code { "{code}" } }
+      pre { class: CODE_BLOCK,
+        code { class: "language-{lang}", dangerous_inner_html: highlighted }
+      }
       CopyButton {
         text: code.clone(),
         label: if zh { "复制代码".to_string() } else { "Copy code".to_string() },
@@ -249,12 +253,16 @@ pub fn GettingStarted() -> Element {
         }
       }
       CodeBlock {
+        lang: "toml".to_string(),
         code: format!(
           "[dependencies]\ndioxus-shadcn = {{ version = \"{}\", default-features = false, features = [\"button\", \"dialog\"] }}",
           version_requirement()
         )
       }
-      CodeBlock { code: "use dioxus_shadcn::{Button, ButtonVariant};".to_string() }
+      CodeBlock {
+        lang: "rust".to_string(),
+        code: "use dioxus_shadcn::{Button, ButtonVariant};".to_string(),
+      }
       h2 { class: H2, if zh { "样式表与令牌扫描" } else { "Stylesheet" } }
       if zh {
         p { class: P,
@@ -297,7 +305,10 @@ pub fn GettingStarted() -> Element {
           " again after upgrading the crate:"
         }
       }
-      CodeBlock { code: format!("@import \"tailwindcss\";\n@source \"/path/to/dioxus-shadcn-{VERSION}/src\";") }
+      CodeBlock {
+        lang: "css".to_string(),
+        code: format!("@import \"tailwindcss\";\n@source \"/path/to/dioxus-shadcn-{VERSION}/src\";"),
+      }
       if zh {
         p { class: P,
           "接下来可继续阅读 "
@@ -377,6 +388,7 @@ pub fn Theming() -> Element {
         }
       }
       CodeBlock {
+        lang: "css".to_string(),
         code: ":root {\n  --primary: oklch(0.546 0.245 262.881);\n  --primary-foreground: oklch(0.985 0 0);\n  --ring: oklch(0.546 0.245 262.881);\n}\n\n.dark {\n  --primary: oklch(0.623 0.214 259.815);\n  --ring: oklch(0.623 0.214 259.815);\n}"
           .to_string()
       }
@@ -403,6 +415,7 @@ pub fn Theming() -> Element {
         }
       }
       CodeBlock {
+        lang: "rust".to_string(),
         code: "dxui theme add nord dracula\n\n// main.rs\nlet mut theme = use_signal(|| Theme::System);\nrsx! {\n  ThemeController { theme: theme(), on_theme_change: move |stored| theme.set(stored) }\n  // theme.set(Theme::Preset(\"nord\".into())) from any control\n  App {}\n}"
           .to_string()
       }
@@ -454,6 +467,7 @@ pub fn Theming() -> Element {
         }
       }
       CodeBlock {
+        lang: "rust".to_string(),
         code: "div { class: \"dark min-h-screen bg-background text-foreground\", App {} }".to_string()
       }
     }
@@ -482,6 +496,7 @@ pub fn ComponentPage(slug: String) -> Element {
       CodeBlock { code: "dxui add {component.slug}" }
       p { class: P, if zh { "或开启对应的 Crate 特性：" } else { "Or enable the crate feature:" } }
       CodeBlock {
+        lang: "toml".to_string(),
         code: format!(
           "dioxus-shadcn = {{ version = \"{}\", features = [\"{}\"] }}",
           version_requirement(),
@@ -589,7 +604,10 @@ pub fn BlockPage(slug: String) -> Element {
         }
         TabsContent { value: "code", class: "relative",
           pre { class: "{CODE_BLOCK} max-h-[44rem]", tabindex: "0", "data-site-block-source": "",
-            code { "{block.source}" }
+            code {
+              class: "language-rust",
+              dangerous_inner_html: highlight_html(block.source, "rust"),
+            }
           }
           CopyButton {
             text: block.source.to_string(),
@@ -647,7 +665,10 @@ fn ExampleCard(index: usize) -> Element {
         }
         TabsContent { value: "code", class: "relative",
           pre { class: "{CODE_BLOCK} max-h-[32rem]", "data-site-example-source": "",
-            code { "{example.source}" }
+            code {
+              class: "language-rust",
+              dangerous_inner_html: highlight_html(example.source, "rust"),
+            }
           }
           CopyButton {
             text: example.source.to_string(),

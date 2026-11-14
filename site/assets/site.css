@@ -141,3 +141,50 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 }
+
+/* Syntax highlighting tokens emitted by `site/src/highlight.rs`. */
+.hl-kw {
+  color: #cf222e;
+}
+.hl-type {
+  color: #953800;
+}
+.hl-fn {
+  color: #8250df;
+}
+.hl-str {
+  color: #0a3069;
+}
+.hl-num {
+  color: #0550ae;
+}
+.hl-comment {
+  color: #6e7781;
+  font-style: italic;
+}
+.hl-attr {
+  color: #6f42c1;
+}
+
+.dark .hl-kw {
+  color: #ff7b72;
+}
+.dark .hl-type {
+  color: #ffa657;
+}
+.dark .hl-fn {
+  color: #d2a8ff;
+}
+.dark .hl-str {
+  color: #a5d6ff;
+}
+.dark .hl-num {
+  color: #79c0ff;
+}
+.dark .hl-comment {
+  color: #8b949e;
+  font-style: italic;
+}
+.dark .hl-attr {
+  color: #d2a8ff;
+}

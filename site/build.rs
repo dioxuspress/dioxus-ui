@@ -7,7 +7,11 @@ use std::fmt::Write as _;
 use std::fs;
 use std::path::{Component, Path, PathBuf};
 
-use pulldown_cmark::{CowStr, Event, Options, Parser, Tag, html};
+use pulldown_cmark::{CodeBlockKind, CowStr, Event, Options, Parser, Tag, TagEnd, html};
+
+#[path = "src/highlight.rs"]
+#[allow(dead_code)]
+mod highlight;
 
 /// Replaced at runtime with the site's base path, such as `/dioxus-ui`.
 const SITE_BASE: &str = "__SITE_BASE__";
@@ -96,21 +100,56 @@ fn main() {
   fs::write(out_dir.join("references.rs"), out).expect("write the rendered references");
 }
 
-/// Markdown from a docs page under `dir` to HTML, with its links rewritten.
+/// Markdown from a docs page under `dir` to HTML, with its links rewritten and
+/// fenced code blocks syntax-highlighted.
 fn render(markdown: &str, slugs: &BTreeSet<String>, repository: &str, dir: &str) -> String {
-  let parser = Parser::new_ext(markdown, Options::ENABLE_TABLES).map(|event| match event {
-    Event::Start(Tag::Link { link_type, dest_url, title, id }) => Event::Start(Tag::Link {
-      link_type,
-      dest_url: rewrite_link(&dest_url, slugs, repository, dir),
-      title,
-      id,
-    }),
-    other => other,
-  });
+  let mut events: Vec<Event<'_>> = Vec::new();
+  let mut code_lang: Option<String> = None;
+  let mut code_buf = String::new();
+
+  for event in Parser::new_ext(markdown, Options::ENABLE_TABLES) {
+    match event {
+      Event::Start(Tag::CodeBlock(kind)) => {
+        let lang = match kind {
+          CodeBlockKind::Fenced(info) => info.split_whitespace().next().unwrap_or("").to_string(),
+          CodeBlockKind::Indented => String::new(),
+        };
+        code_lang = Some(lang);
+        code_buf.clear();
+      }
+      Event::End(TagEnd::CodeBlock) => {
+        if let Some(lang) = code_lang.take() {
+          let highlighted = highlight::highlight_html(&code_buf, &lang);
+          let html_block = if lang.is_empty() {
+            format!(r#"<pre tabindex="0"><code>{highlighted}</code></pre>"#)
+          } else {
+            let escaped_lang = highlight::escape_html(&lang);
+            format!(
+              r#"<pre tabindex="0"><code class="language-{escaped_lang}">{highlighted}</code></pre>"#
+            )
+          };
+          events.push(Event::Html(CowStr::from(html_block)));
+          code_buf.clear();
+        }
+      }
+      Event::Text(text) if code_lang.is_some() => {
+        code_buf.push_str(&text);
+      }
+      Event::Start(Tag::Link { link_type, dest_url, title, id }) => {
+        events.push(Event::Start(Tag::Link {
+          link_type,
+          dest_url: rewrite_link(&dest_url, slugs, repository, dir),
+          title,
+          id,
+        }));
+      }
+      other => events.push(other),
+    }
+  }
+
   let mut rendered = String::new();
-  html::push_html(&mut rendered, parser);
-  // A code block that scrolls sideways must take keyboard focus.
-  rendered.replace("<pre>", r#"<pre tabindex="0">"#)
+  html::push_html(&mut rendered, events.into_iter());
+  rendered
 }
 
 /// Links to a component's docs page go to its site route; other relative
