@@ -10,7 +10,7 @@ The manifest defines template metadata for future source preview routes.
 It does not embed full template source, syntax highlighting, rendered routes,
 screenshots, or generated JSON.
 
-Source preview routes: 88
+Source preview routes: 91
 
 ## Source Preview Routes
 
@@ -21,6 +21,7 @@ Source preview routes: 88
 | [Alert Dialog](alert-dialog.md) | /components/alert-dialog/source | crates/dioxus-shadcn-cli/templates/alert_dialog.rs | src/components/ui/alert_dialog.rs | rust | 277 | 9041 |
 | [Aspect Ratio](aspect-ratio.md) | /components/aspect-ratio/source | crates/dioxus-shadcn-cli/templates/aspect_ratio.rs | src/components/ui/aspect_ratio.rs | rust | 43 | 1186 |
 | [Attachment](attachment.md) | /components/attachment/source | crates/dioxus-shadcn-cli/templates/attachment.rs | src/components/ui/attachment.rs | rust | 358 | 10932 |
+| [Aura](aura.md) | /components/aura/source | crates/dioxus-shadcn-cli/templates/aura.rs | src/components/ui/aura.rs | rust | 101 | 2852 |
 | [Avatar](avatar.md) | /components/avatar/source | crates/dioxus-shadcn-cli/templates/avatar.rs | src/components/ui/avatar.rs | rust | 65 | 1750 |
 | [Badge](badge.md) | /components/badge/source | crates/dioxus-shadcn-cli/templates/badge.rs | src/components/ui/badge.rs | rust | 63 | 1875 |
 | [Breadcrumb](breadcrumb.md) | /components/breadcrumb/source | crates/dioxus-shadcn-cli/templates/breadcrumb.rs | src/components/ui/breadcrumb.rs | rust | 153 | 4335 |
@@ -51,6 +52,7 @@ Source preview routes: 88
 | [Fab](fab.md) | /components/fab/source | crates/dioxus-shadcn-cli/templates/fab.rs | src/components/ui/fab.rs | rust | 144 | 5875 |
 | [Field](field.md) | /components/field/source | crates/dioxus-shadcn-cli/templates/field.rs | src/components/ui/field.rs | rust | 124 | 3255 |
 | [File Input](file-input.md) | /components/file-input/source | crates/dioxus-shadcn-cli/templates/file_input.rs | src/components/ui/file_input.rs | rust | 104 | 4281 |
+| [Hover 3d](hover-3d.md) | /components/hover-3d/source | crates/dioxus-shadcn-cli/templates/hover_3d.rs | src/components/ui/hover_3d.rs | rust | 123 | 3777 |
 | [Hover Card](hover-card.md) | /components/hover-card/source | crates/dioxus-shadcn-cli/templates/hover_card.rs | src/components/ui/hover_card.rs | rust | 195 | 5727 |
 | [Hover Gallery](hover-gallery.md) | /components/hover-gallery/source | crates/dioxus-shadcn-cli/templates/hover_gallery.rs | src/components/ui/hover_gallery.rs | rust | 97 | 3172 |
 | [Indicator](indicator.md) | /components/indicator/source | crates/dioxus-shadcn-cli/templates/indicator.rs | src/components/ui/indicator.rs | rust | 77 | 2667 |
@@ -95,6 +97,7 @@ Source preview routes: 88
 | [Table](table.md) | /components/table/source | crates/dioxus-shadcn-cli/templates/table.rs | src/components/ui/table.rs | rust | 152 | 3614 |
 | [Tabs](tabs.md) | /components/tabs/source | crates/dioxus-shadcn-cli/templates/tabs.rs | src/components/ui/tabs.rs | rust | 203 | 6959 |
 | [Tags Input](tags-input.md) | /components/tags-input/source | crates/dioxus-shadcn-cli/templates/tags_input.rs | src/components/ui/tags_input.rs | rust | 141 | 5351 |
+| [Text Rotate](text-rotate.md) | /components/text-rotate/source | crates/dioxus-shadcn-cli/templates/text_rotate.rs | src/components/ui/text_rotate.rs | rust | 137 | 3758 |
 | [Textarea](textarea.md) | /components/textarea/source | crates/dioxus-shadcn-cli/templates/textarea.rs | src/components/ui/textarea.rs | rust | 51 | 1911 |
 | [Theme Controller](theme-controller.md) | /components/theme-controller/source | crates/dioxus-shadcn-cli/templates/theme_controller.rs | src/components/ui/theme_controller.rs | rust | 187 | 6974 |
 | [Timeline](timeline.md) | /components/timeline/source | crates/dioxus-shadcn-cli/templates/timeline.rs | src/components/ui/timeline.rs | rust | 142 | 6088 |

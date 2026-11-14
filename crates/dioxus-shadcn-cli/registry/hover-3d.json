@@ -1,0 +1,14 @@
+{
+  "name": "hover-3d",
+  "description": "Interactive 3D perspective tilt card that responds to pointer zones without JS eval.",
+  "files": [
+    {
+      "source": "templates/hover_3d.rs",
+      "target": "src/components/ui/hover_3d.rs"
+    }
+  ],
+  "dependencies": [
+    "utils"
+  ],
+  "assets": []
+}

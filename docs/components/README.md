@@ -135,6 +135,7 @@ dioxus-shadcn = { version = "0.6", default-features = false, features = ["button
 | [Alert Dialog](alert-dialog.md) | `dxui add alert-dialog` | `alert-dialog` | Dialog-backed styled parts |
 | [Aspect Ratio](aspect-ratio.md) | `dxui add aspect-ratio` | `aspect-ratio` | Fixed-ratio content slot |
 | [Attachment](attachment.md) | `dxui add attachment` | `attachment` | File preview composition parts |
+| [Aura](aura.md) | `dxui add aura` | `aura` | Soft semantic glow backdrop |
 | [Avatar](avatar.md) | `dxui add avatar` | `avatar` | Styled parts |
 | [Badge](badge.md) | `dxui add badge` | `badge` | Styled |
 | [Breadcrumb](breadcrumb.md) | `dxui add breadcrumb` | `breadcrumb` | Navigation composition parts |
@@ -166,6 +167,7 @@ dioxus-shadcn = { version = "0.6", default-features = false, features = ["button
 | [Field](field.md) | `dxui add field` | `field` | Form field composition parts |
 | [File Input](file-input.md) | `dxui add file-input` | `file-input` | Styled native file input |
 | [Hover Card](hover-card.md) | `dxui add hover-card` | `hover-card` | Popover-backed preview content |
+| [Hover 3D](hover-3d.md) | `dxui add hover-3d` | `hover-3d` | 3D perspective tilt card |
 | [Hover Gallery](hover-gallery.md) | `dxui add hover-gallery` | `hover-gallery` | Multi-image hover frame switcher |
 | [Indicator](indicator.md) | `dxui add indicator` | `indicator` | Corner placement parts |
 | [Input](input.md) | `dxui add input` | `input` | Styled |
@@ -210,6 +212,7 @@ dioxus-shadcn = { version = "0.6", default-features = false, features = ["button
 | [Tabs](tabs.md) | `dxui add tabs` | `tabs` | Controlled styled parts |
 | [Tags Input](tags-input.md) | `dxui add tags-input` | `tags-input` | Removable tag chips with a text input |
 | [Textarea](textarea.md) | `dxui add textarea` | `textarea` | Styled |
+| [Text Rotate](text-rotate.md) | `dxui add text-rotate` | `text-rotate` | Vertical rotating phrase switcher |
 | [Theme Controller](theme-controller.md) | `dxui add theme-controller` | `theme-controller` | Applied, system-following, remembered color theme |
 | [Timeline](timeline.md) | `dxui add timeline` | `timeline` | Ordered event timeline parts |
 | [Toggle](toggle.md) | `dxui add toggle` | `toggle` | Controlled styled part |

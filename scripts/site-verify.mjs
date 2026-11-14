@@ -39,7 +39,7 @@ const presets = readdirSync(new URL("../crates/dioxus-shadcn-cli/themes/", impor
 const presetPages = ["/", "/components/button", "/components/alert", "/components/badge", "/components/tabs", "/blocks/dashboard"];
 // The examples each page should show, from the site's example list.
 const examplesSource = readFileSync(new URL("../site/src/examples/mod.rs", import.meta.url), "utf8");
-const examples = [...examplesSource.matchAll(/^\s*(\w+) => (\w+), "([a-z-]+)", "([^"]+)";$/gm)].map((match) => ({
+const examples = [...examplesSource.matchAll(/^\s*(\w+) => (\w+), "([a-z0-9-]+)", "([^"]+)";$/gm)].map((match) => ({
   module: match[1],
   demo: match[2],
   slug: match[3],
@@ -528,7 +528,7 @@ async function run() {
       await visit(zhPage, "/");
       await expect(zhPage.locator("html")).toHaveAttribute("lang", "zh-CN");
       await expect(zhPage.getByRole("link", { name: "快速开始", exact: true })).toBeVisible();
-      await expect(zhPage.getByRole("heading", { name: "88 个组件", exact: true })).toBeVisible();
+      await expect(zhPage.getByRole("heading", { name: "91 个组件", exact: true })).toBeVisible();
       const zhSidebar = zhPage.getByRole("navigation", { name: "站点导航" });
       await expect(zhSidebar.getByRole("link", { name: "Dashboard 数据看板", exact: true })).toBeVisible();
       await expect(zhSidebar.getByRole("link", { name: "Button 按钮", exact: true })).toBeVisible();

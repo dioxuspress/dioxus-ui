@@ -10,7 +10,7 @@ The catalog is derived from registry entries, templates, component docs,
 crate features, and crate modules. It intentionally does not include visual
 preview routes, screenshot artifacts, or generated JSON metadata.
 
-Public components: 88
+Public components: 91
 
 ## Groups
 
@@ -79,6 +79,7 @@ Public components: 88
 
 - [Accordion](accordion.md): Accordion whose root owns which items are open.
 - [Aspect Ratio](aspect-ratio.md): Fixed-ratio media and content slot.
+- [Aura](aura.md): Soft semantic glow backdrop for spotlighting hero cards and feature panels.
 - [Card](card.md): Card component with header, content, and footer parts.
 - [Carousel](carousel.md): Carousel whose root owns the selected slide.
 - [Collapsible](collapsible.md): Collapsible section whose root owns whether it is open.
@@ -101,11 +102,13 @@ Public components: 88
 - [Data Table](data-table.md): Controlled Data Table composition parts and state helpers.
 - [Diff](diff.md): Styled before-and-after comparison with a keyboard-accessible divider.
 - [Empty](empty.md): Empty-state layout composition parts.
+- [Hover 3d](hover-3d.md): Interactive 3D perspective tilt card that responds to pointer zones without JS eval.
 - [Hover Gallery](hover-gallery.md): Interactive multi-image gallery that switches frames as the pointer moves across horizontal zones.
 - [Progress](progress.md): Progress component with accessible value semantics.
 - [Radial Progress](radial-progress.md): Styled circular progress bar with a centered label.
 - [Stat](stat.md): Styled statistic group with title, value, description, and figure.
 - [Table](table.md): Table component with styled table parts.
+- [Text Rotate](text-rotate.md): Vertical rotating phrase switcher with smooth slide-and-fade transitions.
 - [Timeline](timeline.md): Styled ordered timeline with time, marker, and content parts.
 - [Typography](typography.md): Styled semantic typography parts.
 
@@ -135,6 +138,7 @@ Public components: 88
 | [Alert Dialog](alert-dialog.md) | Alert dialog confirmation components backed by dialog primitive configuration. | `dxui add alert-dialog` | `alert-dialog` | `crates/dioxus-shadcn-cli/templates/alert_dialog.rs` | `src/components/ui/alert_dialog.rs` |
 | [Aspect Ratio](aspect-ratio.md) | Fixed-ratio media and content slot. | `dxui add aspect-ratio` | `aspect-ratio` | `crates/dioxus-shadcn-cli/templates/aspect_ratio.rs` | `src/components/ui/aspect_ratio.rs` |
 | [Attachment](attachment.md) | Attachment component for provider-neutral file preview rows and actions. | `dxui add attachment` | `attachment` | `crates/dioxus-shadcn-cli/templates/attachment.rs` | `src/components/ui/attachment.rs` |
+| [Aura](aura.md) | Soft semantic glow backdrop for spotlighting hero cards and feature panels. | `dxui add aura` | `aura` | `crates/dioxus-shadcn-cli/templates/aura.rs` | `src/components/ui/aura.rs` |
 | [Avatar](avatar.md) | Avatar component with image and fallback parts. | `dxui add avatar` | `avatar` | `crates/dioxus-shadcn-cli/templates/avatar.rs` | `src/components/ui/avatar.rs` |
 | [Badge](badge.md) | Badge component with static status variants. | `dxui add badge` | `badge` | `crates/dioxus-shadcn-cli/templates/badge.rs` | `src/components/ui/badge.rs` |
 | [Breadcrumb](breadcrumb.md) | Semantic breadcrumb navigation composition parts. | `dxui add breadcrumb` | `breadcrumb` | `crates/dioxus-shadcn-cli/templates/breadcrumb.rs` | `src/components/ui/breadcrumb.rs` |
@@ -165,6 +169,7 @@ Public components: 88
 | [Fab](fab.md) | Styled floating action button with an optional speed dial. | `dxui add fab` | `fab` | `crates/dioxus-shadcn-cli/templates/fab.rs` | `src/components/ui/fab.rs` |
 | [Field](field.md) | Form field layout composition parts. | `dxui add field` | `field` | `crates/dioxus-shadcn-cli/templates/field.rs` | `src/components/ui/field.rs` |
 | [File Input](file-input.md) | Styled native file input that passes the change event through. | `dxui add file-input` | `file-input` | `crates/dioxus-shadcn-cli/templates/file_input.rs` | `src/components/ui/file_input.rs` |
+| [Hover 3d](hover-3d.md) | Interactive 3D perspective tilt card that responds to pointer zones without JS eval. | `dxui add hover-3d` | `hover-3d` | `crates/dioxus-shadcn-cli/templates/hover_3d.rs` | `src/components/ui/hover_3d.rs` |
 | [Hover Card](hover-card.md) | Controlled rich preview content backed by popover primitive configuration. | `dxui add hover-card` | `hover-card` | `crates/dioxus-shadcn-cli/templates/hover_card.rs` | `src/components/ui/hover_card.rs` |
 | [Hover Gallery](hover-gallery.md) | Interactive multi-image gallery that switches frames as the pointer moves across horizontal zones. | `dxui add hover-gallery` | `hover-gallery` | `crates/dioxus-shadcn-cli/templates/hover_gallery.rs` | `src/components/ui/hover_gallery.rs` |
 | [Indicator](indicator.md) | Styled corner indicator wrapper and placed item. | `dxui add indicator` | `indicator` | `crates/dioxus-shadcn-cli/templates/indicator.rs` | `src/components/ui/indicator.rs` |
@@ -209,6 +214,7 @@ Public components: 88
 | [Table](table.md) | Table component with styled table parts. | `dxui add table` | `table` | `crates/dioxus-shadcn-cli/templates/table.rs` | `src/components/ui/table.rs` |
 | [Tabs](tabs.md) | Tabs components with controlled active state. | `dxui add tabs` | `tabs` | `crates/dioxus-shadcn-cli/templates/tabs.rs` | `src/components/ui/tabs.rs` |
 | [Tags Input](tags-input.md) | Styled tag list with removable chips and a text input. | `dxui add tags-input` | `tags-input` | `crates/dioxus-shadcn-cli/templates/tags_input.rs` | `src/components/ui/tags_input.rs` |
+| [Text Rotate](text-rotate.md) | Vertical rotating phrase switcher with smooth slide-and-fade transitions. | `dxui add text-rotate` | `text-rotate` | `crates/dioxus-shadcn-cli/templates/text_rotate.rs` | `src/components/ui/text_rotate.rs` |
 | [Textarea](textarea.md) | Textarea component with disabled and invalid states. | `dxui add textarea` | `textarea` | `crates/dioxus-shadcn-cli/templates/textarea.rs` | `src/components/ui/textarea.rs` |
 | [Theme Controller](theme-controller.md) | Applies, follows, and remembers the color theme on the document root. | `dxui add theme-controller` | `theme-controller` | `crates/dioxus-shadcn-cli/templates/theme_controller.rs` | `src/components/ui/theme_controller.rs` |
 | [Timeline](timeline.md) | Styled ordered timeline with time, marker, and content parts. | `dxui add timeline` | `timeline` | `crates/dioxus-shadcn-cli/templates/timeline.rs` | `src/components/ui/timeline.rs` |
