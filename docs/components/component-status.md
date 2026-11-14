@@ -13,14 +13,14 @@ parity.
 
 ## Summary
 
-- Public components: 85
-- Registry entries: 110
+- Public components: 88
+- Registry entries: 113
 - Source-copy helpers: anchored-overlay, calendar-grid, choice, class-merge, class-merge-table, default-attribute, density, dialog-labels, dismiss-timer, element-id, hover-open, layer, listbox, media-query, menu-marks, menu-radio, menu-sub, modal-focus, overlay, overlay-root, root-state, roving-group, safe-url, script, utils
-- Templates: 110
-- Crate modules: 85
-- Crate features: 85
-- Component docs pages: 85
-- Complete local wiring: 85
+- Templates: 113
+- Crate modules: 88
+- Crate features: 88
+- Component docs pages: 88
+- Complete local wiring: 88
 - Incomplete local wiring: 0
 
 ## Category Counts
@@ -31,8 +31,8 @@ parity.
 | Forms | 19 |
 | Overlays | 11 |
 | Navigation | 10 |
-| Layout | 12 |
-| Data Display | 13 |
+| Layout | 14 |
+| Data Display | 14 |
 | Feedback | 6 |
 | Messaging | 5 |
 
@@ -56,6 +56,7 @@ parity.
 | Data Table | Data Display | yes | yes | yes | yes | yes | yes | yes |
 | Diff | Data Display | yes | yes | yes | yes | yes | yes | yes |
 | Empty | Data Display | yes | yes | yes | yes | yes | yes | yes |
+| Hover Gallery | Data Display | yes | yes | yes | yes | yes | yes | yes |
 | Progress | Data Display | yes | yes | yes | yes | yes | yes | yes |
 | Radial Progress | Data Display | yes | yes | yes | yes | yes | yes | yes |
 | Stat | Data Display | yes | yes | yes | yes | yes | yes | yes |
@@ -95,10 +96,12 @@ parity.
 | Direction | Layout | yes | yes | yes | yes | yes | yes | yes |
 | Indicator | Layout | yes | yes | yes | yes | yes | yes | yes |
 | Item | Layout | yes | yes | yes | yes | yes | yes | yes |
+| Mask | Layout | yes | yes | yes | yes | yes | yes | yes |
 | Mockup | Layout | yes | yes | yes | yes | yes | yes | yes |
 | Resizable | Layout | yes | yes | yes | yes | yes | yes | yes |
 | Scroll Area | Layout | yes | yes | yes | yes | yes | yes | yes |
 | Separator | Layout | yes | yes | yes | yes | yes | yes | yes |
+| Stack | Layout | yes | yes | yes | yes | yes | yes | yes |
 | Attachment | Messaging | yes | yes | yes | yes | yes | yes | yes |
 | Bubble | Messaging | yes | yes | yes | yes | yes | yes | yes |
 | Marker | Messaging | yes | yes | yes | yes | yes | yes | yes |
@@ -146,6 +149,7 @@ parity.
 | Data Table | Data Display | [docs](data-table.md) | `dxui add data-table` | `data-table` | `crates/dioxus-shadcn-cli/templates/data_table.rs` | `src/components/ui/data_table.rs` |
 | Diff | Data Display | [docs](diff.md) | `dxui add diff` | `diff` | `crates/dioxus-shadcn-cli/templates/diff.rs` | `src/components/ui/diff.rs` |
 | Empty | Data Display | [docs](empty.md) | `dxui add empty` | `empty` | `crates/dioxus-shadcn-cli/templates/empty.rs` | `src/components/ui/empty.rs` |
+| Hover Gallery | Data Display | [docs](hover-gallery.md) | `dxui add hover-gallery` | `hover-gallery` | `crates/dioxus-shadcn-cli/templates/hover_gallery.rs` | `src/components/ui/hover_gallery.rs` |
 | Progress | Data Display | [docs](progress.md) | `dxui add progress` | `progress` | `crates/dioxus-shadcn-cli/templates/progress.rs` | `src/components/ui/progress.rs` |
 | Radial Progress | Data Display | [docs](radial-progress.md) | `dxui add radial-progress` | `radial-progress` | `crates/dioxus-shadcn-cli/templates/radial_progress.rs` | `src/components/ui/radial_progress.rs` |
 | Stat | Data Display | [docs](stat.md) | `dxui add stat` | `stat` | `crates/dioxus-shadcn-cli/templates/stat.rs` | `src/components/ui/stat.rs` |
@@ -185,10 +189,12 @@ parity.
 | Direction | Layout | [docs](direction.md) | `dxui add direction` | `direction` | `crates/dioxus-shadcn-cli/templates/direction.rs` | `src/components/ui/direction.rs` |
 | Indicator | Layout | [docs](indicator.md) | `dxui add indicator` | `indicator` | `crates/dioxus-shadcn-cli/templates/indicator.rs` | `src/components/ui/indicator.rs` |
 | Item | Layout | [docs](item.md) | `dxui add item` | `item` | `crates/dioxus-shadcn-cli/templates/item.rs` | `src/components/ui/item.rs` |
+| Mask | Layout | [docs](mask.md) | `dxui add mask` | `mask` | `crates/dioxus-shadcn-cli/templates/mask.rs` | `src/components/ui/mask.rs` |
 | Mockup | Layout | [docs](mockup.md) | `dxui add mockup` | `mockup` | `crates/dioxus-shadcn-cli/templates/mockup.rs` | `src/components/ui/mockup.rs` |
 | Resizable | Layout | [docs](resizable.md) | `dxui add resizable` | `resizable` | `crates/dioxus-shadcn-cli/templates/resizable.rs` | `src/components/ui/resizable.rs` |
 | Scroll Area | Layout | [docs](scroll-area.md) | `dxui add scroll-area` | `scroll-area` | `crates/dioxus-shadcn-cli/templates/scroll_area.rs` | `src/components/ui/scroll_area.rs` |
 | Separator | Layout | [docs](separator.md) | `dxui add separator` | `separator` | `crates/dioxus-shadcn-cli/templates/separator.rs` | `src/components/ui/separator.rs` |
+| Stack | Layout | [docs](stack.md) | `dxui add stack` | `stack` | `crates/dioxus-shadcn-cli/templates/stack.rs` | `src/components/ui/stack.rs` |
 | Attachment | Messaging | [docs](attachment.md) | `dxui add attachment` | `attachment` | `crates/dioxus-shadcn-cli/templates/attachment.rs` | `src/components/ui/attachment.rs` |
 | Bubble | Messaging | [docs](bubble.md) | `dxui add bubble` | `bubble` | `crates/dioxus-shadcn-cli/templates/bubble.rs` | `src/components/ui/bubble.rs` |
 | Marker | Messaging | [docs](marker.md) | `dxui add marker` | `marker` | `crates/dioxus-shadcn-cli/templates/marker.rs` | `src/components/ui/marker.rs` |

@@ -101,6 +101,9 @@ const componentCategories = {
   steps: "navigation",
   timeline: "data-display",
   stat: "data-display",
+  mask: "layout",
+  stack: "layout",
+  "hover-gallery": "data-display",
 };
 
 const categoryLabels = new Map(catalogCategories.map((category) => [category.id, category.label]));

@@ -11,7 +11,7 @@ It does not create rendered routes, router code, screenshots, or generated JSON.
 For source preview route metadata, see the
 [Source Preview Manifest](source-preview.md).
 
-Component routes: 85
+Component routes: 88
 Category routes: 8
 
 ## Top-level Routes
@@ -76,6 +76,7 @@ Category routes: 8
 | [Field](field.md) | /components/field | docs/components/field.md | /components#category-forms | /components/field/source |
 | [File Input](file-input.md) | /components/file-input | docs/components/file-input.md | /components#category-forms | /components/file-input/source |
 | [Hover Card](hover-card.md) | /components/hover-card | docs/components/hover-card.md | /components#category-overlays | /components/hover-card/source |
+| [Hover Gallery](hover-gallery.md) | /components/hover-gallery | docs/components/hover-gallery.md | /components#category-data-display | /components/hover-gallery/source |
 | [Indicator](indicator.md) | /components/indicator | docs/components/indicator.md | /components#category-layout | /components/indicator/source |
 | [Input](input.md) | /components/input | docs/components/input.md | /components#category-forms | /components/input/source |
 | [Input Group](input-group.md) | /components/input-group | docs/components/input-group.md | /components#category-forms | /components/input-group/source |
@@ -84,6 +85,7 @@ Category routes: 8
 | [Kbd](kbd.md) | /components/kbd | docs/components/kbd.md | /components#category-actions | /components/kbd/source |
 | [Label](label.md) | /components/label | docs/components/label.md | /components#category-forms | /components/label/source |
 | [Marker](marker.md) | /components/marker | docs/components/marker.md | /components#category-messaging | /components/marker/source |
+| [Mask](mask.md) | /components/mask | docs/components/mask.md | /components#category-layout | /components/mask/source |
 | [Menu](menu.md) | /components/menu | docs/components/menu.md | /components#category-navigation | /components/menu/source |
 | [Menubar](menubar.md) | /components/menubar | docs/components/menubar.md | /components#category-overlays | /components/menubar/source |
 | [Message](message.md) | /components/message | docs/components/message.md | /components#category-messaging | /components/message/source |
@@ -108,6 +110,7 @@ Category routes: 8
 | [Slider](slider.md) | /components/slider | docs/components/slider.md | /components#category-forms | /components/slider/source |
 | [Sonner](sonner.md) | /components/sonner | docs/components/sonner.md | /components#category-feedback | /components/sonner/source |
 | [Spinner](spinner.md) | /components/spinner | docs/components/spinner.md | /components#category-feedback | /components/spinner/source |
+| [Stack](stack.md) | /components/stack | docs/components/stack.md | /components#category-layout | /components/stack/source |
 | [Stat](stat.md) | /components/stat | docs/components/stat.md | /components#category-data-display | /components/stat/source |
 | [Status](status.md) | /components/status | docs/components/status.md | /components#category-feedback | /components/status/source |
 | [Steps](steps.md) | /components/steps | docs/components/steps.md | /components#category-navigation | /components/steps/source |

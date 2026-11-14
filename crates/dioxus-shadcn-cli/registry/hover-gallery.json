@@ -1,0 +1,14 @@
+{
+  "name": "hover-gallery",
+  "description": "Interactive multi-image gallery that switches frames as the pointer moves across horizontal zones.",
+  "files": [
+    {
+      "source": "templates/hover_gallery.rs",
+      "target": "src/components/ui/hover_gallery.rs"
+    }
+  ],
+  "dependencies": [
+    "utils"
+  ],
+  "assets": []
+}

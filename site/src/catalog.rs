@@ -386,6 +386,12 @@ pub const CATEGORIES: &[Category] = &[
         feature: "item",
       },
       Component {
+        slug: "mask",
+        title: "Mask",
+        description: "Geometric clip-path mask wrapper with squircle, heart, star, hexagon, and half-crop shapes.",
+        feature: "mask",
+      },
+      Component {
         slug: "mockup",
         title: "Mockup",
         description: "Browser, window, code, and phone frames for showing content.",
@@ -408,6 +414,12 @@ pub const CATEGORIES: &[Category] = &[
         title: "Separator",
         description: "Separator component for visual or semantic content division.",
         feature: "separator",
+      },
+      Component {
+        slug: "stack",
+        title: "Stack",
+        description: "Stacked card and element deck with directional depth offsets.",
+        feature: "stack",
       },
     ],
   },
@@ -456,6 +468,12 @@ pub const CATEGORIES: &[Category] = &[
         title: "Empty",
         description: "Empty-state layout composition parts.",
         feature: "empty",
+      },
+      Component {
+        slug: "hover-gallery",
+        title: "Hover Gallery",
+        description: "Interactive multi-image gallery that switches frames as the pointer moves across horizontal zones.",
+        feature: "hover-gallery",
       },
       Component {
         slug: "progress",

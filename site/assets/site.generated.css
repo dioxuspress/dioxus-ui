@@ -253,6 +253,9 @@
   .inset-x-0\.5 {
     inset-inline: calc(var(--spacing) * 0.5);
   }
+  .inset-x-2 {
+    inset-inline: calc(var(--spacing) * 2);
+  }
   .inset-y-0 {
     inset-block: 0px;
   }
@@ -297,6 +300,9 @@
   }
   .bottom-0 {
     bottom: 0px;
+  }
+  .bottom-2 {
+    bottom: calc(var(--spacing) * 2);
   }
   .bottom-4 {
     bottom: calc(var(--spacing) * 4);
@@ -484,6 +490,9 @@
   .table {
     display: table;
   }
+  .aspect-4\/3 {
+    aspect-ratio: 4/3;
+  }
   .aspect-\[9\/19\.5\] {
     aspect-ratio: 9/19.5;
   }
@@ -537,6 +546,10 @@
     width: calc(var(--spacing) * 14);
     height: calc(var(--spacing) * 14);
   }
+  .size-16 {
+    width: calc(var(--spacing) * 16);
+    height: calc(var(--spacing) * 16);
+  }
   .size-20 {
     width: calc(var(--spacing) * 20);
     height: calc(var(--spacing) * 20);
@@ -548,6 +561,9 @@
   .size-full {
     width: 100%;
     height: 100%;
+  }
+  .h-1 {
+    height: var(--spacing);
   }
   .h-2 {
     height: calc(var(--spacing) * 2);
@@ -593,6 +609,9 @@
   }
   .h-16 {
     height: calc(var(--spacing) * 16);
+  }
+  .h-24 {
+    height: calc(var(--spacing) * 24);
   }
   .h-28 {
     height: calc(var(--spacing) * 28);
@@ -921,6 +940,10 @@
     --tw-translate-x: calc(1 / 2 * 100%);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
+  .translate-x-2 {
+    --tw-translate-x: calc(var(--spacing) * 2);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
   .translate-x-5 {
     --tw-translate-x: calc(var(--spacing) * 5);
     translate: var(--tw-translate-x) var(--tw-translate-y);
@@ -1046,6 +1069,9 @@
   }
   .place-items-center {
     place-items: center;
+  }
+  .place-items-stretch {
+    place-items: stretch;
   }
   .content-start {
     align-content: flex-start;
@@ -1384,6 +1410,18 @@
   }
   .bg-background {
     background-color: var(--background);
+  }
+  .bg-background\/40 {
+    background-color: var(--background);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--background) 40%, transparent);
+    }
+  }
+  .bg-background\/90 {
+    background-color: var(--background);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--background) 90%, transparent);
+    }
   }
   .bg-black\/50 {
     background-color: color-mix(in srgb, #000 50%, transparent);
@@ -2047,6 +2085,10 @@
   .duration-150 {
     --tw-duration: 150ms;
     transition-duration: 150ms;
+  }
+  .duration-200 {
+    --tw-duration: 200ms;
+    transition-duration: 200ms;
   }
   .duration-300 {
     --tw-duration: 300ms;
@@ -3173,6 +3215,86 @@
   }
   .\[\&_ul\]\:ps-6 ul {
     padding-inline-start: calc(var(--spacing) * 6);
+  }
+  .\[\&\>\*\]\:col-start-1 > * {
+    grid-column-start: 1;
+  }
+  .\[\&\>\*\]\:row-start-1 > * {
+    grid-row-start: 1;
+  }
+  .\[\&\>\*\]\:transition-transform > * {
+    transition-property: transform, translate, scale, rotate;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+  .\[\&\>\*\]\:duration-200 > * {
+    --tw-duration: 200ms;
+    transition-duration: 200ms;
+  }
+  .\[\&\>\*\:nth-child\(1\)\]\:z-3 > :nth-child(1) {
+    z-index: 3;
+  }
+  .\[\&\>\*\:nth-child\(2\)\]\:z-2 > :nth-child(2) {
+    z-index: 2;
+  }
+  .\[\&\>\*\:nth-child\(2\)\]\:-translate-x-2 > :nth-child(2) {
+    --tw-translate-x: calc(var(--spacing) * -2);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .\[\&\>\*\:nth-child\(2\)\]\:translate-x-2 > :nth-child(2) {
+    --tw-translate-x: calc(var(--spacing) * 2);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .\[\&\>\*\:nth-child\(2\)\]\:-translate-y-2 > :nth-child(2) {
+    --tw-translate-y: calc(var(--spacing) * -2);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .\[\&\>\*\:nth-child\(2\)\]\:translate-y-2 > :nth-child(2) {
+    --tw-translate-y: calc(var(--spacing) * 2);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .\[\&\>\*\:nth-child\(2\)\]\:scale-95 > :nth-child(2) {
+    --tw-scale-x: 95%;
+    --tw-scale-y: 95%;
+    --tw-scale-z: 95%;
+    scale: var(--tw-scale-x) var(--tw-scale-y);
+  }
+  .\[\&\>\*\:nth-child\(2\)\]\:opacity-90 > :nth-child(2) {
+    opacity: 90%;
+  }
+  .\[\&\>\*\:nth-child\(3\)\]\:z-1 > :nth-child(3) {
+    z-index: 1;
+  }
+  .\[\&\>\*\:nth-child\(3\)\]\:-translate-x-4 > :nth-child(3) {
+    --tw-translate-x: calc(var(--spacing) * -4);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .\[\&\>\*\:nth-child\(3\)\]\:translate-x-4 > :nth-child(3) {
+    --tw-translate-x: calc(var(--spacing) * 4);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .\[\&\>\*\:nth-child\(3\)\]\:-translate-y-4 > :nth-child(3) {
+    --tw-translate-y: calc(var(--spacing) * -4);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .\[\&\>\*\:nth-child\(3\)\]\:translate-y-4 > :nth-child(3) {
+    --tw-translate-y: calc(var(--spacing) * 4);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .\[\&\>\*\:nth-child\(3\)\]\:scale-90 > :nth-child(3) {
+    --tw-scale-x: 90%;
+    --tw-scale-y: 90%;
+    --tw-scale-z: 90%;
+    scale: var(--tw-scale-x) var(--tw-scale-y);
+  }
+  .\[\&\>\*\:nth-child\(3\)\]\:opacity-70 > :nth-child(3) {
+    opacity: 70%;
+  }
+  .\[\&\>\*\:nth-child\(n\+4\)\]\:z-0 > :nth-child(n+4) {
+    z-index: 0;
+  }
+  .\[\&\>\*\:nth-child\(n\+4\)\]\:opacity-0 > :nth-child(n+4) {
+    opacity: 0%;
   }
   .\[\&\>button\:not\(\:first-child\)\]\:rounded-t-none > button:not(:first-child) {
     border-top-left-radius: 0;
@@ -4990,6 +5112,21 @@
   initial-value: "";
   inherits: false;
 }
+@property --tw-scale-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: 1;
+}
+@property --tw-scale-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: 1;
+}
+@property --tw-scale-z {
+  syntax: "*";
+  inherits: false;
+  initial-value: 1;
+}
 @keyframes spin {
   to {
     transform: rotate(360deg);
@@ -5063,6 +5200,9 @@
       --tw-duration: initial;
       --tw-ease: initial;
       --tw-content: "";
+      --tw-scale-x: 1;
+      --tw-scale-y: 1;
+      --tw-scale-z: 1;
     }
   }
 }

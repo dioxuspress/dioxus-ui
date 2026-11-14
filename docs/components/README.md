@@ -166,6 +166,7 @@ dioxus-shadcn = { version = "0.6", default-features = false, features = ["button
 | [Field](field.md) | `dxui add field` | `field` | Form field composition parts |
 | [File Input](file-input.md) | `dxui add file-input` | `file-input` | Styled native file input |
 | [Hover Card](hover-card.md) | `dxui add hover-card` | `hover-card` | Popover-backed preview content |
+| [Hover Gallery](hover-gallery.md) | `dxui add hover-gallery` | `hover-gallery` | Multi-image hover frame switcher |
 | [Indicator](indicator.md) | `dxui add indicator` | `indicator` | Corner placement parts |
 | [Input](input.md) | `dxui add input` | `input` | Styled |
 | [Input Group](input-group.md) | `dxui add input-group` | `input-group` | Grouped input composition parts |
@@ -173,6 +174,7 @@ dioxus-shadcn = { version = "0.6", default-features = false, features = ["button
 | [Item](item.md) | `dxui add item` | `item` | Generic item composition parts |
 | [Kbd](kbd.md) | `dxui add kbd` | `kbd` | Styled keyboard hint |
 | [Label](label.md) | `dxui add label` | `label` | Styled |
+| [Mask](mask.md) | `dxui add mask` | `mask` | Geometric clip-path shape wrapper |
 | [Marker](marker.md) | `dxui add marker` | `marker` | Inline message marker parts |
 | [Menu](menu.md) | `dxui add menu` | `menu` | Vertical navigation list with collapsible groups |
 | [Menubar](menubar.md) | `dxui add menubar` | `menubar` | Dropdown-backed menubar parts |
@@ -198,6 +200,7 @@ dioxus-shadcn = { version = "0.6", default-features = false, features = ["button
 | [Slider](slider.md) | `dxui add slider` | `slider` | Primitive-backed styled part |
 | [Sonner](sonner.md) | `dxui add sonner` | `sonner` | Opinionated notification parts |
 | [Spinner](spinner.md) | `dxui add spinner` | `spinner` | Styled |
+| [Stack](stack.md) | `dxui add stack` | `stack` | Layered card deck with depth offsets |
 | [Stat](stat.md) | `dxui add stat` | `stat` | Statistic definition list parts |
 | [Status](status.md) | `dxui add status` | `status` | Labelled or decorative status dot |
 | [Steps](steps.md) | `dxui add steps` | `steps` | Numbered process step parts |

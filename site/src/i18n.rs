@@ -345,6 +345,10 @@ fn zh_component_meta(slug: &str) -> Option<(&'static str, &'static str)> {
       ("Direction 书写方向", "为子树局部指定原生从左到右（LTR）或从右到左（RTL）书写方向的容器。")
     }
     "indicator" => ("Indicator 角标指示", "在目标元素边角叠加角标计数或在线状态点的定位容器。"),
+    "mask" => {
+      ("Mask 几何遮罩", "使用 CSS clip-path 将图片或容器裁剪为心形、星形、六边形等几何形状。")
+    }
+    "stack" => ("Stack 卡片堆叠", "将多个子卡片按层级深度、缩放与偏移叠放展示的布局容器。"),
     "item" => ("Item 列表项", "用于构建列表行、设置项与联系人条目的通用列表项组合部件。"),
     "mockup" => ("Mockup 样机外框", "提供浏览器、窗口、代码终端与手机外框的内容展示样机容器。"),
     "resizable" => ("Resizable 可调分栏", "支持鼠标与键盘拖拽调整分栏比例的可调尺寸面板组部件。"),
@@ -362,6 +366,9 @@ fn zh_component_meta(slug: &str) -> Option<(&'static str, &'static str)> {
     }
     "diff" => ("Diff 视图对比", "支持键盘左右调节分割线的前后视图对比（Diff）组件。"),
     "empty" => ("Empty 空状态", "用于展示无数据、空搜索结果及引导操作的空状态布局部件。"),
+    "hover-gallery" => {
+      ("Hover Gallery 悬停画廊", "随指针横向移动切换展示多张预览图的多图画廊容器。")
+    }
     "progress" => ("Progress 进度条", "具备完整无障碍进度数值语义的线性进度条组件。"),
     "radial-progress" => {
       ("Radial Progress 环形进度", "中心可展示百分比或自定义标签的环形进度指示组件。")
@@ -544,6 +551,9 @@ fn zh_example_title(english_title: &str) -> Option<&'static str> {
     "Upload states" => "附件上传状态",
     "Thread" => "消息对话串",
     "Follow new messages" => "自动跟随新消息",
+    "Geometric shapes" => "几何遮罩形状",
+    "Stacked cards" => "层叠卡片",
+    "Product angles" => "商品多角度预览",
     _ => return None,
   })
 }

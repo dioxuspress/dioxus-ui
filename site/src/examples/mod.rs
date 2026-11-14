@@ -104,6 +104,9 @@ examples! {
   timeline_release => TimelineReleaseDemo, "timeline", "Release history";
   steps_checkout => StepsCheckoutDemo, "steps", "Checkout";
   indicator_counts => IndicatorCountsDemo, "indicator", "Counts and presence";
+  mask_shapes => MaskShapesDemo, "mask", "Geometric shapes";
+  stack_cards => StackCardsDemo, "stack", "Stacked cards";
+  hover_gallery_product => HoverGalleryProductDemo, "hover-gallery", "Product angles";
   status_presence => StatusPresenceDemo, "status", "Service health";
   radial_progress_usage => RadialProgressUsageDemo, "radial-progress", "Sizes and labels";
   countdown_sale => CountdownSaleDemo, "countdown", "Sale timer";

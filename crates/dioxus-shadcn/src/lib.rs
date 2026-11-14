@@ -831,6 +831,15 @@ pub mod timeline;
 #[cfg(feature = "stat")]
 pub mod stat;
 
+#[cfg(feature = "mask")]
+pub mod mask;
+
+#[cfg(feature = "stack")]
+pub mod stack;
+
+#[cfg(feature = "hover-gallery")]
+pub mod hover_gallery;
+
 #[cfg(feature = "code-tabs")]
 pub use code_tabs::{
   CodeTabs, CodeTabsActivation, CodeTabsContent, CodeTabsList, CodeTabsTrigger, code_tabs_class,
@@ -917,6 +926,15 @@ pub use rating::{Rating, rating_class};
 
 #[cfg(feature = "number-input")]
 pub use number_input::{NumberInput, number_input_class};
+
+#[cfg(feature = "mask")]
+pub use mask::{Mask, MaskHalf, MaskShape, mask_class, mask_style};
+
+#[cfg(feature = "stack")]
+pub use stack::{Stack, StackAlign, stack_class};
+
+#[cfg(feature = "hover-gallery")]
+pub use hover_gallery::{HoverGallery, HoverGalleryImage, hover_gallery_class};
 
 #[cfg(feature = "tags-input")]
 pub use tags_input::{TagsInput, tags_input_class};

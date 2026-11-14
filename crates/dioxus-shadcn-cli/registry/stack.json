@@ -1,0 +1,14 @@
+{
+  "name": "stack",
+  "description": "Stacked card and element deck with directional depth offsets.",
+  "files": [
+    {
+      "source": "templates/stack.rs",
+      "target": "src/components/ui/stack.rs"
+    }
+  ],
+  "dependencies": [
+    "utils"
+  ],
+  "assets": []
+}
