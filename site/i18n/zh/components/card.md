@@ -1,12 +1,20 @@
 ## API 概览
 
 - `Card`
+- `CardVariant`（`Default`、`Border`、`Dash`、`Primary`、`Muted`）
+- `CardSize`（`Xs`、`Sm`、`Md`、`Lg`、`Xl`）
+- `CardLayout`（`Vertical`、`Side`、`ImageFull`）
 - `CardHeader`
 - `CardTitle`
 - `CardDescription`
 - `CardContent`
 - `CardFooter`
+- `CardMedia`
+- `CardBody`
+- `CardActions`
+- `CardActionsJustify`（`Start`、`Center`、`End`、`Between`）
 - `card_class`
+- `card_variant_class`
 
 ## 无障碍说明
 

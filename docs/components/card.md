@@ -18,12 +18,20 @@ dioxus-shadcn = { version = "0.6", default-features = false, features = ["card"]
 ## API Surface
 
 - `Card`
+- `CardVariant` (`Default`, `Border`, `Dash`, `Primary`, `Muted`)
+- `CardSize` (`Xs`, `Sm`, `Md`, `Lg`, `Xl`)
+- `CardLayout` (`Vertical`, `Side`, `ImageFull`)
 - `CardHeader`
 - `CardTitle`
 - `CardDescription`
 - `CardContent`
 - `CardFooter`
+- `CardMedia`
+- `CardBody`
+- `CardActions`
+- `CardActionsJustify` (`Start`, `Center`, `End`, `Between`)
 - `card_class`
+- `card_variant_class`
 
 ## Accessibility Notes
 
