@@ -28,7 +28,7 @@ Source preview routes: 100
 | [Bubble](bubble.md) | /components/bubble/source | crates/dioxus-shadcn-cli/templates/bubble.rs | src/components/ui/bubble.rs | rust | 256 | 7293 |
 | [Button](button.md) | /components/button/source | crates/dioxus-shadcn-cli/templates/button.rs | src/components/ui/button.rs | rust | 117 | 3753 |
 | [Button Group](button-group.md) | /components/button-group/source | crates/dioxus-shadcn-cli/templates/button_group.rs | src/components/ui/button_group.rs | rust | 111 | 3717 |
-| [Calendar](calendar.md) | /components/calendar/source | crates/dioxus-shadcn-cli/templates/calendar.rs | src/components/ui/calendar.rs | rust | 613 | 20593 |
+| [Calendar](calendar.md) | /components/calendar/source | crates/dioxus-shadcn-cli/templates/calendar.rs | src/components/ui/calendar.rs | rust | 613 | 20589 |
 | [Card](card.md) | /components/card/source | crates/dioxus-shadcn-cli/templates/card.rs | src/components/ui/card.rs | rust | 423 | 11733 |
 | [Carousel](carousel.md) | /components/carousel/source | crates/dioxus-shadcn-cli/templates/carousel.rs | src/components/ui/carousel.rs | rust | 428 | 14205 |
 | [Chart](chart.md) | /components/chart/source | crates/dioxus-shadcn-cli/templates/chart.rs | src/components/ui/chart.rs | rust | 806 | 23715 |
@@ -55,7 +55,7 @@ Source preview routes: 100
 | [Filter](filter.md) | /components/filter/source | crates/dioxus-shadcn-cli/templates/filter.rs | src/components/ui/filter.rs | rust | 114 | 4349 |
 | [Footer](footer.md) | /components/footer/source | crates/dioxus-shadcn-cli/templates/footer.rs | src/components/ui/footer.rs | rust | 86 | 2442 |
 | [Hero](hero.md) | /components/hero/source | crates/dioxus-shadcn-cli/templates/hero.rs | src/components/ui/hero.rs | rust | 65 | 1983 |
-| [Hover 3d](hover-3d.md) | /components/hover-3d/source | crates/dioxus-shadcn-cli/templates/hover_3d.rs | src/components/ui/hover_3d.rs | rust | 123 | 3777 |
+| [Hover 3d](hover-3d.md) | /components/hover-3d/source | crates/dioxus-shadcn-cli/templates/hover_3d.rs | src/components/ui/hover_3d.rs | rust | 123 | 3775 |
 | [Hover Card](hover-card.md) | /components/hover-card/source | crates/dioxus-shadcn-cli/templates/hover_card.rs | src/components/ui/hover_card.rs | rust | 195 | 5727 |
 | [Hover Gallery](hover-gallery.md) | /components/hover-gallery/source | crates/dioxus-shadcn-cli/templates/hover_gallery.rs | src/components/ui/hover_gallery.rs | rust | 97 | 3172 |
 | [Indicator](indicator.md) | /components/indicator/source | crates/dioxus-shadcn-cli/templates/indicator.rs | src/components/ui/indicator.rs | rust | 77 | 2667 |

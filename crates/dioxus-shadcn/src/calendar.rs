@@ -565,11 +565,11 @@ pub fn CalendarWheelColumn(
         }
       }
       div {
-        class: "pointer-events-none absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-background to-transparent",
+        class: "pointer-events-none absolute inset-x-0 top-0 h-12 bg-linear-to-b from-background to-transparent",
         "aria-hidden": "true",
       }
       div {
-        class: "pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-background to-transparent",
+        class: "pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-linear-to-t from-background to-transparent",
         "aria-hidden": "true",
       }
     }
