@@ -91,7 +91,7 @@ pub fn Hover3D(
         if shine {
           div {
             class: if active {
-              "pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-background/10 to-background/25 opacity-100 transition-opacity duration-200"
+              "pointer-events-none absolute inset-0 bg-linear-to-tr from-transparent via-background/10 to-background/25 opacity-100 transition-opacity duration-200"
             } else {
               "pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-200"
             },
