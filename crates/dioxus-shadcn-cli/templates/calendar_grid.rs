@@ -381,3 +381,145 @@ fn weekday_offset(first_weekday: CalendarWeekday, weekday: CalendarWeekday) -> u
 fn ordered_dates(first: CalendarDate, second: CalendarDate) -> (CalendarDate, CalendarDate) {
   if first <= second { (first, second) } else { (second, first) }
 }
+
+/// Clamps `month` to `1..=12` and `day` to `1..=days_in_month(year, month)`
+/// so wheel/dropdown year-month changes always yield a valid `CalendarDate`.
+pub fn calendar_clamp_date(year: i32, month: u8, day: u8) -> CalendarDate {
+  let month = month.clamp(1, 12);
+  let max_day = days_in_month(year, month);
+  CalendarDate { year, month, day: day.clamp(1, max_day) }
+}
+
+/// A wall-clock time of day (`hour` 0..=23, `minute` 0..=59, `second` 0..=59).
+#[derive(Clone, Copy, Debug, Default, Eq, Ord, PartialEq, PartialOrd)]
+pub struct CalendarTime {
+  /// Hour of the day, 0 to 23.
+  pub hour: u8,
+  /// Minute of the hour, 0 to 59.
+  pub minute: u8,
+  /// Second of the minute, 0 to 59.
+  pub second: u8,
+}
+
+impl CalendarTime {
+  /// Builds a time, or `None` when any field is out of 24-hour clock bounds.
+  pub fn new(hour: u8, minute: u8, second: u8) -> Option<Self> {
+    if hour < 24 && minute < 60 && second < 60 {
+      Some(Self { hour, minute, second })
+    } else {
+      None
+    }
+  }
+
+  /// Builds a time without validating it; for constants known to be valid.
+  pub const fn unchecked(hour: u8, minute: u8, second: u8) -> Self {
+    Self { hour, minute, second }
+  }
+
+  /// Formats as `HH:MM` or `HH:MM:SS`.
+  pub fn format(self, include_seconds: bool) -> String {
+    format_time(self, include_seconds)
+  }
+}
+
+/// A combined calendar date and wall-clock time.
+#[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
+pub struct CalendarDateTime {
+  /// Calendar date.
+  pub date: CalendarDate,
+  /// Time of day.
+  pub time: CalendarTime,
+}
+
+impl CalendarDateTime {
+  /// Combines a `CalendarDate` and `CalendarTime`.
+  pub const fn new(date: CalendarDate, time: CalendarTime) -> Self {
+    Self { date, time }
+  }
+
+  /// Builds a date-time from raw numeric components, returning `None` if invalid.
+  pub fn from_ymd_hms(
+    year: i32,
+    month: u8,
+    day: u8,
+    hour: u8,
+    minute: u8,
+    second: u8,
+  ) -> Option<Self> {
+    Some(Self { date: CalendarDate::new(year, month, day)?, time: CalendarTime::new(hour, minute, second)? })
+  }
+
+  /// Builds a date-time without validating it; for constants known to be valid.
+  pub const fn unchecked(
+    year: i32,
+    month: u8,
+    day: u8,
+    hour: u8,
+    minute: u8,
+    second: u8,
+  ) -> Self {
+    Self {
+      date: CalendarDate::unchecked(year, month, day),
+      time: CalendarTime::unchecked(hour, minute, second),
+    }
+  }
+
+  /// Formats as `YYYY-MM-DD HH:MM` or `YYYY-MM-DD HH:MM:SS`.
+  pub fn format(self, include_seconds: bool) -> String {
+    format_date_time(self, include_seconds)
+  }
+}
+
+/// Formats `time` as `HH:MM` or `HH:MM:SS`.
+pub fn format_time(time: CalendarTime, include_seconds: bool) -> String {
+  if include_seconds {
+    format!("{:02}:{:02}:{:02}", time.hour, time.minute, time.second)
+  } else {
+    format!("{:02}:{:02}", time.hour, time.minute)
+  }
+}
+
+/// Parses `HH:MM` or `HH:MM:SS` into a `CalendarTime`.
+pub fn parse_time(text: &str) -> Option<CalendarTime> {
+  let trimmed = text.trim();
+  let mut parts = trimmed.split(':');
+  let hour: u8 = parts.next()?.parse().ok()?;
+  let minute: u8 = parts.next()?.parse().ok()?;
+  let second: u8 = match parts.next() {
+    Some(sec) => sec.parse().ok()?,
+    None => 0,
+  };
+  if parts.next().is_some() {
+    return None;
+  }
+  CalendarTime::new(hour, minute, second)
+}
+
+/// Formats `value` as `YYYY-MM-DD HH:MM` or `YYYY-MM-DD HH:MM:SS`.
+pub fn format_date_time(value: CalendarDateTime, include_seconds: bool) -> String {
+  format!(
+    "{:04}-{:02}-{:02} {}",
+    value.date.year,
+    value.date.month,
+    value.date.day,
+    format_time(value.time, include_seconds),
+  )
+}
+
+/// Parses `YYYY-MM-DD HH:MM[:SS]` or `YYYY-MM-DDTHH:MM[:SS]` into `CalendarDateTime`.
+pub fn parse_date_time(text: &str) -> Option<CalendarDateTime> {
+  let trimmed = text.trim();
+  let (date_part, time_part) = trimmed
+    .split_once(' ')
+    .or_else(|| trimmed.split_once('T'))?;
+  let mut d_parts = date_part.split('-');
+  let year: i32 = d_parts.next()?.parse().ok()?;
+  let month: u8 = d_parts.next()?.parse().ok()?;
+  let day: u8 = d_parts.next()?.parse().ok()?;
+  if d_parts.next().is_some() {
+    return None;
+  }
+  let date = CalendarDate::new(year, month, day)?;
+  let time = parse_time(time_part.trim())?;
+  Some(CalendarDateTime::new(date, time))
+}

@@ -39,6 +39,7 @@ const componentCategories = {
   "context-menu": "overlays",
   "data-table": "data-display",
   "date-picker": "forms",
+  "date-time-picker": "forms",
   dialog: "overlays",
   direction: "layout",
   drawer: "overlays",

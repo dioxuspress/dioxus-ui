@@ -1,0 +1,21 @@
+{
+  "name": "date-time-picker",
+  "description": "Date Time Picker with calendar+time columns, standalone TimePicker, and full-wheel DateTimeWheel.",
+  "files": [
+    {
+      "source": "templates/date_time_picker.rs",
+      "target": "src/components/ui/date_time_picker.rs"
+    }
+  ],
+  "dependencies": [
+    "anchored-overlay",
+    "calendar",
+    "density",
+    "element-id",
+    "modal-focus",
+    "overlay",
+    "root-state",
+    "utils"
+  ],
+  "assets": []
+}

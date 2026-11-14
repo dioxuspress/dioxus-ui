@@ -10,7 +10,7 @@ The catalog is derived from registry entries, templates, component docs,
 crate features, and crate modules. It intentionally does not include visual
 preview routes, screenshot artifacts, or generated JSON metadata.
 
-Public components: 84
+Public components: 85
 
 ## Groups
 
@@ -31,6 +31,7 @@ Public components: 84
 - [Calendar](calendar.md): Calendar components backed by pure date grid primitives.
 - [Checkbox](checkbox.md): Checkbox component with checked and disabled states.
 - [Date Picker](date-picker.md): Date Picker trigger, value, and popover content parts for composing Calendar.
+- [Date Time Picker](date-time-picker.md): Date Time Picker with calendar+time columns, standalone TimePicker, and full-wheel DateTimeWheel.
 - [Field](field.md): Form field layout composition parts.
 - [File Input](file-input.md): Styled native file input that passes the change event through.
 - [Input](input.md): Input component with disabled and invalid states.
@@ -150,6 +151,7 @@ Public components: 84
 | [Countdown](countdown.md) | Styled countdown timer for app-owned remaining seconds. | `dxui add countdown` | `countdown` | `crates/dioxus-shadcn-cli/templates/countdown.rs` | `src/components/ui/countdown.rs` |
 | [Data Table](data-table.md) | Controlled Data Table composition parts and state helpers. | `dxui add data-table` | `data-table` | `crates/dioxus-shadcn-cli/templates/data_table.rs` | `src/components/ui/data_table.rs` |
 | [Date Picker](date-picker.md) | Date Picker trigger, value, and popover content parts for composing Calendar. | `dxui add date-picker` | `date-picker` | `crates/dioxus-shadcn-cli/templates/date_picker.rs` | `src/components/ui/date_picker.rs` |
+| [Date Time Picker](date-time-picker.md) | Date Time Picker with calendar+time columns, standalone TimePicker, and full-wheel DateTimeWheel. | `dxui add date-time-picker` | `date-time-picker` | `crates/dioxus-shadcn-cli/templates/date_time_picker.rs` | `src/components/ui/date_time_picker.rs` |
 | [Dialog](dialog.md) | Dialog overlay components backed by primitive configuration types. | `dxui add dialog` | `dialog` | `crates/dioxus-shadcn-cli/templates/dialog.rs` | `src/components/ui/dialog.rs` |
 | [Diff](diff.md) | Styled before-and-after comparison with a keyboard-accessible divider. | `dxui add diff` | `diff` | `crates/dioxus-shadcn-cli/templates/diff.rs` | `src/components/ui/diff.rs` |
 | [Direction](direction.md) | Direction component for scoped native ltr/rtl text direction. | `dxui add direction` | `direction` | `crates/dioxus-shadcn-cli/templates/direction.rs` | `src/components/ui/direction.rs` |

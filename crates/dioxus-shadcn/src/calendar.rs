@@ -8,9 +8,10 @@ use crate::density::{density_control_class, use_density, with_density};
 use dioxus::prelude::*;
 use dioxus_shadcn_core::{classes, merge_classes};
 pub use dioxus_shadcn_primitives::{
-  CalendarDate, CalendarDay as CalendarPrimitiveDay, CalendarKeyMove, CalendarMonth,
-  CalendarMonthGrid, CalendarRangeState, CalendarWeekday, calendar_month_grid, calendar_move_date,
-  calendar_range_state, days_in_month, is_leap_year,
+  CalendarDate, CalendarDateTime, CalendarDay as CalendarPrimitiveDay, CalendarKeyMove,
+  CalendarMonth, CalendarMonthGrid, CalendarRangeState, CalendarTime, CalendarWeekday,
+  calendar_clamp_date, calendar_month_grid, calendar_move_date, calendar_range_state,
+  days_in_month, format_date_time, format_time, is_leap_year, parse_date_time, parse_time,
 };
 
 const CALENDAR_BASE_CLASS: &str =
@@ -30,6 +31,11 @@ const CALENDAR_DAY_SELECTED_CLASS: &str = "bg-primary text-primary-foreground ho
 const CALENDAR_DAY_TODAY_CLASS: &str = "border border-input";
 const CALENDAR_DAY_OUTSIDE_CLASS: &str = "text-muted-foreground";
 const CALENDAR_DAY_RANGE_CLASS: &str = "bg-accent text-accent-foreground";
+const CALENDAR_SELECT_BASE_CLASS: &str = "h-8 rounded-md border border-input bg-background px-2 text-sm font-medium text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50";
+const CALENDAR_WHEEL_BASE_CLASS: &str = "inline-flex items-center gap-1 rounded-md border border-border bg-background p-2 text-foreground";
+const CALENDAR_WHEEL_COLUMN_BASE_CLASS: &str = "relative h-48 w-16 overflow-hidden rounded-md select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
+const CALENDAR_WHEEL_ITEM_HEIGHT_PX: isize = 32;
+const CALENDAR_WHEEL_CENTER_OFFSET_PX: isize = 80;
 
 /// Which way a `CalendarNavButton` moves the month.
 #[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
@@ -389,6 +395,248 @@ pub fn CalendarDay(
   }
 }
 
+/// Classes for a compact native `<select>` inside `CalendarHeader` for quick year/month jumps.
+pub fn calendar_select_class(class: &str) -> String {
+  merge_classes(classes([Some(CALENDAR_SELECT_BASE_CLASS)]), class)
+}
+
+/// Classes for the `CalendarWheel` container.
+pub fn calendar_wheel_class(class: &str) -> String {
+  merge_classes(classes([Some(CALENDAR_WHEEL_BASE_CLASS)]), class)
+}
+
+/// Classes for a single `CalendarWheelColumn`.
+pub fn calendar_wheel_column_class(class: &str) -> String {
+  merge_classes(classes([Some(CALENDAR_WHEEL_COLUMN_BASE_CLASS)]), class)
+}
+
+/// Compact native `<select>` for jumping directly to a year or month in `CalendarHeader`.
+#[component]
+pub fn CalendarSelect(
+  #[props(default)] value: String,
+  #[props(default)] disabled: bool,
+  #[props(default)] onchange: Option<EventHandler<FormEvent>>,
+  #[props(default)] class: String,
+  #[props(extends = GlobalAttributes, extends = select)] attributes: Vec<Attribute>,
+  children: Element,
+) -> Element {
+  let class = calendar_select_class(&class);
+
+  rsx! {
+    select {
+      class,
+      value,
+      disabled,
+      onchange: move |event| {
+        if let Some(handler) = onchange {
+          handler.call(event);
+        }
+      },
+      ..attributes,
+      {children}
+    }
+  }
+}
+
+fn wheel_step_index(current: usize, delta: isize, len: usize) -> usize {
+  if len == 0 {
+    return 0;
+  }
+  let max = (len - 1) as isize;
+  (current as isize + delta).clamp(0, max) as usize
+}
+
+/// A single vertical drum/wheel column supporting mouse wheel, pointer swipe,
+/// item click, and keyboard (`ArrowUp` / `ArrowDown` / `PageUp` / `PageDown` /
+/// `Home` / `End`) selection.
+#[component]
+pub fn CalendarWheelColumn(
+  label: String,
+  items: Vec<String>,
+  selected_index: usize,
+  #[props(default)] on_select: Option<EventHandler<usize>>,
+  #[props(default)] class: String,
+) -> Element {
+  let len = items.len();
+  let clamped = if len == 0 { 0 } else { selected_index.min(len - 1) };
+  let offset_px =
+    CALENDAR_WHEEL_CENTER_OFFSET_PX - (clamped as isize * CALENDAR_WHEEL_ITEM_HEIGHT_PX);
+  let class = calendar_wheel_column_class(&class);
+  let mut wheel_acc = use_signal(|| 0.0_f64);
+  let mut drag_start_y = use_signal(|| None::<f64>);
+
+  let emit_step = move |delta: isize| {
+    if len == 0 {
+      return;
+    }
+    let next = wheel_step_index(clamped, delta, len);
+    if next != clamped {
+      if let Some(handler) = on_select {
+        handler.call(next);
+      }
+    }
+  };
+
+  rsx! {
+    div {
+      role: "listbox",
+      "aria-label": "{label}",
+      tabindex: "0",
+      class,
+      onwheel: move |event| {
+        event.prevent_default();
+        let dy = event.delta().strip_units().y;
+        let next_acc = wheel_acc() + dy;
+        let step_px = 20.0;
+        if next_acc >= step_px {
+          wheel_acc.set(0.0);
+          emit_step(1);
+        } else if next_acc <= -step_px {
+          wheel_acc.set(0.0);
+          emit_step(-1);
+        } else {
+          wheel_acc.set(next_acc);
+        }
+      },
+      onpointerdown: move |event| {
+        drag_start_y.set(Some(event.client_coordinates().y));
+      },
+      onpointermove: move |event| {
+        if let Some(start_y) = drag_start_y() {
+          let current_y = event.client_coordinates().y;
+          let diff = start_y - current_y;
+          if diff.abs() >= 24.0 {
+            let steps = (diff / 24.0).trunc() as isize;
+            drag_start_y.set(Some(current_y));
+            emit_step(steps);
+          }
+        }
+      },
+      onpointerup: move |_| drag_start_y.set(None),
+      onpointercancel: move |_| drag_start_y.set(None),
+      onkeydown: move |event| {
+        let delta = match event.key() {
+          Key::ArrowUp => Some(-1),
+          Key::ArrowDown => Some(1),
+          Key::PageUp => Some(-5),
+          Key::PageDown => Some(5),
+          Key::Home => Some(-(clamped as isize)),
+          Key::End => Some((len.saturating_sub(1) as isize) - (clamped as isize)),
+          _ => None,
+        };
+        if let Some(delta) = delta {
+          event.prevent_default();
+          emit_step(delta);
+        }
+      },
+      div {
+        class: "pointer-events-none absolute inset-x-0.5 top-1/2 h-8 -translate-y-1/2 rounded-md border border-border bg-accent/50",
+        "aria-hidden": "true",
+      }
+      div {
+        class: "transition-transform duration-150 ease-out",
+        style: "transform: translateY({offset_px}px);",
+        for (idx, item) in items.iter().enumerate() {
+          {
+            let is_selected = idx == clamped;
+            let item_class = if is_selected {
+              "relative z-10 flex h-8 w-full items-center justify-center text-sm font-semibold text-foreground tabular-nums"
+            } else {
+              "relative z-10 flex h-8 w-full items-center justify-center text-sm text-muted-foreground tabular-nums hover:text-foreground"
+            };
+            rsx! {
+              button {
+                key: "{idx}-{item}",
+                r#type: "button",
+                role: "option",
+                tabindex: "-1",
+                "aria-selected": is_selected.to_string(),
+                "data-selected": is_selected.to_string(),
+                class: item_class,
+                onclick: move |_| {
+                  if let Some(handler) = on_select {
+                    handler.call(idx);
+                  }
+                },
+                "{item}"
+              }
+            }
+          }
+        }
+      }
+      div {
+        class: "pointer-events-none absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-background to-transparent",
+        "aria-hidden": "true",
+      }
+      div {
+        class: "pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-background to-transparent",
+        "aria-hidden": "true",
+      }
+    }
+  }
+}
+
+/// Three-column Year / Month / Day scroll-wheel date picker that clamps days
+/// automatically when changing months or leap years.
+#[component]
+pub fn CalendarWheel(
+  value: CalendarDate,
+  #[props(default = 1950)] min_year: i32,
+  #[props(default = 2050)] max_year: i32,
+  #[props(default = "Year".to_string())] year_label: String,
+  #[props(default = "Month".to_string())] month_label: String,
+  #[props(default = "Day".to_string())] day_label: String,
+  #[props(default)] on_value_change: Option<EventHandler<CalendarDate>>,
+  #[props(default)] class: String,
+) -> Element {
+  let max_year = max_year.max(min_year);
+  let clamped_year = value.year.clamp(min_year, max_year);
+  let clamped_month = value.month.clamp(1, 12);
+  let max_day = days_in_month(clamped_year, clamped_month);
+  let clamped_day = value.day.clamp(1, max_day);
+
+  let years: Vec<String> = (min_year..=max_year).map(|y| format!("{y:04}")).collect();
+  let months: Vec<String> = (1..=12).map(|m| format!("{m:02}")).collect();
+  let days: Vec<String> = (1..=max_day).map(|d| format!("{d:02}")).collect();
+
+  let year_index = (clamped_year - min_year) as usize;
+  let month_index = (clamped_month - 1) as usize;
+  let day_index = (clamped_day - 1) as usize;
+  let class = calendar_wheel_class(&class);
+
+  let emit_date = move |year: i32, month: u8, day: u8| {
+    if let Some(handler) = on_value_change {
+      handler.call(calendar_clamp_date(year, month, day));
+    }
+  };
+
+  rsx! {
+    div {
+      class,
+      "data-calendar-wheel": "",
+      CalendarWheelColumn {
+        label: year_label,
+        items: years,
+        selected_index: year_index,
+        class: "w-20".to_string(),
+        on_select: move |idx| emit_date(min_year + idx as i32, clamped_month, clamped_day),
+      }
+      CalendarWheelColumn {
+        label: month_label,
+        items: months,
+        selected_index: month_index,
+        on_select: move |idx| emit_date(clamped_year, (idx + 1) as u8, clamped_day),
+      }
+      CalendarWheelColumn {
+        label: day_label,
+        items: days,
+        selected_index: day_index,
+        on_select: move |idx| emit_date(clamped_year, clamped_month, (idx + 1) as u8),
+      }
+    }
+  }
+}
+
 #[cfg(test)]
 mod tests {
   use super::*;
@@ -424,5 +672,24 @@ mod tests {
   fn calendar_primitives_are_reexported() {
     assert_eq!(days_in_month(2024, 2), 29);
     assert_eq!(CalendarDate::unchecked(2024, 6, 1).weekday(), CalendarWeekday::Saturday);
+    assert_eq!(calendar_clamp_date(2025, 2, 31), CalendarDate::unchecked(2025, 2, 28));
+  }
+
+  #[test]
+  fn calendar_wheel_and_select_ssr_render() {
+    let mut vdom = VirtualDom::new(|| {
+      rsx! {
+        CalendarSelect { "aria-label": "Year", value: "2026".to_string(),
+          option { value: "2026", "2026" }
+        }
+        CalendarWheel { value: CalendarDate::unchecked(2026, 10, 15) }
+      }
+    });
+    vdom.rebuild_in_place();
+    let html = dioxus_ssr::render(&vdom);
+    assert!(html.contains(r#"data-calendar-wheel="""#));
+    assert!(html.contains(r#"aria-label="Year""#));
+    assert!(html.contains(r#"aria-label="Month""#));
+    assert!(html.contains(r#"aria-label="Day""#));
   }
 }

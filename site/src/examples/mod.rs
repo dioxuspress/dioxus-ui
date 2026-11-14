@@ -46,9 +46,12 @@ examples! {
   toggle_basic => ToggleBasicDemo, "toggle", "Variants";
   toggle_group_single => ToggleGroupSingleDemo, "toggle-group", "Single selection";
   calendar_month => CalendarMonthDemo, "calendar", "Month";
+  calendar_wheel => CalendarWheelDemo, "calendar", "Year/Month dropdown & wheel";
   checkbox_basic => CheckboxBasicDemo, "checkbox", "States";
   date_picker_basic => DatePickerBasicDemo, "date-picker", "Date picker";
   date_picker_input => DatePickerInputDemo, "date-picker", "Typed date";
+  date_time_picker_calendar => DateTimePickerCalendarDemo, "date-time-picker", "Calendar & time picker";
+  date_time_picker_wheel => DateTimePickerWheelDemo, "date-time-picker", "Full wheel & time input";
   field_basic => FieldBasicDemo, "field", "Description and error";
   input_states => InputStatesDemo, "input", "States";
   input_group_addons => InputGroupAddonsDemo, "input-group", "Addons";

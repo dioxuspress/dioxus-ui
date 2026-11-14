@@ -11,17 +11,22 @@
 - `CalendarBody { class, children }`
 - `CalendarRow { class, children }`
 - `CalendarDay { date, selected, today, outside_month, disabled, range_state, focused, on_key_move, on_select, class, children }`
+- `CalendarSelect { value, disabled, onchange, class, children }`（放在 `CalendarHeader` 内的紧凑型原生 `<select>`，用于年份与月份快速跳转）
+- `CalendarWheelColumn { label, items, selected_index, on_select, class }`（支持鼠标滚轮、触摸/拖拽滑动、点击与键盘上下键的单列滚轮）
+- `CalendarWheel { value, min_year, max_year, year_label, month_label, day_label, on_value_change, class }`（年/月/日三列联动滚轮选择器，自动按闰年与大小月裁剪天数）
 
 属性与辅助函数使用的类型：
 
 - `CalendarNavDirection`（`CalendarNavButton` 的 `direction` 属性类型）
 - `CalendarKeyMove`（`on_key_move` 回调载荷）
 - `CalendarMonth`, `CalendarWeekday`, `CalendarMonthGrid`, `CalendarPrimitiveDay`
+- `CalendarTime`, `CalendarDateTime`
 
 原语辅助函数：
 
 - `calendar_month_grid(...)`
 - `calendar_move_date(...)`
+- `calendar_clamp_date(year, month, day)`
 - `calendar_key_move(key, shift)`
 - `calendar_range_state(...)`
 - `days_in_month(year, month)`

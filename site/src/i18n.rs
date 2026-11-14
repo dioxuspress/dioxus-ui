@@ -280,6 +280,9 @@ fn zh_component_meta(slug: &str) -> Option<(&'static str, &'static str)> {
     "date-picker" => {
       ("Date Picker 日期选择器", "组合触发器、选中值展示与日历浮层面板的日期选择器部件。")
     }
+    "date-time-picker" => {
+      ("Date Time Picker 日期时间", "支持日历加时间列、全滚轮选择与键盘输入的日期时间选择器。")
+    }
     "field" => ("Field 表单字段", "用于统一组织标签、控件、辅助说明与校验错误的表单字段布局部件。"),
     "file-input" => ("File Input 文件上传", "样式化的原生文件上传输入框，完整透传原生变更事件。"),
     "input" => ("Input 输入框", "支持禁用态与校验错误态的单行文本输入框组件。"),
@@ -463,9 +466,12 @@ fn zh_example_title(english_title: &str) -> Option<&'static str> {
     "System, light, and dark" => "跟随系统、浅色与深色",
     "Single selection" => "单选切换",
     "Month" => "月历视图",
+    "Year/Month dropdown & wheel" => "年月下拉与滚轮选择",
     "States" => "交互状态",
     "Date picker" => "日期选择浮层",
     "Typed date" => "键盘输入日期",
+    "Calendar & time picker" => "日历与时间组合选择",
+    "Full wheel & time input" => "全滚轮与时间输入",
     "Description and error" => "辅助说明与错误提示",
     "Addons" => "前后缀组合",
     "Six digits" => "六位验证码",

@@ -10,7 +10,7 @@ The manifest defines template metadata for future source preview routes.
 It does not embed full template source, syntax highlighting, rendered routes,
 screenshots, or generated JSON.
 
-Source preview routes: 84
+Source preview routes: 85
 
 ## Source Preview Routes
 
@@ -27,7 +27,7 @@ Source preview routes: 84
 | [Bubble](bubble.md) | /components/bubble/source | crates/dioxus-shadcn-cli/templates/bubble.rs | src/components/ui/bubble.rs | rust | 256 | 7293 |
 | [Button](button.md) | /components/button/source | crates/dioxus-shadcn-cli/templates/button.rs | src/components/ui/button.rs | rust | 117 | 3753 |
 | [Button Group](button-group.md) | /components/button-group/source | crates/dioxus-shadcn-cli/templates/button_group.rs | src/components/ui/button_group.rs | rust | 111 | 3717 |
-| [Calendar](calendar.md) | /components/calendar/source | crates/dioxus-shadcn-cli/templates/calendar.rs | src/components/ui/calendar.rs | rust | 364 | 11783 |
+| [Calendar](calendar.md) | /components/calendar/source | crates/dioxus-shadcn-cli/templates/calendar.rs | src/components/ui/calendar.rs | rust | 613 | 20593 |
 | [Card](card.md) | /components/card/source | crates/dioxus-shadcn-cli/templates/card.rs | src/components/ui/card.rs | rust | 112 | 2701 |
 | [Carousel](carousel.md) | /components/carousel/source | crates/dioxus-shadcn-cli/templates/carousel.rs | src/components/ui/carousel.rs | rust | 428 | 14205 |
 | [Chart](chart.md) | /components/chart/source | crates/dioxus-shadcn-cli/templates/chart.rs | src/components/ui/chart.rs | rust | 806 | 23715 |
@@ -40,6 +40,7 @@ Source preview routes: 84
 | [Countdown](countdown.md) | /components/countdown/source | crates/dioxus-shadcn-cli/templates/countdown.rs | src/components/ui/countdown.rs | rust | 76 | 2519 |
 | [Data Table](data-table.md) | /components/data-table/source | crates/dioxus-shadcn-cli/templates/data_table.rs | src/components/ui/data_table.rs | rust | 357 | 10364 |
 | [Date Picker](date-picker.md) | /components/date-picker/source | crates/dioxus-shadcn-cli/templates/date_picker.rs | src/components/ui/date_picker.rs | rust | 338 | 12546 |
+| [Date Time Picker](date-time-picker.md) | /components/date-time-picker/source | crates/dioxus-shadcn-cli/templates/date_time_picker.rs | src/components/ui/date_time_picker.rs | rust | 509 | 17898 |
 | [Dialog](dialog.md) | /components/dialog/source | crates/dioxus-shadcn-cli/templates/dialog.rs | src/components/ui/dialog.rs | rust | 194 | 6409 |
 | [Diff](diff.md) | /components/diff/source | crates/dioxus-shadcn-cli/templates/diff.rs | src/components/ui/diff.rs | rust | 101 | 3983 |
 | [Direction](direction.md) | /components/direction/source | crates/dioxus-shadcn-cli/templates/direction.rs | src/components/ui/direction.rs | rust | 52 | 1163 |
