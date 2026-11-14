@@ -10,7 +10,7 @@ The catalog is derived from registry entries, templates, component docs,
 crate features, and crate modules. It intentionally does not include visual
 preview routes, screenshot artifacts, or generated JSON metadata.
 
-Public components: 85
+Public components: 88
 
 ## Groups
 
@@ -85,10 +85,12 @@ Public components: 85
 - [Direction](direction.md): Direction component for scoped native ltr/rtl text direction.
 - [Indicator](indicator.md): Styled corner indicator wrapper and placed item.
 - [Item](item.md): Generic list item composition parts.
+- [Mask](mask.md): Geometric clip-path mask wrapper with squircle, heart, star, hexagon, and half-crop shapes.
 - [Mockup](mockup.md): Browser, window, code, and phone frames for showing content.
 - [Resizable](resizable.md): Controlled resizable panel group, panel, and handle parts.
 - [Scroll Area](scroll-area.md): Native scroll area wrapper with styled viewport and scrollbar parts.
 - [Separator](separator.md): Separator component for visual or semantic content division.
+- [Stack](stack.md): Stacked card and element deck with directional depth offsets.
 
 ### Data Display
 
@@ -99,6 +101,7 @@ Public components: 85
 - [Data Table](data-table.md): Controlled Data Table composition parts and state helpers.
 - [Diff](diff.md): Styled before-and-after comparison with a keyboard-accessible divider.
 - [Empty](empty.md): Empty-state layout composition parts.
+- [Hover Gallery](hover-gallery.md): Interactive multi-image gallery that switches frames as the pointer moves across horizontal zones.
 - [Progress](progress.md): Progress component with accessible value semantics.
 - [Radial Progress](radial-progress.md): Styled circular progress bar with a centered label.
 - [Stat](stat.md): Styled statistic group with title, value, description, and figure.
@@ -163,6 +166,7 @@ Public components: 85
 | [Field](field.md) | Form field layout composition parts. | `dxui add field` | `field` | `crates/dioxus-shadcn-cli/templates/field.rs` | `src/components/ui/field.rs` |
 | [File Input](file-input.md) | Styled native file input that passes the change event through. | `dxui add file-input` | `file-input` | `crates/dioxus-shadcn-cli/templates/file_input.rs` | `src/components/ui/file_input.rs` |
 | [Hover Card](hover-card.md) | Controlled rich preview content backed by popover primitive configuration. | `dxui add hover-card` | `hover-card` | `crates/dioxus-shadcn-cli/templates/hover_card.rs` | `src/components/ui/hover_card.rs` |
+| [Hover Gallery](hover-gallery.md) | Interactive multi-image gallery that switches frames as the pointer moves across horizontal zones. | `dxui add hover-gallery` | `hover-gallery` | `crates/dioxus-shadcn-cli/templates/hover_gallery.rs` | `src/components/ui/hover_gallery.rs` |
 | [Indicator](indicator.md) | Styled corner indicator wrapper and placed item. | `dxui add indicator` | `indicator` | `crates/dioxus-shadcn-cli/templates/indicator.rs` | `src/components/ui/indicator.rs` |
 | [Input](input.md) | Input component with disabled and invalid states. | `dxui add input` | `input` | `crates/dioxus-shadcn-cli/templates/input.rs` | `src/components/ui/input.rs` |
 | [Input Group](input-group.md) | Input Group component for addons, controls, and actions around inputs. | `dxui add input-group` | `input-group` | `crates/dioxus-shadcn-cli/templates/input_group.rs` | `src/components/ui/input_group.rs` |
@@ -171,6 +175,7 @@ Public components: 85
 | [Kbd](kbd.md) | Styled keyboard shortcut hint. | `dxui add kbd` | `kbd` | `crates/dioxus-shadcn-cli/templates/kbd.rs` | `src/components/ui/kbd.rs` |
 | [Label](label.md) | Label component for associating text with form controls. | `dxui add label` | `label` | `crates/dioxus-shadcn-cli/templates/label.rs` | `src/components/ui/label.rs` |
 | [Marker](marker.md) | Marker component for inline status, bordered rows, and labeled separators. | `dxui add marker` | `marker` | `crates/dioxus-shadcn-cli/templates/marker.rs` | `src/components/ui/marker.rs` |
+| [Mask](mask.md) | Geometric clip-path mask wrapper with squircle, heart, star, hexagon, and half-crop shapes. | `dxui add mask` | `mask` | `crates/dioxus-shadcn-cli/templates/mask.rs` | `src/components/ui/mask.rs` |
 | [Menu](menu.md) | Vertical navigation list with titles, active items, and collapsible groups. | `dxui add menu` | `menu` | `crates/dioxus-shadcn-cli/templates/menu.rs` | `src/components/ui/menu.rs` |
 | [Menubar](menubar.md) | Controlled menubar parts backed by dropdown primitive configuration. | `dxui add menubar` | `menubar` | `crates/dioxus-shadcn-cli/templates/menubar.rs` | `src/components/ui/menubar.rs` |
 | [Message](message.md) | Message component for provider-neutral chat row layout. | `dxui add message` | `message` | `crates/dioxus-shadcn-cli/templates/message.rs` | `src/components/ui/message.rs` |
@@ -195,6 +200,7 @@ Public components: 85
 | [Slider](slider.md) | Slider component for controlled horizontal numeric values. | `dxui add slider` | `slider` | `crates/dioxus-shadcn-cli/templates/slider.rs` | `src/components/ui/slider.rs` |
 | [Sonner](sonner.md) | Opinionated toast notification parts and queue helpers. | `dxui add sonner` | `sonner` | `crates/dioxus-shadcn-cli/templates/sonner.rs` | `src/components/ui/sonner.rs` |
 | [Spinner](spinner.md) | Spinner component for loading status feedback. | `dxui add spinner` | `spinner` | `crates/dioxus-shadcn-cli/templates/spinner.rs` | `src/components/ui/spinner.rs` |
+| [Stack](stack.md) | Stacked card and element deck with directional depth offsets. | `dxui add stack` | `stack` | `crates/dioxus-shadcn-cli/templates/stack.rs` | `src/components/ui/stack.rs` |
 | [Stat](stat.md) | Styled statistic group with title, value, description, and figure. | `dxui add stat` | `stat` | `crates/dioxus-shadcn-cli/templates/stat.rs` | `src/components/ui/stat.rs` |
 | [Status](status.md) | Styled status dot with an optional accessible label. | `dxui add status` | `status` | `crates/dioxus-shadcn-cli/templates/status.rs` | `src/components/ui/status.rs` |
 | [Steps](steps.md) | Styled numbered steps with complete, current, and upcoming states. | `dxui add steps` | `steps` | `crates/dioxus-shadcn-cli/templates/steps.rs` | `src/components/ui/steps.rs` |

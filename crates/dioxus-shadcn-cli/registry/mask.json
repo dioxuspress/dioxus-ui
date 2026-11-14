@@ -1,0 +1,14 @@
+{
+  "name": "mask",
+  "description": "Geometric clip-path mask wrapper with squircle, heart, star, hexagon, and half-crop shapes.",
+  "files": [
+    {
+      "source": "templates/mask.rs",
+      "target": "src/components/ui/mask.rs"
+    }
+  ],
+  "dependencies": [
+    "utils"
+  ],
+  "assets": []
+}
