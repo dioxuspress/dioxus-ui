@@ -88,6 +88,8 @@ examples! {
   accordion_faq => AccordionFaqDemo, "accordion", "FAQ";
   aspect_ratio_basic => AspectRatioBasicDemo, "aspect-ratio", "Ratios";
   card_basic => CardBasicDemo, "card", "Form card";
+  card_variants => CardVariantsDemo, "card", "Border, dash, and sizes";
+  card_media => CardMediaDemo, "card", "Media, side, and overlay";
   carousel_basic => CarouselBasicDemo, "carousel", "Slides";
   collapsible_basic => CollapsibleBasicDemo, "collapsible", "Show more";
   direction_rtl => DirectionRtlDemo, "direction", "Right to left";

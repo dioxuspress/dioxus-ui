@@ -493,7 +493,11 @@ pub use calendar::{
   parse_date_time, parse_time,
 };
 #[cfg(feature = "card")]
-pub use card::{Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, card_class};
+pub use card::{
+  Card, CardActions, CardActionsJustify, CardBody, CardContent, CardDescription, CardFooter,
+  CardHeader, CardLayout, CardMedia, CardSize, CardTitle, CardVariant, card_class,
+  card_variant_class,
+};
 #[cfg(feature = "carousel")]
 pub use carousel::{
   Carousel, CarouselContent, CarouselIndicator, CarouselItem, CarouselNext, CarouselOrientation,

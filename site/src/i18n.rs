@@ -506,6 +506,8 @@ fn zh_example_title(english_title: &str) -> Option<&'static str> {
     "FAQ" => "常见问题手风琴",
     "Ratios" => "固定宽高比",
     "Form card" => "表单卡片",
+    "Border, dash, and sizes" => "边框、虚线与尺寸",
+    "Media, side, and overlay" => "图文、侧栏与遮罩叠加",
     "Slides" => "轮播切换",
     "Show more" => "展开更多",
     "Right to left" => "从右到左（RTL）",
