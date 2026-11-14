@@ -5,6 +5,7 @@ mod blocks;
 mod catalog;
 mod components;
 mod examples;
+mod highlight;
 mod i18n;
 mod pages;
 mod themes;
