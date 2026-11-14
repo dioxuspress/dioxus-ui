@@ -495,7 +495,7 @@ pub use calendar::{
 #[cfg(feature = "card")]
 pub use card::{
   Card, CardActions, CardActionsJustify, CardBody, CardContent, CardDescription, CardFooter,
-  CardHeader, CardLayout, CardMedia, CardSize, CardTitle, CardVariant, card_class,
+  CardHeader, CardLayout, CardMedia, CardSize, CardSurface, CardTitle, CardVariant, card_class,
   card_variant_class,
 };
 #[cfg(feature = "carousel")]

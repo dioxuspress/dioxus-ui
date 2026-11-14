@@ -8,7 +8,7 @@ const CARD_BASE_CLASS: &str =
   "rounded-md border border-border bg-card text-card-foreground shadow-sm";
 const CARD_HEADER_BASE_CLASS: &str = "flex flex-col gap-1.5";
 const CARD_TITLE_BASE_CLASS: &str = "font-semibold leading-none tracking-normal";
-const CARD_DESCRIPTION_BASE_CLASS: &str = "text-sm text-muted-foreground";
+const CARD_DESCRIPTION_BASE_CLASS: &str = "text-sm";
 const CARD_CONTENT_BASE_CLASS: &str = "pt-0";
 const CARD_FOOTER_BASE_CLASS: &str = "flex items-center pt-0";
 const CARD_BODY_BASE_CLASS: &str = "flex flex-1 flex-col gap-2";
@@ -105,7 +105,7 @@ fn card_layout_tokens(layout: CardLayout) -> Option<&'static str> {
   match layout {
     CardLayout::Vertical => None,
     CardLayout::Side => Some("flex flex-col overflow-hidden sm:flex-row"),
-    CardLayout::ImageFull => Some("relative grid overflow-hidden bg-zinc-900 text-white"),
+    CardLayout::ImageFull => Some("relative grid overflow-hidden"),
   }
 }
 
@@ -143,6 +143,14 @@ pub fn card_class(class: &str) -> String {
   merge_classes(classes([Some(CARD_BASE_CLASS)]), class)
 }
 
+fn card_surface_tokens(variant: CardVariant, layout: CardLayout) -> &'static str {
+  if layout == CardLayout::ImageFull {
+    "rounded-md border border-border bg-foreground text-background shadow-sm"
+  } else {
+    card_variant_tokens(variant)
+  }
+}
+
 /// Classes for a [`Card`] with explicit `variant`, `size`, and `layout`.
 pub fn card_variant_class(
   variant: CardVariant,
@@ -150,7 +158,10 @@ pub fn card_variant_class(
   layout: CardLayout,
   class: &str,
 ) -> String {
-  merge_classes(classes([Some(card_variant_tokens(variant)), card_layout_tokens(layout)]), class)
+  merge_classes(
+    classes([Some(card_surface_tokens(variant, layout)), card_layout_tokens(layout)]),
+    class,
+  )
 }
 
 fn card_header_class(ctx: CardContext, class: &str) -> String {
@@ -168,13 +179,19 @@ fn card_title_class(ctx: CardContext, class: &str) -> String {
   )
 }
 
-fn card_description_class(ctx: CardContext, class: &str) -> String {
-  let base = if ctx.variant == CardVariant::Primary || ctx.layout == CardLayout::ImageFull {
-    "text-sm text-current/80"
+fn card_description_tokens(ctx: CardContext) -> &'static str {
+  if ctx.variant == CardVariant::Primary || ctx.layout == CardLayout::ImageFull {
+    "text-current/80"
   } else {
-    CARD_DESCRIPTION_BASE_CLASS
-  };
-  merge_classes(classes([Some(base)]), class)
+    "text-muted-foreground"
+  }
+}
+
+fn card_description_class(ctx: CardContext, class: &str) -> String {
+  merge_classes(
+    classes([Some(CARD_DESCRIPTION_BASE_CLASS), Some(card_description_tokens(ctx))]),
+    class,
+  )
 }
 
 fn card_content_class(ctx: CardContext, class: &str) -> String {
@@ -223,10 +240,24 @@ fn card_actions_class(justify: CardActionsJustify, class: &str) -> String {
   merge_classes(classes([Some(CARD_ACTIONS_BASE_CLASS), Some(justify_cls)]), class)
 }
 
+/// Basic bordered card container (v0.6-compatible props). For variant, size,
+/// and layout props, use [`CardSurface`].
+#[component]
+pub fn Card(#[props(default)] class: String, children: Element) -> Element {
+  let class = card_class(&class);
+
+  rsx! {
+    div {
+      class,
+      {children}
+    }
+  }
+}
+
 /// Surface container that groups related content, supporting border/color variants,
 /// padding sizes, and vertical, side-by-side, or full-bleed image layouts.
 #[component]
-pub fn Card(
+pub fn CardSurface(
   #[props(default)] variant: CardVariant,
   #[props(default)] size: CardSize,
   #[props(default)] layout: CardLayout,
@@ -354,7 +385,7 @@ pub fn CardMedia(
       class,
       {children}
       if ctx.layout == CardLayout::ImageFull {
-        div { class: "pointer-events-none absolute inset-0 bg-black/55" }
+        div { class: "pointer-events-none absolute inset-0 bg-foreground/65" }
       }
     }
   }
@@ -440,7 +471,7 @@ mod tests {
   fn ssr_card_body_and_media_respect_context_size_and_layout() {
     fn app() -> Element {
       rsx! {
-        Card { variant: CardVariant::Border, size: CardSize::Sm, layout: CardLayout::ImageFull,
+        CardSurface { variant: CardVariant::Border, size: CardSize::Sm, layout: CardLayout::ImageFull,
           CardMedia { div { "bg" } }
           CardBody {
             CardTitle { "Shoes!" }
@@ -457,7 +488,7 @@ mod tests {
     assert!(html.contains("data-size=\"sm\""));
     assert!(html.contains("data-layout=\"image-full\""));
     assert!(html.contains("<figure"));
-    assert!(html.contains("bg-black/55"));
+    assert!(html.contains("bg-foreground/65"));
     assert!(html.contains("p-4"));
     assert!(html.contains("justify-between"));
   }
