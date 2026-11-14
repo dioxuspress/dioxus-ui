@@ -10,7 +10,7 @@ The catalog is derived from registry entries, templates, component docs,
 crate features, and crate modules. It intentionally does not include visual
 preview routes, screenshot artifacts, or generated JSON metadata.
 
-Public components: 95
+Public components: 100
 
 ## Groups
 
@@ -48,6 +48,7 @@ Public components: 95
 - [Switch](switch.md): Switch component with checked and disabled states.
 - [Tags Input](tags-input.md): Styled tag list with removable chips and a text input.
 - [Textarea](textarea.md): Textarea component with disabled and invalid states.
+- [Validator](validator.md): Declarative form validation wrapper and accessible hint message.
 
 ### Overlays
 
@@ -69,7 +70,9 @@ Public components: 95
 - [Code Tabs](code-tabs.md): Underlined code comparison tabs with roving keyboard navigation and code panels.
 - [Dock](dock.md): Styled bottom navigation bar of links or buttons.
 - [Link](link.md): Styled anchor links with semantic color variants, underline modes, and safe URL filtering.
+- [Megamenu](megamenu.md): Multi-column navigation panel with keyboard Escape dismissal and safe links.
 - [Menu](menu.md): Vertical navigation list with titles, active items, and collapsible groups.
+- [Navbar](navbar.md): Top-level application navigation bar with start, center, and end slots.
 - [Navigation Menu](navigation-menu.md): Controlled navigation menu parts with navigation semantics.
 - [Pagination](pagination.md): Pagination component with link, item, and ellipsis parts.
 - [Sidebar](sidebar.md): Sidebar shell whose provider owns the collapsed and off-canvas state, with navigation parts.
@@ -86,6 +89,8 @@ Public components: 95
 - [Carousel](carousel.md): Carousel whose root owns the selected slide.
 - [Collapsible](collapsible.md): Collapsible section whose root owns whether it is open.
 - [Direction](direction.md): Direction component for scoped native ltr/rtl text direction.
+- [Footer](footer.md): Semantic page footer with multi-column navigation and centered layout modes.
+- [Hero](hero.md): Full-width showcase section with centered content and optional overlay.
 - [Indicator](indicator.md): Styled corner indicator wrapper and placed item.
 - [Item](item.md): Generic list item composition parts.
 - [Join](join.md): Grouping container that collapses adjacent border radii for buttons, inputs, and selects.
@@ -174,6 +179,8 @@ Public components: 95
 | [Field](field.md) | Form field layout composition parts. | `dxui add field` | `field` | `crates/dioxus-shadcn-cli/templates/field.rs` | `src/components/ui/field.rs` |
 | [File Input](file-input.md) | Styled native file input that passes the change event through. | `dxui add file-input` | `file-input` | `crates/dioxus-shadcn-cli/templates/file_input.rs` | `src/components/ui/file_input.rs` |
 | [Filter](filter.md) | Radio-style filter pill bar with automatic reset button when an option is selected. | `dxui add filter` | `filter` | `crates/dioxus-shadcn-cli/templates/filter.rs` | `src/components/ui/filter.rs` |
+| [Footer](footer.md) | Semantic page footer with multi-column navigation and centered layout modes. | `dxui add footer` | `footer` | `crates/dioxus-shadcn-cli/templates/footer.rs` | `src/components/ui/footer.rs` |
+| [Hero](hero.md) | Full-width showcase section with centered content and optional overlay. | `dxui add hero` | `hero` | `crates/dioxus-shadcn-cli/templates/hero.rs` | `src/components/ui/hero.rs` |
 | [Hover 3d](hover-3d.md) | Interactive 3D perspective tilt card that responds to pointer zones without JS eval. | `dxui add hover-3d` | `hover-3d` | `crates/dioxus-shadcn-cli/templates/hover_3d.rs` | `src/components/ui/hover_3d.rs` |
 | [Hover Card](hover-card.md) | Controlled rich preview content backed by popover primitive configuration. | `dxui add hover-card` | `hover-card` | `crates/dioxus-shadcn-cli/templates/hover_card.rs` | `src/components/ui/hover_card.rs` |
 | [Hover Gallery](hover-gallery.md) | Interactive multi-image gallery that switches frames as the pointer moves across horizontal zones. | `dxui add hover-gallery` | `hover-gallery` | `crates/dioxus-shadcn-cli/templates/hover_gallery.rs` | `src/components/ui/hover_gallery.rs` |
@@ -189,12 +196,14 @@ Public components: 95
 | [Loading](loading.md) | Accessible loading indicator supporting spinner, dots, ring, ball, bars, and infinity variants. | `dxui add loading` | `loading` | `crates/dioxus-shadcn-cli/templates/loading.rs` | `src/components/ui/loading.rs` |
 | [Marker](marker.md) | Marker component for inline status, bordered rows, and labeled separators. | `dxui add marker` | `marker` | `crates/dioxus-shadcn-cli/templates/marker.rs` | `src/components/ui/marker.rs` |
 | [Mask](mask.md) | Geometric clip-path mask wrapper with squircle, heart, star, hexagon, and half-crop shapes. | `dxui add mask` | `mask` | `crates/dioxus-shadcn-cli/templates/mask.rs` | `src/components/ui/mask.rs` |
+| [Megamenu](megamenu.md) | Multi-column navigation panel with keyboard Escape dismissal and safe links. | `dxui add megamenu` | `megamenu` | `crates/dioxus-shadcn-cli/templates/megamenu.rs` | `src/components/ui/megamenu.rs` |
 | [Menu](menu.md) | Vertical navigation list with titles, active items, and collapsible groups. | `dxui add menu` | `menu` | `crates/dioxus-shadcn-cli/templates/menu.rs` | `src/components/ui/menu.rs` |
 | [Menubar](menubar.md) | Controlled menubar parts backed by dropdown primitive configuration. | `dxui add menubar` | `menubar` | `crates/dioxus-shadcn-cli/templates/menubar.rs` | `src/components/ui/menubar.rs` |
 | [Message](message.md) | Message component for provider-neutral chat row layout. | `dxui add message` | `message` | `crates/dioxus-shadcn-cli/templates/message.rs` | `src/components/ui/message.rs` |
 | [Message Scroller](message-scroller.md) | Controlled message scroller composition parts with pure scroll intent helpers. | `dxui add message-scroller` | `message-scroller` | `crates/dioxus-shadcn-cli/templates/message_scroller.rs` | `src/components/ui/message_scroller.rs` |
 | [Mockup](mockup.md) | Browser, window, code, and phone frames for showing content. | `dxui add mockup` | `mockup` | `crates/dioxus-shadcn-cli/templates/mockup.rs` | `src/components/ui/mockup.rs` |
 | [Native Select](native-select.md) | Styled native select, optgroup, and option components. | `dxui add native-select` | `native-select` | `crates/dioxus-shadcn-cli/templates/native_select.rs` | `src/components/ui/native_select.rs` |
+| [Navbar](navbar.md) | Top-level application navigation bar with start, center, and end slots. | `dxui add navbar` | `navbar` | `crates/dioxus-shadcn-cli/templates/navbar.rs` | `src/components/ui/navbar.rs` |
 | [Navigation Menu](navigation-menu.md) | Controlled navigation menu parts with navigation semantics. | `dxui add navigation-menu` | `navigation-menu` | `crates/dioxus-shadcn-cli/templates/navigation_menu.rs` | `src/components/ui/navigation_menu.rs` |
 | [Number Input](number-input.md) | Styled number field with stepping buttons and spinbutton keys. | `dxui add number-input` | `number-input` | `crates/dioxus-shadcn-cli/templates/number_input.rs` | `src/components/ui/number_input.rs` |
 | [Pagination](pagination.md) | Pagination component with link, item, and ellipsis parts. | `dxui add pagination` | `pagination` | `crates/dioxus-shadcn-cli/templates/pagination.rs` | `src/components/ui/pagination.rs` |
@@ -232,3 +241,4 @@ Public components: 95
 | [Tooltip](tooltip.md) | Tooltip content component backed by primitive configuration types. | `dxui add tooltip` | `tooltip` | `crates/dioxus-shadcn-cli/templates/tooltip.rs` | `src/components/ui/tooltip.rs` |
 | [Tree](tree.md) | Tree of items that expand and collapse, with WAI-ARIA tree keyboard navigation. | `dxui add tree` | `tree` | `crates/dioxus-shadcn-cli/templates/tree.rs` | `src/components/ui/tree.rs` |
 | [Typography](typography.md) | Styled semantic typography parts. | `dxui add typography` | `typography` | `crates/dioxus-shadcn-cli/templates/typography.rs` | `src/components/ui/typography.rs` |
+| [Validator](validator.md) | Declarative form validation wrapper and accessible hint message. | `dxui add validator` | `validator` | `crates/dioxus-shadcn-cli/templates/validator.rs` | `src/components/ui/validator.rs` |

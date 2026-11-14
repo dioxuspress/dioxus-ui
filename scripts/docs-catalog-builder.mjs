@@ -111,6 +111,11 @@ const componentCategories = {
   link: "navigation",
   loading: "feedback",
   join: "layout",
+  navbar: "navigation",
+  hero: "layout",
+  footer: "layout",
+  megamenu: "navigation",
+  validator: "forms",
 };
 
 const categoryLabels = new Map(catalogCategories.map((category) => [category.id, category.label]));

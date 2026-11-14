@@ -1,0 +1,14 @@
+{
+  "name": "validator",
+  "description": "Declarative form validation wrapper and accessible hint message.",
+  "files": [
+    {
+      "source": "templates/validator.rs",
+      "target": "src/components/ui/validator.rs"
+    }
+  ],
+  "dependencies": [
+    "utils"
+  ],
+  "assets": []
+}

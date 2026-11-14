@@ -1,0 +1,15 @@
+{
+  "name": "megamenu",
+  "description": "Multi-column navigation panel with keyboard Escape dismissal and safe links.",
+  "files": [
+    {
+      "source": "templates/megamenu.rs",
+      "target": "src/components/ui/megamenu.rs"
+    }
+  ],
+  "dependencies": [
+    "safe-url",
+    "utils"
+  ],
+  "assets": []
+}

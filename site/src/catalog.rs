@@ -199,6 +199,12 @@ pub const CATEGORIES: &[Category] = &[
         description: "Textarea component with disabled and invalid states.",
         feature: "textarea",
       },
+      Component {
+        slug: "validator",
+        title: "Validator",
+        description: "Declarative form validation wrapper and accessible hint message.",
+        feature: "validator",
+      },
     ],
   },
   Category {
@@ -302,10 +308,22 @@ pub const CATEGORIES: &[Category] = &[
         feature: "link",
       },
       Component {
+        slug: "megamenu",
+        title: "Megamenu",
+        description: "Multi-column navigation panel with keyboard Escape dismissal and safe links.",
+        feature: "megamenu",
+      },
+      Component {
         slug: "menu",
         title: "Menu",
         description: "Vertical navigation list with titles, active items, and collapsible groups.",
         feature: "menu",
+      },
+      Component {
+        slug: "navbar",
+        title: "Navbar",
+        description: "Top-level application navigation bar with start, center, and end slots.",
+        feature: "navbar",
       },
       Component {
         slug: "navigation-menu",
@@ -390,6 +408,18 @@ pub const CATEGORIES: &[Category] = &[
         title: "Direction",
         description: "Direction component for scoped native ltr/rtl text direction.",
         feature: "direction",
+      },
+      Component {
+        slug: "footer",
+        title: "Footer",
+        description: "Semantic page footer with multi-column navigation and centered layout modes.",
+        feature: "footer",
+      },
+      Component {
+        slug: "hero",
+        title: "Hero",
+        description: "Full-width showcase section with centered content and optional overlay.",
+        feature: "hero",
       },
       Component {
         slug: "indicator",

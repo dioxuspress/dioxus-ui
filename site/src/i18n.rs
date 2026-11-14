@@ -383,6 +383,11 @@ fn zh_component_meta(slug: &str) -> Option<(&'static str, &'static str)> {
     // feedback
     "alert" => ("Alert 警告提示", "包含标题与详细说明的页面内静态提示与告警横幅组件。"),
     "filter" => ("Filter 筛选栏", "带自动重置按钮的单选胶囊筛选栏组件。"),
+    "footer" => ("Footer 页脚", "支持多列导航与居中布局模式的语义化页面页脚组件。"),
+    "hero" => ("Hero 巨幕横幅", "支持居中性内容与可选背景遮罩的全宽展示横幅组件。"),
+    "megamenu" => ("Megamenu 超级菜单", "支持多栏分组、Escape 关闭与安全链接过滤的导航展开面板。"),
+    "navbar" => ("Navbar 导航栏", "提供左、中、右三栏插槽的顶部应用导航栏容器。"),
+    "validator" => ("Validator 表单校验", "声明式包裹表单控件并配合无障碍提示文本的校验容器。"),
     "join" => ("Join 组合拼接", "将相邻输入框、按钮或选择器圆角无缝拼接的布局容器。"),
     "link" => ("Link 链接", "支持语义配色、下划线模式与安全 URL 过滤的链接组件。"),
     "loading" => (
@@ -571,6 +576,11 @@ fn zh_example_title(english_title: &str) -> Option<&'static str> {
     "Link variants" => "链接样式变体",
     "Loading variants" => "加载动画变体",
     "Joined controls" => "拼接控件组",
+    "Navbar slots" => "导航栏三栏插槽",
+    "Hero showcase" => "巨幕横幅展示",
+    "Footer columns" => "多列页脚布局",
+    "Megamenu columns" => "多栏超级菜单",
+    "Validation states" => "表单校验状态",
     _ => return None,
   })
 }

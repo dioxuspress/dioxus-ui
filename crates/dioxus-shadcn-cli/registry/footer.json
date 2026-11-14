@@ -1,0 +1,14 @@
+{
+  "name": "footer",
+  "description": "Semantic page footer with multi-column navigation and centered layout modes.",
+  "files": [
+    {
+      "source": "templates/footer.rs",
+      "target": "src/components/ui/footer.rs"
+    }
+  ],
+  "dependencies": [
+    "utils"
+  ],
+  "assets": []
+}

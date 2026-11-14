@@ -1,0 +1,14 @@
+{
+  "name": "navbar",
+  "description": "Top-level application navigation bar with start, center, and end slots.",
+  "files": [
+    {
+      "source": "templates/navbar.rs",
+      "target": "src/components/ui/navbar.rs"
+    }
+  ],
+  "dependencies": [
+    "utils"
+  ],
+  "assets": []
+}
