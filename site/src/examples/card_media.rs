@@ -1,14 +1,14 @@
 use dioxus::prelude::*;
 use dioxus_shadcn::{
-  Badge, BadgeVariant, Button, ButtonSize, ButtonVariant, Card, CardActions, CardActionsJustify,
-  CardBody, CardDescription, CardLayout, CardMedia, CardSize, CardTitle, CardVariant,
+  Badge, BadgeVariant, Button, ButtonSize, ButtonVariant, CardActions, CardActionsJustify,
+  CardBody, CardDescription, CardLayout, CardMedia, CardSize, CardSurface, CardTitle, CardVariant,
 };
 
 #[component]
 pub fn CardMediaDemo() -> Element {
   rsx! {
     div { class: "grid gap-4 md:grid-cols-2",
-      Card { variant: CardVariant::Border, size: CardSize::Sm,
+      CardSurface { variant: CardVariant::Border, size: CardSize::Sm,
         CardMedia {
           svg {
             view_box: "0 0 400 180",
@@ -30,7 +30,7 @@ pub fn CardMediaDemo() -> Element {
         }
       }
 
-      Card { variant: CardVariant::Border, size: CardSize::Sm,
+      CardSurface { variant: CardVariant::Border, size: CardSize::Sm,
         CardMedia { inset: true,
           svg {
             view_box: "0 0 400 180",
@@ -48,7 +48,7 @@ pub fn CardMediaDemo() -> Element {
         }
       }
 
-      Card { variant: CardVariant::Border, size: CardSize::Sm, layout: CardLayout::Side,
+      CardSurface { variant: CardVariant::Border, size: CardSize::Sm, layout: CardLayout::Side,
         CardMedia {
           svg {
             view_box: "0 0 220 220",
@@ -66,7 +66,7 @@ pub fn CardMediaDemo() -> Element {
         }
       }
 
-      Card { size: CardSize::Sm, layout: CardLayout::ImageFull, class: "min-h-44",
+      CardSurface { size: CardSize::Sm, layout: CardLayout::ImageFull, class: "min-h-44",
         CardMedia {
           svg {
             view_box: "0 0 400 220",

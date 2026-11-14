@@ -1,14 +1,14 @@
 use dioxus::prelude::*;
 use dioxus_shadcn::{
-  Badge, BadgeVariant, Button, ButtonSize, ButtonVariant, Card, CardActions, CardActionsJustify,
-  CardBody, CardDescription, CardSize, CardTitle, CardVariant,
+  Badge, BadgeVariant, Button, ButtonSize, ButtonVariant, CardActions, CardActionsJustify,
+  CardBody, CardDescription, CardSize, CardSurface, CardTitle, CardVariant,
 };
 
 #[component]
 pub fn CardVariantsDemo() -> Element {
   rsx! {
     div { class: "grid gap-4 sm:grid-cols-2",
-      Card { variant: CardVariant::Border, size: CardSize::Sm,
+      CardSurface { variant: CardVariant::Border, size: CardSize::Sm,
         CardBody {
           div { class: "flex items-center justify-between gap-2",
             CardTitle { "Bordered card" }
@@ -20,7 +20,7 @@ pub fn CardVariantsDemo() -> Element {
           }
         }
       }
-      Card { variant: CardVariant::Dash, size: CardSize::Sm,
+      CardSurface { variant: CardVariant::Dash, size: CardSize::Sm,
         CardBody {
           div { class: "flex items-center justify-between gap-2",
             CardTitle { "Dashed card" }
@@ -32,7 +32,7 @@ pub fn CardVariantsDemo() -> Element {
           }
         }
       }
-      Card { variant: CardVariant::Primary, size: CardSize::Sm,
+      CardSurface { variant: CardVariant::Primary, size: CardSize::Sm,
         CardBody {
           CardTitle { "Primary surface" }
           CardDescription { "High-emphasis container for featured actions or promos." }
@@ -41,7 +41,7 @@ pub fn CardVariantsDemo() -> Element {
           }
         }
       }
-      Card { variant: CardVariant::Muted, size: CardSize::Xs,
+      CardSurface { variant: CardVariant::Muted, size: CardSize::Xs,
         CardBody {
           CardTitle { "Compact xs card" }
           CardDescription { "Tight padding for dense sidebars and summary strips." }

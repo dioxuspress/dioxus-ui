@@ -18,6 +18,7 @@ dioxus-shadcn = { version = "0.6", default-features = false, features = ["card"]
 ## API Surface
 
 - `Card`
+- `CardSurface`
 - `CardVariant` (`Default`, `Border`, `Dash`, `Primary`, `Muted`)
 - `CardSize` (`Xs`, `Sm`, `Md`, `Lg`, `Xl`)
 - `CardLayout` (`Vertical`, `Side`, `ImageFull`)
