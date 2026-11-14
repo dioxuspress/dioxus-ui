@@ -1,0 +1,14 @@
+{
+  "name": "filter",
+  "description": "Radio-style filter pill bar with automatic reset button when an option is selected.",
+  "files": [
+    {
+      "source": "templates/filter.rs",
+      "target": "src/components/ui/filter.rs"
+    }
+  ],
+  "dependencies": [
+    "utils"
+  ],
+  "assets": []
+}

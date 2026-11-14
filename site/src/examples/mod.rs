@@ -139,6 +139,10 @@ examples! {
   marker_variants => MarkerVariantsDemo, "marker", "Variants";
   message_thread => MessageThreadDemo, "message", "Thread";
   message_scroller_chat => MessageScrollerChatDemo, "message-scroller", "Follow new messages";
+  filter_pills => FilterPillsDemo, "filter", "Filter pills";
+  link_variants => LinkVariantsDemo, "link", "Link variants";
+  loading_variants => LoadingVariantsDemo, "loading", "Loading variants";
+  join_items => JoinItemsDemo, "join", "Joined controls";
 }
 
 #[cfg(test)]

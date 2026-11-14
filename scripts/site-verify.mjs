@@ -528,7 +528,7 @@ async function run() {
       await visit(zhPage, "/");
       await expect(zhPage.locator("html")).toHaveAttribute("lang", "zh-CN");
       await expect(zhPage.getByRole("link", { name: "快速开始", exact: true })).toBeVisible();
-      await expect(zhPage.getByRole("heading", { name: "91 个组件", exact: true })).toBeVisible();
+      await expect(zhPage.getByRole("heading", { name: "95 个组件", exact: true })).toBeVisible();
       const zhSidebar = zhPage.getByRole("navigation", { name: "站点导航" });
       await expect(zhSidebar.getByRole("link", { name: "Dashboard 数据看板", exact: true })).toBeVisible();
       await expect(zhSidebar.getByRole("link", { name: "Button 按钮", exact: true })).toBeVisible();

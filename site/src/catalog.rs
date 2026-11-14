@@ -116,6 +116,12 @@ pub const CATEGORIES: &[Category] = &[
         feature: "file-input",
       },
       Component {
+        slug: "filter",
+        title: "Filter",
+        description: "Radio-style filter pill bar with automatic reset button when an option is selected.",
+        feature: "filter",
+      },
+      Component {
         slug: "input",
         title: "Input",
         description: "Input component with disabled and invalid states.",
@@ -290,6 +296,12 @@ pub const CATEGORIES: &[Category] = &[
         feature: "dock",
       },
       Component {
+        slug: "link",
+        title: "Link",
+        description: "Styled anchor links with semantic color variants, underline modes, and safe URL filtering.",
+        feature: "link",
+      },
+      Component {
         slug: "menu",
         title: "Menu",
         description: "Vertical navigation list with titles, active items, and collapsible groups.",
@@ -390,6 +402,12 @@ pub const CATEGORIES: &[Category] = &[
         title: "Item",
         description: "Generic list item composition parts.",
         feature: "item",
+      },
+      Component {
+        slug: "join",
+        title: "Join",
+        description: "Grouping container that collapses adjacent border radii for buttons, inputs, and selects.",
+        feature: "join",
       },
       Component {
         slug: "mask",
@@ -540,6 +558,12 @@ pub const CATEGORIES: &[Category] = &[
         title: "Alert",
         description: "Alert component with title and description parts.",
         feature: "alert",
+      },
+      Component {
+        slug: "loading",
+        title: "Loading",
+        description: "Accessible loading indicator supporting spinner, dots, ring, ball, bars, and infinity variants.",
+        feature: "loading",
       },
       Component {
         slug: "skeleton",

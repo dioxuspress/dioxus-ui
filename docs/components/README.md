@@ -166,6 +166,7 @@ dioxus-shadcn = { version = "0.6", default-features = false, features = ["button
 | [Fab](fab.md) | `dxui add fab` | `fab` | Floating action button and speed dial |
 | [Field](field.md) | `dxui add field` | `field` | Form field composition parts |
 | [File Input](file-input.md) | `dxui add file-input` | `file-input` | Styled native file input |
+| [Filter](filter.md) | `dxui add filter` | `filter` | Radio-style filter pills with reset |
 | [Hover Card](hover-card.md) | `dxui add hover-card` | `hover-card` | Popover-backed preview content |
 | [Hover 3D](hover-3d.md) | `dxui add hover-3d` | `hover-3d` | 3D perspective tilt card |
 | [Hover Gallery](hover-gallery.md) | `dxui add hover-gallery` | `hover-gallery` | Multi-image hover frame switcher |
@@ -174,8 +175,11 @@ dioxus-shadcn = { version = "0.6", default-features = false, features = ["button
 | [Input Group](input-group.md) | `dxui add input-group` | `input-group` | Grouped input composition parts |
 | [Input OTP](input-otp.md) | `dxui add input-otp` | `input-otp` | Controlled one-time-code slots |
 | [Item](item.md) | `dxui add item` | `item` | Generic item composition parts |
+| [Join](join.md) | `dxui add join` | `join` | Connected control strip layout |
 | [Kbd](kbd.md) | `dxui add kbd` | `kbd` | Styled keyboard hint |
 | [Label](label.md) | `dxui add label` | `label` | Styled |
+| [Link](link.md) | `dxui add link` | `link` | Styled anchor with safe URL filtering |
+| [Loading](loading.md) | `dxui add loading` | `loading` | Multi-variant animated loading indicator |
 | [Mask](mask.md) | `dxui add mask` | `mask` | Geometric clip-path shape wrapper |
 | [Marker](marker.md) | `dxui add marker` | `marker` | Inline message marker parts |
 | [Menu](menu.md) | `dxui add menu` | `menu` | Vertical navigation list with collapsible groups |

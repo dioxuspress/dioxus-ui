@@ -13,14 +13,14 @@ parity.
 
 ## Summary
 
-- Public components: 91
-- Registry entries: 116
+- Public components: 95
+- Registry entries: 120
 - Source-copy helpers: anchored-overlay, calendar-grid, choice, class-merge, class-merge-table, default-attribute, density, dialog-labels, dismiss-timer, element-id, hover-open, layer, listbox, media-query, menu-marks, menu-radio, menu-sub, modal-focus, overlay, overlay-root, root-state, roving-group, safe-url, script, utils
-- Templates: 116
-- Crate modules: 91
-- Crate features: 91
-- Component docs pages: 91
-- Complete local wiring: 91
+- Templates: 120
+- Crate modules: 95
+- Crate features: 95
+- Component docs pages: 95
+- Complete local wiring: 95
 - Incomplete local wiring: 0
 
 ## Category Counts
@@ -28,12 +28,12 @@ parity.
 | Category | Components |
 | --- | ---: |
 | Actions | 9 |
-| Forms | 19 |
+| Forms | 20 |
 | Overlays | 11 |
-| Navigation | 10 |
-| Layout | 15 |
+| Navigation | 11 |
+| Layout | 16 |
 | Data Display | 16 |
-| Feedback | 6 |
+| Feedback | 7 |
 | Messaging | 5 |
 
 ## Coverage Matrix
@@ -66,6 +66,7 @@ parity.
 | Timeline | Data Display | yes | yes | yes | yes | yes | yes | yes |
 | Typography | Data Display | yes | yes | yes | yes | yes | yes | yes |
 | Alert | Feedback | yes | yes | yes | yes | yes | yes | yes |
+| Loading | Feedback | yes | yes | yes | yes | yes | yes | yes |
 | Skeleton | Feedback | yes | yes | yes | yes | yes | yes | yes |
 | Sonner | Feedback | yes | yes | yes | yes | yes | yes | yes |
 | Spinner | Feedback | yes | yes | yes | yes | yes | yes | yes |
@@ -77,6 +78,7 @@ parity.
 | Date Time Picker | Forms | yes | yes | yes | yes | yes | yes | yes |
 | Field | Forms | yes | yes | yes | yes | yes | yes | yes |
 | File Input | Forms | yes | yes | yes | yes | yes | yes | yes |
+| Filter | Forms | yes | yes | yes | yes | yes | yes | yes |
 | Input | Forms | yes | yes | yes | yes | yes | yes | yes |
 | Input Group | Forms | yes | yes | yes | yes | yes | yes | yes |
 | Input OTP | Forms | yes | yes | yes | yes | yes | yes | yes |
@@ -99,6 +101,7 @@ parity.
 | Direction | Layout | yes | yes | yes | yes | yes | yes | yes |
 | Indicator | Layout | yes | yes | yes | yes | yes | yes | yes |
 | Item | Layout | yes | yes | yes | yes | yes | yes | yes |
+| Join | Layout | yes | yes | yes | yes | yes | yes | yes |
 | Mask | Layout | yes | yes | yes | yes | yes | yes | yes |
 | Mockup | Layout | yes | yes | yes | yes | yes | yes | yes |
 | Resizable | Layout | yes | yes | yes | yes | yes | yes | yes |
@@ -113,6 +116,7 @@ parity.
 | Breadcrumb | Navigation | yes | yes | yes | yes | yes | yes | yes |
 | Code Tabs | Navigation | yes | yes | yes | yes | yes | yes | yes |
 | Dock | Navigation | yes | yes | yes | yes | yes | yes | yes |
+| Link | Navigation | yes | yes | yes | yes | yes | yes | yes |
 | Menu | Navigation | yes | yes | yes | yes | yes | yes | yes |
 | Navigation Menu | Navigation | yes | yes | yes | yes | yes | yes | yes |
 | Pagination | Navigation | yes | yes | yes | yes | yes | yes | yes |
@@ -162,6 +166,7 @@ parity.
 | Timeline | Data Display | [docs](timeline.md) | `dxui add timeline` | `timeline` | `crates/dioxus-shadcn-cli/templates/timeline.rs` | `src/components/ui/timeline.rs` |
 | Typography | Data Display | [docs](typography.md) | `dxui add typography` | `typography` | `crates/dioxus-shadcn-cli/templates/typography.rs` | `src/components/ui/typography.rs` |
 | Alert | Feedback | [docs](alert.md) | `dxui add alert` | `alert` | `crates/dioxus-shadcn-cli/templates/alert.rs` | `src/components/ui/alert.rs` |
+| Loading | Feedback | [docs](loading.md) | `dxui add loading` | `loading` | `crates/dioxus-shadcn-cli/templates/loading.rs` | `src/components/ui/loading.rs` |
 | Skeleton | Feedback | [docs](skeleton.md) | `dxui add skeleton` | `skeleton` | `crates/dioxus-shadcn-cli/templates/skeleton.rs` | `src/components/ui/skeleton.rs` |
 | Sonner | Feedback | [docs](sonner.md) | `dxui add sonner` | `sonner` | `crates/dioxus-shadcn-cli/templates/sonner.rs` | `src/components/ui/sonner.rs` |
 | Spinner | Feedback | [docs](spinner.md) | `dxui add spinner` | `spinner` | `crates/dioxus-shadcn-cli/templates/spinner.rs` | `src/components/ui/spinner.rs` |
@@ -173,6 +178,7 @@ parity.
 | Date Time Picker | Forms | [docs](date-time-picker.md) | `dxui add date-time-picker` | `date-time-picker` | `crates/dioxus-shadcn-cli/templates/date_time_picker.rs` | `src/components/ui/date_time_picker.rs` |
 | Field | Forms | [docs](field.md) | `dxui add field` | `field` | `crates/dioxus-shadcn-cli/templates/field.rs` | `src/components/ui/field.rs` |
 | File Input | Forms | [docs](file-input.md) | `dxui add file-input` | `file-input` | `crates/dioxus-shadcn-cli/templates/file_input.rs` | `src/components/ui/file_input.rs` |
+| Filter | Forms | [docs](filter.md) | `dxui add filter` | `filter` | `crates/dioxus-shadcn-cli/templates/filter.rs` | `src/components/ui/filter.rs` |
 | Input | Forms | [docs](input.md) | `dxui add input` | `input` | `crates/dioxus-shadcn-cli/templates/input.rs` | `src/components/ui/input.rs` |
 | Input Group | Forms | [docs](input-group.md) | `dxui add input-group` | `input-group` | `crates/dioxus-shadcn-cli/templates/input_group.rs` | `src/components/ui/input_group.rs` |
 | Input OTP | Forms | [docs](input-otp.md) | `dxui add input-otp` | `input-otp` | `crates/dioxus-shadcn-cli/templates/input_otp.rs` | `src/components/ui/input_otp.rs` |
@@ -195,6 +201,7 @@ parity.
 | Direction | Layout | [docs](direction.md) | `dxui add direction` | `direction` | `crates/dioxus-shadcn-cli/templates/direction.rs` | `src/components/ui/direction.rs` |
 | Indicator | Layout | [docs](indicator.md) | `dxui add indicator` | `indicator` | `crates/dioxus-shadcn-cli/templates/indicator.rs` | `src/components/ui/indicator.rs` |
 | Item | Layout | [docs](item.md) | `dxui add item` | `item` | `crates/dioxus-shadcn-cli/templates/item.rs` | `src/components/ui/item.rs` |
+| Join | Layout | [docs](join.md) | `dxui add join` | `join` | `crates/dioxus-shadcn-cli/templates/join.rs` | `src/components/ui/join.rs` |
 | Mask | Layout | [docs](mask.md) | `dxui add mask` | `mask` | `crates/dioxus-shadcn-cli/templates/mask.rs` | `src/components/ui/mask.rs` |
 | Mockup | Layout | [docs](mockup.md) | `dxui add mockup` | `mockup` | `crates/dioxus-shadcn-cli/templates/mockup.rs` | `src/components/ui/mockup.rs` |
 | Resizable | Layout | [docs](resizable.md) | `dxui add resizable` | `resizable` | `crates/dioxus-shadcn-cli/templates/resizable.rs` | `src/components/ui/resizable.rs` |
@@ -209,6 +216,7 @@ parity.
 | Breadcrumb | Navigation | [docs](breadcrumb.md) | `dxui add breadcrumb` | `breadcrumb` | `crates/dioxus-shadcn-cli/templates/breadcrumb.rs` | `src/components/ui/breadcrumb.rs` |
 | Code Tabs | Navigation | [docs](code-tabs.md) | `dxui add code-tabs` | `code-tabs` | `crates/dioxus-shadcn-cli/templates/code_tabs.rs` | `src/components/ui/code_tabs.rs` |
 | Dock | Navigation | [docs](dock.md) | `dxui add dock` | `dock` | `crates/dioxus-shadcn-cli/templates/dock.rs` | `src/components/ui/dock.rs` |
+| Link | Navigation | [docs](link.md) | `dxui add link` | `link` | `crates/dioxus-shadcn-cli/templates/link.rs` | `src/components/ui/link.rs` |
 | Menu | Navigation | [docs](menu.md) | `dxui add menu` | `menu` | `crates/dioxus-shadcn-cli/templates/menu.rs` | `src/components/ui/menu.rs` |
 | Navigation Menu | Navigation | [docs](navigation-menu.md) | `dxui add navigation-menu` | `navigation-menu` | `crates/dioxus-shadcn-cli/templates/navigation_menu.rs` | `src/components/ui/navigation_menu.rs` |
 | Pagination | Navigation | [docs](pagination.md) | `dxui add pagination` | `pagination` | `crates/dioxus-shadcn-cli/templates/pagination.rs` | `src/components/ui/pagination.rs` |

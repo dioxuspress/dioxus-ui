@@ -11,7 +11,7 @@ It does not create rendered routes, router code, screenshots, or generated JSON.
 For source preview route metadata, see the
 [Source Preview Manifest](source-preview.md).
 
-Component routes: 91
+Component routes: 95
 Category routes: 8
 
 ## Top-level Routes
@@ -76,6 +76,7 @@ Category routes: 8
 | [Fab](fab.md) | /components/fab | docs/components/fab.md | /components#category-actions | /components/fab/source |
 | [Field](field.md) | /components/field | docs/components/field.md | /components#category-forms | /components/field/source |
 | [File Input](file-input.md) | /components/file-input | docs/components/file-input.md | /components#category-forms | /components/file-input/source |
+| [Filter](filter.md) | /components/filter | docs/components/filter.md | /components#category-forms | /components/filter/source |
 | [Hover 3d](hover-3d.md) | /components/hover-3d | docs/components/hover-3d.md | /components#category-data-display | /components/hover-3d/source |
 | [Hover Card](hover-card.md) | /components/hover-card | docs/components/hover-card.md | /components#category-overlays | /components/hover-card/source |
 | [Hover Gallery](hover-gallery.md) | /components/hover-gallery | docs/components/hover-gallery.md | /components#category-data-display | /components/hover-gallery/source |
@@ -84,8 +85,11 @@ Category routes: 8
 | [Input Group](input-group.md) | /components/input-group | docs/components/input-group.md | /components#category-forms | /components/input-group/source |
 | [Input OTP](input-otp.md) | /components/input-otp | docs/components/input-otp.md | /components#category-forms | /components/input-otp/source |
 | [Item](item.md) | /components/item | docs/components/item.md | /components#category-layout | /components/item/source |
+| [Join](join.md) | /components/join | docs/components/join.md | /components#category-layout | /components/join/source |
 | [Kbd](kbd.md) | /components/kbd | docs/components/kbd.md | /components#category-actions | /components/kbd/source |
 | [Label](label.md) | /components/label | docs/components/label.md | /components#category-forms | /components/label/source |
+| [Link](link.md) | /components/link | docs/components/link.md | /components#category-navigation | /components/link/source |
+| [Loading](loading.md) | /components/loading | docs/components/loading.md | /components#category-feedback | /components/loading/source |
 | [Marker](marker.md) | /components/marker | docs/components/marker.md | /components#category-messaging | /components/marker/source |
 | [Mask](mask.md) | /components/mask | docs/components/mask.md | /components#category-layout | /components/mask/source |
 | [Menu](menu.md) | /components/menu | docs/components/menu.md | /components#category-navigation | /components/menu/source |

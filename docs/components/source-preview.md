@@ -10,7 +10,7 @@ The manifest defines template metadata for future source preview routes.
 It does not embed full template source, syntax highlighting, rendered routes,
 screenshots, or generated JSON.
 
-Source preview routes: 91
+Source preview routes: 95
 
 ## Source Preview Routes
 
@@ -52,6 +52,7 @@ Source preview routes: 91
 | [Fab](fab.md) | /components/fab/source | crates/dioxus-shadcn-cli/templates/fab.rs | src/components/ui/fab.rs | rust | 144 | 5875 |
 | [Field](field.md) | /components/field/source | crates/dioxus-shadcn-cli/templates/field.rs | src/components/ui/field.rs | rust | 124 | 3255 |
 | [File Input](file-input.md) | /components/file-input/source | crates/dioxus-shadcn-cli/templates/file_input.rs | src/components/ui/file_input.rs | rust | 104 | 4281 |
+| [Filter](filter.md) | /components/filter/source | crates/dioxus-shadcn-cli/templates/filter.rs | src/components/ui/filter.rs | rust | 114 | 4349 |
 | [Hover 3d](hover-3d.md) | /components/hover-3d/source | crates/dioxus-shadcn-cli/templates/hover_3d.rs | src/components/ui/hover_3d.rs | rust | 123 | 3777 |
 | [Hover Card](hover-card.md) | /components/hover-card/source | crates/dioxus-shadcn-cli/templates/hover_card.rs | src/components/ui/hover_card.rs | rust | 195 | 5727 |
 | [Hover Gallery](hover-gallery.md) | /components/hover-gallery/source | crates/dioxus-shadcn-cli/templates/hover_gallery.rs | src/components/ui/hover_gallery.rs | rust | 97 | 3172 |
@@ -60,8 +61,11 @@ Source preview routes: 91
 | [Input Group](input-group.md) | /components/input-group/source | crates/dioxus-shadcn-cli/templates/input_group.rs | src/components/ui/input_group.rs | rust | 141 | 4901 |
 | [Input OTP](input-otp.md) | /components/input-otp/source | crates/dioxus-shadcn-cli/templates/input_otp.rs | src/components/ui/input_otp.rs | rust | 484 | 15651 |
 | [Item](item.md) | /components/item/source | crates/dioxus-shadcn-cli/templates/item.rs | src/components/ui/item.rs | rust | 129 | 3747 |
+| [Join](join.md) | /components/join/source | crates/dioxus-shadcn-cli/templates/join.rs | src/components/ui/join.rs | rust | 70 | 2133 |
 | [Kbd](kbd.md) | /components/kbd/source | crates/dioxus-shadcn-cli/templates/kbd.rs | src/components/ui/kbd.rs | rust | 50 | 1321 |
 | [Label](label.md) | /components/label/source | crates/dioxus-shadcn-cli/templates/label.rs | src/components/ui/label.rs | rust | 34 | 1059 |
+| [Link](link.md) | /components/link/source | crates/dioxus-shadcn-cli/templates/link.rs | src/components/ui/link.rs | rust | 107 | 3260 |
+| [Loading](loading.md) | /components/loading/source | crates/dioxus-shadcn-cli/templates/loading.rs | src/components/ui/loading.rs | rust | 148 | 4600 |
 | [Marker](marker.md) | /components/marker/source | crates/dioxus-shadcn-cli/templates/marker.rs | src/components/ui/marker.rs | rust | 107 | 2890 |
 | [Mask](mask.md) | /components/mask/source | crates/dioxus-shadcn-cli/templates/mask.rs | src/components/ui/mask.rs | rust | 136 | 4239 |
 | [Menu](menu.md) | /components/menu/source | crates/dioxus-shadcn-cli/templates/menu.rs | src/components/ui/menu.rs | rust | 187 | 6606 |

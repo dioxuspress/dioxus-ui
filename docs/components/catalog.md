@@ -10,7 +10,7 @@ The catalog is derived from registry entries, templates, component docs,
 crate features, and crate modules. It intentionally does not include visual
 preview routes, screenshot artifacts, or generated JSON metadata.
 
-Public components: 91
+Public components: 95
 
 ## Groups
 
@@ -34,6 +34,7 @@ Public components: 91
 - [Date Time Picker](date-time-picker.md): Date Time Picker with calendar+time columns, standalone TimePicker, and full-wheel DateTimeWheel.
 - [Field](field.md): Form field layout composition parts.
 - [File Input](file-input.md): Styled native file input that passes the change event through.
+- [Filter](filter.md): Radio-style filter pill bar with automatic reset button when an option is selected.
 - [Input](input.md): Input component with disabled and invalid states.
 - [Input Group](input-group.md): Input Group component for addons, controls, and actions around inputs.
 - [Input OTP](input-otp.md): One-time code input whose root owns the code.
@@ -67,6 +68,7 @@ Public components: 91
 - [Breadcrumb](breadcrumb.md): Semantic breadcrumb navigation composition parts.
 - [Code Tabs](code-tabs.md): Underlined code comparison tabs with roving keyboard navigation and code panels.
 - [Dock](dock.md): Styled bottom navigation bar of links or buttons.
+- [Link](link.md): Styled anchor links with semantic color variants, underline modes, and safe URL filtering.
 - [Menu](menu.md): Vertical navigation list with titles, active items, and collapsible groups.
 - [Navigation Menu](navigation-menu.md): Controlled navigation menu parts with navigation semantics.
 - [Pagination](pagination.md): Pagination component with link, item, and ellipsis parts.
@@ -86,6 +88,7 @@ Public components: 91
 - [Direction](direction.md): Direction component for scoped native ltr/rtl text direction.
 - [Indicator](indicator.md): Styled corner indicator wrapper and placed item.
 - [Item](item.md): Generic list item composition parts.
+- [Join](join.md): Grouping container that collapses adjacent border radii for buttons, inputs, and selects.
 - [Mask](mask.md): Geometric clip-path mask wrapper with squircle, heart, star, hexagon, and half-crop shapes.
 - [Mockup](mockup.md): Browser, window, code, and phone frames for showing content.
 - [Resizable](resizable.md): Controlled resizable panel group, panel, and handle parts.
@@ -115,6 +118,7 @@ Public components: 91
 ### Feedback
 
 - [Alert](alert.md): Alert component with title and description parts.
+- [Loading](loading.md): Accessible loading indicator supporting spinner, dots, ring, ball, bars, and infinity variants.
 - [Skeleton](skeleton.md): Skeleton component for loading placeholders.
 - [Sonner](sonner.md): Opinionated toast notification parts and queue helpers.
 - [Spinner](spinner.md): Spinner component for loading status feedback.
@@ -169,6 +173,7 @@ Public components: 91
 | [Fab](fab.md) | Styled floating action button with an optional speed dial. | `dxui add fab` | `fab` | `crates/dioxus-shadcn-cli/templates/fab.rs` | `src/components/ui/fab.rs` |
 | [Field](field.md) | Form field layout composition parts. | `dxui add field` | `field` | `crates/dioxus-shadcn-cli/templates/field.rs` | `src/components/ui/field.rs` |
 | [File Input](file-input.md) | Styled native file input that passes the change event through. | `dxui add file-input` | `file-input` | `crates/dioxus-shadcn-cli/templates/file_input.rs` | `src/components/ui/file_input.rs` |
+| [Filter](filter.md) | Radio-style filter pill bar with automatic reset button when an option is selected. | `dxui add filter` | `filter` | `crates/dioxus-shadcn-cli/templates/filter.rs` | `src/components/ui/filter.rs` |
 | [Hover 3d](hover-3d.md) | Interactive 3D perspective tilt card that responds to pointer zones without JS eval. | `dxui add hover-3d` | `hover-3d` | `crates/dioxus-shadcn-cli/templates/hover_3d.rs` | `src/components/ui/hover_3d.rs` |
 | [Hover Card](hover-card.md) | Controlled rich preview content backed by popover primitive configuration. | `dxui add hover-card` | `hover-card` | `crates/dioxus-shadcn-cli/templates/hover_card.rs` | `src/components/ui/hover_card.rs` |
 | [Hover Gallery](hover-gallery.md) | Interactive multi-image gallery that switches frames as the pointer moves across horizontal zones. | `dxui add hover-gallery` | `hover-gallery` | `crates/dioxus-shadcn-cli/templates/hover_gallery.rs` | `src/components/ui/hover_gallery.rs` |
@@ -177,8 +182,11 @@ Public components: 91
 | [Input Group](input-group.md) | Input Group component for addons, controls, and actions around inputs. | `dxui add input-group` | `input-group` | `crates/dioxus-shadcn-cli/templates/input_group.rs` | `src/components/ui/input_group.rs` |
 | [Input OTP](input-otp.md) | One-time code input whose root owns the code. | `dxui add input-otp` | `input-otp` | `crates/dioxus-shadcn-cli/templates/input_otp.rs` | `src/components/ui/input_otp.rs` |
 | [Item](item.md) | Generic list item composition parts. | `dxui add item` | `item` | `crates/dioxus-shadcn-cli/templates/item.rs` | `src/components/ui/item.rs` |
+| [Join](join.md) | Grouping container that collapses adjacent border radii for buttons, inputs, and selects. | `dxui add join` | `join` | `crates/dioxus-shadcn-cli/templates/join.rs` | `src/components/ui/join.rs` |
 | [Kbd](kbd.md) | Styled keyboard shortcut hint. | `dxui add kbd` | `kbd` | `crates/dioxus-shadcn-cli/templates/kbd.rs` | `src/components/ui/kbd.rs` |
 | [Label](label.md) | Label component for associating text with form controls. | `dxui add label` | `label` | `crates/dioxus-shadcn-cli/templates/label.rs` | `src/components/ui/label.rs` |
+| [Link](link.md) | Styled anchor links with semantic color variants, underline modes, and safe URL filtering. | `dxui add link` | `link` | `crates/dioxus-shadcn-cli/templates/link.rs` | `src/components/ui/link.rs` |
+| [Loading](loading.md) | Accessible loading indicator supporting spinner, dots, ring, ball, bars, and infinity variants. | `dxui add loading` | `loading` | `crates/dioxus-shadcn-cli/templates/loading.rs` | `src/components/ui/loading.rs` |
 | [Marker](marker.md) | Marker component for inline status, bordered rows, and labeled separators. | `dxui add marker` | `marker` | `crates/dioxus-shadcn-cli/templates/marker.rs` | `src/components/ui/marker.rs` |
 | [Mask](mask.md) | Geometric clip-path mask wrapper with squircle, heart, star, hexagon, and half-crop shapes. | `dxui add mask` | `mask` | `crates/dioxus-shadcn-cli/templates/mask.rs` | `src/components/ui/mask.rs` |
 | [Menu](menu.md) | Vertical navigation list with titles, active items, and collapsible groups. | `dxui add menu` | `menu` | `crates/dioxus-shadcn-cli/templates/menu.rs` | `src/components/ui/menu.rs` |

@@ -107,6 +107,10 @@ const componentCategories = {
   "hover-3d": "data-display",
   "text-rotate": "data-display",
   aura: "layout",
+  filter: "forms",
+  link: "navigation",
+  loading: "feedback",
+  join: "layout",
 };
 
 const categoryLabels = new Map(catalogCategories.map((category) => [category.id, category.label]));

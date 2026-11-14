@@ -1,0 +1,14 @@
+{
+  "name": "join",
+  "description": "Grouping container that collapses adjacent border radii for buttons, inputs, and selects.",
+  "files": [
+    {
+      "source": "templates/join.rs",
+      "target": "src/components/ui/join.rs"
+    }
+  ],
+  "dependencies": [
+    "utils"
+  ],
+  "assets": []
+}

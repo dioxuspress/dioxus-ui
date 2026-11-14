@@ -1,0 +1,14 @@
+{
+  "name": "loading",
+  "description": "Accessible loading indicator supporting spinner, dots, ring, ball, bars, and infinity variants.",
+  "files": [
+    {
+      "source": "templates/loading.rs",
+      "target": "src/components/ui/loading.rs"
+    }
+  ],
+  "dependencies": [
+    "utils"
+  ],
+  "assets": []
+}
