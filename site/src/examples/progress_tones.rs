@@ -1,5 +1,5 @@
 use dioxus::prelude::*;
-use dioxus_shadcn::Progress;
+use dioxus_shadcn::{Progress, ProgressSize, ProgressVariant};
 
 #[component]
 pub fn ProgressTonesDemo() -> Element {
@@ -10,7 +10,7 @@ pub fn ProgressTonesDemo() -> Element {
           span { "Default · xs" }
           span { "35%" }
         }
-        Progress { class: "h-1.5", value: 35.0, "aria-label": "Default progress" }
+        Progress { size: ProgressSize::Xs, value: 35.0, "aria-label": "Default progress" }
       }
       div { class: "grid gap-1.5",
         div { class: "flex justify-between text-xs text-muted-foreground",
@@ -18,8 +18,8 @@ pub fn ProgressTonesDemo() -> Element {
           span { "72%" }
         }
         Progress {
-          class: "h-2.5",
-          indicator_class: "bg-success",
+          variant: ProgressVariant::Success,
+          size: ProgressSize::Sm,
           value: 72.0,
           "aria-label": "Success progress",
         }
@@ -30,8 +30,8 @@ pub fn ProgressTonesDemo() -> Element {
           span { "86%" }
         }
         Progress {
-          class: "h-3.5",
-          indicator_class: "bg-warning",
+          variant: ProgressVariant::Warning,
+          size: ProgressSize::Md,
           value: 86.0,
           "aria-label": "Warning progress",
         }
@@ -42,10 +42,22 @@ pub fn ProgressTonesDemo() -> Element {
           span { "96%" }
         }
         Progress {
-          class: "h-5",
-          indicator_class: "bg-destructive",
+          variant: ProgressVariant::Destructive,
+          size: ProgressSize::Lg,
           value: 96.0,
           "aria-label": "Critical usage progress",
+        }
+      }
+      div { class: "grid gap-1.5",
+        div { class: "flex justify-between text-xs text-muted-foreground",
+          span { "Info · sm" }
+          span { "58%" }
+        }
+        Progress {
+          variant: ProgressVariant::Info,
+          size: ProgressSize::Sm,
+          value: 58.0,
+          "aria-label": "Info progress",
         }
       }
     }

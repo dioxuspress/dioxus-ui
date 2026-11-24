@@ -1,5 +1,5 @@
 use dioxus::prelude::*;
-use dioxus_shadcn::{Badge, BadgeVariant, Button, ButtonSize, ButtonVariant};
+use dioxus_shadcn::{Badge, BadgeSize, BadgeStyle, BadgeVariant, Button, ButtonSize, ButtonVariant};
 
 const DEFAULT_TAGS: [&str; 3] = ["Rust", "Dioxus 0.7", "Tailwind v4"];
 
@@ -10,22 +10,22 @@ pub fn BadgeCompositionDemo() -> Element {
   rsx! {
     div { class: "grid gap-4",
       div { class: "flex flex-wrap items-center gap-2",
-        Badge { variant: BadgeVariant::Outline, class: "gap-1.5 rounded-full px-2.5",
+        Badge { variant: BadgeVariant::Success, style: BadgeStyle::Soft, pill: true, class: "gap-1.5",
           span { class: "size-1.5 rounded-full bg-success", "aria-hidden": "true" }
           "Operational"
         }
-        Badge { variant: BadgeVariant::Outline, class: "gap-1.5 rounded-full px-2.5",
+        Badge { variant: BadgeVariant::Warning, style: BadgeStyle::Soft, pill: true, class: "gap-1.5",
           span { class: "size-1.5 rounded-full bg-warning", "aria-hidden": "true" }
           "Degraded"
         }
         Button { variant: ButtonVariant::Outline, size: ButtonSize::Sm, class: "gap-2",
           "Inbox"
-          Badge { variant: BadgeVariant::Secondary, class: "rounded-full px-1.5", "9+" }
+          Badge { variant: BadgeVariant::Secondary, size: BadgeSize::Xs, pill: true, "9+" }
         }
       }
       div { class: "flex flex-wrap items-center gap-2",
         for tag in tags() {
-          Badge { key: "{tag}", variant: BadgeVariant::Secondary, class: "gap-1.5 pe-1",
+          Badge { key: "{tag}", variant: BadgeVariant::Secondary, size: BadgeSize::Sm, class: "gap-1.5 pe-1",
             span { "{tag}" }
             button {
               r#type: "button",

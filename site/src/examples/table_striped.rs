@@ -12,22 +12,22 @@ const METRICS: [(&str, &str, &str, &str); 4] = [
 pub fn TableStripedDemo() -> Element {
   rsx! {
     div { class: "w-full min-w-0 overflow-hidden rounded-md border border-border",
-      Table { class: "text-xs",
+      Table { striped: true, compact: true, sticky_header: true,
         TableHeader { class: "bg-muted/50",
           TableRow {
-            TableHead { class: "h-9 px-3", "Region" }
-            TableHead { class: "h-9 px-3", "Uptime" }
-            TableHead { class: "h-9 px-3 text-right", "P95 Latency" }
-            TableHead { class: "h-9 px-3 text-right", "Throughput" }
+            TableHead { "Region" }
+            TableHead { "Uptime" }
+            TableHead { class: "text-right", "P95 Latency" }
+            TableHead { class: "text-right", "Throughput" }
           }
         }
         TableBody {
           for (region, uptime, latency, rps) in METRICS {
-            TableRow { key: "{region}", class: "even:bg-muted/30",
-              TableCell { class: "px-3 py-2 font-mono font-medium", "{region}" }
-              TableCell { class: "px-3 py-2", "{uptime}" }
-              TableCell { class: "px-3 py-2 text-right tabular-nums", "{latency}" }
-              TableCell { class: "px-3 py-2 text-right tabular-nums", "{rps}" }
+            TableRow { key: "{region}",
+              TableCell { class: "font-mono font-medium", "{region}" }
+              TableCell { "{uptime}" }
+              TableCell { class: "text-right tabular-nums", "{latency}" }
+              TableCell { class: "text-right tabular-nums", "{rps}" }
             }
           }
         }

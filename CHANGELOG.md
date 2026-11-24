@@ -8,6 +8,37 @@ for commit messages.
 
 ## [Unreleased]
 
+### Added
+- Orthogonal visual variants, sizes, and ergonomic props across seven core
+  components (synced between `dioxus-shadcn` and `dioxus-shadcn-cli` templates):
+  - `Button`: `ButtonVariant::{Soft, Dash}`, `ButtonSize::{Xs, IconSm, IconLg}`,
+    and `loading: bool` (disables clicks, sets `aria-busy="true"`, renders an
+    inline spinner).
+  - `Badge`: `BadgeStyle::{Solid, Soft, Outline, Dash}`,
+    `BadgeSize::{Xs, Sm, Md, Lg}`, `pill: bool`, and `badge_styled_class`.
+  - `Alert`: `AlertStyle::{Default, Soft, Outline, Dash, Solid}`,
+    `alert_styled_class`, and automatic `AlertDescription` foreground adaptation
+    through `Alert`'s context.
+  - `Input`: `InputSize::{Sm, Md, Lg}`, `InputVariant::{Default, Ghost, Soft}`,
+    and `input_styled_class`.
+  - `Tabs`: `TabsVariant::{Default, Underline, Bordered}`,
+    `tabs_list_variant_class`, and `tabs_trigger_variant_class` propagated via
+    `Tabs` context across both horizontal and vertical orientations.
+  - `Avatar`: `AvatarSize::{Xs, Sm, Md, Lg, Xl}`,
+    `AvatarShape::{Circle, Square}`, `AvatarGroup`, `avatar_styled_class`, and
+    `avatar_group_class`.
+  - `Table` and `Progress`: `Table` props `striped`, `compact`, and
+    `sticky_header`; `ProgressVariant::{Default, Success, Warning, Destructive,
+    Info}`, `ProgressSize::{Xs, Sm, Md, Lg}`, `progress_sized_class`, and
+    `progress_indicator_variant_class`.
+
+### Changed
+- **Migration (`0.6.x` → `0.7.0`)**: All existing RSX call sites and `*_class`
+  helper signatures remain source-compatible because every new component prop
+  uses `#[props(default)]`. Code that exhaustively matches `ButtonVariant` or
+  `ButtonSize` or constructs `*Props` struct literals directly should add arms
+  or fields for the new variants and props.
+
 ## [0.6.8] - 2026-11-24
 
 Version 0.6.8 expands the library from 84 to 100 public components while

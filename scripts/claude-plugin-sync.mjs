@@ -62,7 +62,7 @@ export function renderCatalogReference(root = repoRoot) {
     "",
     `Synced with \`dioxus-shadcn\` **${version}** (${catalog.length} public components across ${catalogCategories.length} categories).`,
     "",
-    "- **Crate mode**: add the feature under `dioxus-shadcn = { version = \"0.6\", default-features = false, features = [...] }` and import from `dioxus_shadcn::<module>` (or crate root re-exports).",
+    `- **Crate mode**: add the feature under \`dioxus-shadcn = { version = "${version.split(".").slice(0, 2).join(".")}", default-features = false, features = [...] }\` and import from \`dioxus_shadcn::<module>\` (or crate root re-exports).`,
     "- **Source-copy mode**: run `dxui add <slug>` and import from `crate::components::ui::<module>`.",
     "- **Live docs & examples**: `https://ui.dioxuspress.dev/components/<slug>`",
     "",

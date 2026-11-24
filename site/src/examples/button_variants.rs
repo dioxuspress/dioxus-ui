@@ -7,7 +7,9 @@ pub fn ButtonVariantsDemo() -> Element {
     div { class: "flex flex-wrap items-center gap-2",
       Button { "Primary" }
       Button { variant: ButtonVariant::Secondary, "Secondary" }
+      Button { variant: ButtonVariant::Soft, "Soft" }
       Button { variant: ButtonVariant::Outline, "Outline" }
+      Button { variant: ButtonVariant::Dash, "Dash" }
       Button { variant: ButtonVariant::Ghost, "Ghost" }
       Button { variant: ButtonVariant::Destructive, "Destructive" }
       Button { variant: ButtonVariant::Link, "Link" }

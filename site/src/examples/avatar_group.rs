@@ -1,20 +1,18 @@
 use dioxus::prelude::*;
-use dioxus_shadcn::{Avatar, AvatarFallback};
+use dioxus_shadcn::{Avatar, AvatarFallback, AvatarGroup};
 
 #[component]
 pub fn AvatarGroupDemo() -> Element {
   rsx! {
     div { class: "flex flex-wrap items-center gap-8",
-      div { class: "flex items-center -space-x-2",
+      AvatarGroup {
         for (initials, tone) in [
           ("AL", "bg-primary text-primary-foreground"),
           ("GK", "bg-secondary text-secondary-foreground"),
           ("MN", "bg-muted text-foreground"),
           ("+4", "bg-muted text-foreground text-xs"),
         ] {
-          Avatar {
-            key: "{initials}",
-            class: "ring-2 ring-background",
+          Avatar { key: "{initials}",
             AvatarFallback { class: tone, "{initials}" }
           }
         }

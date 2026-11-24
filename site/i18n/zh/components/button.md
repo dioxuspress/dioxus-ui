@@ -1,12 +1,12 @@
 ## API 概览
 
-- `Button`
-- `ButtonVariant`
-- `ButtonSize`
+- `Button`（`variant`、`size`、`disabled`、`loading`、`class`、`onclick`）
+- `ButtonVariant`（`Primary`、`Secondary`、`Destructive`、`Outline`、`Ghost`、`Link`、`Soft`、`Dash`）
+- `ButtonSize`（`Xs`、`Sm`、`Md`、`Lg`、`Icon`、`IconSm`、`IconLg`）
 - `button_class`
 - `DensityProvider`, `use_density`, `UiDensity`
 
-`ButtonVariant::Link` 使用前景色渲染文本，并在悬停时显示主色下划线，使链接按钮在使用浅色主色的主题预设下依然保持清晰可读（参见 [RFC 0057](../../../../docs/rfcs/0057-theme-presets.md)）。
+`ButtonVariant::Link` 使用前景色渲染文本并在悬停时显示主色下划线，`ButtonVariant::Soft` 与 `ButtonVariant::Dash` 同样以 `text-foreground` 搭配柔和浅底或虚线边框，使各变体在使用浅色主色的主题预设下依然保持清晰可读（参见 [RFC 0057](../../../../docs/rfcs/0057-theme-presets.md)）。设置 `loading: true` 会自动禁用按钮、添加 `aria-busy="true"` 并在内容前渲染旋转指示器。
 
 ## 事件处理
 

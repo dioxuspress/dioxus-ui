@@ -1,6 +1,6 @@
 ## API 概览
 
-- `Table`
+- `Table`（`striped`、`compact`、`sticky_header`、`class`）
 - `TableHeader`
 - `TableBody`
 - `TableFooter`

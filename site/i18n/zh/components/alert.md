@@ -1,14 +1,16 @@
 ## API 概览
 
-- `Alert`
+- `Alert`（`variant`、`style`、`class`）
 - `AlertTitle`
 - `AlertDescription`
-- `AlertVariant`
+- `AlertVariant`（`Default`、`Destructive`、`Success`、`Warning`、`Info`）
+- `AlertStyle`（`Default`、`Soft`、`Outline`、`Dash`、`Solid`）
 - `alert_class`
+- `alert_styled_class`
 - `alert_title_class`
 - `alert_description_class`
 
-`AlertVariant` 包含 `Default`、`Destructive` 以及状态变体 `Success`、`Warning` 和 `Info`。由于状态颜色直接作为正文文本时对比度偏浅，状态提示框会对背景表面与边框着色并保留前景色文本；请将相同的变体一并传给 `AlertDescription`（参见 [RFC 0058](../../../../docs/rfcs/0058-status-variants.md)）。
+`AlertVariant` 包含 `Default`、`Destructive` 以及状态变体 `Success`、`Warning` 和 `Info`。由于状态颜色直接作为正文文本时对比度偏浅，状态提示框会对背景表面与边框着色并保留前景色文本（参见 [RFC 0058](../../../../docs/rfcs/0058-status-variants.md)）。可通过 `AlertStyle` 在默认、柔和（`Soft`）、描边（`Outline`）、虚线（`Dash`）与实心高对比度（`Solid`）外观间切换，`AlertDescription` 会通过上下文自动适配文字颜色。
 
 ## 无障碍说明
 

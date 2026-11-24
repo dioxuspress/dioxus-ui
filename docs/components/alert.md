@@ -17,19 +17,23 @@ dioxus-shadcn = { version = "0.6", default-features = false, features = ["alert"
 
 ## API Surface
 
-- `Alert`
+- `Alert` (`variant`, `style`, `class`)
 - `AlertTitle`
 - `AlertDescription`
-- `AlertVariant`
+- `AlertVariant` (`Default`, `Destructive`, `Success`, `Warning`, `Info`)
+- `AlertStyle` (`Default`, `Soft`, `Outline`, `Dash`, `Solid`)
 - `alert_class`
+- `alert_styled_class`
 - `alert_title_class`
 - `alert_description_class`
 
 `AlertVariant` has `Default`, `Destructive`, and the status variants
 `Success`, `Warning`, and `Info`. The status colors are too light to be text,
-so status alerts tint the surface and border and keep foreground text; pass
-the same variant to `AlertDescription`
-([RFC 0058](../rfcs/0058-status-variants.md)).
+so status alerts tint the surface and border and keep foreground text
+([RFC 0058](../rfcs/0058-status-variants.md)). `AlertStyle` selects between
+the default card/tint look, `Soft`, `Outline`, `Dash`, and high-contrast
+`Solid` surfaces; `AlertDescription` adapts automatically through `Alert`'s
+context.
 
 ## Accessibility Notes
 

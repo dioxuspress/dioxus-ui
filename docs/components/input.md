@@ -16,8 +16,11 @@ dioxus-shadcn = { version = "0.6", default-features = false, features = ["input"
 
 ## API Surface
 
-- `Input`
+- `Input` (`value`, `placeholder`, `size`, `variant`, `disabled`, `invalid`, `class`, `on_value_change`)
+- `InputSize` (`Sm`, `Md`, `Lg`)
+- `InputVariant` (`Default`, `Ghost`, `Soft`)
 - `input_class`
+- `input_styled_class`
 
 ## Change Events
 
