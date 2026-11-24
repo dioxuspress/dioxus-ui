@@ -19,18 +19,26 @@ dioxus-shadcn = { version = "0.6", default-features = false, features = ["radial
 
 - `RadialProgress`
 - `RadialProgressSize`
+- `RadialProgressVariant` (`Default`, `Success`, `Warning`, `Destructive`, `Info`)
 - `radial_progress_class`
+- `radial_progress_indicator_class`
 
 ```rust
 rsx! {
   RadialProgress { value: 72.0, "aria-label": "Storage used" }
-  RadialProgress { value: 3.0 / 5.0 * 100.0, "aria-label": "Tasks done", "3/5" }
+  RadialProgress {
+    value: 3.0 / 5.0 * 100.0,
+    variant: RadialProgressVariant::Success,
+    "aria-label": "Tasks done",
+    "3/5"
+  }
 }
 ```
 
 `value` is clamped to 0 through 100. Children replace the centered
-percentage. `RadialProgressSize` is `Sm`, `Md` (the default), or `Lg`. Color
-the ring with a class such as `[&_circle:last-of-type]:stroke-success`.
+percentage. `RadialProgressSize` is `Sm`, `Md` (the default), or `Lg`.
+`RadialProgressVariant` selects the semantic stroke tone (`Default`, `Success`,
+`Warning`, `Destructive`, or `Info`).
 
 ## Accessibility Notes
 

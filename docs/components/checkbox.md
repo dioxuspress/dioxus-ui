@@ -18,7 +18,9 @@ dioxus-shadcn = { version = "0.6", default-features = false, features = ["checkb
 ## API Surface
 
 - `Checkbox`
+- `CheckboxSize` (`Sm`, `Md`, `Lg`)
 - `checkbox_class`
+- `checkbox_sized_class`
 
 ## Change Events
 

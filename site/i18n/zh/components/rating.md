@@ -1,7 +1,9 @@
 ## API 概览
 
 - `Rating`
+- `RatingSize`（`Sm`、`Md`、`Lg`）
 - `rating_class`
+- `rating_star_class`
 
 ```rust
 let mut rating = use_signal(|| 0_u8);
@@ -12,10 +14,11 @@ rsx! {
     value: rating(),
     on_value_change: move |value| rating.set(value),
   }
+  Rating { value: 4, size: RatingSize::Sm, read_only: true }
 }
 ```
 
-`value` 的取值范围为 `0`（未评分）到 `max`（默认为 `5`）；小于等于该值的星标会以警告色填充。评分变更时会以选中的星级调用 `on_value_change`。`name` 用于设置单选组的表单字段名；未提供时，每个 `Rating` 会自动获得一个唯一名称。`disabled` 会禁用所有星标。
+`value` 的取值范围为 `0`（未评分）到 `max`（默认为 `5`）；小于等于该值的星标会以警告色填充。评分变更时会以选中的星级调用 `on_value_change`。`size` 支持 `Sm`、`Md`（默认）与 `Lg`；设置 `read_only: true` 可渲染无交互的满对比度静态评分（`role="img"`）。`name` 用于设置单选组的表单字段名；未提供时，每个 `Rating` 会自动获得一个唯一名称。`disabled` 会禁用所有星标。
 
 ## 无障碍说明
 

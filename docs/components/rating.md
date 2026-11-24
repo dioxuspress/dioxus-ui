@@ -18,7 +18,9 @@ dioxus-shadcn = { version = "0.6", default-features = false, features = ["rating
 ## API Surface
 
 - `Rating`
+- `RatingSize` (`Sm`, `Md`, `Lg`)
 - `rating_class`
+- `rating_star_class`
 
 ```rust
 let mut rating = use_signal(|| 0_u8);
@@ -29,13 +31,16 @@ rsx! {
     value: rating(),
     on_value_change: move |value| rating.set(value),
   }
+  Rating { value: 4, size: RatingSize::Sm, read_only: true }
 }
 ```
 
 `value` runs from 0 (no rating) to `max` (default 5); the stars up to it are
 filled with the warning color. A change calls `on_value_change` with the
-chosen star. `name` sets the radio group's form name; without it each Rating
-gets a unique one. `disabled` disables every star.
+chosen star. `size` selects `Sm`, `Md` (default), or `Lg`. Set
+`read_only: true` to display a full-contrast static score (`role="img"`)
+without radio inputs. `name` sets the radio group's form name; without it each
+Rating gets a unique one. `disabled` disables every star.
 
 ## Accessibility Notes
 

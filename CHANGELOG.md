@@ -31,6 +31,14 @@ for commit messages.
     `sticky_header`; `ProgressVariant::{Default, Success, Warning, Destructive,
     Info}`, `ProgressSize::{Xs, Sm, Md, Lg}`, `progress_sized_class`, and
     `progress_indicator_variant_class`.
+  - `Textarea`, `RadialProgress`, `Rating`, `Switch`, and `Checkbox`:
+    `TextareaSize::{Sm, Md, Lg}`, `TextareaVariant::{Default, Ghost, Soft}`,
+    and `textarea_styled_class`; `RadialProgressVariant::{Default, Success,
+    Warning, Destructive, Info}` and `radial_progress_indicator_class`;
+    `RatingSize::{Sm, Md, Lg}`, `read_only: bool` (`role="img"` static score
+    at full contrast), and `rating_star_class`; `SwitchSize::{Sm, Md, Lg}`,
+    `switch_sized_class`, and `switch_thumb_sized_class`; `CheckboxSize::{Sm,
+    Md, Lg}` and `checkbox_sized_class`.
 - Landmark `aria-label` attribute forwarding on `Breadcrumb`, `Pagination`,
   `ToastViewport`, and `SonnerViewport` (via `default_attribute`), allowing
   multiple instances on the same page with unique accessible landmark names.

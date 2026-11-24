@@ -17,8 +17,11 @@ dioxus-shadcn = { version = "0.6", default-features = false, features = ["switch
 ## API Surface
 
 - `Switch`
+- `SwitchSize` (`Sm`, `Md`, `Lg`)
 - `switch_class`
+- `switch_sized_class`
 - `switch_thumb_class`
+- `switch_thumb_sized_class`
 
 ## Change Events
 

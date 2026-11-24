@@ -781,6 +781,9 @@
   .min-h-24 {
     min-height: calc(var(--spacing) * 24);
   }
+  .min-h-32 {
+    min-height: calc(var(--spacing) * 32);
+  }
   .min-h-40 {
     min-height: calc(var(--spacing) * 40);
   }
@@ -864,6 +867,9 @@
   }
   .w-12 {
     width: calc(var(--spacing) * 12);
+  }
+  .w-13 {
+    width: calc(var(--spacing) * 13);
   }
   .w-14 {
     width: calc(var(--spacing) * 14);
@@ -1043,8 +1049,16 @@
     --tw-translate-x: calc(var(--spacing) * 2);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
+  .translate-x-4 {
+    --tw-translate-x: calc(var(--spacing) * 4);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
   .translate-x-5 {
     --tw-translate-x: calc(var(--spacing) * 5);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .translate-x-6 {
+    --tw-translate-x: calc(var(--spacing) * 6);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
   .-translate-y-1\/2 {
@@ -1917,11 +1931,23 @@
   .stroke-current {
     stroke: currentcolor;
   }
+  .stroke-destructive {
+    stroke: var(--destructive);
+  }
+  .stroke-info {
+    stroke: var(--info);
+  }
   .stroke-muted {
     stroke: var(--muted);
   }
   .stroke-primary {
     stroke: var(--primary);
+  }
+  .stroke-success {
+    stroke: var(--success);
+  }
+  .stroke-warning {
+    stroke: var(--warning);
   }
   .object-cover {
     object-fit: cover;
@@ -3653,9 +3679,6 @@
   }
   .\[\&_a\]\:underline-offset-4 a {
     text-underline-offset: 4px;
-  }
-  .\[\&_circle\:last-of-type\]\:stroke-success circle:last-of-type {
-    stroke: var(--success);
   }
   .\[\&_code\]\:font-mono code {
     font-family: var(--font-mono);
