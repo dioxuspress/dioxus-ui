@@ -1,6 +1,6 @@
 # Dioxus UI (`dioxus-shadcn`) API Patterns & Conventions
 
-Concise reference distilled from `docs/component-api.md` and shipped components for `dioxus-shadcn` `0.6.7` (Dioxus `0.7.x`).
+Concise reference distilled from `docs/component-api.md` and shipped components for `dioxus-shadcn` `0.6.8` (Dioxus `0.7.x`).
 
 ## Imports: Crate Mode vs. Source-Copy Mode
 

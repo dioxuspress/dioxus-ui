@@ -8,6 +8,51 @@ for commit messages.
 
 ## [Unreleased]
 
+## [0.6.8] - 2026-11-24
+
+Version 0.6.8 expands the library from 84 to 100 public components while
+preserving full `0.6.x` semver compatibility across `dioxus-shadcn-core`,
+`dioxus-shadcn-primitives`, and `dioxus-shadcn`, adds bilingual Chinese/English
+documentation on `ui.dioxuspress.dev`, and ships the official Claude Code
+plugin and self-hosted marketplace.
+
+### Added
+- 16 new public components (84 to 100 total, available both as Cargo features
+  and via `dxui add`):
+  - Date & calendar: `DateTimePicker` (`date-time-picker`) alongside `Calendar`
+    wheel and select navigation variants.
+  - Visual & motion primitives: `Mask` (`mask`), `Stack` (`stack`),
+    `HoverGallery` (`hover-gallery`), `Hover3D` (`hover-3d`), `TextRotate`
+    (`text-rotate`), and `Aura` (`aura`).
+  - Form, loading, and composition primitives: `Filter` (`filter`), `Link`
+    (`link`), `Loading` (`loading`), `Join` (`join`), and `Validator`
+    (`validator`).
+  - Navigation & page layout primitives: `Navbar` (`navbar`), `Hero` (`hero`),
+    `Footer` (`footer`), and `Megamenu` (`megamenu`).
+- DaisyUI-style `Card` variants, sizes, media, body, and actions while
+  retaining `0.6.x` `CardProps` semver compatibility and RFC 0051 semantic
+  tokens.
+- Official Claude Code plugin (`plugins/dioxus-ui/`) and self-hosted
+  marketplace (`.claude-plugin/marketplace.json`) with source-generated
+  component, block, and theme references (`npm run claude-plugin:sync` and
+  `npm run verify:claude-plugin`).
+- Simplified Chinese README (`README.zh-CN.md`) and full bilingual
+  Chinese/English showcase site served at `https://ui.dioxuspress.dev/` with
+  cross-site language synchronization and syntax-highlighted source tabs.
+
+### Changed
+- Migrated repository and showcase links to the `dioxuspress` GitHub
+  organization (`https://github.com/dioxuspress/dioxus-ui` and
+  `https://ui.dioxuspress.dev/`).
+
+### Fixed
+- Synchronized the Tailwind v4 class merge table with Playwright Chromium and
+  updated gradient utility usage to Tailwind v4 `bg-linear-to-*`.
+- Fixed preset theme specificity, first-paint rendering, and Rust 1.100
+  `unreachable_code` lint scoping on `Routable` derives in the showcase site.
+- Completed the rendered component coverage manifest for all 100 public
+  components.
+
 ## [0.6.7] - 2026-11-08
 
 Version 0.6.7 adds the Code Tabs component (`code-tabs`) for underlined

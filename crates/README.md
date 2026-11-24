@@ -37,7 +37,7 @@ about the rest.
 you pass `--overwrite`, and says which files it kept. `dxui diff [<name>...]`
 shows how your copies, all of them unless you name some, differ from the
 templates of the installed CLI.
-`dxui list` prints the 84 components. Copied
+`dxui list` prints the 100 components. Copied
 components depend only on `dioxus`.
 
 `dxui add` also takes a block, a whole screen such as `login`: it copies the
@@ -80,7 +80,7 @@ writes an `@source` line for the crate's source, after the import, from
 
 ```css
 @import "tailwindcss";
-@source "/home/me/.cargo/registry/src/index.crates.io-…/dioxus-shadcn-0.6.7/src";
+@source "/home/me/.cargo/registry/src/index.crates.io-…/dioxus-shadcn-0.6.8/src";
 ```
 
 The path names one version, so run `dxui init` again after upgrading the
@@ -116,17 +116,19 @@ stylesheet; set `data-theme="nord"` on any element to theme its subtree.
 
 ## Components
 
-Accordion, Alert, Alert Dialog, Aspect Ratio, Attachment, Avatar, Badge,
+Accordion, Alert, Alert Dialog, Aspect Ratio, Attachment, Aura, Avatar, Badge,
 Breadcrumb, Bubble, Button, Button Group, Calendar, Card, Carousel, Chart,
-Checkbox, Code Tabs, Collapsible, Combobox, Command, Context Menu, Countdown, Data Table,
-Date Picker, Dialog, Diff, Direction, Dock, Drawer, Dropdown, Empty, Fab,
-Field, File Input, Hover Card, Indicator, Input, Input Group, Input OTP, Item,
-Kbd, Label, Marker, Menubar, Message, Message Scroller, Native Select,
-Navigation Menu, Number Input, Pagination, Popover, Progress, Radial Progress,
-Radio Group, Rating, Resizable, Scroll Area, Select, Separator, Sheet,
-Sidebar, Skeleton, Slider, Sonner, Spinner, Stat, Status, Steps, Swap, Switch,
-Table, Tabs, Tags Input, Textarea, Timeline, Toast, Toggle, Toggle Group,
-Tooltip, and Typography.
+Checkbox, Code Tabs, Collapsible, Combobox, Command, Context Menu, Countdown,
+Data Table, Date Picker, Date Time Picker, Dialog, Diff, Direction, Dock,
+Drawer, Dropdown, Empty, Fab, Field, File Input, Filter, Footer, Hero, Hover
+3D, Hover Card, Hover Gallery, Indicator, Input, Input Group, Input OTP, Item,
+Join, Kbd, Label, Link, Loading, Marker, Mask, Megamenu, Menu, Menubar,
+Message, Message Scroller, Mockup, Native Select, Navbar, Navigation Menu,
+Number Input, Pagination, Popover, Progress, Radial Progress, Radio Group,
+Rating, Resizable, Scroll Area, Select, Separator, Sheet, Sidebar, Skeleton,
+Slider, Sonner, Spinner, Stack, Stat, Status, Steps, Swap, Switch, Table, Tabs,
+Tags Input, Text Rotate, Textarea, Theme Controller, Timeline, Toast, Toggle,
+Toggle Group, Tooltip, Tree, Typography, and Validator.
 
 Components are controlled: the app owns state such as `open` or `value` and
 receives changes through callbacks such as `on_open_change`. Overlays handle
