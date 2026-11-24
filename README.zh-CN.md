@@ -9,7 +9,7 @@
 - **源码拷贝 CLI（`dxui`）**：按需将组件源码复制到你的应用仓库中，支持自由深度定制
 - **Cargo Crate 依赖模式**：偏好通过 Cargo 管理版本更新的项目也可直接按特性（feature）引入
 
-当前共提供 **84 个组件**、`dxui` 命令行工具以及在线交互预览站 [`ui.dioxuspress.dev`](https://ui.dioxuspress.dev/)。最新版本 `0.6.7` 已发布至 crates.io：[`dioxus-shadcn`](https://crates.io/crates/dioxus-shadcn) 与 [`dioxus-shadcn-cli`](https://crates.io/crates/dioxus-shadcn-cli)。
+当前共提供 **100 个组件**、`dxui` 命令行工具以及在线交互预览站 [`ui.dioxuspress.dev`](https://ui.dioxuspress.dev/)。最新版本 `0.6.8` 已发布至 crates.io：[`dioxus-shadcn`](https://crates.io/crates/dioxus-shadcn) 与 [`dioxus-shadcn-cli`](https://crates.io/crates/dioxus-shadcn-cli)。
 
 ## 产品定位与架构形态
 
@@ -33,7 +33,7 @@ dioxus-ui/
 ├─ crates/
 │  ├─ dioxus-shadcn-core/        # 共享类型、Tailwind 类名合并、主题令牌与脚本桥接
 │  ├─ dioxus-shadcn-primitives/  # 无样式交互与无障碍原语组件
-│  ├─ dioxus-shadcn/             # 面向业务公开的 Tailwind 样式组件（84 个）
+│  ├─ dioxus-shadcn/             # 面向业务公开的 Tailwind 样式组件（100 个）
 │  └─ dioxus-shadcn-cli/         # dxui 命令行工具（init / add / diff / list / theme）
 │     ├─ registry/               # 内嵌于 CLI 二进制中的组件注册表元数据
 │     └─ templates/              # dxui add 拷贝到用户项目的组件与辅助模板
@@ -185,7 +185,7 @@ script-src 'self' 'wasm-unsafe-eval'
 
 ## 组件范围与 Tailwind 静态类名准则
 
-完整的 **84 个公开组件目录**见 [docs/components/catalog.md](docs/components/catalog.md)（也可通过 `dxui list` 查看）。
+完整的 **100 个公开组件目录**见 [docs/components/catalog.md](docs/components/catalog.md)（也可通过 `dxui list` 查看）。
 
 编写或扩展组件样式时，Tailwind 类名必须以**完整的静态字面量**出现，严禁运行时动态拼接字符串：
 
