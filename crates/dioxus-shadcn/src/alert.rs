@@ -35,14 +35,74 @@ impl AlertVariant {
   }
 }
 
+/// Visual surface style of an [`Alert`].
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub enum AlertStyle {
+  /// Standard alert appearance (default).
+  #[default]
+  Default,
+  /// Soft tinted surface with subtle border and foreground text.
+  Soft,
+  /// Background surface with a solid semantic border and foreground text.
+  Outline,
+  /// Background surface with a dashed semantic border and foreground text.
+  Dash,
+  /// Full semantic background paired with its contrasting foreground token.
+  Solid,
+}
+
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+struct AlertContext {
+  style: AlertStyle,
+}
+
 const ALERT_BASE_CLASS: &str = "relative w-full rounded-md border p-4";
 const ALERT_TITLE_BASE_CLASS: &str = "mb-1 font-medium leading-none tracking-normal";
 const ALERT_DESCRIPTION_BASE_CLASS: &str = "text-sm";
+
+const fn alert_surface_class(variant: AlertVariant, style: AlertStyle) -> &'static str {
+  match style {
+    AlertStyle::Default => variant.class(),
+    AlertStyle::Soft => match variant {
+      AlertVariant::Default => "border-border/60 bg-muted/50 text-foreground",
+      AlertVariant::Destructive => "border-destructive/40 bg-destructive/10 text-foreground",
+      AlertVariant::Success => "border-success/40 bg-success/10 text-foreground",
+      AlertVariant::Warning => "border-warning/40 bg-warning/10 text-foreground",
+      AlertVariant::Info => "border-info/40 bg-info/10 text-foreground",
+    },
+    AlertStyle::Outline => match variant {
+      AlertVariant::Default => "border-border bg-background text-foreground",
+      AlertVariant::Destructive => "border-destructive bg-background text-foreground",
+      AlertVariant::Success => "border-success bg-background text-foreground",
+      AlertVariant::Warning => "border-warning bg-background text-foreground",
+      AlertVariant::Info => "border-info bg-background text-foreground",
+    },
+    AlertStyle::Dash => match variant {
+      AlertVariant::Default => "border-dashed border-border bg-background text-foreground",
+      AlertVariant::Destructive => "border-dashed border-destructive bg-background text-foreground",
+      AlertVariant::Success => "border-dashed border-success bg-background text-foreground",
+      AlertVariant::Warning => "border-dashed border-warning bg-background text-foreground",
+      AlertVariant::Info => "border-dashed border-info bg-background text-foreground",
+    },
+    AlertStyle::Solid => match variant {
+      AlertVariant::Default => "border-transparent bg-primary text-primary-foreground",
+      AlertVariant::Destructive => "border-transparent bg-destructive text-destructive-foreground",
+      AlertVariant::Success => "border-transparent bg-success text-success-foreground",
+      AlertVariant::Warning => "border-transparent bg-warning text-warning-foreground",
+      AlertVariant::Info => "border-transparent bg-info text-info-foreground",
+    },
+  }
+}
 
 /// Classes for the alert box: base classes, the variant's colors, then `class` merged
 /// over them.
 pub fn alert_class(variant: AlertVariant, class: &str) -> String {
   merge_classes(classes([Some(ALERT_BASE_CLASS), Some(variant.class())]), class)
+}
+
+/// Classes for an [`Alert`] with explicit `variant` and `style`.
+pub fn alert_styled_class(variant: AlertVariant, style: AlertStyle, class: &str) -> String {
+  merge_classes(classes([Some(ALERT_BASE_CLASS), Some(alert_surface_class(variant, style))]), class)
 }
 
 /// Classes for the title: base classes with `class` merged over them.
@@ -63,13 +123,20 @@ pub fn alert_description_class(variant: AlertVariant, class: &str) -> String {
   merge_classes(classes([Some(ALERT_DESCRIPTION_BASE_CLASS), Some(variant_class)]), class)
 }
 
+/// Callout banner that announces an important status or validation message.
 #[component]
 pub fn Alert(
   #[props(default)] variant: AlertVariant,
+  #[props(default)] style: AlertStyle,
   #[props(default)] class: String,
   children: Element,
 ) -> Element {
-  let class = alert_class(variant, &class);
+  use_context_provider(|| AlertContext { style });
+  let class = if style == AlertStyle::Default {
+    alert_class(variant, &class)
+  } else {
+    alert_styled_class(variant, style, &class)
+  };
 
   rsx! {
     div {
@@ -80,6 +147,7 @@ pub fn Alert(
   }
 }
 
+/// Title section of an [`Alert`].
 #[component]
 pub fn AlertTitle(#[props(default)] class: String, children: Element) -> Element {
   let class = alert_title_class(&class);
@@ -92,13 +160,23 @@ pub fn AlertTitle(#[props(default)] class: String, children: Element) -> Element
   }
 }
 
+/// Supporting body copy of an [`Alert`].
 #[component]
 pub fn AlertDescription(
   #[props(default)] variant: AlertVariant,
   #[props(default)] class: String,
   children: Element,
 ) -> Element {
-  let class = alert_description_class(variant, &class);
+  let ctx = try_use_context::<AlertContext>().unwrap_or_default();
+  let class = match ctx.style {
+    AlertStyle::Default => alert_description_class(variant, &class),
+    AlertStyle::Solid => {
+      merge_classes(classes([Some(ALERT_DESCRIPTION_BASE_CLASS), Some("text-current")]), &class)
+    }
+    AlertStyle::Soft | AlertStyle::Outline | AlertStyle::Dash => {
+      merge_classes(classes([Some(ALERT_DESCRIPTION_BASE_CLASS), Some("text-foreground")]), &class)
+    }
+  };
 
   rsx! {
     div {
@@ -159,5 +237,33 @@ mod tests {
     assert!(actual.contains(ALERT_DESCRIPTION_BASE_CLASS));
     assert!(actual.contains("text-destructive"));
     assert!(actual.ends_with("leading-6"));
+  }
+
+  #[test]
+  fn alert_styled_class_supports_soft_outline_dash_and_solid() {
+    let soft = alert_styled_class(AlertVariant::Info, AlertStyle::Soft, "");
+    let dash = alert_styled_class(AlertVariant::Warning, AlertStyle::Dash, "");
+    let solid = alert_styled_class(AlertVariant::Success, AlertStyle::Solid, "");
+
+    assert!(soft.contains("bg-info/10 text-foreground"));
+    assert!(dash.contains("border-dashed border-warning"));
+    assert!(solid.contains("bg-success text-success-foreground"));
+  }
+
+  #[test]
+  fn solid_alert_description_inherits_contrasting_foreground() {
+    fn app() -> Element {
+      rsx! {
+        Alert { variant: AlertVariant::Destructive, style: AlertStyle::Solid,
+          AlertTitle { "Outage" }
+          AlertDescription { "Write traffic is paused." }
+        }
+      }
+    }
+    let html = render(app);
+
+    assert!(html.contains("bg-destructive text-destructive-foreground"), "{html}");
+    assert!(html.contains("text-current"), "{html}");
+    assert!(!html.contains("text-muted-foreground"), "{html}");
   }
 }

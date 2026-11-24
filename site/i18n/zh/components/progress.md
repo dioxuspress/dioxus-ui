@@ -1,8 +1,12 @@
 ## API 概览
 
-- `Progress`
+- `Progress`（`value`、`max`、`variant`、`size`、`class`、`indicator_class`）
+- `ProgressVariant`（`Default`、`Success`、`Warning`、`Destructive`、`Info`）
+- `ProgressSize`（`Xs`、`Sm`、`Md`、`Lg`）
 - `progress_class`
+- `progress_sized_class`
 - `progress_indicator_class`
+- `progress_indicator_variant_class`
 
 ## 无障碍说明
 

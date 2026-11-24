@@ -1,6 +1,6 @@
 use dioxus::prelude::*;
 use dioxus_shadcn::{
-  Alert, AlertDescription, AlertTitle, AlertVariant, Button, ButtonSize, ButtonVariant,
+  Alert, AlertDescription, AlertStyle, AlertTitle, AlertVariant, Button, ButtonSize, ButtonVariant,
 };
 
 #[component]
@@ -19,7 +19,7 @@ pub fn AlertActionsDemo() -> Element {
           "Show update notice"
         }
       } else {
-        Alert { variant: AlertVariant::Info,
+        Alert { variant: AlertVariant::Info, style: AlertStyle::Soft,
           div { class: "flex flex-wrap items-start justify-between gap-3",
             div { class: "flex items-start gap-3",
               svg {
@@ -34,7 +34,7 @@ pub fn AlertActionsDemo() -> Element {
               }
               div {
                 AlertTitle { "New CLI version available" }
-                AlertDescription { variant: AlertVariant::Info,
+                AlertDescription {
                   "Run dxui diff to review updated component templates."
                 }
               }
@@ -48,11 +48,11 @@ pub fn AlertActionsDemo() -> Element {
           }
         }
       }
-      Alert { variant: AlertVariant::Warning,
+      Alert { variant: AlertVariant::Warning, style: AlertStyle::Outline,
         div { class: "flex flex-wrap items-center justify-between gap-3",
           div {
             AlertTitle { "Sync paused" }
-            AlertDescription { variant: AlertVariant::Warning,
+            AlertDescription {
               if retried() == 0 {
                 "Could not reach the remote cache."
               } else {

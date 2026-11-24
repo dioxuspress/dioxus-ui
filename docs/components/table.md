@@ -16,7 +16,7 @@ dioxus-shadcn = { version = "0.6", default-features = false, features = ["table"
 
 ## API Surface
 
-- `Table`
+- `Table` (`striped`, `compact`, `sticky_header`, `class`)
 - `TableHeader`
 - `TableBody`
 - `TableFooter`

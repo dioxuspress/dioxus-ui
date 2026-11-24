@@ -1,5 +1,5 @@
 use dioxus::prelude::*;
-use dioxus_shadcn::{Button, ButtonSize, ButtonVariant, Spinner, SpinnerSize};
+use dioxus_shadcn::{Button, ButtonSize, ButtonVariant};
 
 #[component]
 pub fn ButtonIconsDemo() -> Element {
@@ -22,7 +22,7 @@ pub fn ButtonIconsDemo() -> Element {
           }
           "New project"
         }
-        Button { variant: ButtonVariant::Outline, class: "gap-2 rounded-full",
+        Button { variant: ButtonVariant::Soft, class: "gap-2 rounded-full",
           "Download"
           svg {
             class: "size-4",
@@ -38,21 +38,23 @@ pub fn ButtonIconsDemo() -> Element {
         }
         Button {
           variant: ButtonVariant::Secondary,
-          class: "gap-2",
-          "aria-busy": saving().to_string(),
-          onclick: move |_| saving.toggle(),
-          if saving() {
-            Spinner { size: SpinnerSize::Sm }
-            "Saving..."
-          } else {
-            "Toggle loading"
+          loading: saving(),
+          onclick: move |_| saving.set(true),
+          if saving() { "Saving..." } else { "Save changes" }
+        }
+        if saving() {
+          Button {
+            variant: ButtonVariant::Ghost,
+            size: ButtonSize::Sm,
+            onclick: move |_| saving.set(false),
+            "Reset"
           }
         }
       }
       Button {
-        variant: ButtonVariant::Outline,
+        variant: ButtonVariant::Dash,
         size: ButtonSize::Sm,
-        class: "w-full border-dashed",
+        class: "w-full",
         "Add another filter rule"
       }
     }

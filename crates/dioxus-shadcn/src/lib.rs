@@ -437,8 +437,8 @@ pub use accordion::{
 };
 #[cfg(feature = "alert")]
 pub use alert::{
-  Alert, AlertDescription, AlertTitle, AlertVariant, alert_class, alert_description_class,
-  alert_title_class,
+  Alert, AlertDescription, AlertStyle, AlertTitle, AlertVariant, alert_class,
+  alert_description_class, alert_styled_class, alert_title_class,
 };
 #[cfg(feature = "alert-dialog")]
 pub use alert_dialog::{
@@ -462,10 +462,11 @@ pub use attachment::{
 };
 #[cfg(feature = "avatar")]
 pub use avatar::{
-  Avatar, AvatarFallback, AvatarImage, avatar_class, avatar_fallback_class, avatar_image_class,
+  Avatar, AvatarFallback, AvatarGroup, AvatarImage, AvatarShape, AvatarSize, avatar_class,
+  avatar_fallback_class, avatar_group_class, avatar_image_class, avatar_styled_class,
 };
 #[cfg(feature = "badge")]
-pub use badge::{Badge, BadgeVariant, badge_class};
+pub use badge::{Badge, BadgeSize, BadgeStyle, BadgeVariant, badge_class, badge_styled_class};
 #[cfg(feature = "breadcrumb")]
 pub use breadcrumb::{
   Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage,
@@ -622,7 +623,7 @@ pub use hover_card::{
   hover_card_content_class,
 };
 #[cfg(feature = "input")]
-pub use input::{Input, input_class};
+pub use input::{Input, InputSize, InputVariant, input_class, input_styled_class};
 #[cfg(feature = "input-group")]
 pub use input_group::{
   InputGroup, InputGroupAction, InputGroupAddon, InputGroupAddonPosition, InputGroupControl,
@@ -699,7 +700,10 @@ pub use popover::{
   popover_content_class,
 };
 #[cfg(feature = "progress")]
-pub use progress::{Progress, progress_class, progress_indicator_class};
+pub use progress::{
+  Progress, ProgressSize, ProgressVariant, progress_class, progress_indicator_class,
+  progress_indicator_variant_class, progress_sized_class,
+};
 #[cfg(feature = "radio-group")]
 pub use radio_group::{
   RadioGroup, RadioGroupItem, radio_group_class, radio_group_item_class, radio_group_item_tabindex,
@@ -893,8 +897,9 @@ pub use table::{
 };
 #[cfg(feature = "tabs")]
 pub use tabs::{
-  Tabs, TabsActivation, TabsContent, TabsList, TabsOrientation, TabsTrigger, tabs_class,
-  tabs_content_class, tabs_list_class, tabs_trigger_class,
+  Tabs, TabsActivation, TabsContent, TabsList, TabsOrientation, TabsTrigger, TabsVariant,
+  tabs_class, tabs_content_class, tabs_list_class, tabs_list_variant_class, tabs_trigger_class,
+  tabs_trigger_variant_class,
 };
 #[cfg(feature = "toast")]
 pub use toast::{

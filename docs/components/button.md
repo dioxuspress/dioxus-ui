@@ -16,14 +16,18 @@ dioxus-shadcn = { version = "0.6", default-features = false, features = ["button
 
 ## API Surface
 
-- `Button`
-- `ButtonVariant`
-- `ButtonSize`
+- `Button` (`variant`, `size`, `disabled`, `loading`, `class`, `onclick`)
+- `ButtonVariant` (`Primary`, `Secondary`, `Destructive`, `Outline`, `Ghost`, `Link`, `Soft`, `Dash`)
+- `ButtonSize` (`Xs`, `Sm`, `Md`, `Lg`, `Icon`, `IconSm`, `IconLg`)
 - `button_class`
 - `DensityProvider`, `use_density`, `UiDensity`
+
 `ButtonVariant::Link` draws foreground-colored text with a primary underline
-on hover, so link buttons stay readable in theme presets with a light primary
-color ([RFC 0057](../rfcs/0057-theme-presets.md)).
+on hover, and `ButtonVariant::Soft` / `ButtonVariant::Dash` pair subtle tinted
+or dashed borders with `text-foreground` so every variant stays readable across
+all theme presets ([RFC 0057](../rfcs/0057-theme-presets.md)). Setting
+`loading: true` disables the button, sets `aria-busy="true"`, and prepends an
+inline spinner.
 
 ## Events
 

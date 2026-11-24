@@ -1,14 +1,17 @@
 ## API 概览
 
-- `Tabs`
+- `Tabs`（`value`、`default_value`、`on_value_change`、`activation`、`orientation`、`variant`、`class`）
 - `TabsList`
 - `TabsTrigger`
 - `TabsContent`
 - `TabsActivation`
 - `TabsOrientation`
+- `TabsVariant`（`Default`、`Underline`、`Bordered`）
 - `tabs_class`
 - `tabs_list_class`
+- `tabs_list_variant_class`
 - `tabs_trigger_class`
+- `tabs_trigger_variant_class`
 - `tabs_content_class`
 
 ## 行为与交互

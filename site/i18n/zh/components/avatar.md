@@ -1,11 +1,16 @@
 ## API 概览
 
-- `Avatar`
+- `Avatar`（`size`、`shape`、`class`）
 - `AvatarImage`
 - `AvatarFallback`
+- `AvatarGroup`
+- `AvatarSize`（`Xs`、`Sm`、`Md`、`Lg`、`Xl`）
+- `AvatarShape`（`Circle`、`Square`）
 - `avatar_class`
+- `avatar_styled_class`
 - `avatar_image_class`
 - `avatar_fallback_class`
+- `avatar_group_class`
 
 ## 无障碍说明
 
