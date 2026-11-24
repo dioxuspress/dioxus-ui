@@ -15,6 +15,7 @@ use dioxus_shadcn_primitives::{
   toast_variant_attribute as sonner_variant_attribute,
 };
 
+use crate::default_attribute::default_attribute;
 use crate::density::{density_control_class, use_density, with_density};
 use crate::dismiss_timer::use_dismiss_timer;
 
@@ -117,17 +118,20 @@ fn sonner_live_attribute(variant: SonnerVariant) -> &'static str {
 pub fn SonnerViewport(
   #[props(default)] placement: SonnerPlacement,
   #[props(default)] class: String,
+  #[props(extends = GlobalAttributes, extends = div)] attributes: Vec<Attribute>,
   children: Element,
 ) -> Element {
   let class = sonner_viewport_class(placement, &class);
+  let label = default_attribute(&attributes, "aria-label", "Notifications");
 
   rsx! {
     div {
       role: "region",
       class,
-      "aria-label": "Notifications",
+      "aria-label": label,
       "aria-live": "polite",
       "data-placement": sonner_placement_attribute(placement),
+      ..attributes,
       {children}
     }
   }
@@ -295,6 +299,19 @@ mod tests {
 
     assert!(icon.contains("bg-muted-foreground animate-pulse"));
     assert!(description.contains("text-muted-foreground"));
+  }
+
+  #[test]
+  fn sonner_viewport_allows_custom_aria_label() {
+    fn app() -> Element {
+      rsx! { SonnerViewport { "aria-label": "Deployment notifications" } }
+    }
+    let mut dom = VirtualDom::new(app);
+    dom.rebuild_in_place();
+    let html = dioxus_ssr::render(&dom);
+
+    assert!(html.contains(r#"aria-label="Deployment notifications""#));
+    assert!(!html.contains(r#"aria-label="Notifications""#));
   }
 
   #[test]

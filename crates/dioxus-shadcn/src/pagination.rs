@@ -87,14 +87,20 @@ fn pagination_ellipsis_class(class: &str) -> String {
 }
 
 #[component]
-pub fn Pagination(#[props(default)] class: String, children: Element) -> Element {
+pub fn Pagination(
+  #[props(default)] class: String,
+  #[props(extends = GlobalAttributes, extends = nav)] attributes: Vec<Attribute>,
+  children: Element,
+) -> Element {
   let class = pagination_class(&class);
+  let label = default_attribute(&attributes, "aria-label", "pagination");
 
   rsx! {
     nav {
       class,
       role: "navigation",
-      "aria-label": "pagination",
+      "aria-label": label,
+      ..attributes,
       {children}
     }
   }
@@ -340,6 +346,15 @@ mod tests {
     }
 
     assert_eq!(aria_labels(&render(app)), ["Go to previous page", "Go to next page"]);
+  }
+
+  #[test]
+  fn ssr_pagination_allows_custom_aria_label() {
+    fn app() -> Element {
+      rsx! { Pagination { "aria-label": "Results pagination" } }
+    }
+
+    assert_eq!(aria_labels(&render(app)), ["Results pagination"]);
   }
 
   #[test]

@@ -79,14 +79,20 @@ fn pagination_ellipsis_class(class: &str) -> String {
 }
 
 #[component]
-pub fn Pagination(#[props(default)] class: String, children: Element) -> Element {
+pub fn Pagination(
+  #[props(default)] class: String,
+  #[props(extends = GlobalAttributes, extends = nav)] attributes: Vec<Attribute>,
+  children: Element,
+) -> Element {
   let class = pagination_class(&class);
+  let label = default_attribute(&attributes, "aria-label", "pagination");
 
   rsx! {
     nav {
       class,
       role: "navigation",
-      "aria-label": "pagination",
+      "aria-label": label,
+      ..attributes,
       {children}
     }
   }

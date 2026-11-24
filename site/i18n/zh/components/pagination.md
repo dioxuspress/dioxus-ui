@@ -65,4 +65,4 @@ for (index, entry) in pagination_range(page(), 10, 1).into_iter().enumerate() {
 
 ## 无障碍说明
 
-`Pagination` 会渲染一个带有分页标签的导航区域（`nav`）。请使用 `active` 属性标记当前页，无论是按钮形式还是锚点形式都会自动设置 `aria-current="page"`。
+`Pagination` 会渲染一个默认 `aria-label="pagination"` 的导航区域（`nav`），同页存在多个分页栏时可通过属性覆盖 `aria-label`。请使用 `active` 属性标记当前页，无论是按钮形式还是锚点形式都会自动设置 `aria-current="page"`。

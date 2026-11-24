@@ -1,6 +1,7 @@
 use dioxus::prelude::*;
 use dioxus_shadcn::{
-  Badge, BadgeVariant, Button, ButtonSize, ButtonVariant, Tabs, TabsContent, TabsList, TabsTrigger,
+  Badge, BadgeVariant, Button, ButtonSize, ButtonVariant, DensityProvider, Tabs, TabsContent,
+  TabsList, TabsTrigger, UiDensity,
 };
 
 use crate::Route;
@@ -640,6 +641,7 @@ fn BlockRender(slug: &'static str) -> Element {
 fn ExampleCard(index: usize) -> Element {
   let lang = use_site_lang()();
   let zh = lang == SiteLang::Zh;
+  let mut density = use_signal(|| UiDensity::Comfortable);
   let Some(example) = EXAMPLES.get(index) else {
     return rsx! {};
   };
@@ -649,19 +651,51 @@ fn ExampleCard(index: usize) -> Element {
     section { class: "mt-6", "data-site-example": example.title,
       h3 { class: "font-semibold", "{shown_title}" }
       Tabs { class: "mt-3", default_value: "preview",
-        TabsList {
-          "aria-label": if zh {
-            format!("{shown_title} 示例")
-          } else {
-            format!("{} example", example.title)
-          },
-          TabsTrigger { value: "preview", if zh { "预览" } else { "Preview" } }
-          TabsTrigger { value: "code", if zh { "代码" } else { "Code" } }
+        div { class: "flex flex-wrap items-center justify-between gap-2",
+          TabsList {
+            "aria-label": if zh {
+              format!("{shown_title} 示例")
+            } else {
+              format!("{} example", example.title)
+            },
+            TabsTrigger { value: "preview", if zh { "预览" } else { "Preview" } }
+            TabsTrigger { value: "code", if zh { "代码" } else { "Code" } }
+          }
+          div {
+            class: "inline-flex items-center gap-1 rounded-md bg-muted p-1 text-xs",
+            role: "group",
+            "aria-label": if zh {
+              format!("{shown_title} 密度")
+            } else {
+              format!("{} density", example.title)
+            },
+            "data-site-density-controls": "",
+            for (value, label_en, label_zh) in [
+              (UiDensity::Compact, "Compact", "紧凑"),
+              (UiDensity::Comfortable, "Default", "默认"),
+              (UiDensity::Touch, "Touch", "触控"),
+            ] {
+              button {
+                key: "{label_en}",
+                r#type: "button",
+                class: if density() == value {
+                  "rounded-sm bg-background px-2.5 py-1 font-medium text-foreground shadow-sm transition-colors"
+                } else {
+                  "rounded-sm px-2.5 py-1 font-medium text-muted-foreground transition-colors hover:text-foreground"
+                },
+                "aria-pressed": if density() == value { "true" } else { "false" },
+                onclick: move |_| density.set(value),
+                if zh { "{label_zh}" } else { "{label_en}" }
+              }
+            }
+          }
         }
         TabsContent {
           value: "preview",
           class: "rounded-md border border-border p-6",
-          div { "data-site-example-preview": "", ExampleRender { index } }
+          div { "data-site-example-preview": "",
+            DensityProvider { density: density(), ExampleRender { index } }
+          }
         }
         TabsContent { value: "code", class: "relative",
           pre { class: "{CODE_BLOCK} max-h-[32rem]", "data-site-example-source": "",

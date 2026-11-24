@@ -71,7 +71,7 @@ Simulator by `npm run verify:mobile-interactions`, and an Android emulator by
 
 ## Accessibility Notes
 
-`ToastViewport` is a persistent `role="region"` labelled `Notifications` with
+`ToastViewport` is a persistent `role="region"` labelled `Notifications` by default (overridable via `aria-label` attributes) with
 `aria-live="polite"`. Render it once and add toasts inside it, so assistive
 technology announces additions to a region it already tracks.
 

@@ -9,6 +9,7 @@ pub use dioxus_shadcn_primitives::{
   toast_queue_limit, toast_queue_push, toast_variant_attribute,
 };
 
+use crate::default_attribute::default_attribute;
 use crate::density::{density_control_class, use_density, with_density};
 use crate::dismiss_timer::use_dismiss_timer;
 
@@ -91,17 +92,20 @@ fn toast_live_attribute(variant: ToastVariant) -> &'static str {
 pub fn ToastViewport(
   #[props(default)] placement: ToastPlacement,
   #[props(default)] class: String,
+  #[props(extends = GlobalAttributes, extends = div)] attributes: Vec<Attribute>,
   children: Element,
 ) -> Element {
   let class = toast_viewport_class(placement, &class);
+  let label = default_attribute(&attributes, "aria-label", "Notifications");
 
   rsx! {
     div {
       role: "region",
       class,
-      "aria-label": "Notifications",
+      "aria-label": label,
       "aria-live": "polite",
       "data-placement": toast_placement_attribute(placement),
+      ..attributes,
       {children}
     }
   }
@@ -242,6 +246,19 @@ mod tests {
     );
     assert!(root.contains("border-destructive/50"));
     assert!(description.contains("text-muted-foreground"));
+  }
+
+  #[test]
+  fn toast_viewport_allows_custom_aria_label() {
+    fn app() -> Element {
+      rsx! { ToastViewport { "aria-label": "Status notifications" } }
+    }
+    let mut dom = VirtualDom::new(app);
+    dom.rebuild_in_place();
+    let html = dioxus_ssr::render(&dom);
+
+    assert!(html.contains(r#"aria-label="Status notifications""#));
+    assert!(!html.contains(r#"aria-label="Notifications""#));
   }
 
   #[test]

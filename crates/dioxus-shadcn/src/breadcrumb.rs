@@ -1,6 +1,7 @@
 //! Breadcrumb: semantic parts for a navigation trail. It owns structure and
 //! styling; routing, links, and which page is current stay with the app.
 
+use crate::default_attribute::default_attribute;
 use crate::safe_url::safe_href;
 use dioxus::prelude::*;
 use dioxus_shadcn_core::{classes, merge_classes};
@@ -57,13 +58,19 @@ pub fn breadcrumb_ellipsis_class(class: &str) -> String {
 }
 
 #[component]
-pub fn Breadcrumb(#[props(default)] class: String, children: Element) -> Element {
+pub fn Breadcrumb(
+  #[props(default)] class: String,
+  #[props(extends = GlobalAttributes, extends = nav)] attributes: Vec<Attribute>,
+  children: Element,
+) -> Element {
   let class = breadcrumb_class(&class);
+  let label = default_attribute(&attributes, "aria-label", "breadcrumb");
 
   rsx! {
     nav {
       class,
-      "aria-label": "breadcrumb",
+      "aria-label": label,
+      ..attributes,
       {children}
     }
   }
@@ -183,6 +190,17 @@ mod tests {
     assert!(actual.contains(BREADCRUMB_LINK_BASE_CLASS));
     assert!(actual.contains(BREADCRUMB_LINK_CURRENT_CLASS));
     assert!(actual.ends_with("underline"));
+  }
+
+  #[test]
+  fn ssr_breadcrumb_allows_custom_aria_label() {
+    fn app() -> Element {
+      rsx! { Breadcrumb { "aria-label": "Workspace path" } }
+    }
+    let html = render(app);
+
+    assert!(html.contains(r#"aria-label="Workspace path""#));
+    assert!(!html.contains(r#"aria-label="breadcrumb""#));
   }
 
   #[test]

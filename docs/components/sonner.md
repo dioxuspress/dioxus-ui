@@ -56,7 +56,7 @@ Sonner shares the Toast countdown script; only the Web renderer is covered by
 
 ## Accessibility Notes
 
-`SonnerViewport` is a persistent `role="region"` labelled `Notifications` with
+`SonnerViewport` is a persistent `role="region"` labelled `Notifications` by default (overridable via `aria-label` attributes) with
 `aria-live="polite"`. Render it once and add toasts inside it, so assistive
 technology announces additions to a region it already tracks.
 

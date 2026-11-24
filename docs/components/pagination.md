@@ -97,5 +97,5 @@ fewer pages with `PaginationEllipsis`.
 
 ## Accessibility Notes
 
-Pagination renders a navigation region with a pagination label. Mark the
+Pagination renders a navigation region with a default `aria-label="pagination"` (overridable via attributes when rendering multiple pagination bars). Mark the
 current page with `active`, which sets `aria-current="page"` on either form.

@@ -34,7 +34,7 @@ dioxus-shadcn = { version = "0.6", default-features = false, features = ["breadc
 
 ## Accessibility Notes
 
-- `Breadcrumb` renders a navigation region with a breadcrumb label.
+- `Breadcrumb` renders a navigation region with a default `aria-label="breadcrumb"` that can be overridden via attributes when multiple breadcrumbs appear on one page.
 - `BreadcrumbList` renders an ordered list.
 - `BreadcrumbLink { current: true }` and `BreadcrumbPage` expose
   `aria-current="page"`.
