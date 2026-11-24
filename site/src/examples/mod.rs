@@ -37,6 +37,7 @@ macro_rules! examples {
 examples! {
   button_variants => ButtonVariantsDemo, "button", "Variants";
   button_sizes => ButtonSizesDemo, "button", "Sizes and states";
+  button_icons => ButtonIconsDemo, "button", "Icons, loading, and full width";
   button_group_basic => ButtonGroupBasicDemo, "button-group", "Orientation";
   command_palette => CommandPaletteDemo, "command", "Command palette";
   kbd_shortcuts => KbdShortcutsDemo, "kbd", "Shortcuts";
@@ -54,6 +55,8 @@ examples! {
   date_time_picker_wheel => DateTimePickerWheelDemo, "date-time-picker", "Full wheel & time input";
   field_basic => FieldBasicDemo, "field", "Description and error";
   input_states => InputStatesDemo, "input", "States";
+  input_icons => InputIconsDemo, "input", "Leading icon and password toggle";
+  input_validation => InputValidationDemo, "input", "Live email validation";
   input_group_addons => InputGroupAddonsDemo, "input-group", "Addons";
   input_otp_basic => InputOtpBasicDemo, "input-otp", "Six digits";
   label_basic => LabelBasicDemo, "label", "Labels";
@@ -69,6 +72,8 @@ examples! {
   combobox_search => ComboboxSearchDemo, "combobox", "Search";
   context_menu_basic => ContextMenuBasicDemo, "context-menu", "Right-click menu";
   dialog_form => DialogFormDemo, "dialog", "Form in a dialog";
+  dialog_scrollable => DialogScrollableDemo, "dialog", "Scrollable terms";
+  dialog_share => DialogShareDemo, "dialog", "Share link with copy";
   drawer_basic => DrawerBasicDemo, "drawer", "Bottom drawer";
   dropdown_actions => DropdownActionsDemo, "dropdown", "Actions menu";
   dropdown_options => DropdownOptionsDemo, "dropdown", "View options";
@@ -84,6 +89,8 @@ examples! {
   sidebar_collapsible => SidebarCollapsibleDemo, "sidebar", "Collapsible";
   code_tabs_compare => CodeTabsCompareDemo, "code-tabs", "Three-way syntax comparison";
   tabs_account => TabsAccountDemo, "tabs", "Account settings";
+  tabs_vertical => TabsVerticalDemo, "tabs", "Vertical sidebar tabs";
+  tabs_underline => TabsUnderlineDemo, "tabs", "Underline and badges";
   tree_files => TreeFilesDemo, "tree", "Project files";
   accordion_faq => AccordionFaqDemo, "accordion", "FAQ";
   aspect_ratio_basic => AspectRatioBasicDemo, "aspect-ratio", "Ratios";
@@ -98,11 +105,20 @@ examples! {
   scroll_area_tags => ScrollAreaTagsDemo, "scroll-area", "Tags";
   separator_basic => SeparatorBasicDemo, "separator", "Orientation";
   avatar_basic => AvatarBasicDemo, "avatar", "Image and fallback";
+  avatar_sizes => AvatarSizesDemo, "avatar", "Sizes and shapes";
+  avatar_group => AvatarGroupDemo, "avatar", "Avatar group and status";
   badge_variants => BadgeVariantsDemo, "badge", "Variants";
   badge_status => BadgeStatusDemo, "badge", "Status";
+  badge_composition => BadgeCompositionDemo, "badge", "Dots, counts, and removable";
   stat_revenue => StatRevenueDemo, "stat", "Revenue";
+  stat_vertical => StatVerticalDemo, "stat", "Vertical KPI stack";
+  stat_actions => StatActionsDemo, "stat", "Stats with figures and actions";
   timeline_release => TimelineReleaseDemo, "timeline", "Release history";
+  timeline_cards => TimelineCardsDemo, "timeline", "Card entries";
+  timeline_compact => TimelineCompactDemo, "timeline", "Activity feed";
   steps_checkout => StepsCheckoutDemo, "steps", "Checkout";
+  steps_descriptions => StepsDescriptionsDemo, "steps", "Detailed milestones";
+  steps_clickable => StepsClickableDemo, "steps", "Clickable onboarding";
   indicator_counts => IndicatorCountsDemo, "indicator", "Counts and presence";
   mask_shapes => MaskShapesDemo, "mask", "Geometric shapes";
   stack_cards => StackCardsDemo, "stack", "Stacked cards";
@@ -126,10 +142,15 @@ examples! {
   data_table_users => DataTableUsersDemo, "data-table", "Filter, sort, and select";
   empty_projects => EmptyProjectsDemo, "empty", "No projects";
   progress_upload => ProgressUploadDemo, "progress", "Upload";
+  progress_tones => ProgressTonesDemo, "progress", "Semantic tones and sizes";
+  progress_steps => ProgressStepsDemo, "progress", "Multi-metric storage quota";
   table_invoices => TableInvoicesDemo, "table", "Invoices";
+  table_striped => TableStripedDemo, "table", "Striped and compact";
+  table_status => TableStatusDemo, "table", "Users with avatars and actions";
   typography_article => TypographyArticleDemo, "typography", "Article";
   alert_variants => AlertVariantsDemo, "alert", "Variants";
   alert_status => AlertStatusDemo, "alert", "Status";
+  alert_actions => AlertActionsDemo, "alert", "With icons and actions";
   skeleton_card => SkeletonCardDemo, "skeleton", "Loading profile";
   sonner_variants => SonnerVariantsDemo, "sonner", "Variants";
   spinner_sizes => SpinnerSizesDemo, "spinner", "Sizes";
@@ -144,8 +165,14 @@ examples! {
   loading_variants => LoadingVariantsDemo, "loading", "Loading variants";
   join_items => JoinItemsDemo, "join", "Joined controls";
   navbar_slots => NavbarSlotsDemo, "navbar", "Navbar slots";
+  navbar_search => NavbarSearchDemo, "navbar", "Search and avatar";
+  navbar_surface => NavbarSurfaceDemo, "navbar", "Primary and subtle surfaces";
   hero_showcase => HeroShowcaseDemo, "hero", "Hero showcase";
+  hero_split => HeroSplitDemo, "hero", "Split with visual";
+  hero_auth => HeroAuthDemo, "hero", "Hero with sign-in card";
   footer_columns => FooterColumnsDemo, "footer", "Footer columns";
+  footer_centered => FooterCenteredDemo, "footer", "Centered social footer";
+  footer_newsletter => FooterNewsletterDemo, "footer", "Newsletter subscription";
   megamenu_columns => MegamenuColumnsDemo, "megamenu", "Megamenu columns";
   validator_states => ValidatorStatesDemo, "validator", "Validation states";
 }
