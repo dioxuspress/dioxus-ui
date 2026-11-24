@@ -1,7 +1,8 @@
 //! Breadcrumb: semantic parts for a navigation trail. It owns structure and
 //! styling; routing, links, and which page is current stay with the app.
-use super::utils::{classes, merge_classes};
+use super::default_attribute::default_attribute;
 use super::safe_url::safe_href;
+use super::utils::{classes, merge_classes};
 use dioxus::prelude::*;
 
 const BREADCRUMB_BASE_CLASS: &str = "";
@@ -53,13 +54,19 @@ pub fn breadcrumb_ellipsis_class(class: &str) -> String {
 }
 
 #[component]
-pub fn Breadcrumb(#[props(default)] class: String, children: Element) -> Element {
+pub fn Breadcrumb(
+  #[props(default)] class: String,
+  #[props(extends = GlobalAttributes, extends = nav)] attributes: Vec<Attribute>,
+  children: Element,
+) -> Element {
   let class = breadcrumb_class(&class);
+  let label = default_attribute(&attributes, "aria-label", "breadcrumb");
 
   rsx! {
     nav {
       class,
-      "aria-label": "breadcrumb",
+      "aria-label": label,
+      ..attributes,
       {children}
     }
   }

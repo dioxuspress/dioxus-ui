@@ -1,8 +1,9 @@
 //! Toast: notification parts and pure queue helpers. The app owns the queue; each
 //! `ToastRoot` runs its own dismiss countdown inside a polite live region.
+use super::default_attribute::default_attribute;
+use super::density::{density_control_class, use_density, with_density};
 use super::dismiss_timer::use_dismiss_timer;
 use super::utils::{classes, merge_classes};
-use super::density::{density_control_class, use_density, with_density};
 use dioxus::prelude::*;
 
 /// Which viewport corner or edge toasts stack in.
@@ -284,17 +285,20 @@ fn toast_live_attribute(variant: ToastVariant) -> &'static str {
 pub fn ToastViewport(
   #[props(default)] placement: ToastPlacement,
   #[props(default)] class: String,
+  #[props(extends = GlobalAttributes, extends = div)] attributes: Vec<Attribute>,
   children: Element,
 ) -> Element {
   let class = toast_viewport_class(placement, &class);
+  let label = default_attribute(&attributes, "aria-label", "Notifications");
 
   rsx! {
     div {
       role: "region",
       class,
-      "aria-label": "Notifications",
+      "aria-label": label,
       "aria-live": "polite",
       "data-placement": toast_placement_attribute(placement),
+      ..attributes,
       {children}
     }
   }

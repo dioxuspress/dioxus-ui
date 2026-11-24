@@ -237,6 +237,7 @@ mod dismiss_timer;
 
 #[cfg(any(
   feature = "alert-dialog",
+  feature = "breadcrumb",
   feature = "carousel",
   feature = "collapsible",
   feature = "combobox",
@@ -249,7 +250,9 @@ mod dismiss_timer;
   feature = "scroll-area",
   feature = "select",
   feature = "sheet",
-  feature = "sidebar"
+  feature = "sidebar",
+  feature = "sonner",
+  feature = "toast"
 ))]
 mod default_attribute;
 

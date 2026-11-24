@@ -11,7 +11,7 @@
 
 ## 无障碍说明
 
-- `Breadcrumb` 渲染带有面包屑标签的导航区域（`nav`）。
+- `Breadcrumb` 渲染默认 `aria-label="breadcrumb"` 的导航区域（`nav`）；当同页存在多个面包屑时可通过透传 `aria-label` 属性覆盖。
 - `BreadcrumbList` 渲染有序列表（`ol`）。
 - `BreadcrumbLink { current: true }` 与 `BreadcrumbPage` 均会暴露 `aria-current="page"`。
 - `BreadcrumbLink` 会透传 `title` 和 `target` 等链接属性。

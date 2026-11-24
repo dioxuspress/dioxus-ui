@@ -31,6 +31,6 @@ Sonner 与 Toast 共用同一套倒计时脚本；目前仅 Web 渲染器纳入�
 
 ## 无障碍说明
 
-`SonnerViewport` 是一个持久化的 `role="region"` 容器，标签为 `Notifications` 且带有 `aria-live="polite"`。请仅挂载一次并在其内部追加通知，以便辅助技术能够播报已跟踪区域内新增的内容。
+`SonnerViewport` 是一个持久化的 `role="region"` 容器，默认标签为 `Notifications`（支持通过 `aria-label` 属性覆盖）且带有 `aria-live="polite"`。请仅挂载一次并在其内部追加通知，以便辅助技术能够播报已跟踪区域内新增的内容。
 
 通知根节点会根据变体紧急程度暴露状态语义与 `aria-live`。变体图标均为装饰性元素。悬停与聚焦时倒计时暂停，确保消息可被完整阅读。播报文案、异步状态（Promise）编排、Portal 挂载位置、`Escape` 键行为以及焦点策略由应用自行管理。

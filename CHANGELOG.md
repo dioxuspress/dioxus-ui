@@ -31,6 +31,13 @@ for commit messages.
     `sticky_header`; `ProgressVariant::{Default, Success, Warning, Destructive,
     Info}`, `ProgressSize::{Xs, Sm, Md, Lg}`, `progress_sized_class`, and
     `progress_indicator_variant_class`.
+- Landmark `aria-label` attribute forwarding on `Breadcrumb`, `Pagination`,
+  `ToastViewport`, and `SonnerViewport` (via `default_attribute`), allowing
+  multiple instances on the same page with unique accessible landmark names.
+- Expanded `ui.dioxuspress.dev` to 160 interactive examples (adding 20 demos
+  across 15 form, overlay, navigation, and feedback components) and added an
+  interactive `Compact` / `Default` / `Touch` `DensityProvider` switcher to
+  every example preview card.
 
 ### Changed
 - **Migration (`0.6.x` → `0.7.0`)**: All existing RSX call sites and `*_class`

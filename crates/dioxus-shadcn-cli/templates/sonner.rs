@@ -1,8 +1,9 @@
 //! Sonner: toast notifications that dismiss themselves after a countdown, which
 //! pauses on hover and focus, plus pure helpers for the toast queue.
+use super::default_attribute::default_attribute;
+use super::density::{density_control_class, use_density, with_density};
 use super::dismiss_timer::use_dismiss_timer;
 use super::utils::{classes, merge_classes};
-use super::density::{density_control_class, use_density, with_density};
 use dioxus::prelude::*;
 
 pub use self::{
@@ -313,17 +314,20 @@ fn sonner_live_attribute(variant: SonnerVariant) -> &'static str {
 pub fn SonnerViewport(
   #[props(default)] placement: SonnerPlacement,
   #[props(default)] class: String,
+  #[props(extends = GlobalAttributes, extends = div)] attributes: Vec<Attribute>,
   children: Element,
 ) -> Element {
   let class = sonner_viewport_class(placement, &class);
+  let label = default_attribute(&attributes, "aria-label", "Notifications");
 
   rsx! {
     div {
       role: "region",
       class,
-      "aria-label": "Notifications",
+      "aria-label": label,
       "aria-live": "polite",
       "data-placement": sonner_placement_attribute(placement),
+      ..attributes,
       {children}
     }
   }
