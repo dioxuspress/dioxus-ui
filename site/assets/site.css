@@ -142,49 +142,68 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
-/* Syntax highlighting tokens emitted by `site/src/highlight.rs`. */
+/* Syntax highlighting tokens emitted by `site/src/highlight.rs`.
+   Tuned to keep >= 4.5:1 contrast on `bg-muted` across light, dark, and all
+   33 daisyUI theme presets (RFC 0057). */
 .hl-kw {
-  color: #cf222e;
+  color: #9e1c26;
 }
 .hl-type {
-  color: #953800;
+  color: #7a2e00;
 }
 .hl-fn {
-  color: #8250df;
+  color: #5a2ca0;
 }
 .hl-str {
   color: #0a3069;
 }
 .hl-num {
-  color: #0550ae;
+  color: #05408e;
 }
 .hl-comment {
-  color: #6e7781;
+  color: #495057;
   font-style: italic;
 }
 .hl-attr {
-  color: #6f42c1;
+  color: #562b99;
 }
 
-.dark .hl-kw {
-  color: #ff7b72;
-}
-.dark .hl-type {
-  color: #ffa657;
-}
-.dark .hl-fn {
-  color: #d2a8ff;
-}
-.dark .hl-str {
-  color: #a5d6ff;
-}
-.dark .hl-num {
-  color: #79c0ff;
-}
-.dark .hl-comment {
-  color: #8b949e;
-  font-style: italic;
-}
-.dark .hl-attr {
-  color: #d2a8ff;
+:is(
+  .dark,
+  [data-theme="abyss"],
+  [data-theme="aqua"],
+  [data-theme="black"],
+  [data-theme="business"],
+  [data-theme="coffee"],
+  [data-theme="dim"],
+  [data-theme="dracula"],
+  [data-theme="forest"],
+  [data-theme="halloween"],
+  [data-theme="luxury"],
+  [data-theme="night"],
+  [data-theme="sunset"],
+  [data-theme="synthwave"]
+) {
+  & .hl-kw {
+    color: #ffb4ae;
+  }
+  & .hl-type {
+    color: #ffd399;
+  }
+  & .hl-fn {
+    color: #e5ceff;
+  }
+  & .hl-str {
+    color: #cce6ff;
+  }
+  & .hl-num {
+    color: #b3daff;
+  }
+  & .hl-comment {
+    color: #d0d7de;
+    font-style: italic;
+  }
+  & .hl-attr {
+    color: #e5ceff;
+  }
 }
