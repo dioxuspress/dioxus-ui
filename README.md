@@ -212,6 +212,23 @@ dioxus-shadcn = { version = "0.6", default-features = false, features = ["button
 use dioxus_shadcn::{Button, DialogContent, DialogTitle, Input};
 ```
 
+### Claude Code Plugin
+
+An official, maintainer-owned Claude Code plugin is bundled in this repository
+under `plugins/dioxus-ui/` and exposed through `.claude-plugin/marketplace.json`.
+It guides Claude Code through inspecting your installed `dioxus-shadcn` / `dxui`
+version and mode, selecting components and blocks, configuring Cargo features or
+non-destructive `dxui` commands, and customizing Tailwind CSS v4 themes.
+
+```bash
+claude plugin marketplace add dioxuspress/dioxus-ui
+claude plugin install dioxus-ui@dioxuspress --scope user
+```
+
+See [plugins/dioxus-ui/README.md](plugins/dioxus-ui/README.md) for `user` /
+`project` / `local` scopes, macOS / Linux / Windows instructions, updates,
+uninstall, and release-version alignment.
+
 ## Compatibility
 
 The crates need Rust 1.88 or newer (`rust-version`). Before 1.0, a minor
@@ -492,6 +509,7 @@ npm run verify:readme
 npm run verify:docs-index
 npm run verify:docs-links
 npm run verify:docs-anchors
+npm run verify:claude-plugin
 ```
 
 This builds the catalog in memory from registry entries, templates, component

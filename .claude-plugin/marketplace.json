@@ -1,0 +1,33 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "dioxuspress",
+  "description": "Official Claude Code plugin marketplace maintained by DioxusPress.",
+  "owner": {
+    "name": "DioxusPress",
+    "url": "https://github.com/dioxuspress"
+  },
+  "plugins": [
+    {
+      "name": "dioxus-ui",
+      "description": "Official Dioxus UI (dioxus-shadcn) workflow skill and version-synced component, block, and theme references for building Dioxus 0.7 Rust interfaces.",
+      "version": "0.6.7",
+      "author": {
+        "name": "DioxusPress",
+        "url": "https://github.com/dioxuspress"
+      },
+      "homepage": "https://ui.dioxuspress.dev/",
+      "repository": "https://github.com/dioxuspress/dioxus-ui",
+      "license": "MIT",
+      "category": "development",
+      "keywords": [
+        "dioxus",
+        "dioxus-shadcn",
+        "dioxus-ui",
+        "rust",
+        "tailwind",
+        "ui-components"
+      ],
+      "source": "./plugins/dioxus-ui"
+    }
+  ]
+}

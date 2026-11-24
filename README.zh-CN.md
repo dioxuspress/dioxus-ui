@@ -200,6 +200,17 @@ match variant {
 format!("bg-{}-500", color)
 ```
 
+## Claude Code 官方插件
+
+本仓库内置官方维护的 Claude Code 插件（`plugins/dioxus-ui/`）及自托管 Marketplace 清单（`.claude-plugin/marketplace.json`），支持 macOS、Linux 与 Windows：
+
+```bash
+claude plugin marketplace add dioxuspress/dioxus-ui
+claude plugin install dioxus-ui@dioxuspress --scope user
+```
+
+插件内置 5 步组件开发工作流与从源码注册表自动同步的组件、Blocks 与 33 套主题预设索引，完整安装作用域（`user` / `project` / `local`）、更新、卸载与版本对齐说明见 [plugins/dioxus-ui/README.md](plugins/dioxus-ui/README.md)。
+
 ## 在线组件预览站（Component Site）
 
 `site/` 是一个完整的 Dioxus Web 应用（在线地址：[`https://ui.dioxuspress.dev/`](https://ui.dioxuspress.dev/)），按分类展示全部组件的实时交互预览（Preview）、源码标签页（Code）、安装命令、33 套主题预设切换与明暗模式对比（[RFC 0052](docs/rfcs/0052-component-site.md)）。本地启动预览站：

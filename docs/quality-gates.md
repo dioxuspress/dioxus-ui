@@ -295,6 +295,14 @@ target document headings or explicit anchors. It is read-only and does not
 validate external URL anchors, rendered HTML anchors, or generated docs runtime
 routes.
 
+`npm run verify:claude-plugin` checks `.claude-plugin/marketplace.json`,
+`plugins/dioxus-ui/.claude-plugin/plugin.json`, `SKILL.md` frontmatter and
+reference links, version synchronization with `Cargo.toml`, zero drift on the
+generated `skills/dioxus-ui/references/{catalog,blocks,themes}.md` files (kept
+in sync by `npm run claude-plugin:sync`), and that documented `dxui add`,
+`dxui theme add`, and Cargo `features = [...]` examples reference real items in
+the current release. It is read-only and does not execute Claude Code.
+
 `npm run verify:release-docs` checks that release documentation still mentions
 the local aggregate alias, the exact ordered expanded release gate block for
 every direct `verify:release` command segment, source-copy fixture smoke,
