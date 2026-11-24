@@ -31,6 +31,7 @@ const requiredScripts = {
   "verify:docs-index": "node scripts/docs-index-verify.mjs",
   "verify:docs-links": "node scripts/docs-link-targets-verify.mjs",
   "verify:docs-anchors": "node scripts/docs-anchors-verify.mjs",
+  "verify:claude-plugin": "node scripts/claude-plugin-verify.mjs",
   "verify:rfcs": "node scripts/rfc-metadata-verify.mjs",
   "verify:changelog": "node scripts/changelog-metadata-verify.mjs",
   "verify:readme": "node scripts/readme-verification-verify.mjs",
@@ -71,6 +72,7 @@ const aggregateScriptRequirements = {
     "npm run verify:docs-index",
     "npm run verify:docs-links",
     "npm run verify:docs-anchors",
+    "npm run verify:claude-plugin",
   ],
   "verify:preview": [
     "npm run verify:web-preview",
