@@ -1,7 +1,9 @@
 ## API 概览
 
 - `Checkbox`
+- `CheckboxSize`（`Sm`、`Md`、`Lg`）
 - `checkbox_class`
+- `checkbox_sized_class`
 
 ## 变更事件
 

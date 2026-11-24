@@ -36,11 +36,41 @@ impl RadialProgressSize {
   }
 }
 
+/// Stroke tone of a [`RadialProgress`] indicator ring.
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub enum RadialProgressVariant {
+  /// Primary stroke (default).
+  #[default]
+  Default,
+  /// Success stroke for completed or healthy progress.
+  Success,
+  /// Warning stroke for elevated usage or attention thresholds.
+  Warning,
+  /// Destructive stroke for critical or over-quota usage.
+  Destructive,
+  /// Informational stroke.
+  Info,
+}
+
+impl RadialProgressVariant {
+  /// The indicator stroke class for this tone.
+  pub const fn class(self) -> &'static str {
+    match self {
+      Self::Default => "stroke-primary",
+      Self::Success => "stroke-success",
+      Self::Warning => "stroke-warning",
+      Self::Destructive => "stroke-destructive",
+      Self::Info => "stroke-info",
+    }
+  }
+}
+
 const RADIAL_PROGRESS_BASE_CLASS: &str =
   "relative inline-grid shrink-0 place-items-center font-medium tabular-nums";
 const RADIAL_PROGRESS_TRACK_CLASS: &str = "stroke-muted";
 const RADIAL_PROGRESS_INDICATOR_CLASS: &str =
   "stroke-primary transition-[stroke-dashoffset] duration-300";
+const RADIAL_PROGRESS_INDICATOR_CORE_CLASS: &str = "transition-[stroke-dashoffset] duration-300";
 // Children fill the slot; while it is empty the default percentage shows.
 const RADIAL_PROGRESS_SLOT_CLASS: &str = "peer relative empty:hidden";
 const RADIAL_PROGRESS_DEFAULT_LABEL_CLASS: &str = "relative hidden peer-empty:inline";
@@ -48,6 +78,11 @@ const RADIAL_PROGRESS_DEFAULT_LABEL_CLASS: &str = "relative hidden peer-empty:in
 /// Classes for the root: base classes and the size's, with `class` merged over them.
 pub fn radial_progress_class(size: RadialProgressSize, class: &str) -> String {
   merge_classes(classes([Some(RADIAL_PROGRESS_BASE_CLASS), Some(size.class())]), class)
+}
+
+/// Classes for the ring indicator with an explicit [`RadialProgressVariant`].
+pub fn radial_progress_indicator_class(variant: RadialProgressVariant, class: &str) -> String {
+  merge_classes(classes([Some(variant.class()), Some(RADIAL_PROGRESS_INDICATOR_CORE_CLASS)]), class)
 }
 
 /// The value clamped to 0 through 100; anything that is not a number is 0.
@@ -70,11 +105,17 @@ fn radial_progress_geometry(value: f64, stroke_width: f64) -> (f64, f64, f64) {
 pub fn RadialProgress(
   value: f64,
   #[props(default)] size: RadialProgressSize,
+  #[props(default)] variant: RadialProgressVariant,
   #[props(default)] class: String,
   #[props(extends = GlobalAttributes)] attributes: Vec<Attribute>,
   children: Element,
 ) -> Element {
   let class = radial_progress_class(size, &class);
+  let indicator_class = if variant == RadialProgressVariant::Default {
+    RADIAL_PROGRESS_INDICATOR_CLASS.to_string()
+  } else {
+    radial_progress_indicator_class(variant, "")
+  };
   let value = radial_progress_value(value);
   let stroke_width = size.stroke_width();
   let (radius, circumference, offset) = radial_progress_geometry(value, stroke_width);
@@ -102,7 +143,7 @@ pub fn RadialProgress(
           stroke_width: "{stroke_width}",
         }
         circle {
-          class: RADIAL_PROGRESS_INDICATOR_CLASS,
+          class: indicator_class,
           cx: "50",
           cy: "50",
           r: "{radius}",
@@ -141,6 +182,26 @@ mod tests {
     assert!(html.contains("aria-valuenow=\"72\""));
     assert!(html.contains("aria-label=\"Storage used\""));
     assert!(html.contains(">72%</span>"));
+  }
+
+  #[test]
+  fn ssr_radial_progress_supports_semantic_variants() {
+    fn app() -> Element {
+      rsx! {
+        RadialProgress {
+          value: 85.0,
+          variant: RadialProgressVariant::Success,
+          "aria-label": "Tasks done",
+        }
+      }
+    }
+    let html = render(app);
+
+    assert!(html.contains("stroke-success"), "{html}");
+    assert!(
+      radial_progress_indicator_class(RadialProgressVariant::Destructive, "")
+        .contains("stroke-destructive")
+    );
   }
 
   #[test]

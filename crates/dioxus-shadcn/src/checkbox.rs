@@ -22,10 +22,34 @@ export async function run(dioxus) {
 "#
 );
 
+/// Box dimensions of a [`Checkbox`].
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub enum CheckboxSize {
+  /// Compact 14-pixel box for dense tables and toolbars.
+  Sm,
+  /// Standard 16-pixel box (default).
+  #[default]
+  Md,
+  /// Prominent 20-pixel box for cards and touch-friendly lists.
+  Lg,
+}
+
+impl CheckboxSize {
+  /// The width and height classes for this size.
+  pub const fn class(self) -> &'static str {
+    match self {
+      Self::Sm => "h-3.5 w-3.5",
+      Self::Md => "h-4 w-4",
+      Self::Lg => "h-5 w-5",
+    }
+  }
+}
+
 // The input draws its own box, so `appearance-none` drops the native control.
 // The checked and mixed marks are a `::before` masked to the mark's shape and
 // filled with `--primary-foreground`, so they follow any theme (RFC 0057).
 const CHECKBOX_BASE_CLASS: &str = "inline-flex h-4 w-4 shrink-0 appearance-none items-center justify-center rounded border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=indeterminate]:border-primary data-[state=indeterminate]:bg-primary before:block before:size-full before:bg-primary-foreground before:opacity-0 before:[mask:url(data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%2016%2016%27%20fill=%27none%27%20stroke=%27black%27%20stroke-width=%272.5%27%20stroke-linecap=%27round%27%20stroke-linejoin=%27round%27%3E%3Cpath%20d=%27M3.5%208.5l3%203%206-7%27/%3E%3C/svg%3E)_center/100%_no-repeat] data-[state=checked]:before:opacity-100 data-[state=indeterminate]:before:opacity-100 data-[state=indeterminate]:before:[mask-image:url(data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%2016%2016%27%20fill=%27none%27%20stroke=%27black%27%20stroke-width=%272.5%27%20stroke-linecap=%27round%27%20stroke-linejoin=%27round%27%3E%3Cpath%20d=%27M4%208h8%27/%3E%3C/svg%3E)]";
+const CHECKBOX_CORE_CLASS: &str = "inline-flex shrink-0 appearance-none items-center justify-center rounded border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=indeterminate]:border-primary data-[state=indeterminate]:bg-primary before:block before:size-full before:bg-primary-foreground before:opacity-0 before:[mask:url(data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%2016%2016%27%20fill=%27none%27%20stroke=%27black%27%20stroke-width=%272.5%27%20stroke-linecap=%27round%27%20stroke-linejoin=%27round%27%3E%3Cpath%20d=%27M3.5%208.5l3%203%206-7%27/%3E%3C/svg%3E)_center/100%_no-repeat] data-[state=checked]:before:opacity-100 data-[state=indeterminate]:before:opacity-100 data-[state=indeterminate]:before:[mask-image:url(data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%2016%2016%27%20fill=%27none%27%20stroke=%27black%27%20stroke-width=%272.5%27%20stroke-linecap=%27round%27%20stroke-linejoin=%27round%27%3E%3Cpath%20d=%27M4%208h8%27/%3E%3C/svg%3E)]";
 
 /// Classes for the checkbox: base classes, the checked or unchecked colors, then
 /// `class` merged over them.
@@ -37,6 +61,20 @@ pub fn checkbox_class(checked: bool, class: &str) -> String {
   };
 
   merge_classes(classes([Some(CHECKBOX_BASE_CLASS), Some(checked_class)]), class)
+}
+
+/// Classes for the checkbox with an explicit [`CheckboxSize`].
+pub fn checkbox_sized_class(checked: bool, size: CheckboxSize, class: &str) -> String {
+  let checked_class = if checked {
+    "border-primary bg-primary text-primary-foreground"
+  } else {
+    "border-input bg-background text-transparent"
+  };
+
+  merge_classes(
+    classes([Some(CHECKBOX_CORE_CLASS), Some(size.class()), Some(checked_class)]),
+    class,
+  )
 }
 
 fn checkbox_state(checked: bool, indeterminate: bool) -> &'static str {
@@ -62,15 +100,18 @@ fn checkbox_requested_state(checked: bool, indeterminate: bool) -> bool {
 pub fn Checkbox(
   #[props(default)] checked: bool,
   #[props(default)] indeterminate: bool,
+  #[props(default)] size: CheckboxSize,
   #[props(default)] class: String,
   #[props(default)] disabled: bool,
   #[props(default)] on_checked_change: Option<EventHandler<bool>>,
   #[props(extends = GlobalAttributes, extends = input)] attributes: Vec<Attribute>,
 ) -> Element {
-  let class = checkbox_class(
-    checked || indeterminate,
-    &with_density(density_hit_area_class(use_density()), &class),
-  );
+  let merged_user = with_density(density_hit_area_class(use_density()), &class);
+  let class = if size == CheckboxSize::Md {
+    checkbox_class(checked || indeterminate, &merged_user)
+  } else {
+    checkbox_sized_class(checked || indeterminate, size, &merged_user)
+  };
   let scope_id = use_hook(|| format!("dxui-checkbox-{}", next_element_id()));
   // A click clears the native property before any handler runs; bumping this
   // re-runs the sync after the app's next render, in case it stays mixed.
@@ -146,6 +187,15 @@ mod tests {
     assert!(actual.contains(CHECKBOX_BASE_CLASS));
     assert!(actual.contains("border-primary bg-primary text-primary-foreground"));
     assert!(actual.ends_with("mt-1"));
+  }
+
+  #[test]
+  fn checkbox_sized_class_applies_dimensions() {
+    let sm = checkbox_sized_class(true, CheckboxSize::Sm, "");
+    let lg = checkbox_sized_class(false, CheckboxSize::Lg, "mt-1");
+
+    assert!(sm.contains("h-3.5 w-3.5") && sm.contains("bg-primary"));
+    assert!(lg.contains("h-5 w-5") && lg.contains("border-input") && lg.ends_with("mt-1"));
   }
 
   #[test]

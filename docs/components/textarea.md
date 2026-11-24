@@ -18,7 +18,10 @@ dioxus-shadcn = { version = "0.6", default-features = false, features = ["textar
 ## API Surface
 
 - `Textarea`
+- `TextareaSize` (`Sm`, `Md`, `Lg`)
+- `TextareaVariant` (`Default`, `Ghost`, `Soft`)
 - `textarea_class`
+- `textarea_styled_class`
 
 ## Change Events
 

@@ -3,9 +3,53 @@ use crate::density::{density_hit_area_class, use_density, with_density};
 use dioxus::prelude::*;
 use dioxus_shadcn_core::{classes, merge_classes};
 
+/// Track and thumb scale of a [`Switch`].
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub enum SwitchSize {
+  /// Compact 20×36px switch for dense tables and toolbars.
+  Sm,
+  /// Standard 24×44px switch (default).
+  #[default]
+  Md,
+  /// Prominent 28×52px switch for touch-friendly settings.
+  Lg,
+}
+
+impl SwitchSize {
+  /// The track height and width classes for this size.
+  pub const fn track_class(self) -> &'static str {
+    match self {
+      Self::Sm => "h-5 w-9",
+      Self::Md => "h-6 w-11",
+      Self::Lg => "h-7 w-13",
+    }
+  }
+
+  /// The thumb diameter classes for this size.
+  pub const fn thumb_class(self) -> &'static str {
+    match self {
+      Self::Sm => "h-4 w-4",
+      Self::Md => "h-5 w-5",
+      Self::Lg => "h-6 w-6",
+    }
+  }
+
+  /// The thumb horizontal translation class when checked.
+  pub const fn thumb_checked_translate(self) -> &'static str {
+    match self {
+      Self::Sm => "translate-x-4",
+      Self::Md => "translate-x-5",
+      Self::Lg => "translate-x-6",
+    }
+  }
+}
+
 const SWITCH_BASE_CLASS: &str = "inline-flex h-6 w-11 shrink-0 items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50";
+const SWITCH_CORE_CLASS: &str = "inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50";
 const SWITCH_THUMB_BASE_CLASS: &str =
   "pointer-events-none block h-5 w-5 rounded-full bg-background shadow transition-transform";
+const SWITCH_THUMB_CORE_CLASS: &str =
+  "pointer-events-none block rounded-full bg-background shadow transition-transform";
 
 /// Classes for the track: base classes, the primary fill when `checked`, then `class`
 /// merged over them.
@@ -15,11 +59,28 @@ pub fn switch_class(checked: bool, class: &str) -> String {
   merge_classes(classes([Some(SWITCH_BASE_CLASS), Some(checked_class)]), class)
 }
 
+/// Classes for the track with an explicit [`SwitchSize`].
+pub fn switch_sized_class(checked: bool, size: SwitchSize, class: &str) -> String {
+  let checked_class = if checked { "bg-primary" } else { "bg-input" };
+
+  merge_classes(
+    classes([Some(SWITCH_CORE_CLASS), Some(size.track_class()), Some(checked_class)]),
+    class,
+  )
+}
+
 /// Classes for the thumb, moved to the end of the track when `checked`.
 pub fn switch_thumb_class(checked: bool) -> String {
   let checked_class = if checked { "translate-x-5" } else { "translate-x-0" };
 
   classes([Some(SWITCH_THUMB_BASE_CLASS), Some(checked_class)])
+}
+
+/// Classes for the thumb with an explicit [`SwitchSize`].
+pub fn switch_thumb_sized_class(checked: bool, size: SwitchSize) -> String {
+  let checked_class = if checked { size.thumb_checked_translate() } else { "translate-x-0" };
+
+  classes([Some(SWITCH_THUMB_CORE_CLASS), Some(size.thumb_class()), Some(checked_class)])
 }
 
 /// Renders `data-state` for `data-[state=checked]:` style variants.
@@ -34,13 +95,23 @@ fn switch_state(checked: bool) -> &'static str {
 #[component]
 pub fn Switch(
   #[props(default)] checked: bool,
+  #[props(default)] size: SwitchSize,
   #[props(default)] class: String,
   #[props(default)] disabled: bool,
   #[props(default)] on_checked_change: Option<EventHandler<bool>>,
   #[props(extends = GlobalAttributes, extends = button)] attributes: Vec<Attribute>,
 ) -> Element {
-  let class = switch_class(checked, &with_density(density_hit_area_class(use_density()), &class));
-  let thumb_class = switch_thumb_class(checked);
+  let merged_user = with_density(density_hit_area_class(use_density()), &class);
+  let class = if size == SwitchSize::Md {
+    switch_class(checked, &merged_user)
+  } else {
+    switch_sized_class(checked, size, &merged_user)
+  };
+  let thumb_class = if size == SwitchSize::Md {
+    switch_thumb_class(checked)
+  } else {
+    switch_thumb_sized_class(checked, size)
+  };
   let state = switch_state(checked);
 
   rsx! {
@@ -82,6 +153,19 @@ mod tests {
   fn switch_thumb_class_reflects_checked_state() {
     assert!(switch_thumb_class(true).contains("translate-x-5"));
     assert!(switch_thumb_class(false).contains("translate-x-0"));
+  }
+
+  #[test]
+  fn switch_sized_helpers_apply_track_and_thumb_scales() {
+    let sm_track = switch_sized_class(true, SwitchSize::Sm, "");
+    let sm_thumb = switch_thumb_sized_class(true, SwitchSize::Sm);
+    let lg_track = switch_sized_class(false, SwitchSize::Lg, "");
+    let lg_thumb = switch_thumb_sized_class(true, SwitchSize::Lg);
+
+    assert!(sm_track.contains("h-5 w-9"));
+    assert!(sm_thumb.contains("h-4 w-4") && sm_thumb.contains("translate-x-4"));
+    assert!(lg_track.contains("h-7 w-13"));
+    assert!(lg_thumb.contains("h-6 w-6") && lg_thumb.contains("translate-x-6"));
   }
 
   #[test]

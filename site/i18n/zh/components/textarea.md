@@ -1,7 +1,10 @@
 ## API 概览
 
 - `Textarea`
+- `TextareaSize`（`Sm`、`Md`、`Lg`）
+- `TextareaVariant`（`Default`、`Ghost`、`Soft`）
 - `textarea_class`
+- `textarea_styled_class`
 
 ## 变更事件
 

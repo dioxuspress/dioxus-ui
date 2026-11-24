@@ -1,22 +1,44 @@
 use dioxus::prelude::*;
-use dioxus_shadcn::{Checkbox, Label};
+use dioxus_shadcn::{Checkbox, CheckboxSize, Label};
 
 #[component]
 pub fn CheckboxBasicDemo() -> Element {
   let mut terms = use_signal(|| true);
+  let mut compact = use_signal(|| true);
+  let mut prominent = use_signal(|| false);
   let mut items = use_signal(|| [true, false]);
   let all = items().iter().all(|item| *item);
   let some = items().iter().any(|item| *item);
 
   rsx! {
     div { class: "grid gap-3",
-      div { class: "flex items-center gap-2",
-        Checkbox {
-          id: "checkbox-basic-terms",
-          checked: terms(),
-          on_checked_change: move |checked| terms.set(checked),
+      div { class: "flex flex-wrap items-center gap-5",
+        div { class: "flex items-center gap-2",
+          Checkbox {
+            id: "checkbox-basic-sm",
+            size: CheckboxSize::Sm,
+            checked: compact(),
+            on_checked_change: move |checked| compact.set(checked),
+          }
+          Label { r#for: "checkbox-basic-sm", "Small" }
         }
-        Label { r#for: "checkbox-basic-terms", "Accept terms and conditions" }
+        div { class: "flex items-center gap-2",
+          Checkbox {
+            id: "checkbox-basic-terms",
+            checked: terms(),
+            on_checked_change: move |checked| terms.set(checked),
+          }
+          Label { r#for: "checkbox-basic-terms", "Default (Md)" }
+        }
+        div { class: "flex items-center gap-2",
+          Checkbox {
+            id: "checkbox-basic-lg",
+            size: CheckboxSize::Lg,
+            checked: prominent(),
+            on_checked_change: move |checked| prominent.set(checked),
+          }
+          Label { r#for: "checkbox-basic-lg", "Large" }
+        }
       }
       div { class: "flex items-center gap-2",
         Checkbox { id: "checkbox-basic-disabled", disabled: true }

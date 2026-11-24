@@ -521,7 +521,7 @@ pub use chart::{
   chart_summary, chart_value_label, chart_view_box,
 };
 #[cfg(feature = "checkbox")]
-pub use checkbox::{Checkbox, checkbox_class};
+pub use checkbox::{Checkbox, CheckboxSize, checkbox_class, checkbox_sized_class};
 #[cfg(feature = "collapsible")]
 pub use collapsible::{
   Collapsible, CollapsibleContent, CollapsibleTrigger, collapsible_class,
@@ -759,7 +759,9 @@ pub use sonner::{
 #[cfg(feature = "spinner")]
 pub use spinner::{Spinner, SpinnerSize, spinner_class};
 #[cfg(feature = "textarea")]
-pub use textarea::{Textarea, textarea_class};
+pub use textarea::{
+  Textarea, TextareaSize, TextareaVariant, textarea_class, textarea_styled_class,
+};
 #[cfg(feature = "switch")]
 pub mod switch;
 
@@ -892,7 +894,10 @@ pub use code_tabs::{
   code_tabs_content_class, code_tabs_list_class, code_tabs_trigger_class,
 };
 #[cfg(feature = "switch")]
-pub use switch::{Switch, switch_class, switch_thumb_class};
+pub use switch::{
+  Switch, SwitchSize, switch_class, switch_sized_class, switch_thumb_class,
+  switch_thumb_sized_class,
+};
 #[cfg(feature = "table")]
 pub use table::{
   Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow,
@@ -960,7 +965,10 @@ pub use indicator::{
 pub use status::{Status, StatusSize, StatusVariant, status_class};
 
 #[cfg(feature = "radial-progress")]
-pub use radial_progress::{RadialProgress, RadialProgressSize, radial_progress_class};
+pub use radial_progress::{
+  RadialProgress, RadialProgressSize, RadialProgressVariant, radial_progress_class,
+  radial_progress_indicator_class,
+};
 
 #[cfg(feature = "countdown")]
 pub use countdown::{Countdown, CountdownParts, countdown_class, countdown_parts};
@@ -969,7 +977,7 @@ pub use countdown::{Countdown, CountdownParts, countdown_class, countdown_parts}
 pub use diff::{Diff, DiffAfter, DiffBefore, diff_class, diff_layer_class};
 
 #[cfg(feature = "rating")]
-pub use rating::{Rating, rating_class};
+pub use rating::{Rating, RatingSize, rating_class, rating_star_class};
 
 #[cfg(feature = "number-input")]
 pub use number_input::{NumberInput, number_input_class};
