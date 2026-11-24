@@ -694,6 +694,9 @@
   .h-56 {
     height: calc(var(--spacing) * 56);
   }
+  .h-64 {
+    height: calc(var(--spacing) * 64);
+  }
   .h-72 {
     height: calc(var(--spacing) * 72);
   }
@@ -999,6 +1002,9 @@
   }
   .min-w-36 {
     min-width: calc(var(--spacing) * 36);
+  }
+  .min-w-60 {
+    min-width: calc(var(--spacing) * 60);
   }
   .min-w-\[28rem\] {
     min-width: 28rem;
@@ -1702,6 +1708,12 @@
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--card) 90%, transparent);
     }
+  }
+  .bg-chart-1 {
+    background-color: var(--chart-1);
+  }
+  .bg-chart-2 {
+    background-color: var(--chart-2);
   }
   .bg-chart-3 {
     background-color: var(--chart-3);
@@ -3541,6 +3553,9 @@
     }
     .sm\:grid-cols-2 {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .sm\:grid-cols-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
     .sm\:flex-row {
       flex-direction: row;

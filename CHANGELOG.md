@@ -42,10 +42,12 @@ for commit messages.
 - Landmark `aria-label` attribute forwarding on `Breadcrumb`, `Pagination`,
   `ToastViewport`, and `SonnerViewport` (via `default_attribute`), allowing
   multiple instances on the same page with unique accessible landmark names.
-- Expanded `ui.dioxuspress.dev` to 160 interactive examples (adding 20 demos
-  across 15 form, overlay, navigation, and feedback components) and added an
-  interactive `Compact` / `Default` / `Touch` `DensityProvider` switcher to
-  every example preview card.
+- Expanded `ui.dioxuspress.dev` to 180 interactive examples (adding 40 demos
+  across 35 form, overlay, navigation, data display, visual, and feedback
+  components, including `ChartBarSeries`, `FileDropzone`, `DataTablePagination`,
+  nested context/menubar submenus, right `SidebarRail`, `MockupWindow`, and
+  vertical looping `Carousel`) and added an interactive `Compact` / `Default` /
+  `Touch` `DensityProvider` switcher to every example preview card.
 
 ### Changed
 - **Migration (`0.6.x` → `0.7.0`)**: All existing RSX call sites and `*_class`
