@@ -8,9 +8,19 @@ for commit messages.
 
 ## [Unreleased]
 
+## [0.7.0] - 2026-11-25
+
+Version 0.7.0 expands visual expressiveness and API ergonomics across 13 core,
+form, and indicator components (strictly synced between `dioxus-shadcn` and
+`dioxus-shadcn-cli` templates), adds landmark `aria-label` forwarding to 4
+navigation/notification components, and grows the interactive showcase on
+`ui.dioxuspress.dev` from 113 to 180 live examples with a built-in
+`DensityProvider` switcher.
+
 ### Added
-- Orthogonal visual variants, sizes, and ergonomic props across seven core
-  components (synced between `dioxus-shadcn` and `dioxus-shadcn-cli` templates):
+- Orthogonal visual variants, sizes, and ergonomic props across 13 core, form,
+  and indicator components (synced between `dioxus-shadcn` and
+  `dioxus-shadcn-cli` templates):
   - `Button`: `ButtonVariant::{Soft, Dash}`, `ButtonSize::{Xs, IconSm, IconLg}`,
     and `loading: bool` (disables clicks, sets `aria-busy="true"`, renders an
     inline spinner).
@@ -42,12 +52,13 @@ for commit messages.
 - Landmark `aria-label` attribute forwarding on `Breadcrumb`, `Pagination`,
   `ToastViewport`, and `SonnerViewport` (via `default_attribute`), allowing
   multiple instances on the same page with unique accessible landmark names.
-- Expanded `ui.dioxuspress.dev` to 180 interactive examples (adding 40 demos
-  across 35 form, overlay, navigation, data display, visual, and feedback
-  components, including `ChartBarSeries`, `FileDropzone`, `DataTablePagination`,
-  nested context/menubar submenus, right `SidebarRail`, `MockupWindow`, and
-  vertical looping `Carousel`) and added an interactive `Compact` / `Default` /
-  `Touch` `DensityProvider` switcher to every example preview card.
+- Expanded `ui.dioxuspress.dev` from 113 to 180 interactive examples (adding 67
+  demos across 52 flagship, form, overlay, navigation, data display, visual,
+  and feedback components, including `ChartBarSeries`, `FileDropzone`,
+  `DataTablePagination`, nested context/menubar submenus, right `SidebarRail`,
+  `MockupWindow`, and vertical looping `Carousel`) and added an interactive
+  `Compact` / `Default` / `Touch` `DensityProvider` switcher to every example
+  preview card.
 
 ### Changed
 - **Migration (`0.6.x` → `0.7.0`)**: All existing RSX call sites and `*_class`

@@ -9,7 +9,7 @@
 - **源码拷贝 CLI（`dxui`）**：按需将组件源码复制到你的应用仓库中，支持自由深度定制
 - **Cargo Crate 依赖模式**：偏好通过 Cargo 管理版本更新的项目也可直接按特性（feature）引入
 
-当前共提供 **100 个组件**、`dxui` 命令行工具以及在线交互预览站 [`ui.dioxuspress.dev`](https://ui.dioxuspress.dev/)。最新版本 `0.6.8` 已发布至 crates.io：[`dioxus-shadcn`](https://crates.io/crates/dioxus-shadcn) 与 [`dioxus-shadcn-cli`](https://crates.io/crates/dioxus-shadcn-cli)。
+当前共提供 **100 个组件**、`dxui` 命令行工具以及在线交互预览站 [`ui.dioxuspress.dev`](https://ui.dioxuspress.dev/)。最新版本 `0.7.0` 已发布至 crates.io：[`dioxus-shadcn`](https://crates.io/crates/dioxus-shadcn) 与 [`dioxus-shadcn-cli`](https://crates.io/crates/dioxus-shadcn-cli)。
 
 ## 产品定位与架构形态
 
@@ -147,7 +147,7 @@ div { "data-theme": "nord", class: "min-h-screen bg-background text-foreground",
 
 ```toml
 [dependencies]
-dioxus-shadcn = { version = "0.6", default-features = false, features = ["button", "input", "dialog"] }
+dioxus-shadcn = { version = "0.7", default-features = false, features = ["button", "input", "dialog"] }
 ```
 
 ```rust

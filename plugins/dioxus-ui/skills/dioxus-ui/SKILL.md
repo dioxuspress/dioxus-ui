@@ -62,7 +62,7 @@ Enable only the component features used by the app (`default-features = false` a
 
 ```toml
 [dependencies]
-dioxus-shadcn = { version = "0.6", default-features = false, features = ["button", "card", "dialog", "input"] }
+dioxus-shadcn = { version = "0.7", default-features = false, features = ["button", "card", "dialog", "input"] }
 ```
 
 Run `dxui init` once (or after upgrading `dioxus-shadcn`) so `assets/dioxus-shadcn.css` contains the semantic tokens and the Tailwind v4 `@source` path pointing to the installed crate's source files.
