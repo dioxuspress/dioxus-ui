@@ -1,11 +1,11 @@
 # Dioxus UI (`dioxus-shadcn`) API Patterns & Conventions
 
-Concise reference distilled from `docs/component-api.md` and shipped components for `dioxus-shadcn` `0.6.8` (Dioxus `0.7.x`).
+Concise reference distilled from `docs/component-api.md` and shipped components for `dioxus-shadcn` `0.7.0` (Dioxus `0.7.x`).
 
 ## Imports: Crate Mode vs. Source-Copy Mode
 
 ```rust
-// Crate mode (`Cargo.toml`: dioxus-shadcn = { version = "0.6", default-features = false, features = ["button", "card", "dialog", "input"] })
+// Crate mode (`Cargo.toml`: dioxus-shadcn = { version = "0.7", default-features = false, features = ["button", "card", "dialog", "input"] })
 use dioxus::prelude::*;
 use dioxus_shadcn::{
   Button, ButtonSize, ButtonVariant, Card, CardContent, CardHeader, CardTitle,
@@ -26,8 +26,8 @@ use crate::components::ui::input::Input;
 
 - `class: String` (default empty): merged last via `merge_classes`, so user utilities override conflicting component utilities of the same property/variant (e.g. `bg-blue-100` replaces `bg-muted`, while `hover:*` stays). For physical vs. logical conflicts (e.g. `ms-2` over `ml-4`), append Tailwind's important modifier (`ms-2!`).
 - `children: Element`: standard on container/content components (`Button`, `Card`, `Alert`, `Dialog`, `Tabs`). Void inputs (`Input`, `Separator`, `Progress`) omit `children`.
-- Semantic `variant` enums (never color names): e.g. `ButtonVariant::{Primary, Secondary, Destructive, Outline, Ghost, Link}`.
-- Component-local `size` enums: e.g. `ButtonSize::{Sm, Md, Lg, Icon}`.
+- Semantic `variant` enums (never color names): e.g. `ButtonVariant::{Primary, Secondary, Destructive, Outline, Ghost, Link, Soft, Dash}`.
+- Component-local `size` enums: e.g. `ButtonSize::{Xs, Sm, Md, Lg, IconSm, Icon, IconLg}`.
 - Boolean state props without `is_` prefix: `disabled`, `invalid`, `loading`.
 - Events follow Dioxus `on_*` naming (`onclick`, `oninput`, `on_open_change`, `on_value_change`, `on_checked_change`).
 
