@@ -73,9 +73,10 @@ fn App() -> Element {
 }
 ```
 
-Run `dxui init` in the app's directory for the stylesheet. Tailwind
-generates only the classes it finds in scanned files, so `dxui init` also
-writes an `@source` line for the crate's source, after the import, from
+Run `dxui init` in the app's directory for the stylesheet (it skips creating
+`src/components/ui/mod.rs` when `dioxus-shadcn` is already in `Cargo.toml`).
+Tailwind generates only the classes it finds in scanned files, so `dxui init`
+also writes an `@source` line for the crate's source, after the import, from
 `cargo metadata`:
 
 ```css

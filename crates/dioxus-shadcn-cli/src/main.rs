@@ -187,11 +187,11 @@ where
 
 fn init_command(args: &[OsString]) -> Result<(), Box<dyn Error>> {
   let root = parse_root(args, "init")?;
+  let sources = crate_sources(&root)?;
 
-  init_project(&root)?;
+  init_project_with_mode(&root, !sources.is_empty())?;
   println!("initialized dioxus-shadcn in {}", root.display());
 
-  let sources = crate_sources(&root)?;
   let path = app_path(&root, Path::new("assets/dioxus-shadcn.css"))?;
   let css = fs::read_to_string(&path)
     .map_err(|error| format!("cannot read {}: {error}", path.display()))?;
@@ -738,14 +738,19 @@ const UI_MOD_HEADER: &str =
 ";
 
 fn init_project(root: &Path) -> Result<(), Box<dyn Error>> {
+  init_project_with_mode(root, false)
+}
+
+fn init_project_with_mode(root: &Path, crate_mode: bool) -> Result<(), Box<dyn Error>> {
   let assets_dir = app_path(root, Path::new("assets"))?;
-  let ui_dir = app_path(root, Path::new("src/components/ui"))?;
-
   fs::create_dir_all(&assets_dir)?;
-  fs::create_dir_all(&ui_dir)?;
-
   write_new_file(&app_path(root, Path::new("assets/dioxus-shadcn.css"))?, DEFAULT_CSS)?;
-  write_new_file(&app_path(root, Path::new("src/components/ui/mod.rs"))?, UI_MOD_HEADER)?;
+
+  if !crate_mode {
+    let ui_dir = app_path(root, Path::new("src/components/ui"))?;
+    fs::create_dir_all(&ui_dir)?;
+    write_new_file(&app_path(root, Path::new("src/components/ui/mod.rs"))?, UI_MOD_HEADER)?;
+  }
 
   Ok(())
 }
@@ -1076,6 +1081,43 @@ mod tests {
     assert!(css.contains(".dark {\n  color-scheme: dark;"));
     assert!(css.contains("@theme inline {\n"));
     assert!(css.contains("--color-primary: var(--primary);"));
+    assert!(root.join("src").join("components").join("ui").join("mod.rs").is_file());
+  }
+
+  #[test]
+  fn init_command_skips_ui_module_in_crate_mode() {
+    let root = temp_project();
+    let cli = Path::new(env!("CARGO_MANIFEST_DIR"));
+    let workspace = cli.parent().and_then(Path::parent).expect("cli crate should sit in crates/");
+    let crate_path =
+      workspace.join("crates").join("dioxus-shadcn").to_string_lossy().replace('\\', "/");
+
+    fs::create_dir_all(root.join("src")).expect("src dir should be created");
+    fs::write(root.join("src").join("main.rs"), "fn main() {}\n").expect("main.rs should write");
+    fs::write(
+      root.join("Cargo.toml"),
+      format!(
+        "[package]\nname = \"crate-mode-init-fixture\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[dependencies]\ndioxus-shadcn = {{ path = \"{crate_path}\", default-features = false, features = [\"button\"] }}\n"
+      ),
+    )
+    .expect("Cargo.toml should write");
+    fs::copy(workspace.join("Cargo.lock"), root.join("Cargo.lock"))
+      .expect("Cargo.lock should copy");
+
+    let args = vec![OsString::from("--root"), root.clone().into_os_string()];
+    init_command(&args).expect("crate-mode init should succeed");
+
+    let css = fs::read_to_string(root.join("assets").join("dioxus-shadcn.css"))
+      .expect("css should be readable");
+    assert!(css.contains("@source \""), "{css}");
+    assert!(css.contains("dioxus-shadcn/src\""), "{css}");
+    assert!(
+      !root.join("src").join("components").exists(),
+      "crate-mode init should not create unused src/components/ui/mod.rs"
+    );
+
+    // Running `dxui add` later still creates src/components/ui/mod.rs on demand.
+    add_component(&root, "button").expect("add should create ui module on demand");
     assert!(root.join("src").join("components").join("ui").join("mod.rs").is_file());
   }
 
