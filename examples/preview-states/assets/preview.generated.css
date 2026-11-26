@@ -508,6 +508,9 @@
   .ms-auto {
     margin-inline-start: auto;
   }
+  .me-1\.5 {
+    margin-inline-end: calc(var(--spacing) * 1.5);
+  }
   .me-2 {
     margin-inline-end: calc(var(--spacing) * 2);
   }

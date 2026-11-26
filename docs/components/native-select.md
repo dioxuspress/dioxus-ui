@@ -29,13 +29,15 @@ use dioxus_shadcn::{NativeSelect, NativeSelectGroup, NativeSelectOption};
 
 ## API Surface
 
-- `NativeSelect { invalid, disabled, class, on_value_change, children }`
+- `NativeSelect { size, invalid, disabled, class, on_value_change, children }`
+- `NativeSelectSize` (`Sm`, `Md`, `Lg`)
 - `NativeSelectGroup { label, class, children }`
 - `NativeSelectOption { value, disabled, selected, class, children }`
 
 Class helpers:
 
 - `native_select_class(invalid, class)`
+- `native_select_sized_class(size, invalid, class)`
 - `native_select_group_class(class)`
 - `native_select_option_class(class)`
 

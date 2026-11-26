@@ -41,7 +41,11 @@ rsx! {
 ```
 
 `Slider` is controlled. It calls `on_value_change` with the new snapped value
-when it differs from `value`, and the app passes it back as `value`.
+when it differs from `value`, and the app passes it back as `value`. Pass
+`on_value_commit` when you need a single callback after a pointer drag ends
+(`pointerup` / `pointercancel`) or after a keyboard move, such as pushing an
+undo snapshot or triggering expensive recalculation (see
+[RFC 0083](../rfcs/0083-desktop-workstation-ergonomics-and-fixes.md)).
 
 | Input | Change |
 | --- | --- |
@@ -106,7 +110,8 @@ rsx! {
   keys as `Slider`. Its `aria-valuemin` or `aria-valuemax` is the other
   thumb's value, `min_steps_between` steps away.
 - A press moves the nearer thumb and focuses it; dragging keeps moving it
-  and stops at the other thumb.
+  and stops at the other thumb. `on_value_commit` fires with the final
+  `(low, high)` pair on pointer release or after a keyboard move.
 - The root is a `group`; name it with `aria-label` or `aria-labelledby`.
 - Right-to-left horizontal range sliders are not included.
 

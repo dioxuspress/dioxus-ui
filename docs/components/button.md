@@ -27,7 +27,7 @@ on hover, and `ButtonVariant::Soft` / `ButtonVariant::Dash` pair subtle tinted
 or dashed borders with `text-foreground` so every variant stays readable across
 all theme presets ([RFC 0057](../rfcs/0057-theme-presets.md)). Setting
 `loading: true` disables the button, sets `aria-busy="true"`, and prepends an
-inline spinner.
+inline spinner (`size-3` at `Xs` and `IconSm`, `size-4` otherwise).
 
 ## Events
 
@@ -48,7 +48,8 @@ button. Inside a form the button keeps the native `submit` type; pass
 `Button` takes its density from the nearest `DensityProvider`
 ([RFC 0078](../rfcs/0078-touch-density.md)), `Comfortable` without one. Under
 `Touch` it is at least 48 CSS pixels high and 44 wide, a touch target; at
-`Comfortable` the size alone sets the height (`Sm` is 32 pixels):
+`Comfortable` the size alone sets the height (`Sm` is 32 pixels), and at
+`Compact` `Xs` keeps its 28 pixel height ([RFC 0083](../rfcs/0083-desktop-workstation-ergonomics-and-fixes.md)):
 
 ```rust
 rsx! {

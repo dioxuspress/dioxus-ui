@@ -10,7 +10,7 @@
 - a packaged crate for users who prefer dependency-based usage
 
 It ships 100 components, the `dxui` CLI, and a
-[component site](https://ui.dioxuspress.dev/). Version 0.7.0 is
+[component site](https://ui.dioxuspress.dev/). Version 0.8.0 is
 on crates.io as [`dioxus-shadcn`](https://crates.io/crates/dioxus-shadcn) and
 [`dioxus-shadcn-cli`](https://crates.io/crates/dioxus-shadcn-cli).
 
@@ -192,20 +192,21 @@ div { "data-theme": "nord", class: "min-h-screen bg-background text-foreground",
 ```
 
 Crate-mode apps get the same stylesheet by running `dxui init`, which writes
-only `assets/dioxus-shadcn.css` and `src/components/ui/mod.rs`. In an app that
-depends on the crate it also writes an `@source` line for the crate's source
-after the import, from `cargo metadata`, since Tailwind generates only the
-classes it finds in scanned files; rerun it after upgrading the crate (see
-[crates/README.md](crates/README.md#depend-on-the-crate)). The token blocks in
-`examples/web-demo/assets/preview.css`, after its repository-relative
-`@source` lines, match the generated stylesheet; `npm run verify:css-inputs`
-checks that.
+only `assets/dioxus-shadcn.css` (and skips creating `src/components/ui/mod.rs`
+when `dioxus-shadcn` is already a Cargo dependency; `dxui add` still creates
+it on demand). In an app that depends on the crate it also writes an `@source`
+line for the crate's source after the import, from `cargo metadata`, since
+Tailwind generates only the classes it finds in scanned files; rerun it after
+upgrading the crate (see [crates/README.md](crates/README.md#depend-on-the-crate)).
+The token blocks in `examples/web-demo/assets/preview.css`, after its
+repository-relative `@source` lines, match the generated stylesheet;
+`npm run verify:css-inputs` checks that.
 
 ### Crate Mode
 
 ```toml
 [dependencies]
-dioxus-shadcn = { version = "0.7", default-features = false, features = ["button", "input", "dialog"] }
+dioxus-shadcn = { version = "0.8", default-features = false, features = ["button", "input", "dialog"] }
 ```
 
 ```rust
@@ -433,6 +434,7 @@ only.
 - [RFC 0080: Page Scripts Without Eval](docs/rfcs/0080-page-scripts-without-eval.md)
 - [RFC 0081: Overlay and Listbox Fixes](docs/rfcs/0081-overlay-and-listbox-fixes.md)
 - [RFC 0082: Blocks and Block-Driven Components](docs/rfcs/0082-blocks-and-block-driven-components.md)
+- [RFC 0083: Desktop Workstation Ergonomics and Fixes](docs/rfcs/0083-desktop-workstation-ergonomics-and-fixes.md)
 
 ## Verification Shortcuts
 

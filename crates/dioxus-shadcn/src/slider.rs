@@ -9,9 +9,9 @@ use crate::element_id::next_element_id;
 use crate::script::{Script, component_script};
 
 // Runs for the slider's lifetime. A primary-button press captures the pointer
-// and sends the value under it, and so does each move until release. Bounds
-// and step are read from the root at event time, so prop changes apply
-// without a restart.
+// and sends `["change", value]` for the press and each move, then
+// `["commit", value]` on pointer release or cancel. Bounds and step are read
+// from the root at event time, so prop changes apply without a restart.
 // Keep in sync with `slider_pointer_script` in the CLI `slider.rs` template.
 component_script!(
   slider_pointer_script = r#"
@@ -34,9 +34,11 @@ export async function run(dioxus) {
     const value = min + Math.round((ratio * (max - min)) / step) * step;
     return Math.min(max, Math.max(min, value));
   };
+  let lastValue = null;
   const send = (event) => {
     const value = valueAt(event);
-    if (value !== Number(root.getAttribute("aria-valuenow"))) dioxus.send(value);
+    lastValue = value;
+    if (value !== Number(root.getAttribute("aria-valuenow"))) dioxus.send(["change", value]);
   };
   const onPointerDown = (event) => {
     if (disabled() || event.button !== 0) return;
@@ -50,14 +52,18 @@ export async function run(dioxus) {
     if (root.hasPointerCapture(event.pointerId)) send(event);
   };
   const onPointerUp = (event) => {
-    if (root.hasPointerCapture(event.pointerId)) root.releasePointerCapture(event.pointerId);
+    if (!root.hasPointerCapture(event.pointerId)) return;
+    root.releasePointerCapture(event.pointerId);
+    const value = event.type === "pointercancel" && lastValue !== null ? lastValue : valueAt(event);
+    lastValue = null;
+    dioxus.send(["commit", value]);
   };
   let finish;
   const ended = new Promise((resolve) => {
     finish = resolve;
   });
-  const observer = new MutationObserver(() => {
-    if (!root.isConnected) finish();
+  const observer = new MutationObserver((records) => {
+    if (records.some((record) => record.removedNodes.length > 0) && !root.isConnected) finish();
   });
   observer.observe(document.documentElement, { subtree: true, childList: true });
   root.addEventListener("pointerdown", onPointerDown);
@@ -169,9 +175,11 @@ pub fn slider_key_move(key: &str) -> Option<SliderKeyMove> {
 
 /// A controlled slider. Arrow, Page Up, Page Down, Home, and End keys and a
 /// pointer press or drag call `on_value_change` with the new snapped value
-/// when it differs from `value`; the app passes it back as `value`. Other
-/// attributes, such as `aria-label` and `aria-valuetext`, are passed to the
-/// root. A disabled slider ignores keys and the pointer.
+/// when it differs from `value`; the app passes it back as `value`.
+/// `on_value_commit` runs when a pointer drag ends or a key changes the value,
+/// suitable for committing undo history or expensive work. Other attributes,
+/// such as `aria-label` and `aria-valuetext`, are passed to the root. A
+/// disabled slider ignores keys and the pointer.
 #[component]
 pub fn Slider(
   #[props(default)] value: f64,
@@ -185,10 +193,11 @@ pub fn Slider(
   #[props(default)] range_class: String,
   #[props(default)] thumb_class: String,
   #[props(default)] on_value_change: Option<EventHandler<f64>>,
+  #[props(default)] on_value_commit: Option<EventHandler<f64>>,
   #[props(extends = GlobalAttributes, extends = div)] attributes: Vec<Attribute>,
 ) -> Element {
   let state = slider_state(value, min, max, step);
-  let scope_id = use_slider_pointer(state, disabled, on_value_change);
+  let scope_id = use_slider_pointer(state, disabled, on_value_change, on_value_commit);
   let percent = state.percent();
   let aria = state.aria_attributes();
   let (root_orientation, track_orientation, range_orientation) =
@@ -235,6 +244,9 @@ pub fn Slider(
           if let Some(handler) = on_value_change {
             handler.call(next);
           }
+          if let Some(handler) = on_value_commit {
+            handler.call(next);
+          }
         }
       },
       ..attributes,
@@ -255,16 +267,18 @@ pub fn Slider(
 
 /// Runs the pointer script for the slider's lifetime and returns the value
 /// for the root's `data-dxui-slider` attribute. Values from the script are
-/// snapped against the latest props before reaching `on_value_change`.
+/// snapped against the latest props before reaching `on_value_change` and
+/// `on_value_commit`.
 fn use_slider_pointer(
   state: SliderState,
   disabled: bool,
   on_value_change: Option<EventHandler<f64>>,
+  on_value_commit: Option<EventHandler<f64>>,
 ) -> String {
   let scope_id = use_hook(|| format!("dxui-slider-{}", next_element_id()));
   // The receive loop outlives this render, so it reads the latest props here.
-  let mut latest = use_hook(|| CopyValue::new((state, disabled)));
-  latest.set((state, disabled));
+  let mut latest = use_hook(|| CopyValue::new((state, disabled, on_value_change, on_value_commit)));
+  latest.set((state, disabled, on_value_change, on_value_commit));
   let effect_scope_id = scope_id.clone();
 
   use_effect(move || {
@@ -272,14 +286,31 @@ fn use_slider_pointer(
     // A send error means the page already finished the script; nothing to track.
     let _ = script.send(effect_scope_id.as_str());
     spawn(async move {
-      while let Ok(value) = script.recv::<f64>().await {
-        let (state, disabled) = latest();
-        let next = state.with_value(value).value;
-        if disabled || next == state.value {
+      while let Ok((kind, value)) = script.recv::<(String, f64)>().await {
+        let (state, disabled, on_value_change, on_value_commit) = latest();
+        if disabled {
           continue;
         }
-        if let Some(handler) = on_value_change {
-          handler.call(next);
+        let next = state.with_value(value).value;
+        match kind.as_str() {
+          "change" => {
+            if next != state.value {
+              if let Some(handler) = on_value_change {
+                handler.call(next);
+              }
+            }
+          }
+          "commit" => {
+            if next != state.value {
+              if let Some(handler) = on_value_change {
+                handler.call(next);
+              }
+            }
+            if let Some(handler) = on_value_commit {
+              handler.call(next);
+            }
+          }
+          _ => {}
         }
       }
     });
@@ -290,8 +321,8 @@ fn use_slider_pointer(
 
 // Runs for the range slider's lifetime. A primary-button press picks the
 // nearer thumb (the upper one when the press is above both), captures the
-// pointer, and sends `[thumb, value]` for the press and each move until
-// release.
+// pointer, and sends `["change", thumb, value]` for the press and each move,
+// then `["commit", thumb, value]` on pointer release or cancel.
 // Keep in sync with `range_slider_pointer_script` in the CLI `slider.rs` template.
 component_script!(
   range_slider_pointer_script = r#"
@@ -313,28 +344,37 @@ export async function run(dioxus) {
     return Math.min(max, Math.max(min, min + Math.round((ratio * (max - min)) / step) * step));
   };
   let active = 0;
+  let lastValue = null;
   const onPointerDown = (event) => {
     if (root.dataset.disabled === "true" || event.button !== 0) return;
     event.preventDefault();
     const value = valueAt(event);
     const [low, high] = thumbs().map((thumb) => Number(thumb.getAttribute("aria-valuenow")));
     active = Math.abs(value - low) < Math.abs(value - high) || value < low ? 0 : 1;
+    lastValue = value;
     root.setPointerCapture(event.pointerId);
     thumbs()[active]?.focus();
-    dioxus.send([active, value]);
+    dioxus.send(["change", active, value]);
   };
   const onPointerMove = (event) => {
-    if (root.hasPointerCapture(event.pointerId)) dioxus.send([active, valueAt(event)]);
+    if (!root.hasPointerCapture(event.pointerId)) return;
+    const value = valueAt(event);
+    lastValue = value;
+    dioxus.send(["change", active, value]);
   };
   const onPointerUp = (event) => {
-    if (root.hasPointerCapture(event.pointerId)) root.releasePointerCapture(event.pointerId);
+    if (!root.hasPointerCapture(event.pointerId)) return;
+    root.releasePointerCapture(event.pointerId);
+    const value = event.type === "pointercancel" && lastValue !== null ? lastValue : valueAt(event);
+    lastValue = null;
+    dioxus.send(["commit", active, value]);
   };
   let finish;
   const ended = new Promise((resolve) => {
     finish = resolve;
   });
-  const observer = new MutationObserver(() => {
-    if (!root.isConnected) finish();
+  const observer = new MutationObserver((records) => {
+    if (records.some((record) => record.removedNodes.length > 0) && !root.isConnected) finish();
   });
   observer.observe(document.documentElement, { subtree: true, childList: true });
   root.addEventListener("pointerdown", onPointerDown);
@@ -373,7 +413,8 @@ fn range_slider_values(
 /// A controlled slider with two thumbs, each a `slider` that keyboard and
 /// pointer move as on `Slider`; a press moves the nearer thumb. The thumbs
 /// stay `min_steps_between` steps apart. `on_value_change` receives the new
-/// `(low, high)` pair. `start_label` and `end_label` name the thumbs; other
+/// `(low, high)` pair; `on_value_commit` runs when a pointer drag ends or a
+/// key changes the pair. `start_label` and `end_label` name the thumbs; other
 /// attributes are passed to the root, a `group`.
 #[component]
 pub fn RangeSlider(
@@ -391,6 +432,7 @@ pub fn RangeSlider(
   #[props(default)] range_class: String,
   #[props(default)] thumb_class: String,
   #[props(default)] on_value_change: Option<EventHandler<(f64, f64)>>,
+  #[props(default)] on_value_commit: Option<EventHandler<(f64, f64)>>,
   #[props(extends = GlobalAttributes, extends = div)] attributes: Vec<Attribute>,
 ) -> Element {
   let state = slider_state(min, min, max, step);
@@ -398,22 +440,41 @@ pub fn RangeSlider(
   let values = range_slider_values(value, 0, value.0.min(value.1), min, max, step, gap);
   let scope_id = use_hook(|| format!("dxui-range-slider-{}", next_element_id()));
   // The receive loop outlives this render, so it reads the latest props here.
-  let mut latest = use_hook(|| CopyValue::new((values, min, max, step, gap, disabled)));
-  latest.set((values, min, max, step, gap, disabled));
+  let mut latest = use_hook(|| {
+    CopyValue::new((values, min, max, step, gap, disabled, on_value_change, on_value_commit))
+  });
+  latest.set((values, min, max, step, gap, disabled, on_value_change, on_value_commit));
   let effect_scope_id = scope_id.clone();
   use_effect(move || {
     let script = range_slider_pointer_script::start();
     // A send error means the page already finished the script; nothing to track.
     let _ = script.send(effect_scope_id.as_str());
     spawn(async move {
-      while let Ok((thumb, target)) = script.recv::<(usize, f64)>().await {
-        let (values, min, max, step, gap, disabled) = latest();
-        let next = range_slider_values(values, thumb, target, min, max, step, gap);
-        if disabled || next == values {
+      while let Ok((kind, thumb, target)) = script.recv::<(String, usize, f64)>().await {
+        let (values, min, max, step, gap, disabled, on_value_change, on_value_commit) = latest();
+        if disabled {
           continue;
         }
-        if let Some(handler) = on_value_change {
-          handler.call(next);
+        let next = range_slider_values(values, thumb, target, min, max, step, gap);
+        match kind.as_str() {
+          "change" => {
+            if next != values {
+              if let Some(handler) = on_value_change {
+                handler.call(next);
+              }
+            }
+          }
+          "commit" => {
+            if next != values {
+              if let Some(handler) = on_value_change {
+                handler.call(next);
+              }
+            }
+            if let Some(handler) = on_value_commit {
+              handler.call(next);
+            }
+          }
+          _ => {}
         }
       }
     });
@@ -489,6 +550,9 @@ pub fn RangeSlider(
               if let Some(handler) = on_value_change {
                 handler.call(next);
               }
+              if let Some(handler) = on_value_commit {
+                handler.call(next);
+              }
             }
           },
         }
@@ -500,6 +564,40 @@ pub fn RangeSlider(
 #[cfg(test)]
 mod tests {
   use super::*;
+
+  #[test]
+  fn ssr_slider_and_range_slider_accept_on_value_commit() {
+    fn app() -> Element {
+      rsx! {
+        Slider {
+          value: 45.0,
+          on_value_change: move |_| {},
+          on_value_commit: move |_| {},
+          "aria-label": "Volume",
+        }
+        RangeSlider {
+          value: (25.0, 75.0),
+          on_value_change: move |_| {},
+          on_value_commit: move |_| {},
+          "aria-label": "Range",
+        }
+      }
+    }
+    let mut dom = VirtualDom::new(app);
+    dom.rebuild_in_place();
+    let html = dioxus_ssr::render(&dom);
+
+    assert!(html.contains(r#"aria-valuenow="45""#));
+    assert!(html.contains(r#"aria-valuenow="25""#));
+    assert!(html.contains(r#"aria-valuenow="75""#));
+  }
+
+  #[test]
+  fn slider_pointer_scripts_emit_commit_and_filter_removed_nodes() {
+    let source = include_str!("slider.rs").split("#[cfg(test)]").next().unwrap_or("");
+    assert_eq!(source.matches(r#"dioxus.send(["commit","#).count(), 2);
+    assert_eq!(source.matches("record.removedNodes.length > 0").count(), 2);
+  }
 
   #[test]
   fn range_slider_values_snap_and_keep_the_gap() {

@@ -8,6 +8,14 @@ for commit messages.
 
 ## [Unreleased]
 
+## [0.8.0] - 2026-11-26
+
+Version 0.8.0 ships desktop workstation and modal/input ergonomics across
+`Sheet`, `Input`, `Textarea`, `Combobox`, `Button`, `NativeSelect`, `Slider`,
+`RangeSlider`, and the `dxui` CLI (strictly synced between `dioxus-shadcn` and
+`dioxus-shadcn-cli` templates), alongside all `v0.7.1` modal and listbox
+listener race fixes.
+
 ### Added
 - `Sheet`: `SheetSize::{Sm, Md, Lg, Xl, Full}`, `SheetSide::class_for_size`,
   `sheet_content_sized_class`, and `size` prop / `data-size` attribute on
@@ -18,6 +26,11 @@ for commit messages.
 - `Combobox`: `allow_custom_value: bool` on `Combobox` for free-solo `Enter`
   commits when no option is highlighted, and `on_value_change`, `onkeydown`,
   `onfocus`, and `onblur` on `ComboboxInput`.
+- `NativeSelect`: `NativeSelectSize::{Sm, Md, Lg}`,
+  `native_select_sized_class`, and `size` prop on `NativeSelect` (defaults to
+  `NativeSelectSize::Md`; RFC 0083).
+- `Slider` and `RangeSlider`: optional `on_value_commit` callback triggered on
+  pointer release (`pointerup` / `pointercancel`) and keyboard moves (RFC 0083).
 
 ### Fixed
 - `Dialog`, `Sheet`, `AlertDialog`, and `Drawer`: attach the document-level
@@ -27,13 +40,35 @@ for commit messages.
 - `Listbox` / `Combobox`: attach `keySource`'s `keydown` listener before
   `requestAnimationFrame` in `listbox_script` so pressing `Enter` immediately
   after typing never drops activation or free-solo commits.
+- `Button`: omit `min-h-8` under `UiDensity::Compact` for `ButtonSize::Xs` so
+  extra-small buttons keep `h-7` (28 px), and render a compact `size-3` loading
+  spinner for `ButtonSize::Xs` and `ButtonSize::IconSm` (RFC 0083).
+- `Slider` and `RangeSlider`: short-circuit the disconnect `MutationObserver`
+  when mutation records contain no `removedNodes` (RFC 0083).
+- `dxui init`: skip creating unused `src/components/ui/mod.rs` when
+  `dioxus-shadcn` is already a Cargo dependency (`dxui add` still creates it on
+  demand; RFC 0083).
 
 ### Changed
 - **Migration (`0.7.x` → `0.8.0`)**: All existing RSX call sites remain
   source-compatible because every new component prop uses `#[props(default)]`.
   Code constructing `SheetContentProps`, `InputProps`, `TextareaProps`,
-  `ComboboxProps`, or `ComboboxInputProps` struct literals directly should add
-  the new fields.
+  `ComboboxProps`, `ComboboxInputProps`, `NativeSelectProps`, `SliderProps`, or
+  `RangeSliderProps` struct literals directly should add the new fields.
+
+## [0.7.1] - 2026-11-26
+
+### Fixed
+- `Dialog`, `Sheet`, `AlertDialog`, and `Drawer`: attach the document-level
+  `Escape` listener in `modal_focus_scope_script` before `requestAnimationFrame`
+  (gated by `layer.is_top()`), eliminating the immediate-open `0ms` Escape race
+  and blur-outside Escape gap (synced between `dioxus-shadcn` and
+  `dioxus-shadcn-cli` templates).
+- `Listbox` / `Combobox` / `Select`: attach `keySource`'s `keydown` listener
+  before `requestAnimationFrame` in `listbox_script` (with cleanup on early
+  close) so pressing `Enter` immediately after typing or opening never drops
+  activation (synced between `dioxus-shadcn` and `dioxus-shadcn-cli`
+  templates).
 
 ## [0.7.0] - 2026-11-25
 

@@ -681,8 +681,8 @@ pub use message_scroller::{
 };
 #[cfg(feature = "native-select")]
 pub use native_select::{
-  NativeSelect, NativeSelectGroup, NativeSelectOption, native_select_class,
-  native_select_group_class, native_select_option_class,
+  NativeSelect, NativeSelectGroup, NativeSelectOption, NativeSelectSize, native_select_class,
+  native_select_group_class, native_select_option_class, native_select_sized_class,
 };
 #[cfg(feature = "navigation-menu")]
 pub use navigation_menu::{
