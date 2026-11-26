@@ -18,6 +18,11 @@ for commit messages.
 - `Combobox`: `allow_custom_value: bool` on `Combobox` for free-solo `Enter`
   commits when no option is highlighted, and `on_value_change`, `onkeydown`,
   `onfocus`, and `onblur` on `ComboboxInput`.
+- `NativeSelect`: `NativeSelectSize::{Sm, Md, Lg}`,
+  `native_select_sized_class`, and `size` prop on `NativeSelect` (defaults to
+  `NativeSelectSize::Md`; RFC 0083).
+- `Slider` and `RangeSlider`: optional `on_value_commit` callback triggered on
+  pointer release (`pointerup` / `pointercancel`) and keyboard moves (RFC 0083).
 
 ### Fixed
 - `Dialog`, `Sheet`, `AlertDialog`, and `Drawer`: attach the document-level
@@ -27,13 +32,21 @@ for commit messages.
 - `Listbox` / `Combobox`: attach `keySource`'s `keydown` listener before
   `requestAnimationFrame` in `listbox_script` so pressing `Enter` immediately
   after typing never drops activation or free-solo commits.
+- `Button`: omit `min-h-8` under `UiDensity::Compact` for `ButtonSize::Xs` so
+  extra-small buttons keep `h-7` (28 px), and render a compact `size-3` loading
+  spinner for `ButtonSize::Xs` and `ButtonSize::IconSm` (RFC 0083).
+- `Slider` and `RangeSlider`: short-circuit the disconnect `MutationObserver`
+  when mutation records contain no `removedNodes` (RFC 0083).
+- `dxui init`: skip creating unused `src/components/ui/mod.rs` when
+  `dioxus-shadcn` is already a Cargo dependency (`dxui add` still creates it on
+  demand; RFC 0083).
 
 ### Changed
 - **Migration (`0.7.x` → `0.8.0`)**: All existing RSX call sites remain
   source-compatible because every new component prop uses `#[props(default)]`.
   Code constructing `SheetContentProps`, `InputProps`, `TextareaProps`,
-  `ComboboxProps`, or `ComboboxInputProps` struct literals directly should add
-  the new fields.
+  `ComboboxProps`, `ComboboxInputProps`, `NativeSelectProps`, `SliderProps`, or
+  `RangeSliderProps` struct literals directly should add the new fields.
 
 ## [0.7.0] - 2026-11-25
 

@@ -26,7 +26,7 @@ Source preview routes: 100
 | [Badge](badge.md) | /components/badge/source | crates/dioxus-shadcn-cli/templates/badge.rs | src/components/ui/badge.rs | rust | 168 | 5929 |
 | [Breadcrumb](breadcrumb.md) | /components/breadcrumb/source | crates/dioxus-shadcn-cli/templates/breadcrumb.rs | src/components/ui/breadcrumb.rs | rust | 160 | 4560 |
 | [Bubble](bubble.md) | /components/bubble/source | crates/dioxus-shadcn-cli/templates/bubble.rs | src/components/ui/bubble.rs | rust | 256 | 7293 |
-| [Button](button.md) | /components/button/source | crates/dioxus-shadcn-cli/templates/button.rs | src/components/ui/button.rs | rust | 149 | 4893 |
+| [Button](button.md) | /components/button/source | crates/dioxus-shadcn-cli/templates/button.rs | src/components/ui/button.rs | rust | 155 | 5295 |
 | [Button Group](button-group.md) | /components/button-group/source | crates/dioxus-shadcn-cli/templates/button_group.rs | src/components/ui/button_group.rs | rust | 111 | 3717 |
 | [Calendar](calendar.md) | /components/calendar/source | crates/dioxus-shadcn-cli/templates/calendar.rs | src/components/ui/calendar.rs | rust | 613 | 20589 |
 | [Card](card.md) | /components/card/source | crates/dioxus-shadcn-cli/templates/card.rs | src/components/ui/card.rs | rust | 423 | 11733 |
@@ -76,7 +76,7 @@ Source preview routes: 100
 | [Message](message.md) | /components/message/source | crates/dioxus-shadcn-cli/templates/message.rs | src/components/ui/message.rs | rust | 168 | 4829 |
 | [Message Scroller](message-scroller.md) | /components/message-scroller/source | crates/dioxus-shadcn-cli/templates/message_scroller.rs | src/components/ui/message_scroller.rs | rust | 284 | 9866 |
 | [Mockup](mockup.md) | /components/mockup/source | crates/dioxus-shadcn-cli/templates/mockup.rs | src/components/ui/mockup.rs | rust | 165 | 5469 |
-| [Native Select](native-select.md) | /components/native-select/source | crates/dioxus-shadcn-cli/templates/native_select.rs | src/components/ui/native_select.rs | rust | 105 | 3228 |
+| [Native Select](native-select.md) | /components/native-select/source | crates/dioxus-shadcn-cli/templates/native_select.rs | src/components/ui/native_select.rs | rust | 149 | 4651 |
 | [Navbar](navbar.md) | /components/navbar/source | crates/dioxus-shadcn-cli/templates/navbar.rs | src/components/ui/navbar.rs | rust | 83 | 2426 |
 | [Navigation Menu](navigation-menu.md) | /components/navigation-menu/source | crates/dioxus-shadcn-cli/templates/navigation_menu.rs | src/components/ui/navigation_menu.rs | rust | 503 | 20036 |
 | [Number Input](number-input.md) | /components/number-input/source | crates/dioxus-shadcn-cli/templates/number_input.rs | src/components/ui/number_input.rs | rust | 164 | 6246 |
@@ -93,7 +93,7 @@ Source preview routes: 100
 | [Sheet](sheet.md) | /components/sheet/source | crates/dioxus-shadcn-cli/templates/sheet.rs | src/components/ui/sheet.rs | rust | 338 | 11039 |
 | [Sidebar](sidebar.md) | /components/sidebar/source | crates/dioxus-shadcn-cli/templates/sidebar.rs | src/components/ui/sidebar.rs | rust | 529 | 17922 |
 | [Skeleton](skeleton.md) | /components/skeleton/source | crates/dioxus-shadcn-cli/templates/skeleton.rs | src/components/ui/skeleton.rs | rust | 23 | 612 |
-| [Slider](slider.md) | /components/slider/source | crates/dioxus-shadcn-cli/templates/slider.rs | src/components/ui/slider.rs | rust | 604 | 22750 |
+| [Slider](slider.md) | /components/slider/source | crates/dioxus-shadcn-cli/templates/slider.rs | src/components/ui/slider.rs | rust | 668 | 25226 |
 | [Sonner](sonner.md) | /components/sonner/source | crates/dioxus-shadcn-cli/templates/sonner.rs | src/components/ui/sonner.rs | rust | 472 | 15113 |
 | [Spinner](spinner.md) | /components/spinner/source | crates/dioxus-shadcn-cli/templates/spinner.rs | src/components/ui/spinner.rs | rust | 52 | 1382 |
 | [Stack](stack.md) | /components/stack/source | crates/dioxus-shadcn-cli/templates/stack.rs | src/components/ui/stack.rs | rust | 61 | 2340 |
