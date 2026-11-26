@@ -1,11 +1,11 @@
 # Dioxus UI (`dioxus-shadcn`) API Patterns & Conventions
 
-Concise reference distilled from `docs/component-api.md` and shipped components for `dioxus-shadcn` `0.7.0` (Dioxus `0.7.x`).
+Concise reference distilled from `docs/component-api.md` and shipped components for `dioxus-shadcn` `0.8.0` (Dioxus `0.7.x`).
 
 ## Imports: Crate Mode vs. Source-Copy Mode
 
 ```rust
-// Crate mode (`Cargo.toml`: dioxus-shadcn = { version = "0.7", default-features = false, features = ["button", "card", "dialog", "input"] })
+// Crate mode (`Cargo.toml`: dioxus-shadcn = { version = "0.8", default-features = false, features = ["button", "card", "dialog", "input"] })
 use dioxus::prelude::*;
 use dioxus_shadcn::{
   Button, ButtonSize, ButtonVariant, Card, CardContent, CardHeader, CardTitle,

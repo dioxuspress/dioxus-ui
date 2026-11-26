@@ -10,7 +10,7 @@
 - a packaged crate for users who prefer dependency-based usage
 
 It ships 100 components, the `dxui` CLI, and a
-[component site](https://ui.dioxuspress.dev/). Version 0.7.0 is
+[component site](https://ui.dioxuspress.dev/). Version 0.8.0 is
 on crates.io as [`dioxus-shadcn`](https://crates.io/crates/dioxus-shadcn) and
 [`dioxus-shadcn-cli`](https://crates.io/crates/dioxus-shadcn-cli).
 
@@ -206,7 +206,7 @@ repository-relative `@source` lines, match the generated stylesheet;
 
 ```toml
 [dependencies]
-dioxus-shadcn = { version = "0.7", default-features = false, features = ["button", "input", "dialog"] }
+dioxus-shadcn = { version = "0.8", default-features = false, features = ["button", "input", "dialog"] }
 ```
 
 ```rust
