@@ -82,11 +82,12 @@ impl ButtonSize {
 
 const BUTTON_BASE_CLASS: &str = "inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50";
 const BUTTON_SPINNER_CLASS: &str = "me-2 inline-block size-4 shrink-0 animate-spin rounded-full border-2 border-current border-t-transparent";
+const BUTTON_COMPACT_SPINNER_CLASS: &str = "me-1.5 inline-block size-3 shrink-0 animate-spin rounded-full border-2 border-current border-t-transparent";
 
 /// Classes for the button: base classes, the variant's, the size's, a minimum
 /// height for `density` (and a minimum width at Touch), then `class` merged over them.
 /// At the default `Comfortable` the size alone sets the height, so `Sm` stays
-/// 32 pixels high.
+/// 32 pixels high; at `Compact`, `Xs` keeps its 28 pixel height (`h-7`).
 pub fn button_class(
   variant: ButtonVariant,
   size: ButtonSize,
@@ -94,6 +95,7 @@ pub fn button_class(
   class: &str,
 ) -> String {
   let density_class = match density {
+    UiDensity::Compact if size == ButtonSize::Xs => None,
     UiDensity::Compact => Some("min-h-8"),
     UiDensity::Comfortable => None,
     UiDensity::Touch => Some("min-h-12 min-w-11"),
@@ -124,6 +126,10 @@ pub fn Button(
 ) -> Element {
   let class = button_class(variant, size, use_density(), &class);
   let is_disabled = disabled || loading;
+  let spinner_class = match size {
+    ButtonSize::Xs | ButtonSize::IconSm => BUTTON_COMPACT_SPINNER_CLASS,
+    _ => BUTTON_SPINNER_CLASS,
+  };
 
   rsx! {
     button {
@@ -138,7 +144,7 @@ pub fn Button(
       ..attributes,
       if loading {
         span {
-          class: BUTTON_SPINNER_CLASS,
+          class: spinner_class,
           "aria-hidden": "true",
         }
       }
@@ -234,5 +240,27 @@ mod tests {
     assert!(html.contains("disabled"), "{html}");
     assert!(html.contains(r#"aria-busy="true""#), "{html}");
     assert!(html.contains("animate-spin"), "{html}");
+    assert!(html.contains("size-4"), "{html}");
+  }
+
+  #[test]
+  fn compact_density_keeps_xs_height() {
+    let xs = button_class(ButtonVariant::Primary, ButtonSize::Xs, UiDensity::Compact, "");
+    let sm = button_class(ButtonVariant::Primary, ButtonSize::Sm, UiDensity::Compact, "");
+
+    assert!(xs.contains("h-7") && !xs.contains("min-h-8"), "{xs}");
+    assert!(sm.contains("h-8") && sm.contains("min-h-8"), "{sm}");
+  }
+
+  #[test]
+  fn compact_loading_button_uses_smaller_spinner() {
+    fn app() -> Element {
+      rsx! { Button { size: ButtonSize::Xs, loading: true, "Syncing" } }
+    }
+    let mut dom = VirtualDom::new(app);
+    dom.rebuild_in_place();
+    let html = dioxus_ssr::render(&dom);
+
+    assert!(html.contains("size-3") && !html.contains("size-4"), "{html}");
   }
 }
