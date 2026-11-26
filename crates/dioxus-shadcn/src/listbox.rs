@@ -232,14 +232,17 @@ export async function run(dioxus) {
       if (first) highlight(first);
     }
   });
+  if (keySource) keySource.addEventListener("keydown", onKeyDown);
   await new Promise((resolve) => requestAnimationFrame(resolve));
-  if (closed()) return;
+  if (closed()) {
+    if (keySource) keySource.removeEventListener("keydown", onKeyDown);
+    return;
+  }
   const pointerOpened = isSubmenu && anchor !== null && "dxuiPointerOpen" in anchor.dataset;
   if (anchor) delete anchor.dataset.dxuiPointerOpen;
   wasHidden = hidden();
   if (!pointerOpened && !wasHidden) highlight(initial());
   observer.observe(document.documentElement, { subtree: true, childList: true, attributes: true, attributeFilter: ["hidden", "data-disabled", "aria-disabled"] });
-  if (keySource) keySource.addEventListener("keydown", onKeyDown);
   if (resetsOnInput && anchor) anchor.addEventListener("input", onInput);
   listbox.addEventListener("pointermove", onPointerMove);
   listbox.addEventListener("pointerdown", onPointerDown);
