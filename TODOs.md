@@ -227,6 +227,33 @@ The `files` and `schedule` blocks left two gaps (M224.2, M224.3 and M224.8). Nei
   - Versions, CHANGELOG, release gate with `verify:semver` against `v0.6.5`, publish in dependency order, annotated tag `v0.6.6`, then fresh apps in both modes from crates.io that open the `files` menu with Shift+F10 and pick a day in `schedule`.
   - Done (0c35d99b, tag `v0.6.6`): release gate passed (59 fixtures under the strict policy; `verify:semver` no required update against `v0.6.5`), then the dry run and CI at the first attempt. Each crate was published after `cargo search` listed the one before. A fresh app from `dxui` 0.6.6 (`files` and `schedule`, `#![deny(warnings)]`) and one on `dioxus-shadcn` 0.6.6 in crate mode, served with the strict policy, deleted Budget.xlsx from the menu opened with Shift+F10 and showed the weeks of November 5 and, after ArrowDown, November 12. Recorded in `docs/release.md` (afd0cd07).
 
+## M226 Evidence (measured 2026-11-26 against published `v0.7.0` during `phonon-studio` Desktop migration)
+
+- `phonon-studio` (Dioxus 0.7 Desktop workstation) migrated onto published `dioxus-shadcn` 0.7.0 (17 features) and `dxui` 0.7.0 and recorded `FB-studio-01` to `FB-studio-07` ([RFC 0083](docs/rfcs/0083-desktop-workstation-ergonomics-and-fixes.md)):
+  - `FB-studio-01`: `UiDensity::Compact` injects `min-h-8` (32 px) on `ButtonSize::Xs` (`h-7`, 28 px), making `Xs` taller under `Compact` than under `Comfortable`.
+  - `FB-studio-02`: `Button { loading: true }` hardcodes `size-4 me-2` (16 px) even on `Xs` / `IconSm`.
+  - `FB-studio-03`: `dxui init` creates an unused `src/components/ui/mod.rs` even when `Cargo.toml` already declares `dioxus-shadcn` (crate mode).
+  - `FB-studio-04`: `NativeSelect` hardcodes `h-10 text-sm` with no `NativeSelectSize` enum, forcing 8 manual `h-8`/`h-7 text-xs` overrides.
+  - `FB-studio-05`: `Slider` and `RangeSlider` lack an `on_value_commit` release/key-commit callback for undo snapshots, and their disconnect `MutationObserver` inspects `root.isConnected` even on mutations with no `removedNodes`.
+  - Deferred: `FB-studio-06` (`Badge` attribute forwarding — 5th wrapper across blocks + `phonon-studio`, tracked under Deferred "Attributes on more components"), `FB-studio-07` (`TooltipTrigger` + `Button` helper).
+
+## M226 0.8.0 Desktop Workstation Ergonomics and Fixes (RFC 0083)
+
+- TODO M226.1 `Button`: `Compact` respects `Xs` height and compact loading spinner (`FB-studio-01`, `FB-studio-02`)
+  - Omit `min-h-8` for `ButtonSize::Xs` under `UiDensity::Compact`, and render a `size-3 me-1.5` loading spinner for `Xs` / `IconSm`, in crate, CLI template, and `docs/components/button.md`.
+  - Exit: unit tests for `Xs` under `Compact` (no `min-h-8`) and SSR `Xs` loading spinner (`size-3`), failing before the fix; template parity and `verify:tailwind-conflicts` pass.
+- TODO M226.2 `NativeSelect`: `NativeSelectSize::{Sm, Md, Lg}` and `native_select_sized_class` (`FB-studio-04`)
+  - Add orthogonal `NativeSelectSize` matching `InputSize`, export in `dioxus-shadcn`, sync CLI template and `docs/components/native-select.md`.
+  - Exit: unit and SSR tests for `Sm`/`Md`/`Lg` sizes; `template_parity`, Clippy, and `verify:docs` pass.
+- TODO M226.3 `Slider` & `RangeSlider`: `on_value_commit` and `removedNodes` observer guard (`FB-studio-05`)
+  - Add optional `on_value_commit` prop to `Slider` (`f64`) and `RangeSlider` (`(f64, f64)`), fire on pointer release and keyboard moves, and guard the disconnect observer on `removedNodes.length > 0`, in crate, CLI template, and `docs/components/slider.md`.
+  - Exit: unit & SSR tests plus existing slider checks; `template_parity` and Clippy pass.
+- TODO M226.4 `dxui init`: skip unused `src/components/ui/mod.rs` in crate-mode apps (`FB-studio-03`)
+  - When `crate_sources(&root)` is non-empty, `dxui init` writes only `assets/dioxus-shadcn.css` (and its `@source`) without creating `src/components/ui/mod.rs`; source-copy apps and `dxui add` remain unchanged.
+  - Exit: CLI unit test in a crate-mode fixture asserts `assets/dioxus-shadcn.css` exists with `@source` and `src/components/ui/mod.rs` is absent; `scripts/generated-fixture-smoke.sh` passes.
+- TODO M226.5 Sync generated metadata, CHANGELOG, and verify release gates
+  - Update `CHANGELOG.md` `[Unreleased]`, `docs/components/source-preview.md`, preview/site generated CSS, and Claude plugin metadata; run workspace tests, Clippy, `verify:docs`, `verify:tailwind-conflicts`, `scripts/generated-fixture-smoke.sh`, and `verify:semver`.
+
 ## M215 Dioxus 0.8 Readiness
 
 - DONE M215.1 Browser checks on both `dx` lines
