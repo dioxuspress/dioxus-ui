@@ -2,7 +2,7 @@
 //! secondary forms, and contextual workflows.
 use super::default_attribute::default_attribute;
 use super::dialog_labels::{DialogLabelPart, use_dialog_label_part, use_dialog_labels};
-use super::modal_focus::use_modal_focus_scope;
+use super::modal_focus::use_modal_focus_scope_with_escape;
 pub use super::overlay::{
   DialogPrimitiveConfig, DismissBehavior, FocusReturn, FocusStrategy, PortalTarget,
 };
@@ -162,8 +162,15 @@ pub fn SheetContent(
   let open = root.is_open();
   let id = default_attribute(&attributes, "id", root.content_id());
   let (labelledby, describedby) = use_dialog_labels().content_attributes(&attributes);
-  let focus_scope = use_modal_focus_scope(open, true);
   let layer = use_layer(open);
+  let escape_layer = layer.clone();
+  let on_escape = use_callback(move |()| {
+    if root.is_open() && dismiss.escape_key && escape_layer.is_top() {
+      root.set_open.call(false);
+    }
+  });
+  let focus_scope =
+    use_modal_focus_scope_with_escape(open, true, dismiss.escape_key.then_some(on_escape));
 
   rsx! {
     div {
@@ -180,7 +187,7 @@ pub fn SheetContent(
       "data-dxui-focus-scope": focus_scope,
       onkeydown: move |event| {
         // An overlay opened inside, such as a popover, takes its Escape first.
-        if event.key() == Key::Escape && dismiss.escape_key && layer.is_top() {
+        if event.key() == Key::Escape && dismiss.escape_key && root.is_open() && layer.is_top() {
           root.set_open.call(false);
         }
       },
