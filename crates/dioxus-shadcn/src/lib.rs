@@ -735,8 +735,8 @@ pub use sheet::{
   DialogPrimitiveConfig as SheetPrimitiveConfig, DismissBehavior as SheetDismissBehavior,
   FocusReturn as SheetFocusReturn, FocusStrategy as SheetFocusStrategy,
   PortalTarget as SheetPortalTarget, Sheet, SheetClose, SheetContent, SheetDescription,
-  SheetFooter, SheetHeader, SheetOverlay, SheetSide, SheetTitle, SheetTrigger, sheet_content_class,
-  sheet_overlay_class,
+  SheetFooter, SheetHeader, SheetOverlay, SheetSide, SheetSize, SheetTitle, SheetTrigger,
+  sheet_content_class, sheet_content_sized_class, sheet_overlay_class,
 };
 #[cfg(feature = "sidebar")]
 pub use sidebar::{

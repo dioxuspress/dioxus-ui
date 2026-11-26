@@ -135,6 +135,20 @@ export async function run(dioxus) {
       enterSubmenu(highlighted);
     } else if (event.key === "Enter" && highlighted) {
       activate(highlighted);
+    } else if (
+      event.key === "Enter" &&
+      !highlighted &&
+      mode === "combobox" &&
+      anchor instanceof HTMLInputElement &&
+      anchor.dataset.dxuiAllowCustom === "true" &&
+      !event.isComposing
+    ) {
+      const custom = anchor.value.trim();
+      if (custom !== "") {
+        dioxus.send(custom);
+      } else {
+        handled = false;
+      }
     } else if (searchesByKey && event.key === " " && highlighted && !typing()) {
       activate(highlighted);
     } else if (searchesByKey && event.key.length === 1 && !event.ctrlKey && !event.metaKey && !event.altKey) {

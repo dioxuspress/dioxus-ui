@@ -2,7 +2,7 @@
 //! secondary forms, and contextual workflows.
 use super::default_attribute::default_attribute;
 use super::dialog_labels::{DialogLabelPart, use_dialog_label_part, use_dialog_labels};
-use super::modal_focus::use_modal_focus_scope;
+use super::modal_focus::use_modal_focus_scope_with_escape;
 pub use super::overlay::{
   DialogPrimitiveConfig, DismissBehavior, FocusReturn, FocusStrategy, PortalTarget,
 };
@@ -47,6 +47,55 @@ impl SheetSide {
       Self::Left => "left",
     }
   }
+
+  /// The position, size, and inner border for this edge at an explicit [`SheetSize`].
+  pub const fn class_for_size(self, size: SheetSize) -> &'static str {
+    match (self, size) {
+      (Self::Top, SheetSize::Full) => "inset-x-0 top-0 h-full border-b",
+      (Self::Top, _) => "inset-x-0 top-0 h-auto border-b",
+      (Self::Bottom, SheetSize::Full) => "inset-x-0 bottom-0 h-full border-t",
+      (Self::Bottom, _) => "inset-x-0 bottom-0 h-auto border-t",
+      (Self::Right, SheetSize::Sm) => "inset-y-0 right-0 h-full w-3/4 border-l sm:max-w-sm",
+      (Self::Right, SheetSize::Md) => "inset-y-0 right-0 h-full w-full border-l sm:max-w-lg",
+      (Self::Right, SheetSize::Lg) => "inset-y-0 right-0 h-full w-full border-l sm:max-w-2xl",
+      (Self::Right, SheetSize::Xl) => "inset-y-0 right-0 h-full w-full border-l sm:max-w-4xl",
+      (Self::Right, SheetSize::Full) => "inset-y-0 right-0 h-full w-full max-w-none border-l",
+      (Self::Left, SheetSize::Sm) => "inset-y-0 left-0 h-full w-3/4 border-r sm:max-w-sm",
+      (Self::Left, SheetSize::Md) => "inset-y-0 left-0 h-full w-full border-r sm:max-w-lg",
+      (Self::Left, SheetSize::Lg) => "inset-y-0 left-0 h-full w-full border-r sm:max-w-2xl",
+      (Self::Left, SheetSize::Xl) => "inset-y-0 left-0 h-full w-full border-r sm:max-w-4xl",
+      (Self::Left, SheetSize::Full) => "inset-y-0 left-0 h-full w-full max-w-none border-r",
+    }
+  }
+}
+
+/// Width preset for a side [`SheetContent`] (or full-height expansion for top/bottom).
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub enum SheetSize {
+  /// Compact drawer (`sm:max-w-sm`, default).
+  #[default]
+  Sm,
+  /// Medium drawer (`sm:max-w-lg`).
+  Md,
+  /// Wide drawer (`sm:max-w-2xl`).
+  Lg,
+  /// Extra-wide drawer (`sm:max-w-4xl`), suited for configuration and inspector panels.
+  Xl,
+  /// Full-viewport panel (`max-w-none`), suited for expanded focus workflows.
+  Full,
+}
+
+impl SheetSize {
+  /// The value for the content's `data-size` attribute.
+  pub const fn attribute(self) -> &'static str {
+    match self {
+      Self::Sm => "sm",
+      Self::Md => "md",
+      Self::Lg => "lg",
+      Self::Xl => "xl",
+      Self::Full => "full",
+    }
+  }
 }
 
 const SHEET_OVERLAY_BASE_CLASS: &str = "fixed inset-0 z-50 bg-black/50";
@@ -67,6 +116,15 @@ pub fn sheet_overlay_class(class: &str) -> String {
 /// merged over them.
 pub fn sheet_content_class(side: SheetSide, class: &str) -> String {
   merge_classes(classes([Some(SHEET_CONTENT_BASE_CLASS), Some(side.class())]), class)
+}
+
+/// Classes for the panel with an explicit [`SheetSize`]: base classes, the
+/// side's sized geometry, then `class` merged over them.
+pub fn sheet_content_sized_class(side: SheetSide, size: SheetSize, class: &str) -> String {
+  merge_classes(
+    classes([Some(SHEET_CONTENT_BASE_CLASS), Some(side.class_for_size(size))]),
+    class,
+  )
 }
 
 fn sheet_header_class(class: &str) -> String {
@@ -152,18 +210,33 @@ pub fn SheetOverlay(
 #[component]
 pub fn SheetContent(
   #[props(default)] side: SheetSide,
+  #[props(default)] size: SheetSize,
   #[props(default)] class: String,
   #[props(default = DismissBehavior::dialog_default())] dismiss: DismissBehavior,
   #[props(extends = GlobalAttributes, extends = div)] attributes: Vec<Attribute>,
   children: Element,
 ) -> Element {
   let root = use_sheet("SheetContent");
-  let class = sheet_content_class(side, &class);
+  let class = if size == SheetSize::Sm {
+    sheet_content_class(side, &class)
+  } else {
+    sheet_content_sized_class(side, size, &class)
+  };
   let open = root.is_open();
   let id = default_attribute(&attributes, "id", root.content_id());
   let (labelledby, describedby) = use_dialog_labels().content_attributes(&attributes);
-  let focus_scope = use_modal_focus_scope(open, true);
   let layer = use_layer(open);
+  let escape_layer = layer.clone();
+  let on_escape = use_callback(move |()| {
+    if root.is_open() && dismiss.escape_key && escape_layer.is_top() {
+      root.set_open.call(false);
+    }
+  });
+  let focus_scope = use_modal_focus_scope_with_escape(
+    open,
+    true,
+    dismiss.escape_key.then_some(on_escape),
+  );
 
   rsx! {
     div {
@@ -176,11 +249,12 @@ pub fn SheetContent(
       tabindex: "-1",
       "aria-modal": "true",
       "data-side": side.attribute(),
+      "data-size": size.attribute(),
       "data-state": if open { "open" } else { "closed" },
       "data-dxui-focus-scope": focus_scope,
       onkeydown: move |event| {
         // An overlay opened inside, such as a popover, takes its Escape first.
-        if event.key() == Key::Escape && dismiss.escape_key && layer.is_top() {
+        if event.key() == Key::Escape && dismiss.escape_key && root.is_open() && layer.is_top() {
           root.set_open.call(false);
         }
       },

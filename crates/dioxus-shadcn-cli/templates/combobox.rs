@@ -83,6 +83,7 @@ struct ComboboxContext {
   choice: Choice,
   open: Controllable<bool>,
   set_open: Callback<bool>,
+  allow_custom_value: bool,
 }
 
 impl ComboboxContext {
@@ -99,11 +100,13 @@ fn use_combobox(part: &str) -> ComboboxContext {
 /// `multiple`, and whether the list is open, and links its parts, as
 /// `Select` does. Pass `value` (`values`) or `open` to control them, or
 /// `default_value` (`default_values`) and `default_open` to start them; the
-/// change callbacks hear every change the user makes either way. The typed
-/// text stays with the app, which filters the items it renders. A combobox
-/// has one combobox element, its `ComboboxInput`, or else its
-/// `ComboboxTrigger`; `id` names it, for a `Label` to point at, and the list
-/// anchors to it. Without `id` the ids are generated.
+/// change callbacks hear every change the user makes either way. Set
+/// `allow_custom_value` to commit free-form text typed into `ComboboxInput`
+/// on `Enter` when no option is highlighted. The typed text stays with the
+/// app, which filters the items it renders. A combobox has one combobox
+/// element, its `ComboboxInput`, or else its `ComboboxTrigger`; `id` names it,
+/// for a `Label` to point at, and the list anchors to it. Without `id` the ids
+/// are generated.
 #[component]
 pub fn Combobox(
   #[props(default)] id: Option<String>,
@@ -117,6 +120,7 @@ pub fn Combobox(
   #[props(default)] open: ReadSignal<Option<bool>>,
   #[props(default)] default_open: bool,
   #[props(default)] on_open_change: Option<EventHandler<bool>>,
+  #[props(default)] allow_custom_value: bool,
   children: Element,
 ) -> Element {
   let generated = use_hook(|| format!("dxui-combobox-{}-input", next_element_id()));
@@ -132,7 +136,13 @@ pub fn Combobox(
   );
   let open = use_controllable(move || open.cloned(), move || default_open, on_open_change);
   let set_open = use_callback(move |next: bool| open.set(next));
-  use_context_provider(|| ComboboxContext { input_id, choice, open, set_open });
+  use_context_provider(|| ComboboxContext {
+    input_id,
+    choice,
+    open,
+    set_open,
+    allow_custom_value,
+  });
 
   rsx! { {children} }
 }
@@ -181,14 +191,21 @@ pub fn ComboboxTrigger(
   }
 }
 
-/// Typed text opens the list and reaches the app through `oninput`; the app
-/// filters the items it renders. ArrowDown on a closed input opens the list.
+/// Typed text opens the list and reaches the app through `on_value_change`
+/// (with the new text, matching `Input`) and/or `oninput`; the app filters the
+/// items it renders. ArrowDown on a closed input opens the list. When the
+/// enclosing [`Combobox`] sets `allow_custom_value`, pressing `Enter` with no
+/// highlighted option commits the trimmed input text as the chosen value.
 #[component]
 pub fn ComboboxInput(
   #[props(default)] value: String,
   #[props(default)] placeholder: String,
   #[props(default)] disabled: bool,
+  #[props(default)] on_value_change: Option<EventHandler<String>>,
   #[props(default)] oninput: Option<EventHandler<FormEvent>>,
+  #[props(default)] onkeydown: Option<EventHandler<KeyboardEvent>>,
+  #[props(default)] onfocus: Option<EventHandler<FocusEvent>>,
+  #[props(default)] onblur: Option<EventHandler<FocusEvent>>,
   #[props(default)] class: String,
   #[props(extends = GlobalAttributes, extends = input)] attributes: Vec<Attribute>,
 ) -> Element {
@@ -196,6 +213,9 @@ pub fn ComboboxInput(
   let class = combobox_input_class(&with_density(density_control_class(use_density()), &class));
   let open = context.open.get();
   let set_open = context.set_open;
+  let choose = context.choice.choose;
+  let allow_custom = context.allow_custom_value;
+  let current_value = value.clone();
   let controls = default_attribute(&attributes, "aria-controls", context.list_id());
 
   rsx! {
@@ -210,18 +230,41 @@ pub fn ComboboxInput(
       "aria-autocomplete": "list",
       "aria-controls": controls,
       "aria-expanded": open.to_string(),
-      oninput: move |event| {
+      "data-dxui-allow-custom": allow_custom.then_some("true"),
+      oninput: move |event: FormEvent| {
         if !open {
           set_open.call(true);
+        }
+        if let Some(handler) = on_value_change {
+          handler.call(event.value());
         }
         if let Some(handler) = oninput {
           handler.call(event);
         }
       },
-      onkeydown: move |event| {
+      onkeydown: move |event: KeyboardEvent| {
         if !open && event.key() == Key::ArrowDown {
           event.prevent_default();
           set_open.call(true);
+        } else if !open && allow_custom && event.key() == Key::Enter {
+          let trimmed = current_value.trim();
+          if !trimmed.is_empty() {
+            event.prevent_default();
+            choose.call(trimmed.to_string());
+          }
+        }
+        if let Some(handler) = onkeydown {
+          handler.call(event);
+        }
+      },
+      onfocus: move |event: FocusEvent| {
+        if let Some(handler) = onfocus {
+          handler.call(event);
+        }
+      },
+      onblur: move |event: FocusEvent| {
+        if let Some(handler) = onblur {
+          handler.call(event);
         }
       },
       ..attributes,
