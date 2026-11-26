@@ -8,6 +8,20 @@ for commit messages.
 
 ## [Unreleased]
 
+## [0.7.1] - 2026-11-26
+
+### Fixed
+- `Dialog`, `Sheet`, `AlertDialog`, and `Drawer`: attach the document-level
+  `Escape` listener in `modal_focus_scope_script` before `requestAnimationFrame`
+  (gated by `layer.is_top()`), eliminating the immediate-open `0ms` Escape race
+  and blur-outside Escape gap (synced between `dioxus-shadcn` and
+  `dioxus-shadcn-cli` templates).
+- `Listbox` / `Combobox` / `Select`: attach `keySource`'s `keydown` listener
+  before `requestAnimationFrame` in `listbox_script` (with cleanup on early
+  close) so pressing `Enter` immediately after typing or opening never drops
+  activation (synced between `dioxus-shadcn` and `dioxus-shadcn-cli`
+  templates).
+
 ## [0.7.0] - 2026-11-25
 
 Version 0.7.0 expands visual expressiveness and API ergonomics across 13 core,
