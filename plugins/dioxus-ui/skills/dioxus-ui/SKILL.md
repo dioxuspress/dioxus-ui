@@ -32,10 +32,10 @@ Do not guess the mode or assume the latest `main` branch APIs if the project pin
 
 ## Step 2: Enforce Release & Version Alignment
 
-This plugin snapshot is synchronized with **`dioxus-shadcn` `0.7.0`** (`dxui` `0.7.0`).
+This plugin snapshot is synchronized with **`dioxus-shadcn` `0.8.0`** (`dxui` `0.8.0`).
 
 - **If the project uses Source-Copy Mode**: read the existing file under `src/components/ui/<component>.rs` or `src/blocks/<block>.rs` before writing call sites. Local copies may have custom props, variants, or older signatures—match what is actually on disk.
-- **If the project pins an older Crate Mode release** (e.g., `< 0.7.0`): verify available features and exported items in the installed crate (`cargo metadata` / `~/.cargo/registry/src/.../dioxus-shadcn-<version>/src/lib.rs`) before introducing newer components, blocks, or props. Never suggest APIs that exist only on `main` or in a newer minor release without flagging the required upgrade.
+- **If the project pins an older Crate Mode release** (e.g., `< 0.8.0`): verify available features and exported items in the installed crate (`cargo metadata` / `~/.cargo/registry/src/.../dioxus-shadcn-<version>/src/lib.rs`) before introducing newer components, blocks, or props. Never suggest APIs that exist only on `main` or in a newer minor release without flagging the required upgrade.
 - **If a requested component does not exist in the installed release**: tell the user clearly, show the closest existing component in `references/catalog.md`, or explain the exact crate/`dxui` upgrade needed.
 
 ---
@@ -62,7 +62,7 @@ Enable only the component features used by the app (`default-features = false` a
 
 ```toml
 [dependencies]
-dioxus-shadcn = { version = "0.7", default-features = false, features = ["button", "card", "dialog", "input"] }
+dioxus-shadcn = { version = "0.8", default-features = false, features = ["button", "card", "dialog", "input"] }
 ```
 
 Run `dxui init` once (or after upgrading `dioxus-shadcn`) so `assets/dioxus-shadcn.css` contains the semantic tokens and the Tailwind v4 `@source` path pointing to the installed crate's source files.
