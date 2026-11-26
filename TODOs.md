@@ -239,20 +239,25 @@ The `files` and `schedule` blocks left two gaps (M224.2, M224.3 and M224.8). Nei
 
 ## M226 0.8.0 Desktop Workstation Ergonomics and Fixes (RFC 0083)
 
-- TODO M226.1 `Button`: `Compact` respects `Xs` height and compact loading spinner (`FB-studio-01`, `FB-studio-02`)
+- DONE M226.1 `Button`: `Compact` respects `Xs` height and compact loading spinner (`FB-studio-01`, `FB-studio-02`)
   - Omit `min-h-8` for `ButtonSize::Xs` under `UiDensity::Compact`, and render a `size-3 me-1.5` loading spinner for `Xs` / `IconSm`, in crate, CLI template, and `docs/components/button.md`.
   - Exit: unit tests for `Xs` under `Compact` (no `min-h-8`) and SSR `Xs` loading spinner (`size-3`), failing before the fix; template parity and `verify:tailwind-conflicts` pass.
-- TODO M226.2 `NativeSelect`: `NativeSelectSize::{Sm, Md, Lg}` and `native_select_sized_class` (`FB-studio-04`)
+  - Done (cc9f8325): `button_class` skips `min-h-8` for `ButtonSize::Xs` under `UiDensity::Compact` and `Button` uses `BUTTON_COMPACT_SPINNER_CLASS` (`size-3 me-1.5`) for `Xs` and `IconSm`; synced CLI template and `docs/components/button.md`; unit/SSR tests, `template_parity`, and `verify:tailwind-conflicts` pass.
+- DONE M226.2 `NativeSelect`: `NativeSelectSize::{Sm, Md, Lg}` and `native_select_sized_class` (`FB-studio-04`)
   - Add orthogonal `NativeSelectSize` matching `InputSize`, export in `dioxus-shadcn`, sync CLI template and `docs/components/native-select.md`.
   - Exit: unit and SSR tests for `Sm`/`Md`/`Lg` sizes; `template_parity`, Clippy, and `verify:docs` pass.
-- TODO M226.3 `Slider` & `RangeSlider`: `on_value_commit` and `removedNodes` observer guard (`FB-studio-05`)
+  - Done (0afa6a3a): added `NativeSelectSize::{Sm, Md, Lg}` (default `Md`), `native_select_sized_class`, and `NativeSelect::size`, re-exported from `dioxus-shadcn`, synced CLI template and `docs/components/native-select.md`; 4 unit/SSR tests, `template_parity`, Clippy, and `verify:docs` pass.
+- DONE M226.3 `Slider` & `RangeSlider`: `on_value_commit` and `removedNodes` observer guard (`FB-studio-05`)
   - Add optional `on_value_commit` prop to `Slider` (`f64`) and `RangeSlider` (`(f64, f64)`), fire on pointer release and keyboard moves, and guard the disconnect observer on `removedNodes.length > 0`, in crate, CLI template, and `docs/components/slider.md`.
   - Exit: unit & SSR tests plus existing slider checks; `template_parity` and Clippy pass.
-- TODO M226.4 `dxui init`: skip unused `src/components/ui/mod.rs` in crate-mode apps (`FB-studio-03`)
+  - Done (b411f93d): added `on_value_commit` to `Slider` and `RangeSlider`, updated both pointer scripts to send `change` / `commit` events (retaining last drag value on `pointercancel`) and filter `MutationObserver` callbacks on `record.removedNodes.length > 0`, synced CLI template and `docs/components/slider.md`; 7 unit/SSR tests, `template_parity`, and Clippy pass.
+- DONE M226.4 `dxui init`: skip unused `src/components/ui/mod.rs` in crate-mode apps (`FB-studio-03`)
   - When `crate_sources(&root)` is non-empty, `dxui init` writes only `assets/dioxus-shadcn.css` (and its `@source`) without creating `src/components/ui/mod.rs`; source-copy apps and `dxui add` remain unchanged.
   - Exit: CLI unit test in a crate-mode fixture asserts `assets/dioxus-shadcn.css` exists with `@source` and `src/components/ui/mod.rs` is absent; `scripts/generated-fixture-smoke.sh` passes.
-- TODO M226.5 Sync generated metadata, CHANGELOG, and verify release gates
+  - Done (022caec0): `init_command` resolves `crate_sources(&root)` first and skips creating `src/components/ui/mod.rs` when `dioxus-shadcn` is already a Cargo dependency while keeping source-copy init and `dxui add` unchanged; `init_command_skips_ui_module_in_crate_mode` (37 CLI tests), `scripts/generated-fixture-smoke.sh`, and docs updates pass.
+- DONE M226.5 Sync generated metadata, CHANGELOG, and verify release gates
   - Update `CHANGELOG.md` `[Unreleased]`, `docs/components/source-preview.md`, preview/site generated CSS, and Claude plugin metadata; run workspace tests, Clippy, `verify:docs`, `verify:tailwind-conflicts`, `scripts/generated-fixture-smoke.sh`, and `verify:semver`.
+  - Done (9827eb3b): updated `CHANGELOG.md` `[Unreleased]` (Added, Fixed, and 0.8.0 Migration note), regenerated `docs/components/source-preview.md`, `examples/preview-states/assets/preview.generated.css`, and `site/assets/site.generated.css`, and verified workspace check/test (421+ crate tests), registry tests, Clippy `-D warnings`, `verify:docs`, `verify:tailwind-static`, `verify:tailwind-conflicts`, `verify:css-inputs`, `verify:preview-css`, `verify:site-css`, `verify:site-catalog`, `verify:changelog`, `verify:semver`, and `scripts/generated-fixture-smoke.sh`.
 
 ## M215 Dioxus 0.8 Readiness
 
