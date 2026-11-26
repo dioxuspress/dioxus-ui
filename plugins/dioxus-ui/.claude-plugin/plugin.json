@@ -1,7 +1,7 @@
 {
   "name": "dioxus-ui",
   "description": "Official Dioxus UI (dioxus-shadcn) workflow skill and version-synced component, block, and theme references for building Dioxus 0.7 Rust interfaces.",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "author": {
     "name": "DioxusPress",
     "url": "https://github.com/dioxuspress"

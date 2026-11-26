@@ -8,6 +8,33 @@ for commit messages.
 
 ## [Unreleased]
 
+### Added
+- `Sheet`: `SheetSize::{Sm, Md, Lg, Xl, Full}`, `SheetSide::class_for_size`,
+  `sheet_content_sized_class`, and `size` prop / `data-size` attribute on
+  `SheetContent` (defaults to `SheetSize::Sm`).
+- `Input` and `Textarea`: optional `onkeydown`, `onkeyup`, `onfocus`, `onblur`,
+  `oncompositionstart`, and `oncompositionend` event handlers plus
+  `data-composing="true"` during active IME composition.
+- `Combobox`: `allow_custom_value: bool` on `Combobox` for free-solo `Enter`
+  commits when no option is highlighted, and `on_value_change`, `onkeydown`,
+  `onfocus`, and `onblur` on `ComboboxInput`.
+
+### Fixed
+- `Dialog`, `Sheet`, `AlertDialog`, and `Drawer`: attach the document-level
+  `Escape` listener in `modal_focus_scope_script` before `requestAnimationFrame`
+  (gated by `layer.is_top()`), eliminating the immediate-open `0ms` Escape race
+  and blur-outside Escape gap.
+- `Listbox` / `Combobox`: attach `keySource`'s `keydown` listener before
+  `requestAnimationFrame` in `listbox_script` so pressing `Enter` immediately
+  after typing never drops activation or free-solo commits.
+
+### Changed
+- **Migration (`0.7.x` → `0.8.0`)**: All existing RSX call sites remain
+  source-compatible because every new component prop uses `#[props(default)]`.
+  Code constructing `SheetContentProps`, `InputProps`, `TextareaProps`,
+  `ComboboxProps`, or `ComboboxInputProps` struct literals directly should add
+  the new fields.
+
 ## [0.7.0] - 2026-11-25
 
 Version 0.7.0 expands visual expressiveness and API ergonomics across 13 core,

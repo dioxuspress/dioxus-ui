@@ -3443,6 +3443,15 @@
     .sm\:w-48 {
       width: calc(var(--spacing) * 48);
     }
+    .sm\:max-w-2xl {
+      max-width: var(--container-2xl);
+    }
+    .sm\:max-w-4xl {
+      max-width: var(--container-4xl);
+    }
+    .sm\:max-w-lg {
+      max-width: var(--container-lg);
+    }
     .sm\:max-w-sm {
       max-width: var(--container-sm);
     }

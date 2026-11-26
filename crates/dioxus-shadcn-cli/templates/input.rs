@@ -95,8 +95,12 @@ pub fn input_styled_class(
 }
 
 /// A controlled input. Each `input` event calls `on_value_change` with the new
-/// text; the app passes it back as `value`. Other attributes, such as `id`,
-/// `name`, and `aria-describedby`, are passed to the input.
+/// text; the app passes it back as `value`. Optional keyboard, focus, and IME
+/// composition callbacks (`onkeydown`, `onkeyup`, `onfocus`, `onblur`,
+/// `oncompositionstart`, `oncompositionend`) forward directly to the underlying
+/// `<input>`, and `data-composing="true"` is set while an IME composition is
+/// active. Other attributes, such as `id`, `name`, and `aria-describedby`, are
+/// passed to the input.
 #[component]
 pub fn Input(
   #[props(default)] value: String,
@@ -107,8 +111,15 @@ pub fn Input(
   #[props(default)] disabled: bool,
   #[props(default)] invalid: bool,
   #[props(default)] on_value_change: Option<EventHandler<String>>,
+  #[props(default)] onkeydown: Option<EventHandler<KeyboardEvent>>,
+  #[props(default)] onkeyup: Option<EventHandler<KeyboardEvent>>,
+  #[props(default)] onfocus: Option<EventHandler<FocusEvent>>,
+  #[props(default)] onblur: Option<EventHandler<FocusEvent>>,
+  #[props(default)] oncompositionstart: Option<EventHandler<CompositionEvent>>,
+  #[props(default)] oncompositionend: Option<EventHandler<CompositionEvent>>,
   #[props(extends = GlobalAttributes, extends = input)] attributes: Vec<Attribute>,
 ) -> Element {
+  let mut composing = use_signal(|| false);
   let merged_user = with_density(density_control_class(use_density()), &class);
   let class = if size == InputSize::Md && variant == InputVariant::Default {
     input_class(invalid, &merged_user)
@@ -123,9 +134,42 @@ pub fn Input(
       placeholder,
       disabled,
       "aria-invalid": invalid.to_string(),
+      "data-composing": composing().then_some("true"),
       oninput: move |event: FormEvent| {
         if let Some(handler) = on_value_change {
           handler.call(event.value());
+        }
+      },
+      onkeydown: move |event: KeyboardEvent| {
+        if let Some(handler) = onkeydown {
+          handler.call(event);
+        }
+      },
+      onkeyup: move |event: KeyboardEvent| {
+        if let Some(handler) = onkeyup {
+          handler.call(event);
+        }
+      },
+      onfocus: move |event: FocusEvent| {
+        if let Some(handler) = onfocus {
+          handler.call(event);
+        }
+      },
+      onblur: move |event: FocusEvent| {
+        if let Some(handler) = onblur {
+          handler.call(event);
+        }
+      },
+      oncompositionstart: move |event: CompositionEvent| {
+        composing.set(true);
+        if let Some(handler) = oncompositionstart {
+          handler.call(event);
+        }
+      },
+      oncompositionend: move |event: CompositionEvent| {
+        composing.set(false);
+        if let Some(handler) = oncompositionend {
+          handler.call(event);
         }
       },
       ..attributes,

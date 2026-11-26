@@ -6,8 +6,8 @@ It equips Claude Code with a single component-focused skill and compact, source-
 
 ## Supported Versions & Release Alignment
 
-- **Plugin version**: `0.7.0` (version-locked to `Cargo.toml` `[workspace.package].version`)
-- **Supported library & CLI**: `dioxus-shadcn` `0.7.x`, `dioxus-shadcn-cli` (`dxui`) `0.7.x`, Dioxus `0.7.x`, Rust `1.88+`, Tailwind CSS v4
+- **Plugin version**: `0.8.0` (version-locked to `Cargo.toml` `[workspace.package].version`)
+- **Supported library & CLI**: `dioxus-shadcn` `0.8.x`, `dioxus-shadcn-cli` (`dxui`) `0.8.x`, Dioxus `0.7.x`, Rust `1.88+`, Tailwind CSS v4
 - **How guidance stays aligned with releases**:
   - The plugin lives in the same repository as `dioxus-shadcn` and is version-bumped alongside crate releases.
   - Its component catalog, block inventory, and theme preset lists (`skills/dioxus-ui/references/*.md`) are generated directly from `crates/dioxus-shadcn-cli/{registry,blocks,themes}` and `crates/dioxus-shadcn` and verified by `npm run verify:claude-plugin` in CI.
